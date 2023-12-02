@@ -632,8 +632,7 @@ export default {
       getWallet.post("", {}).then((res) => {
         if (res.code == "000000") {
           dataObj.total =
-            Number(res.data.bcAvailableBalance) +
-            Number(res.data.bcFreezeBalance);
+            Number(res.data.bcAvailableBalance) + Number(res.data.bcFreezeBalance);
         }
       });
     });
@@ -698,15 +697,14 @@ export default {
       tip_text.value = is_win.value
         ? `GANHE ${Number(calc_win.value) * Number(dataObj.betAmount)} !`
         : "";
-      dataObj.winAmount = Number(calc_win.value) * Number(dataObj.betAmount);
+      dataObj.winAmount = is_win.value
+        ? Number(calc_win.value) * Number(dataObj.betAmount)
+        : 0;
       dataObj.total = is_win.value
         ? (Number(calc_win.value) - 1) * Number(dataObj.betAmount) + Number(dataObj.total)
         : Number(dataObj.total) - Number(dataObj.betAmount);
       slot1_play.post("", {
-        banlance: is_win.value
-          ? (Number(calc_win.value) - 1) * Number(dataObj.betAmount) +
-            Number(dataObj.total)
-          : Number(dataObj.total) - Number(dataObj.betAmount),
+        banlance: Number(dataObj.total),
         amount: Number(dataObj.betAmount),
       });
     };
