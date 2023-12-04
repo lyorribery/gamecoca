@@ -1,4 +1,4 @@
-# njb_admin_new
+# pgwinbrl
 
 ## Project setup
 ```
