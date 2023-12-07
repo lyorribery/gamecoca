@@ -42,7 +42,7 @@
               text-align: center;
             "
           >
-            <i class="iconfont icon-nodata" style="color: #ADB6C4; font-size: 32px"></i>
+            <i class="iconfont icon-nodata" style="color: #FAF5F9; font-size: 32px"></i>
           </div>
 
           <div
@@ -66,7 +66,7 @@
               xml:space="preserve"
             >
               <path
-                fill="#005DFE"
+                fill="#D4BD78"
                 d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
                 transform="rotate(275.098 25 25)"
               >
@@ -156,7 +156,7 @@ const {
       .seggested-title {
         font-size: 14px;
         font-weight: 600;
-        color: #ADB6C4;
+        color: #FAF5F9;
         margin-bottom: 15px;
         display: flex;
         justify-content: space-between;
@@ -182,7 +182,7 @@ const {
           width: 100%;
           box-sizing: border-box;
           padding: 8px;
-          color: #ADB6C4;
+          color: #FAF5F9;
           font-size: 13px;
           cursor: pointer;
 
@@ -199,7 +199,7 @@ const {
   }
 
   .serach-ipt-box {
-    background-color: #111923;
+    background-color: #024D46;
     width: 100%;
     border-radius: 32px;
     box-sizing: border-box;
@@ -207,17 +207,17 @@ const {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid #2d3035;
+    border: 2px solid #D4BD78;
     i {
-      color: #ADB6C4;
+      color: #FAF5F9;
       font-size: 20px;
     }
 
     .ipt {
       border: 0px;
       outline: none;
-      background-color: #111923;
-      color: #ADB6C4;
+      background-color: #024D46;
+      color: #FAF5F9;
       font-size: 16px;
       font-weight: 400;
       width: calc(100% - 30px);

@@ -6,14 +6,14 @@
         <div class="item">{{ $t("common.username") }}:{{ item.realName }}</div>
         <div class="item" style="padding-left: 5px">CPF:{{ item.bankAccount }}</div>
         <!-- <div class="item-btn">
-                    <i class="iconfont icon-trash" style="font-size: 20px;color:#ADB6C4;font-weight: 400;"
+                    <i class="iconfont icon-trash" style="font-size: 20px;color:#FAF5F9;font-weight: 400;"
                         @click="del(item.id)"></i>
                 </div> -->
       </div>
       <div class="no-data" v-if="memberBanks.data.length == 0">
         <i
           class="iconfont icon-nodata"
-          style="color: #adb6c4; font-size: 30px; font-weight: 400"
+          style="color: #FAF5F9; font-size: 30px; font-weight: 400"
         ></i>
       </div>
     </div>
@@ -93,7 +93,7 @@
             xml:space="preserve"
           >
             <path
-              fill="#ADB6C4"
+              fill="#FAF5F9"
               d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
               transform="rotate(275.098 25 25)"
             >
@@ -161,7 +161,7 @@ const {
   box-sizing: border-box;
   padding: 15px 10px 0 10px;
   font-size: 11px;
-  color: #adb6c4;
+  color: #FAF5F9;
   text-align: center;
 }
 
@@ -170,7 +170,7 @@ const {
   width: 100%;
   text-align: left;
   font-size: 16px;
-  color: #adb6c4;
+  color: #FAF5F9;
   font-weight: bold;
   box-sizing: border-box;
   padding: 0 15px 10px 15px;
@@ -186,15 +186,15 @@ const {
     box-sizing: border-box;
     padding: 10px;
     border-radius: 12px;
-    border: 2px solid #2d3035;
-    background-color: #0E131B;
+    border: 2px solid #D4BD78;
+    background-color: #024D46;
 
     .submit-btn {
       width: calc((100% - 15px) / 2);
       height: 35px;
       border-radius: 6px;
-      background: #005dfe;
-      border: 1px solid #005dfe;
+      background: #D4BD78;
+      border: 1px solid #D4BD78;
       color: #fff;
       display: flex;
       justify-content: center;
@@ -207,8 +207,8 @@ const {
       width: calc((100% - 15px) / 2);
       height: 35px;
       border-radius: 6px;
-      border: 1px solid #005dfe;
-      color: #005dfe;
+      border: 1px solid #D4BD78;
+      color: #D4BD78;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -219,7 +219,7 @@ const {
     .label {
       width: 100%;
       font-size: 11px;
-      color: #adb6c4;
+      color: #FAF5F9;
       box-sizing: border-box;
       padding-bottom: 5px;
     }
@@ -232,14 +232,14 @@ const {
       border-radius: 6px;
       box-sizing: border-box;
       padding: 8px 15px;
-      border: 2px solid #2d3035;
+      border: 2px solid #D4BD78;
 
 
       .ipt {
-        background-color: #0e131b;
+        background-color: #024D46;
         border: 0px;
         outline: none;
-        color: #adb6c4;
+        color: #FAF5F9;
         font-size: 12px;
         width: 100%;
       }
@@ -248,7 +248,7 @@ const {
     .form-title {
       width: 100%;
       font-size: 13px;
-      color: #adb6c4;
+      color: #FAF5F9;
       margin-bottom: 8px;
     }
   }
@@ -258,7 +258,7 @@ const {
     width: 100%;
     height: 35px;
     border-radius: 6px;
-    background: #005dfe;
+    background: #D4BD78;
     color: #fff;
     display: flex;
     justify-content: center;
@@ -269,7 +269,7 @@ const {
 
   .basic-box {
     width: 100%;
-    background-color: #111923;
+    background-color: #024D46;
     border-radius: 6px;
     box-sizing: border-box;
     padding: 0 10px;
@@ -279,7 +279,7 @@ const {
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #adb6c4;
+      color: #FAF5F9;
       box-sizing: border-box;
       padding: 10px 0;
     }
@@ -299,7 +299,7 @@ const {
       .item {
         width: calc((100% - 30px) / 2);
         font-size: 11px;
-        color: #adb6c4;
+        color: #FAF5F9;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;

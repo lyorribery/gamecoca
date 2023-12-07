@@ -1,5 +1,5 @@
 .nut-tabbar {
-    background-color: #0E131B;
+    background-color: #024D46;
     border-top: 0;
 }
 
@@ -13,7 +13,7 @@ input {
 }
 
 .nut-backtop.show {
-    background-color: #005DFE;
+    background-color: #D4BD78;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -25,7 +25,7 @@ input {
 
 .nut-cell {
     padding: 10px;
-    background: #0E131B;
+    background: #024D46;
 }
 
 .nut-cell:after {
@@ -33,20 +33,20 @@ input {
 }
 
 .nut-radio__label {
-    color: #ADB6C4;
+    color: #FAF5F9;
 }
 
 .nut-radio__icon {
-    color: #005DFE;
+    color: #D4BD78;
 }
 
 .nut-tabs__titles {
-    background: #111923;
+    background: #024D46;
 }
 
 .nut-tabs__titles-item,
 .nut-tabs__titles-item.active {
-    color: #ADB6C4;
+    color: #FAF5F9;
 }
 
 .nut-progress .nut-progress-outer {
@@ -69,7 +69,7 @@ input {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    border: 2px solid #2d3035;
+    border: 2px solid #D4BD78;
 
     .modal-header {
         width: calc(100% - 60px);
@@ -82,12 +82,12 @@ input {
         align-items: center;
         box-sizing: border-box;
         padding: env(safe-area-inset-top) 15px 0 15px;
-        background-color: #111923;
+        background-color: #024D46;
         z-index: 10;
         border-radius: 12px 12px 0 0;
-        border-top: 2px solid #2d3035;
-        border-left: 2px solid #2d3035;
-        border-right: 2px solid #2d3035;
+        border-top: 2px solid #D4BD78;
+        border-left: 2px solid #D4BD78;
+        border-right: 2px solid #D4BD78;
 
         .header-btn-box {
             position: fixed;
@@ -107,7 +107,7 @@ input {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    border: 2px solid #2d3035;
+    border: 2px solid #D4BD78;
 
     .modal-header {
         width: 500px;
@@ -120,12 +120,12 @@ input {
         align-items: center;
         box-sizing: border-box;
         padding: env(safe-area-inset-top) 15px 0 15px;
-        background-color: #111923;
+        background-color: #024D46;
         z-index: 10;
         border-radius: 12px 12px 0 0;
-        border-top: 2px solid #2d3035;
-        border-left: 2px solid #2d3035;
-        border-right: 2px solid #2d3035;
+        border-top: 2px solid #D4BD78;
+        border-left: 2px solid #D4BD78;
+        border-right: 2px solid #D4BD78;
 
         .header-btn-box {
             position: fixed;
@@ -139,7 +139,7 @@ input {
 .modal {
     z-index: 999;
     position: fixed;
-    background-color: #0E131B;
+    background-color: #024D46;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -149,23 +149,23 @@ input {
 }
 
 .nut-elevator__list__item {
-    color: #ADB6C4;
+    color: #FAF5F9;
 }
 
 .nut-elevator__list__item__code {
-    color: #ADB6C4;
+    color: #FAF5F9;
 }
 
 .nut-elevator__list__item__name--highcolor {
-    color: #005DFE;
+    color: #D4BD78;
 }
 
 .nut-elevator__bars__inner__item.active {
-    color: #005DFE;
+    color: #D4BD78;
 }
 
 .nut-grid-item__content {
-    background: #111923 !important;
+    background: #024D46 !important;
     border: none;
 }
 
@@ -190,11 +190,11 @@ input {
 
     .type-box {
         border-radius: 12px;
-        background-color: #1A1C20;
+        background-color: #024D46;
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 2px solid #2d3035;
+        border: 2px solid #D4BD78;
 
         .type {
             border-radius: 12px;
@@ -207,4 +207,28 @@ input {
             cursor: pointer;
         }
     }
+}
+
+input::input-placeholder {
+    color: #E2E8E3;
+}
+
+input::-webkit-input-placeholder {
+    /* Chrome */
+    color: #E2E8E3;
+}
+
+input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #E2E8E3;
+}
+
+input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #E2E8E3;
+}
+
+input::-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #E2E8E3;
 }

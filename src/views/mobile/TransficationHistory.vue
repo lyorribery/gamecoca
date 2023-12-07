@@ -4,14 +4,14 @@
       <div class="type-box">
         <div
           class="type"
-          :style="{ background: type == 0 ? '#005dfe' : '' }"
+          :style="{ background: type == 0 ? '#D4BD78' : '' }"
           @click="changePageType(0)"
         >
           {{ $t("index.deposit") }}
         </div>
         <div
           class="type"
-          :style="{ background: type == 1 ? '#005dfe' : '' }"
+          :style="{ background: type == 1 ? '#D4BD78' : '' }"
           @click="changePageType(1)"
         >
           {{ $t("personal.tixian") }}
@@ -94,7 +94,7 @@
         xml:space="preserve"
       >
         <path
-          fill="#ADB6C4"
+          fill="#FAF5F9"
           d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
           transform="rotate(275.098 25 25)"
         >
@@ -110,7 +110,7 @@
         </path>
       </svg>
       <div class="no-data" v-if="historyList.data.length == 0 && !isLoading">
-        <i class="iconfont icon-nodata" style="color: #adb6c4; font-size: 30px"></i>
+        <i class="iconfont icon-nodata" style="color: #FAF5F9; font-size: 30px"></i>
       </div>
     </div>
     <div
@@ -146,8 +146,8 @@ const {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #2d3035;
-    color: #adb6c4;
+    background-color: #D4BD78;
+    color: #FAF5F9;
     font-size: 11px;
     box-sizing: border-box;
     padding: 8px 15px;
@@ -167,7 +167,7 @@ const {
       box-sizing: border-box;
       padding: 0 15px;
       border-radius: 6px;
-      background-color: #2d3035;
+      background-color: #D4BD78;
       margin-bottom: 10px;
 
       .cell-item {
@@ -179,11 +179,11 @@ const {
         height: 30px;
 
         .label {
-          color: #adb6c4;
+          color: #FAF5F9;
         }
 
         .data {
-          color: #adb6c4;
+          color: #FAF5F9;
         }
 
         i {
@@ -198,7 +198,7 @@ const {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #adb6c4;
+    color: #FAF5F9;
     box-sizing: border-box;
     padding: 10px 0;
   }

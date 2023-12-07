@@ -13,7 +13,7 @@
         <div class="header-btn-box">
           <i
             class="iconfont icon-guanbi"
-            style="font-size: 20px; color: #adb6c4"
+            style="font-size: 20px; color: #FAF5F9"
             @click="closePromotion()"
           ></i>
         </div>
@@ -90,7 +90,7 @@ export default {
     border-radius: 32px;
     box-sizing: border-box;
     padding: 8px 15px;
-    background: #005dfe;
+    background: #D4BD78;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,7 +113,7 @@ export default {
 
   .promotion-title {
     width: 100%;
-    color: #adb6c4;
+    color: #FAF5F9;
     text-align: left;
     font-size: 13px;
   }
@@ -129,14 +129,14 @@ export default {
   padding: 15px 0;
 
   .active-page {
-    background-color: #005dfe;
-    border: 1px solid #005dfe;
+    background-color: #D4BD78;
+    border: 1px solid #D4BD78;
     color: #fff;
   }
 
   .page {
-    border: 1px solid #005dfe;
-    color: #005dfe;
+    border: 1px solid #D4BD78;
+    color: #D4BD78;
   }
 
   .page-item {

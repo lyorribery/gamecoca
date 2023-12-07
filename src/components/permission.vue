@@ -5,7 +5,7 @@
   >
     <div class="modal" :class="user_device == 'h5' ? 'h5' : 'pc'" v-if="show_modal.show">
       <div class="modal-header">
-        <span style="color: #ADB6C4; font-size: 15px; font-weight: 600;">
+        <span style="color: #FAF5F9; font-size: 15px; font-weight: 600;">
           {{
             show_modal.type == "login" ? $t("index.login") : $t("index.register")
           }}</span
@@ -13,7 +13,7 @@
         <div class="header-btn-box">
           <i
             class="iconfont icon-guanbi"
-            style="font-size: 20px; color: #ADB6C4"
+            style="font-size: 20px; color: #FAF5F9"
             @click="closePermission()"
           ></i>
         </div>
@@ -109,7 +109,7 @@
             xml:space="preserve"
           >
             <path
-              fill="#ADB6C4"
+              fill="#FAF5F9"
               d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
               transform="rotate(275.098 25 25)"
             >
@@ -259,7 +259,7 @@
             xml:space="preserve"
           >
             <path
-              fill="#ADB6C4"
+              fill="#FAF5F9"
               d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
               transform="rotate(275.098 25 25)"
             >
@@ -591,13 +591,13 @@ export default {
   width: 100%;
   overflow-y: auto;
   box-sizing: border-box;
-  background:#0E131B;
+  background:#024D46;
 
   .submit-btn {
     margin: 10px 0 0 10px;
     width: calc(100% - 20px);
     border-radius: 6px;
-    background: #005dfe;
+    background: #D4BD78;
     color: #e2e8e3;
     height: 40px;
     display: flex;
@@ -609,11 +609,11 @@ export default {
   }
 
   .ipt-focus {
-    border-color: #005dfe !important;
+    border-color: #D4BD78 !important;
   }
 
   .ipt-focus-login {
-    border-color: #005dfe !important;
+    border-color: #D4BD78 !important;
   }
 
   .form-row {
@@ -624,13 +624,13 @@ export default {
     border-radius: 6px;
     box-sizing: border-box;
     padding: 8px 15px;
-    border: 2px solid #2d3035;
+    border: 2px solid #D4BD78;
     transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
 
     .ipt {
       border: 0px;
       outline: none;
-      background-color: #0E131B;
+      background-color: #024D46;
       color: #e2e8e3;
       font-size: 16px;
       font-weight: 400;

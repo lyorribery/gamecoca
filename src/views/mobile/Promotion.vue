@@ -1,6 +1,6 @@
 <template>
     <div class="promotion">
-        <div style="box-sizing: border-box;padding: 15px 10px;color:#ADB6C4;font-size: 18px;text-align: left;width: 100%;">
+        <div style="box-sizing: border-box;padding: 15px 10px;color:#FAF5F9;font-size: 18px;text-align: left;width: 100%;">
             {{ $t('index.promotion') }}
         </div>
 
@@ -48,7 +48,7 @@ const { promotion_list, goPromotionDetail } = promotion()
 
         .activity-item {
             width: 100%;
-            color: #111923;
+            color: #024D46;
             border-radius: 12px;
             overflow: hidden;
 
@@ -59,7 +59,7 @@ const { promotion_list, goPromotionDetail } = promotion()
 
                 .title {
                     width: 100%;
-                    color: #ADB6C4;
+                    color: #FAF5F9;
                     font-size: 12px;
                     padding-bottom: 10px;
                     text-overflow: ellipsis;

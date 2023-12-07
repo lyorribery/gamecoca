@@ -28,7 +28,7 @@
               <div
                 style="
                   width: 100%;
-                  color: #ADB6C4;
+                  color: #FAF5F9;
                   font-weight: 700;
                   font-size: 22px;
                   display: flex;
@@ -41,7 +41,7 @@
               <div
                 style="
                   width: 100%;
-                  color: #ADB6C4;
+                  color: #FAF5F9;
                   font-weight: 600;
                   font-size: 14px;
                   display: flex;
@@ -56,14 +56,14 @@
                 <div class="ipt-btn" @click="copyContent">
                   <i
                     class="iconfont icon-copy"
-                    style="color: #ADB6C4; font-size: 20px"
+                    style="color: #FAF5F9; font-size: 20px"
                   ></i>
                 </div>
               </div>
               <div
                 style="
                   width: 100%;
-                  color: #ADB6C4;
+                  color: #FAF5F9;
                   font-weight: 600;
                   font-size: 14px;
                   display: flex;
@@ -109,7 +109,7 @@
               <div class="right-box-item">
                 <div
                   class="label"
-                  style="color: #ADB6C4; justify-content: center; font-size: 12px"
+                  style="color: #FAF5F9; justify-content: center; font-size: 12px"
                 >
                   {{ $t("agent.label7") }}
                 </div>
@@ -121,7 +121,7 @@
               <div class="right-box-item">
                 <div
                   class="label"
-                  style="color: #ADB6C4; justify-content: center; font-size: 12px"
+                  style="color: #FAF5F9; justify-content: center; font-size: 12px"
                 >
                   {{ $t("agent.label8") }}
                 </div>
@@ -133,7 +133,7 @@
               <!-- <div class="right-box-item">
                 <div
                   class="label"
-                  style="color: #ADB6C4; justify-content: center; font-size: 12px"
+                  style="color: #FAF5F9; justify-content: center; font-size: 12px"
                 >
                   {{ $t("agent.label14") }}
                 </div>
@@ -144,7 +144,7 @@
               <div class="right-box-item">
                 <div
                   class="label"
-                  style="color: #ADB6C4; justify-content: center; font-size: 12px"
+                  style="color: #FAF5F9; justify-content: center; font-size: 12px"
                 >
                   {{ $t("agent.label15") }}
                 </div>
@@ -155,7 +155,7 @@
               <div class="right-box-item">
                 <div
                   class="label"
-                  style="color: #ADB6C4; justify-content: center; font-size: 12px"
+                  style="color: #FAF5F9; justify-content: center; font-size: 12px"
                 >
                   {{ $t("agent.label9") }}
                 </div>
@@ -174,7 +174,7 @@
               <div class="right-box-bottom-right">
                 <div
                   style="
-                    color: #ADB6C4;
+                    color: #FAF5F9;
                     font-weight: bold;
                     font-size: 18px;
                     width: 100%;
@@ -205,7 +205,7 @@
         </div>
 
         <div class="small-box">
-          <div style="color: #ADB6C4; font-size: 16px; font-weight: 700">
+          <div style="color: #FAF5F9; font-size: 16px; font-weight: 700">
             {{ $t("agent.label17") }}
           </div>
           <div
@@ -221,7 +221,7 @@
             bônus imediato 20% sobre o valor da recarga. (Até R$ 1.000)
           </div>
         </div>
-        <div style="margin: 22px 0; color: #ADB6C4; font-weight: 700; font-size: 20px">
+        <div style="margin: 22px 0; color: #FAF5F9; font-weight: 700; font-size: 20px">
           {{ $t("agent.label21") }}
         </div>
         <div class="small-box2">
@@ -305,7 +305,7 @@
             <div class="small-box2-bottom-item">
               <div
                 style="
-                  color: #ADB6C4;
+                  color: #FAF5F9;
                   font-size: 18px;
                   font-weight: 700;
                   margin-bottom: 8px;
@@ -344,7 +344,7 @@
             text-align: left;
             font-size: 16px;
             font-weight: bold;
-            color: #ADB6C4;
+            color: #FAF5F9;
             margin-bottom: 16px;
           "
         >
@@ -369,10 +369,10 @@
                 align-items: center;
               "
             >
-              <div style="color: #ADB6C4; font-size: 16px; font-weight: 700">
+              <div style="color: #FAF5F9; font-size: 16px; font-weight: 700">
                 R$ {{ registerMoney }}
               </div>
-              <div style="color: #005DFE; font-size: 14px; font-weight: 600">
+              <div style="color: #D4BD78; font-size: 14px; font-weight: 600">
                 {{ $t("agent.label31") }}
               </div>
             </div>
@@ -385,10 +385,10 @@
                 margin-top: 30px;
               "
             >
-              <div style="color: #ADB6C4; font-size: 16px; font-weight: 700">
+              <div style="color: #FAF5F9; font-size: 16px; font-weight: 700">
                 R$ {{ betMoney }}
               </div>
-              <div style="color: #005DFE; font-size: 14px; font-weight: 600">
+              <div style="color: #D4BD78; font-size: 14px; font-weight: 600">
                 {{ $t("agent.label32") }}
               </div>
             </div>
@@ -396,7 +396,7 @@
           <div class="right-item-box">
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 margin: 22px 0;
@@ -408,7 +408,7 @@
             </div>
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -419,7 +419,7 @@
             </div>
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -430,7 +430,7 @@
             </div>
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -442,7 +442,7 @@
             </div>
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -459,7 +459,7 @@
             text-align: left;
             font-size: 16px;
             font-weight: bold;
-            color: #ADB6C4;
+            color: #FAF5F9;
             margin-bottom: 16px;
           "
         >
@@ -477,12 +477,12 @@
             "
           >
             <div
-              style="color: #005DFE; font-size: 18px; font-weight: 700; margin-top: 16px"
+              style="color: #D4BD78; font-size: 18px; font-weight: 700; margin-top: 16px"
             >
               R$ {{ totalMoney }}
             </div>
             <div
-              style="color: #ADB6C4; font-size: 16px; font-weight: 600; margin-top: 5px"
+              style="color: #FAF5F9; font-size: 16px; font-weight: 600; margin-top: 5px"
             >
               {{ $t("agent.label37") }}
             </div>
@@ -490,7 +490,7 @@
           <div class="right-item-box">
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -501,7 +501,7 @@
             </div>
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -513,7 +513,7 @@
             </div>
             <div
               style="
-                color: #ADB6C4;
+                color: #FAF5F9;
                 font-size: 16px;
                 font-weight: 600;
                 width: 100%;
@@ -568,7 +568,7 @@ const {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #111923;
+  background-color: #024D46;
   color: #e2e8e3;
   font-size: 11px;
   width: 100px;
@@ -596,7 +596,7 @@ const {
     overflow: hidden;
     position: relative;
     float: left;
-    background-color: #005DFE;
+    background-color: #D4BD78;
   }
 
   .left:after,
@@ -607,7 +607,7 @@ const {
     width: 8em;
     height: 16em;
     border-radius: 16em 0 0 16em;
-    background-color: #005DFE;
+    background-color: #D4BD78;
   }
 
   .right:after {
@@ -627,7 +627,7 @@ const {
   }
 
   .progress {
-    color: #ADB6C4;
+    color: #FAF5F9;
     position: absolute;
     width: 13em;
     height: 13em;
@@ -642,7 +642,7 @@ const {
 
 .right-box-top {
   font-weight: 700;
-  background-color: #111923;
+  background-color: #024D46;
   border-radius: 16px;
   display: flex;
   justify-content: center;
@@ -652,7 +652,7 @@ const {
 }
 
 .right-box-bottom {
-  background: linear-gradient(180deg, #1e2024, #005DFE);
+  background: linear-gradient(180deg, #1e2024, #D4BD78);
   border-radius: 16px;
   box-sizing: border-box;
   padding: 16px;
@@ -688,7 +688,7 @@ const {
   justify-content: center;
   align-items: center;
   width: calc(100% / 3);
-  color: #ADB6C4;
+  color: #FAF5F9;
   font-size: 16px;
   font-weight: 600;
 }
@@ -700,7 +700,7 @@ const {
   justify-content: center;
   align-items: center;
   width: calc(100% / 3);
-  color: #ADB6C4;
+  color: #FAF5F9;
   font-size: 13px;
   font-weight: 600;
 }
@@ -749,13 +749,13 @@ const {
   text-align: center;
   font-size: 15px;
   font-weight: 700;
-  color: #ADB6C4;
+  color: #FAF5F9;
 }
 
 .bottom-left-box {
   width: calc((100% - 16px) / 2);
   height: 680px;
-  background: linear-gradient(180deg, #1e2024, #005DFE);
+  background: linear-gradient(180deg, #1e2024, #D4BD78);
   border-radius: 16px;
 }
 
@@ -795,7 +795,7 @@ const {
   box-sizing: border-box;
   padding: 16px;
   margin-bottom: 48px;
-  background-color: #111923;
+  background-color: #024D46;
 }
 
 .pc-container .content .box .row {
@@ -808,7 +808,7 @@ const {
 .small-box2 {
   width: 100%;
   border-radius: 16px;
-  background: linear-gradient(180deg, #1e2024, #005DFE);
+  background: linear-gradient(180deg, #1e2024, #D4BD78);
   box-sizing: border-box;
   padding: 16px;
   display: flex;
@@ -830,7 +830,7 @@ const {
   height: 235px;
   box-sizing: border-box;
   padding: 16px;
-  background-color: #111923;
+  background-color: #024D46;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -840,7 +840,7 @@ const {
 .small-box {
   width: 100%;
   border-radius: 16px;
-  background: linear-gradient(180deg, #1e2024, #005DFE);
+  background: linear-gradient(180deg, #1e2024, #D4BD78);
   box-sizing: border-box;
   padding: 16px;
   display: flex;
@@ -859,7 +859,7 @@ const {
 }
 
 .small-box-row-item {
-  background-color: #111923;
+  background-color: #024D46;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
@@ -872,7 +872,7 @@ const {
 }
 
 .small-box-row-item2 {
-  background-color: #111923;
+  background-color: #024D46;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
@@ -916,8 +916,8 @@ const {
   box-sizing: border-box;
   padding: 0 12px;
   border-radius: 6px;
-  background-color: #111923;
-  color: #ADB6C4;
+  background-color: #024D46;
+  color: #FAF5F9;
   font-size: 13px;
   font-weight: 600;
   text-align: left;
@@ -925,7 +925,7 @@ const {
 
 .ipt-btn {
   border-radius: 6px;
-  background-color: #111923;
+  background-color: #024D46;
   width: 45px;
   height: 40px;
   display: flex;
@@ -935,12 +935,12 @@ const {
 }
 
 .ipt-btn:hover {
-  background: linear-gradient(180deg, #111923, #1a2c38);
+  background: linear-gradient(180deg, #024D46, #1a2c38);
   opacity: 1;
 }
 
 .pc-container .content .box .row .left-box .left-content {
-  background: linear-gradient(180deg, #1e2024, #005DFE);
+  background: linear-gradient(180deg, #1e2024, #D4BD78);
   box-sizing: border-box;
   padding: 16px;
   border-radius: 16px;
@@ -955,7 +955,7 @@ const {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  color: #ADB6C4;
+  color: #FAF5F9;
   font-size: 14px;
   font-weight: 600;
   background-color: #171717;
@@ -970,7 +970,7 @@ const {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  background: #111923;
+  background: #024D46;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -988,18 +988,18 @@ const {
   font-weight: 600;
   white-space: nowrap;
   z-index: 1;
-  color: #ADB6C4;
+  color: #FAF5F9;
   font-size: 16px;
   cursor: pointer;
 }
 
 .pc-container .content .tab-box .hover {
-  background: linear-gradient(180deg, #111923, #171717);
+  background: linear-gradient(180deg, #024D46, #171717);
   opacity: 1;
 }
 
 .pc-container .content .tab-box .item:hover {
-  background: linear-gradient(180deg, #111923, #171717);
+  background: linear-gradient(180deg, #024D46, #171717);
   opacity: 1;
 }
 </style>

@@ -24,14 +24,14 @@ const {
 @media screen and (min-width: 1441px) {
     .parse-detail {
         width: 70%;
-        color: #ADB6C4 !important;
+        color: #FAF5F9 !important;
     }
 }
 
 @media screen and (max-width: 1440px) {
     .parse-detail {
         width: 85%;
-        color: #ADB6C4 !important;
+        color: #FAF5F9 !important;
     }
 }
 
@@ -41,8 +41,8 @@ const {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #111923;
-    color: #ADB6C4;
+    background-color: #024D46;
+    color: #FAF5F9;
     font-size: 13px;
     font-weight: 600;
     box-sizing: border-box;

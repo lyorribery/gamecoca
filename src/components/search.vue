@@ -6,7 +6,7 @@
     </div>
     <i
       v-else
-      style="font-size: 20px; color: #ADB6C4"
+      style="font-size: 20px; color: #FAF5F9"
       class="iconfont icon-search"
       @click="showSearch()"
     ></i>
@@ -28,7 +28,7 @@
             @update:model-value="getkey"
           />
           <span
-            style="padding: 0 8px; font-size: 13px; color: #ADB6C4"
+            style="padding: 0 8px; font-size: 13px; color: #FAF5F9"
             @click="closeSearch()"
             >Cancel</span
           >
@@ -39,7 +39,7 @@
             box-sizing: border-box;
             padding: 15px 10px;
             font-size: 13px;
-            color: #ADB6C4;
+            color: #FAF5F9;
             text-align: center;
           "
         >
@@ -70,7 +70,7 @@
               text-align: center;
             "
           >
-            <i class="iconfont icon-nodata" style="color: #ADB6C4; font-size: 32px"></i>
+            <i class="iconfont icon-nodata" style="color: #FAF5F9; font-size: 32px"></i>
           </div>
 
           <div
@@ -94,7 +94,7 @@
               xml:space="preserve"
             >
               <path
-                fill="#005DFE"
+                fill="#D4BD78"
                 d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
                 transform="rotate(275.098 25 25)"
               >
@@ -154,7 +154,7 @@ const {
     position: fixed;
     top: env(safe-area-inset-top);
     left: 0;
-    background-color: #111923;
+    background-color: #024D46;
     width: 100%;
     height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
     display: flex;
@@ -181,7 +181,7 @@ const {
 
       .seggested-title {
         font-size: 12px;
-        color: #ADB6C4;
+        color: #FAF5F9;
         margin: 10px 0;
       }
     }
@@ -191,14 +191,14 @@ const {
       border-radius: 16px;
       box-sizing: border-box;
       padding: 10px 15px;
-      border: 2px solid #2d3035;
-      background-color: #111923;
+      border: 2px solid #D4BD78;
+      background-color: #024D46;
       display: flex;
       justify-content: flex-start;
       align-items: center;
 
       i {
-        color: #ADB6C4;
+        color: #FAF5F9;
         font-size: 16px;
       }
 
@@ -207,8 +207,8 @@ const {
         padding: 0 10px;
         border: 0px;
         outline: none;
-        background-color: #111923;
-        color: #ADB6C4;
+        background-color: #024D46;
+        color: #FAF5F9;
         font-size: 16px;
         font-weight: 400;
       }
@@ -221,20 +221,20 @@ const {
     border-radius: 16px;
     box-sizing: border-box;
     padding: 0 15px;
-    border: 2px solid #2d3035;
-    background-color: #111923;
+    border: 2px solid #D4BD78;
+    background-color: #024D46;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
     i {
-      color: #ADB6C4;
+      color: #FAF5F9;
       font-size: 16px;
     }
 
     span {
       padding-left: 15px;
-      color: #ADB6C4;
+      color: #FAF5F9;
       font-size: 11px;
     }
   }

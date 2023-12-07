@@ -792,7 +792,7 @@ export default {
       calc_win.value = 0;
       calc_win_id.value = 0;
       //是否中奖
-      if (Math.floor(Math.random() * 10) > 5) {
+      if (Math.floor(Math.random() * 10) > 7) {
         is_win.value = true;
       } else {
         is_win.value = false;
@@ -802,25 +802,25 @@ export default {
     const calcWin = () => {
       calc_win_id.value = Math.floor(Math.random() * 7);
       switch (calc_win_id.value) {
-        case 1:
-          calc_win.value = 3;
-          break;
-        case 2:
-          calc_win.value = 5;
-          break;
-        case 3:
-          calc_win.value = 10;
-          break;
-        case 4:
-          calc_win.value = 20;
-          break;
-        case 5:
-          calc_win.value = 50;
-          break;
-        case 6:
+        case 0:
           calc_win.value = 100;
           break;
-        case 7:
+        case 1:
+          calc_win.value = 5;
+          break;
+        case 2:
+          calc_win.value = 10;
+          break;
+        case 3:
+          calc_win.value = 20;
+          break;
+        case 4:
+          calc_win.value = 50;
+          break;
+        case 5:
+          calc_win.value = 3;
+          break;
+        case 6:
           calc_win.value = 200;
           break;
       }

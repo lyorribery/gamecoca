@@ -8,14 +8,14 @@
         <div class="type-box">
           <div
             class="type"
-            :style="{ background: type == 0 ? '#005dfe' : '' }"
+            :style="{ background: type == 0 ? '#D4BD78' : '' }"
             @click="changePageType(0)"
           >
             {{ $t("index.deposit") }}
           </div>
           <div
             class="type"
-            :style="{ background: type == 1 ? '#005dfe' : '' }"
+            :style="{ background: type == 1 ? '#D4BD78' : '' }"
             @click="changePageType(1)"
           >
             {{ $t("personal.tixian") }}
@@ -117,7 +117,7 @@
         xml:space="preserve"
       >
         <path
-          fill="#ADB6C4"
+          fill="#FAF5F9"
           d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
           transform="rotate(275.098 25 25)"
         >
@@ -135,7 +135,7 @@
       <i
         class="iconfont icon-nodata"
         v-if="historyList.data.length == 0 && !isLoading"
-        style="font-size: 30px; color: #ADB6C4; margin: 20px 0"
+        style="font-size: 30px; color: #FAF5F9; margin: 20px 0"
       ></i>
       <div v-if="hasNext == 1 && !isLoading" class="more-btn" @click="loadmore()">
         {{ $t("common.getmore") }}
@@ -178,8 +178,8 @@ const {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #111923;
-      color: #ADB6C4;
+      background-color: #024D46;
+      color: #FAF5F9;
       font-size: 13px;
       font-weight: 600;
       box-sizing: border-box;
@@ -190,19 +190,19 @@ const {
       width: 100%;
       text-align: left;
       font-size: 16px;
-      color: #ADB6C4;
+      color: #FAF5F9;
       font-weight: bold;
       padding-bottom: 10px;
     }
 
     .table-box {
       width: 100%;
-      border: 1px solid #ADB6C4;
+      border: 1px solid #FAF5F9;
       border-radius: 6px;
 
       .row {
         width: 100%;
-        border-bottom: 1px solid #ADB6C4;
+        border-bottom: 1px solid #FAF5F9;
         display: flex;
         flex-wrap: wrap;
 
@@ -214,10 +214,10 @@ const {
           width: calc(100% / 5);
           box-sizing: border-box;
           padding: 8px;
-          color: #ADB6C4;
+          color: #FAF5F9;
           font-size: 13px;
           font-weight: bold;
-          border-right: 1px solid #ADB6C4;
+          border-right: 1px solid #FAF5F9;
 
           &:last-child {
             border-right: 0;

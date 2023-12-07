@@ -37,7 +37,7 @@
               xml:space="preserve"
             >
               <path
-                fill="#ADB6C4"
+                fill="#FAF5F9"
                 d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
                 transform="rotate(275.098 25 25)"
               >
@@ -64,7 +64,7 @@
           style="enable-background: new 0 0 50 50"
           xml:space="preserve"
         >
-          <rect x="0" y="7.6416" width="4" height="10" fill="#ADB6C4" opacity="0.2">
+          <rect x="0" y="7.6416" width="4" height="10" fill="#FAF5F9" opacity="0.2">
             <animate
               attributeName="opacity"
               attributeType="XML"
@@ -90,7 +90,7 @@
               repeatCount="indefinite"
             ></animate>
           </rect>
-          <rect x="8" y="5.1416" width="4" height="10" fill="#ADB6C4" opacity="0.2">
+          <rect x="8" y="5.1416" width="4" height="10" fill="#FAF5F9" opacity="0.2">
             <animate
               attributeName="opacity"
               attributeType="XML"
@@ -116,7 +116,7 @@
               repeatCount="indefinite"
             ></animate>
           </rect>
-          <rect x="16" y="7.3584" width="4" height="10" fill="#ADB6C4" opacity="0.2">
+          <rect x="16" y="7.3584" width="4" height="10" fill="#FAF5F9" opacity="0.2">
             <animate
               attributeName="opacity"
               attributeType="XML"
@@ -205,7 +205,7 @@ const {
           opacity: 0.5;
           cursor: pointer;
           color: #fff;
-          background-color: #005DFE;
+          background-color: #D4BD78;
           font-weight: 600;
           font-size: 13px;
           border-radius: 6px;
@@ -214,7 +214,7 @@ const {
           align-items: center;
           width: 120px;
           height: 30px;
-          border: 2px solid #005DFE;
+          border: 2px solid #D4BD78;
 
           i {
             font-size: 18px;
@@ -235,7 +235,7 @@ const {
       width: 100%;
       box-sizing: border-box;
       padding: 10px 15px;
-      color: #ADB6C4;
+      color: #FAF5F9;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -250,14 +250,14 @@ const {
         height: 30px;
         border-radius: 6px;
         cursor: pointer;
-        border: 2px solid #005DFE;
-        color: #005DFE;
+        border: 2px solid #D4BD78;
+        color: #D4BD78;
         font-weight: 700;
         font-size: 13px;
 
         &:hover {
           color: #fff;
-          background-color: #005DFE;
+          background-color: #D4BD78;
           i {
             color: #fff;
           }
@@ -271,7 +271,7 @@ const {
       }
 
       i {
-        color: #005DFE;
+        color: #D4BD78;
         font-size: 20px;
         cursor: pointer;
       }
@@ -293,8 +293,8 @@ const {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #111923;
-      color: #ADB6C4;
+      background-color: #024D46;
+      color: #FAF5F9;
       font-size: 13px;
       font-weight: 600;
       box-sizing: border-box;
@@ -305,19 +305,19 @@ const {
       width: 100%;
       text-align: left;
       font-size: 16px;
-      color: #ADB6C4;
+      color: #FAF5F9;
       font-weight: bold;
       padding-bottom: 10px;
     }
 
     .table-box {
       width: 100%;
-      border: 1px solid #ADB6C4;
+      border: 1px solid #FAF5F9;
       border-radius: 6px;
 
       .row {
         width: 100%;
-        border-bottom: 1px solid #ADB6C4;
+        border-bottom: 1px solid #FAF5F9;
         display: flex;
         flex-wrap: wrap;
 
@@ -329,10 +329,10 @@ const {
           width: calc(100% / 3);
           box-sizing: border-box;
           padding: 8px;
-          color: #ADB6C4;
+          color: #FAF5F9;
           font-size: 13px;
           font-weight: bold;
-          border-right: 1px solid #ADB6C4;
+          border-right: 1px solid #FAF5F9;
 
           &:last-child {
             border-right: 0;

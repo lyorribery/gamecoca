@@ -16,8 +16,8 @@ export const sockets = {
 
         ws.onmessage = (res) => {
             showNotify.text(JSON.parse(res.data).content, {
-                color: "#ADB6C4",
-                background: "#005DFE",
+                color: "#FAF5F9",
+                background: "#D4BD78",
             });
         }
 

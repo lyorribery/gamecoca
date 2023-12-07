@@ -5,14 +5,14 @@
       <div class="type-box">
         <div
           class="type"
-          :style="{ background: type == 0 ? '#005dfe' : '' }"
+          :style="{ background: type == 0 ? '#D4BD78' : '' }"
           @click="changePageType(0)"
         >
           {{ $t("personalinfos.list1") }}
         </div>
         <div
           class="type"
-          :style="{ background: type == 1 ? '#005dfe' : '' }"
+          :style="{ background: type == 1 ? '#D4BD78' : '' }"
           @click="changePageType(1)"
         >
           {{ $t("personalinfos.list2") }}
@@ -21,12 +21,12 @@
     </div>
     <div class="form-content" v-if="type == 0">
       <div class="account-box">
-        <i class="iconfont icon-touxiang" style="color: #adb6c4"></i>
+        <i class="iconfont icon-touxiang" style="color: #FAF5F9"></i>
         <div style="margin-left: 12px">
-          <div style="color: #adb6c4; font-size: 13px">
+          <div style="color: #FAF5F9; font-size: 13px">
             {{ user_infos.name }}
           </div>
-          <div style="color: #adb6c4; font-size: 12px; font-weight: 400">
+          <div style="color: #FAF5F9; font-size: 12px; font-weight: 400">
             {{ $t("personal.id") }}
             {{ user_infos.userAccount }}
           </div>
@@ -132,7 +132,7 @@
               xml:space="preserve"
             >
               <path
-                fill="#ADB6C4"
+                fill="#FAF5F9"
                 d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
                 transform="rotate(275.098 25 25)"
               >
@@ -185,7 +185,7 @@ const {
     width: 100%;
     text-align: left;
     font-size: 16px;
-    color: #adb6c4;
+    color: #FAF5F9;
     font-weight: bold;
     padding-bottom: 10px;
   }
@@ -197,20 +197,20 @@ const {
     box-sizing: border-box;
     padding-bottom: calc(env(safe-area-inset-bottom) + 50px);
     border-radius: 12px;
-    border: 2px solid #2d3035;
-    background-color: #0e131b;
+    border: 2px solid #D4BD78;
+    background-color: #024D46;
 
     .form-box {
       width: 100%;
       box-sizing: border-box;
       padding: 10px;
-      background-color: #0e131b;
+      background-color: #024D46;
 
       .submit-btn {
         margin: 10px 0;
         width: calc(100% - 20px);
         border-radius: 6px;
-        background: #005dfe;
+        background: #D4BD78;
         color: #e2e8e3;
         height: 40px;
         display: flex;
@@ -224,7 +224,7 @@ const {
       .label {
         width: 100%;
         font-size: 11px;
-        color: #adb6c4;
+        color: #FAF5F9;
         box-sizing: border-box;
         padding-bottom: 5px;
       }
@@ -237,28 +237,28 @@ const {
         border-radius: 6px;
         box-sizing: border-box;
         padding: 8px 15px;
-        border: 2px solid #2d3035;
+        border: 2px solid #D4BD78;
         .ipt {
           border: 0px;
           outline: none;
-          color: #adb6c4;
+          color: #FAF5F9;
           font-size: 12px;
           width: 100%;
-          background-color: #0e131b;
+          background-color: #024D46;
         }
       }
 
       .form-title {
         width: 100%;
         font-size: 13px;
-        color: #adb6c4;
+        color: #FAF5F9;
         margin-bottom: 8px;
       }
 
       .form-sub-title {
         width: 100%;
         font-size: 11px;
-        color: #adb6c4;
+        color: #FAF5F9;
         margin-bottom: 8px;
       }
     }
@@ -268,26 +268,26 @@ const {
       box-sizing: border-box;
       padding: 10px 10px 0 10px;
       font-size: 11px;
-      color: #adb6c4;
+      color: #FAF5F9;
       text-align: center;
     }
 
     .basic-box {
       width: 100%;
       border-radius: 12px;
-      background-color: #0e131b;
+      background-color: #024D46;
       box-sizing: border-box;
       padding: 10px;
       .label {
         font-size: 12px;
-        color: #adb6c4;
+        color: #FAF5F9;
         box-sizing: border-box;
         padding-bottom: 10px;
       }
 
       .val {
         font-size: 15px;
-        color: #adb6c4;
+        color: #FAF5F9;
         width: 100%;
         height: 40px;
         display: flex;
@@ -297,8 +297,8 @@ const {
         padding: 0 10px;
         border-radius: 6px;
         margin-bottom: 10px;
-        background-color: #0e131b;
-        border: 2px solid #2d3035;
+        background-color: #024D46;
+        border: 2px solid #D4BD78;
         &:last-child {
           margin-bottom: 0;
         }
@@ -308,7 +308,7 @@ const {
     .account-box {
       width: 100%;
       border-radius: 6px;
-      background-color: #0e131b;
+      background-color: #024D46;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -317,7 +317,7 @@ const {
 
       i {
         font-size: 40px;
-        color: #adb6c4;
+        color: #FAF5F9;
       }
     }
   }

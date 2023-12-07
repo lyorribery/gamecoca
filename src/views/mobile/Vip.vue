@@ -46,7 +46,7 @@
             <div class="label">
                 {{ $t('vip.text2') }}
             </div>
-            <nut-progress style="width: 100%;" stroke-color="#005DFE" text-color="#ADB6C4"
+            <nut-progress style="width: 100%;" stroke-color="#D4BD78" text-color="#FAF5F9"
                 :percentage="vip_info.needMultiple == 0 ? 100 : (Number(vip_info.hasMultiple) / (Number(vip_info.needMultiple) + Number(vip_info.hasMultiple)) * 100).toFixed(2)" />
             <div class="go-level-box">
                 <div class="level-left">
@@ -190,11 +190,11 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
             align-items: center;
             box-sizing: border-box;
             padding-top: 15px;
-            color: #ADB6C4;
+            color: #FAF5F9;
             font-weight: 700;
 
             i {
-                color: #005DFE;
+                color: #D4BD78;
                 font-size: 25px;
             }
 
@@ -211,7 +211,7 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
             align-items: center;
             box-sizing: border-box;
             padding-top: 10px;
-            color: #005DFE;
+            color: #D4BD78;
             font-size: 11px;
             font-weight: 600;
 
@@ -224,7 +224,7 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
             width: 100%;
             box-sizing: border-box;
             padding-top: 10px;
-            color: #ADB6C4;
+            color: #FAF5F9;
             text-align: left;
             font-size: 11px;
             font-weight: bold;
@@ -245,14 +245,14 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
             }
 
             .level-left {
-                color: #005DFE;
+                color: #D4BD78;
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
             }
 
             .level-right {
-                color: #ADB6C4;
+                color: #FAF5F9;
             }
         }
 
@@ -260,7 +260,7 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
             width: 100%;
             text-align: left;
             font-size: 12px;
-            color: #ADB6C4;
+            color: #FAF5F9;
             font-weight: 600;
             box-sizing: border-box;
             padding: 25px 0 10px 0;
@@ -268,12 +268,12 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
 
         .table-box {
             width: 100%;
-            border: 1px solid #ADB6C4;
+            border: 1px solid #FAF5F9;
             border-radius: 6px;
 
             .row {
                 width: 100%;
-                border-bottom: 1px solid #ADB6C4;
+                border-bottom: 1px solid #FAF5F9;
                 display: flex;
                 flex-wrap: wrap;
 
@@ -285,10 +285,10 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
                     width: calc(100% / 3);
                     box-sizing: border-box;
                     padding: 5px 10px;
-                    color: #ADB6C4;
+                    color: #FAF5F9;
                     font-size: 11px;
                     font-weight: bold;
-                    border-right: 1px solid #ADB6C4;
+                    border-right: 1px solid #FAF5F9;
                     word-break: break-all;
 
                     &:last-child {
@@ -300,10 +300,10 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
                     width: 20%;
                     box-sizing: border-box;
                     padding: 5px 10px;
-                    color: #ADB6C4;
+                    color: #FAF5F9;
                     font-size: 11px;
                     font-weight: bold;
-                    border-right: 1px solid #ADB6C4;
+                    border-right: 1px solid #FAF5F9;
                     word-break: break-all;
 
                     &:last-child {
@@ -315,10 +315,10 @@ const { show_level, vip_info, list, cur_level, listGrade } = vip()
                     width: 25%;
                     box-sizing: border-box;
                     padding: 5px 10px;
-                    color: #ADB6C4;
+                    color: #FAF5F9;
                     font-size: 11px;
                     font-weight: bold;
-                    border-right: 1px solid #ADB6C4;
+                    border-right: 1px solid #FAF5F9;
 
                     &:last-child {
                         border-right: 0;

@@ -38,7 +38,7 @@
             xml:space="preserve"
           >
             <path
-              fill="#ADB6C4"
+              fill="#FAF5F9"
               d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
               transform="rotate(275.098 25 25)"
             >
@@ -91,10 +91,10 @@ const {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #adb6c4;
+    color: #FAF5F9;
     font-size: 15px;
     border-radius: 6px;
-    background: #2b333b;
+    background: #D4BD78;
   }
 
   .play-btn {
@@ -107,7 +107,7 @@ const {
     color: #fff;
     font-size: 15px;
     border-radius: 6px;
-    background: #005dfe;
+    background: #D4BD78;
   }
   .box {
     width: 100%;
@@ -128,19 +128,19 @@ const {
     .box-header {
       width: 100%;
       border-radius: 6px;
-      background-color: #111923;
+      background-color: #024D46;
       box-sizing: border-box;
       padding: 20px 10px;
       display: flex;
       justify-content: space-between;
-      border-bottom: 2px solid #2d3035;
+      border-bottom: 2px solid #D4BD78;
 
       .title-row {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: #adb6c4;
+        color: #FAF5F9;
 
         span {
           font-size: 15px;
@@ -148,7 +148,7 @@ const {
 
         i {
           font-size: 25px;
-          color: #005dfe;
+          color: #D4BD78;
         }
       }
 

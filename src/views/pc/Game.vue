@@ -13,15 +13,15 @@
     >
       <div style="display: flex; align-items: center; margin-right: 50px">
         <span
-          style="font-size: 18px; color: #ADB6C4; font-weight: 600; padding-left: 15px"
+          style="font-size: 18px; color: #FAF5F9; font-weight: 600; padding-left: 15px"
           >{{ companyName ? companyName : "" }}</span
         >
         <span
-          style="font-size: 18px; color: #ADB6C4; font-weight: 600; padding: 0 5px"
+          style="font-size: 18px; color: #FAF5F9; font-weight: 600; padding: 0 5px"
           v-if="companyName && categoryName"
           >/</span
         >
-        <span style="font-size: 18px; color: #ADB6C4; font-weight: 600">{{
+        <span style="font-size: 18px; color: #FAF5F9; font-weight: 600">{{
           categoryName ? categoryName : ""
         }}</span>
       </div>
@@ -31,7 +31,7 @@
     <i
       class="iconfont icon-nodata"
       v-if="gameList.data.length == 0 && !showLoading"
-      style="font-size: 30px; color: #ADB6C4; margin: 20px 0"
+      style="font-size: 30px; color: #FAF5F9; margin: 20px 0"
     ></i>
     <div class="game-list">
       <imgCard
@@ -56,7 +56,7 @@
         xml:space="preserve"
       >
         <path
-          fill="#005DFE"
+          fill="#D4BD78"
           d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
           transform="rotate(275.098 25 25)"
         >
@@ -150,7 +150,7 @@ const {
 
     .page-count {
       font-size: 12px;
-      color: #ADB6C4;
+      color: #FAF5F9;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -163,8 +163,8 @@ const {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 2px solid #2d3035;
-      color: #ADB6C4;
+      border: 2px solid #D4BD78;
+      color: #FAF5F9;
       font-size: 13px;
       font-weight: 600;
       box-sizing: border-box;

@@ -2,7 +2,7 @@
     <div class="header">
         <img src="@/assets/images/logo.png" style="width: 40px;height: auto;">
         <div class="header-btn-box">
-            <i class="iconfont icon-guanbi" style="font-size: 28px;color:#ADB6C4;" @click="closeParse()"></i>
+            <i class="iconfont icon-guanbi" style="font-size: 28px;color:#FAF5F9;" @click="closeParse()"></i>
         </div>
     </div>
     <div class="parse-content" v-html="parse"></div>
@@ -28,15 +28,15 @@ const {
     left: 0;
     z-index: 3;
     height: calc(50px + env(safe-area-inset-top));
-    background-color: #111923;
+    background-color: #024D46;
     box-sizing: border-box;
     padding: 0 10px;
     padding-top: env(safe-area-inset-top);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #2C353F;
-    color: #ADB6C4;
+    border-bottom: 1px solid #D4BD78;
+    color: #FAF5F9;
     font-size: 18px;
     font-weight: bold;
 
@@ -52,6 +52,6 @@ const {
     box-sizing: border-box;
     padding: calc(50px + env(safe-area-inset-top)) 10px env(safe-area-inset-bottom) 10px;
     overflow-y: auto;
-    color: #ADB6C4 !important;
+    color: #FAF5F9 !important;
 }
 </style>

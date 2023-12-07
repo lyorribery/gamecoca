@@ -84,8 +84,8 @@ export default {
           });
         } else {
           router.push({
-              path: "/pgslot",
-            });
+            path: "/pgslot",
+          });
         }
       } else {
         commit("permission/show_permission_modal", { type: "login", show: true });
@@ -95,7 +95,7 @@ export default {
       if (text.includes(props.searchKey)) {
         text = text.replace(
           props.searchKey,
-          '<font style="color:#005DFE!important;">' + props.searchKey + "</font>"
+          '<font style="color:#D4BD78!important;">' + props.searchKey + "</font>"
         );
         return text;
       } else {
@@ -119,7 +119,7 @@ export default {
 
   .card-name {
     text-align: center;
-    color: #adb6c4;
+    color: #FAF5F9;
     font-size: 11px;
     width: 100%;
     box-sizing: border-box;
@@ -163,7 +163,7 @@ export default {
       opacity: 0;
 
       i {
-        color: #adb6c4;
+        color: #FAF5F9;
         font-size: 38px;
       }
     }

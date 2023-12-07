@@ -54,8 +54,8 @@ export default function () {
                         loginFormLoading.value = false
                         if (res.code == '000000') {
                             showNotify.text(t('personalinfos.valid5'), {
-                                color: "#ADB6C4",
-                                background: "#005DFE",
+                                color: "#FAF5F9",
+                                background: "#D4BD78",
                             });
                             ruleLoginForm.value.reset()
                             loginForm.oldPwd = ''

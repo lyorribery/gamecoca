@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <nut-swiper
-      pagination-color="#005DFE"
+      pagination-color="#D4BD78"
       :loop="true"
       auto-play="3000"
       direction="vertical"
@@ -17,8 +17,8 @@
     <nut-noticebar
       :text="horse_info"
       :scrollable="true"
-      :background="`#151D29`"
-      :color="`#ADB6C4`"
+      :background="`#024D46`"
+      :color="`#FAF5F9`"
     ></nut-noticebar>
 
     <div style="width: 100%" v-for="(item, index) in home_game_list" :key="index">
@@ -58,22 +58,22 @@
                 >
                   <path
                     d="M556.8 535.893333L170.666667 149.76c-13.226667-13.226667-13.226667-34.986667 0-48.213333 13.226667-13.226667 34.986667-13.226667 48.213333 0l386.133333 386.133333c13.226667 13.226667 13.226667 34.986667 0 48.213333-13.226667 13.226667-34.986667 13.226667-48.213333 0z"
-                    fill="#adb6c4"
+                    fill="#FAF5F9"
                     p-id="4565"
                   ></path>
                   <path
                     d="M170.666667 873.813333l386.133333-386.133333c13.226667-13.226667 34.986667-13.226667 48.213333 0 13.226667 13.226667 13.226667 34.986667 0 48.213333l-386.133333 386.133334c-13.226667 13.226667-34.986667 13.226667-48.213333 0a33.493333 33.493333 0 0 1 0-48.213334z"
-                    fill="#adb6c4"
+                    fill="#FAF5F9"
                     p-id="4566"
                   ></path>
                   <path
                     d="M825.173333 536.32l-386.133333-386.133333c-13.226667-13.226667-13.226667-34.986667 0-48.213334 13.226667-13.226667 34.986667-13.226667 48.213333 0l386.133334 386.133334c13.226667 13.226667 13.226667 34.986667 0 48.213333a33.493333 33.493333 0 0 1-48.213334 0z"
-                    fill="#adb6c4"
+                    fill="#FAF5F9"
                     p-id="4567"
                   ></path>
                   <path
                     d="M439.04 874.24l386.133333-386.133333c13.226667-13.226667 34.986667-13.226667 48.213334 0 13.226667 13.226667 13.226667 34.986667 0 48.213333l-386.133334 386.133333c-13.226667 13.226667-34.986667 13.226667-48.213333 0-13.226667-13.226667-13.226667-34.56 0-48.213333z"
-                    fill="#adb6c4"
+                    fill="#FAF5F9"
                     p-id="4568"
                   ></path>
                 </svg>
@@ -141,7 +141,7 @@ const {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #005dfe;
+    background: #D4BD78;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,7 +180,7 @@ const {
     .title {
       width: 100%;
       height: 40px;
-      color: #adb6c4;
+      color: #FAF5F9;
       box-sizing: border-box;
       padding: 0 10px;
       font-size: 15px;
@@ -195,7 +195,7 @@ const {
 
         i {
           font-size: 18px;
-          color: #adb6c4;
+          color: #FAF5F9;
           padding-right: 8px;
         }
       }
@@ -204,7 +204,7 @@ const {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #adb6c4;
+        color: #FAF5F9;
         font-weight: bold;
         span {
           font-size: 11px;

@@ -55,7 +55,7 @@ export default function () {
         document.body.appendChild(cInput)
         cInput.select()
         document.execCommand("copy")
-        showNotify.text('O link de compartilhamento foi copiado', { color: '#ADB6C4', background: '#005DFE' });
+        showNotify.text('O link de compartilhamento foi copiado', { color: '#FAF5F9', background: '#D4BD78' });
         document.body.removeChild(cInput)
     }
     const shareFb = () => {

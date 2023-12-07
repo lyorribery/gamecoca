@@ -13,7 +13,7 @@
         <div class="header-btn-box">
           <i
             class="iconfont icon-guanbi"
-            style="font-size: 20px; color: #ADB6C4"
+            style="font-size: 20px; color: #FAF5F9"
             @click="closeWithdrawtip()"
           ></i>
         </div>
@@ -106,8 +106,8 @@ export default {
       cInput.select();
       document.execCommand("copy");
       showNotify.text("O link de compartilhamento foi copiado", {
-        color: "#ADB6C4",
-        background: "#005DFE",
+        color: "#FAF5F9",
+        background: "#D4BD78",
       });
       document.body.removeChild(cInput);
     };
@@ -128,7 +128,7 @@ export default {
   margin: 15px 0;
   width: 100%;
   border-radius: 6px;
-  background: #005DFE;
+  background: #D4BD78;
   color: #fff;
   height: 40px;
   display: flex;
@@ -141,8 +141,8 @@ export default {
 .invite-btn {
   width: 100%;
   border-radius: 6px;
-  background: #2b333b;
-  color: #adb6c4;
+  background: #D4BD78;
+  color: #FAF5F9;
   height: 40px;
   display: flex;
   justify-content: center;
@@ -160,17 +160,17 @@ export default {
   .tip-content {
     width: 100%;
     border-radius: 6px;
-    background-color: #111923;
+    background-color: #024D46;
     box-sizing: border-box;
     padding: 15px 10px;
     .tip-row {
       width: 100%;
       text-align: left;
       font-size: 13px;
-      color: #ADB6C4;
+      color: #FAF5F9;
       margin-bottom: 10px;
       span {
-        color: #005DFE;
+        color: #D4BD78;
         font-size: 18px;
       }
       &:last-child {

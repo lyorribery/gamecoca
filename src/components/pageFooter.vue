@@ -6,7 +6,7 @@
       justify-content: flex-start;
       align-items: center;
       flex-direction: column;
-      background-color: #111923;
+      background-color: #024D46;
       box-sizing: border-box;
       padding-bottom: 20px;
       margin-top: 20px;
@@ -27,7 +27,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #adb6c4;
+        color: #FAF5F9;
         margin: 10px 0;
         font-weight: 500;
       "
@@ -62,7 +62,7 @@
       style="
         width: 100%;
         text-align: center;
-        color: #adb6c4;
+        color: #FAF5F9;
         font-size: 12px;
         box-sizing: border-box;
         padding-bottom: 15px;
@@ -152,7 +152,7 @@ export default {
   box-sizing: border-box;
   padding: 15px 10px 0 10px;
   font-size: 11px;
-  color: #adb6c4;
+  color: #FAF5F9;
 }
 
 .game-company-list {

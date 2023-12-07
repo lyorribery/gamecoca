@@ -13,7 +13,7 @@
         <div class="header-btn-box">
           <i
             class="iconfont icon-guanbi"
-            style="font-size: 22px; color: #adb6c4"
+            style="font-size: 22px; color: #FAF5F9"
             @click="closeWithdraw()"
           ></i>
         </div>
@@ -48,7 +48,7 @@
                 :key="index"
                 @click="changeAccount(item)"
                 :style="{
-                  color: item.bankAccount == formData.bankAccount ? '#005DFE' : '',
+                  color: item.bankAccount == formData.bankAccount ? '#D4BD78' : '',
                 }"
               >
                 {{ item.bankAccount }}
@@ -66,7 +66,7 @@
             v-for="(item, index) in quickAmountList"
             :key="index"
             @click="changeQuickAmount(item.toString())"
-            :style="{ background: item == formData.amount ? '#005DFE' : '#111923' }"
+            :style="{ background: item == formData.amount ? '#D4BD78' : '#024D46' }"
           >
             <div class="item-row">
               <div>R${{ item }}</div>
@@ -87,7 +87,7 @@
             xml:space="preserve"
           >
             <path
-              fill="#ADB6C4"
+              fill="#FAF5F9"
               d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
               transform="rotate(275.098 25 25)"
             >
@@ -241,8 +241,8 @@ export default {
           loading.value = false;
           if (res.code == "000000") {
             showNotify.text(t("withdraw.valid3"), {
-              color: "#ADB6C4",
-              background: "#005DFE",
+              color: "#FAF5F9",
+              background: "#D4BD78",
             });
             closeWithdraw();
           } else if (res.code == "888888") {
@@ -319,7 +319,7 @@ export default {
     margin-right: 15px;
     margin-bottom: 15px;
     cursor: pointer;
-    border: 2px solid #005dfe;
+    border: 2px solid #D4BD78;
     color: #fff;
     .item-row {
       width: 100%;
@@ -356,7 +356,7 @@ export default {
     position: relative;
 
     .bank-account-box {
-      background-color: #111923;
+      background-color: #024D46;
       color: #e2e8e3;
       font-size: 15px;
       width: 100%;
@@ -375,7 +375,7 @@ export default {
       top: 40px;
       width: 100%;
       border-radius: 6px;
-      background-color: #adb6c4;
+      background-color: #FAF5F9;
 
       .options {
         width: 100%;
@@ -384,7 +384,7 @@ export default {
         height: 40px;
         display: flex;
         align-items: center;
-        color: #adb6c4;
+        color: #FAF5F9;
         font-size: 15px;
         justify-content: flex-start;
 
@@ -407,15 +407,15 @@ export default {
         background: radial-gradient(
               circle at right top,
               transparent 8px,
-              #005dfe 0,
-              #005dfe 100%
+              #D4BD78 0,
+              #D4BD78 100%
             )
             right top / 100% 50% no-repeat,
           radial-gradient(
               circle at right bottom,
               transparent 8px,
-              #005dfe 0,
-              #005dfe 100%
+              #D4BD78 0,
+              #D4BD78 100%
             )
             right bottom / 100% 50% no-repeat;
         filter: drop-shadow(-3px 0 3px rgba(0, 0, 0, 0.3));
@@ -426,7 +426,7 @@ export default {
         padding-left: 15px;
 
         i {
-          color: #adb6c4;
+          color: #FAF5F9;
           font-size: 40px;
         }
 
@@ -438,14 +438,14 @@ export default {
           align-items: flex-start;
 
           .amount {
-            color: #adb6c4;
+            color: #FAF5F9;
             font-size: 25px;
             font-weight: bold;
           }
 
           .date {
             font-size: 12px;
-            color: #adb6c4;
+            color: #FAF5F9;
           }
         }
       }
@@ -457,7 +457,7 @@ export default {
         width: 4px;
         top: 0;
         left: -4px;
-        background: radial-gradient(circle at left center, transparent 4px, #005dfe 0)
+        background: radial-gradient(circle at left center, transparent 4px, #D4BD78 0)
           left center / 4px 10px;
       }
 
@@ -486,7 +486,7 @@ export default {
         padding-left: 15px;
 
         i {
-          color: #adb6c4;
+          color: #FAF5F9;
           font-size: 40px;
         }
 
@@ -498,14 +498,14 @@ export default {
           align-items: flex-start;
 
           .amount {
-            color: #adb6c4;
+            color: #FAF5F9;
             font-size: 25px;
             font-weight: bold;
           }
 
           .date {
             font-size: 12px;
-            color: #adb6c4;
+            color: #FAF5F9;
           }
         }
       }
@@ -546,7 +546,7 @@ export default {
         padding-left: 15px;
 
         i {
-          color: #adb6c4;
+          color: #FAF5F9;
           font-size: 40px;
         }
 
@@ -558,14 +558,14 @@ export default {
           align-items: flex-start;
 
           .amount {
-            color: #adb6c4;
+            color: #FAF5F9;
             font-size: 25px;
             font-weight: bold;
           }
 
           .date {
             font-size: 12px;
-            color: #adb6c4;
+            color: #FAF5F9;
           }
         }
       }
@@ -590,11 +590,11 @@ export default {
         background: radial-gradient(
               circle at left top,
               transparent 8px,
-              #005dfe 0,
-              #005dfe 100%
+              #D4BD78 0,
+              #D4BD78 100%
             )
             right top / 100% 50% no-repeat,
-          radial-gradient(circle at left bottom, transparent 8px, #005dfe 0, #005dfe 100%)
+          radial-gradient(circle at left bottom, transparent 8px, #D4BD78 0, #D4BD78 100%)
             right bottom / 100% 50% no-repeat;
         filter: drop-shadow(3px 0 3px rgba(0, 0, 0, 0.3));
 
@@ -603,8 +603,8 @@ export default {
           padding: 5px;
           border-radius: 32px;
           font-size: 12px;
-          color: #adb6c4;
-          border: 2px solid #adb6c4;
+          color: #FAF5F9;
+          border: 2px solid #FAF5F9;
           font-weight: bold;
         }
       }
@@ -612,7 +612,7 @@ export default {
       .r-tickets-1::before {
         content: "";
         width: 0.5px;
-        background: linear-gradient(to top, #adb6c4 0%, #adb6c4 50%, transparent 50%) top
+        background: linear-gradient(to top, #FAF5F9 0%, #FAF5F9 50%, transparent 50%) top
           left / 0.5px 10px repeat-y;
         position: absolute;
         left: 0;
@@ -627,7 +627,7 @@ export default {
         width: 4px;
         top: 0;
         right: -4px;
-        background: radial-gradient(circle at right center, transparent 4px, #005dfe 0)
+        background: radial-gradient(circle at right center, transparent 4px, #D4BD78 0)
           right center / 4px 10px;
       }
 
@@ -653,8 +653,8 @@ export default {
           padding: 5px;
           border-radius: 32px;
           font-size: 12px;
-          color: #adb6c4;
-          border: 2px solid #adb6c4;
+          color: #FAF5F9;
+          border: 2px solid #FAF5F9;
           font-weight: bold;
         }
       }
@@ -662,7 +662,7 @@ export default {
       .r-tickets-2::before {
         content: "";
         width: 0.5px;
-        background: linear-gradient(to top, #adb6c4 0%, #adb6c4 50%, transparent 50%) top
+        background: linear-gradient(to top, #FAF5F9 0%, #FAF5F9 50%, transparent 50%) top
           left / 0.5px 10px repeat-y;
         position: absolute;
         left: 0;
@@ -703,8 +703,8 @@ export default {
           padding: 5px;
           border-radius: 32px;
           font-size: 12px;
-          color: #adb6c4;
-          border: 2px solid #adb6c4;
+          color: #FAF5F9;
+          border: 2px solid #FAF5F9;
           font-weight: bold;
         }
       }
@@ -712,7 +712,7 @@ export default {
       .r-tickets-3::before {
         content: "";
         width: 0.5px;
-        background: linear-gradient(to top, #adb6c4 0%, #adb6c4 50%, transparent 50%) top
+        background: linear-gradient(to top, #FAF5F9 0%, #FAF5F9 50%, transparent 50%) top
           left / 0.5px 10px repeat-y;
         position: absolute;
         left: 0;
@@ -734,11 +734,11 @@ export default {
   }
 
   .active-btn {
-    background: #005dfe;
+    background: #D4BD78;
   }
 
   .disabled-btn {
-    background: #005dfe;
+    background: #D4BD78;
     opacity: 0.5;
   }
 
@@ -759,7 +759,7 @@ export default {
   .ipt {
     transition: border-color 0.36s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
-    background-color: #111923;
+    background-color: #024D46;
     color: #e2e8e3;
     font-size: 15px;
     width: 100%;
@@ -782,7 +782,7 @@ export default {
     margin-top: 10px;
     width: 100%;
     border-radius: 6px;
-    background: #005dfe;
+    background: #D4BD78;
     font-size: 16px;
     font-weight: 800;
     color: #e2e8e3;

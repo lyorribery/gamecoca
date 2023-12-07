@@ -318,7 +318,7 @@
                   R$
                   {{ registerMoney }}
                 </div>
-                <div style="color: #005DFE; font-size: 13px; font-weight: 600">
+                <div style="color: #D4BD78; font-size: 13px; font-weight: 600">
                   {{ $t("agent.label31") }}
                 </div>
               </div>
@@ -333,7 +333,7 @@
                 <div style="color: #e2e8e3; font-size: 16px; font-weight: 700">
                   R$ {{ betMoney }}
                 </div>
-                <div style="color: #005DFE; font-size: 13px; font-weight: 600">
+                <div style="color: #D4BD78; font-size: 13px; font-weight: 600">
                   {{ $t("agent.label32") }}
                 </div>
               </div>
@@ -404,7 +404,7 @@
             "
           >
             <div
-              style="color: #005DFE; font-size: 15px; font-weight: 700; margin-top: 16px"
+              style="color: #D4BD78; font-size: 15px; font-weight: 700; margin-top: 16px"
             >
               R$
               {{ totalMoney }}
@@ -511,12 +511,12 @@ const {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #111923;
+        background: #024D46;
         border-radius: 13px;
         overflow: hidden;
 
         .hover {
-          background: linear-gradient(180deg, #111923, #111923);
+          background: linear-gradient(180deg, #024D46, #024D46);
           opacity: 1;
         }
 
@@ -539,7 +539,7 @@ const {
           width: calc(100% / 3);
 
           &:hover {
-            background: linear-gradient(180deg, #111923, #111923);
+            background: linear-gradient(180deg, #024D46, #024D46);
             opacity: 1;
           }
         }
@@ -553,7 +553,7 @@ const {
         box-sizing: border-box;
         padding: 12px;
         margin-bottom: 25px;
-        background-color: #111923;
+        background-color: #024D46;
 
         .more-btn {
           margin: 15px 0 calc(env(safe-area-inset-bottom)) 0;
@@ -561,7 +561,7 @@ const {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #111923;
+          background-color: #024D46;
           color: #e2e8e3;
           font-size: 11px;
           width: 100px;
@@ -588,7 +588,7 @@ const {
             overflow: hidden;
             position: relative;
             float: left;
-            background-color: #005DFE;
+            background-color: #D4BD78;
           }
 
           .left:after,
@@ -599,7 +599,7 @@ const {
             width: 8em;
             height: 16em;
             border-radius: 16em 0 0 16em;
-            background-color: #005DFE;
+            background-color: #D4BD78;
           }
 
           .right:after {
@@ -688,7 +688,7 @@ const {
         .bottom-left-box {
           width: calc((100% - 16px) / 2);
           height: 1330px;
-          background: linear-gradient(180deg, #1e2024, #005DFE);
+          background: linear-gradient(180deg, #1e2024, #D4BD78);
           border-radius: 16px;
 
           .bottom-left-box-item {
@@ -703,7 +703,7 @@ const {
         .small-box2 {
           width: 100%;
           border-radius: 16px;
-          background: linear-gradient(180deg, #1e2024, #005DFE);
+          background: linear-gradient(180deg, #1e2024, #D4BD78);
           box-sizing: border-box;
           padding: 16px;
           display: flex;
@@ -716,7 +716,7 @@ const {
             width: 100%;
             box-sizing: border-box;
             padding: 16px;
-            background-color: #111923;
+            background-color: #024D46;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -727,7 +727,7 @@ const {
         .small-box {
           width: 100%;
           border-radius: 16px;
-          background: linear-gradient(180deg, #1e2024, #005DFE);
+          background: linear-gradient(180deg, #1e2024, #D4BD78);
           box-sizing: border-box;
           padding: 16px;
           display: flex;
@@ -737,7 +737,7 @@ const {
         }
 
         .right-box-bottom {
-          background: linear-gradient(180deg, #1e2024, #005DFE);
+          background: linear-gradient(180deg, #1e2024, #D4BD78);
           border-radius: 16px;
           box-sizing: border-box;
           padding: 16px;
@@ -749,7 +749,7 @@ const {
 
         .right-box-top {
           font-weight: 700;
-          background-color: #111923;
+          background-color: #024D46;
           border-radius: 16px;
           display: flex;
           justify-content: flex-start;
@@ -793,7 +793,7 @@ const {
         }
 
         .left-content {
-          background: linear-gradient(180deg, #1e2024, #005DFE);
+          background: linear-gradient(180deg, #1e2024, #D4BD78);
           box-sizing: border-box;
           padding: 16px;
           border-radius: 16px;
@@ -811,7 +811,7 @@ const {
 
             .ipt-btn {
               border-radius: 6px;
-              background-color: #111923;
+              background-color: #024D46;
               width: 45px;
               height: 40px;
               display: flex;
@@ -831,7 +831,7 @@ const {
               box-sizing: border-box;
               padding: 0 12px;
               border-radius: 6px;
-              background-color: #111923;
+              background-color: #024D46;
               color: #e2e8e3;
               font-size: 13px;
               font-weight: 600;
