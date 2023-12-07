@@ -42,8 +42,8 @@ export default {
         drawableTip: "Your withdrawal amount is 0"
     },
     footer: {
-        text1: "This site offers games with a risky experience. To be a user of our website, you must be at least 18 years old. We are not responsible for violating your local laws regarding online gambling. Play responsibly and have fun in pgwinbrl.com.",
-        text2: "© 2023 pgwinbrl.com | All rights reserved.",
+        text1: "This site offers games with a risky experience. To be a user of our website, you must be at least 18 years old. We are not responsible for violating your local laws regarding online gambling. Play responsibly and have fun in fortunapg777.com.",
+        text2: "© 2023 fortunapg777.com | All rights reserved.",
     },
     common: {
         servererror: "Server Error",

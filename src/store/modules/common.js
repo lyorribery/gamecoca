@@ -8,7 +8,7 @@ const common = {
         recomend_promotion: [],
         promotion_list: [],
         bc_banner: [],
-        horse_info: "Bem-vindo ao pgwinbrl.com, esperamos que você tenha uma ótima experiência de jogo aqui.",
+        horse_info: "Bem-vindo ao fortunapg777.com, esperamos que você tenha uma ótima experiência de jogo aqui.",
         withdraw_type: 1,
         parse: '',
         show_withdraw_tip: false,

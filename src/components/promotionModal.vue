@@ -62,7 +62,7 @@ export default {
     const changePage = (index) => {
       currentPage.value = index + 1;
     };
-    const goTelegram = () => [(location.href = "http://t.me/pgwinbrlbot")];
+    const goTelegram = () => [(location.href = "http://t.me/fortunapg777bot")];
     return {
       base_img_url,
       user_device,

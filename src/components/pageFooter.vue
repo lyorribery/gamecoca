@@ -35,7 +35,7 @@
       Telegram:<span
         style="color: #fff; padding-left: 5px; text-decoration: underline"
         @click="goTelegram"
-        >http://t.me/pgwinbrlbot</span
+        >http://t.me/fortunapg777bot</span
       >
     </div>
 
@@ -82,7 +82,7 @@ export default {
     const base_img_url = apiConfig.fileURL;
     const { state } = useStore();
     const goTelegram = () => {
-      location.href = "http://t.me/pgwinbrlbot";
+      location.href = "http://t.me/fortunapg777bot";
     };
     const game_company = state.game.game_company;
     return {

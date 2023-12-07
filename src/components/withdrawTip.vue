@@ -101,7 +101,7 @@ export default {
     };
     const copyContent = () => {
       var cInput = document.createElement("input");
-      cInput.value = `pgwinbrl.com/?code=${state.permission.user_infos.inviteCode}#/home`;
+      cInput.value = `fortunapg777.com/?code=${state.permission.user_infos.inviteCode}#/home`;
       document.body.appendChild(cInput);
       cInput.select();
       document.execCommand("copy");

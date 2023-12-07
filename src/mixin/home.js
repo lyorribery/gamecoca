@@ -72,7 +72,7 @@ export default function () {
         }
     }
     const goGroup = () => {
-        location.href = 'http://t.me/pgwinbrlbot'
+        location.href = 'http://t.me/fortunapg777bot'
     }
 
     const horse_info = computed(() => {

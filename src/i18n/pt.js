@@ -42,8 +42,8 @@ export default {
         drawableTip: "O valor do seu saque é 0"
     },
     footer: {
-        text1: "Este site oferece jogos com uma experiência arriscada. Para ser usuário do nosso site, você deve ter pelo menos 18 anos de idade. Não somos responsáveis ​​por violar as leis locais relativas a jogos de azar online. Jogue com responsabilidade e divirta-se em pgwinbrl.com.",
-        text2: "© 2023 pgwinbrl.com | Todos os direitos reservados.",
+        text1: "Este site oferece jogos com uma experiência arriscada. Para ser usuário do nosso site, você deve ter pelo menos 18 anos de idade. Não somos responsáveis ​​por violar as leis locais relativas a jogos de azar online. Jogue com responsabilidade e divirta-se em fortunapg777.com.",
+        text2: "© 2023 fortunapg777.com | Todos os direitos reservados.",
     },
     common: {
         servererror: "Erro de servidor",
