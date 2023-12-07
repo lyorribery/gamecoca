@@ -1,7 +1,7 @@
 import { reactive, ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { startAWC, checkIsCollection, collectionGame, cancelCollection, startGS } from '@/apis/game'
+import { startAWC, checkIsCollection, collectionGame, cancelCollection, startGS, startbS } from '@/apis/game'
 import { showNotify } from '@nutui/nutui'
 
 export default function () {
@@ -83,25 +83,25 @@ export default function () {
         if (loading.value) return
         loading.value = true
 
-        // const game_arr = [
-        //     "https://m.pgsoft-games.com/89/index.html?l=id&ot=ca7094186b309ee149c55c8822e7ecf2&btt=2&from=https://&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com&utm_medium=social",
-        //     "https://m.pgsoft-games.com/98/index.html?l=id&ot=82b8b0f88e17ae53611e6dd7f167bc38&btt=2&from=&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com",
-        //     "https://m.pgsoft-games.com/68/index.html?l=id&ot=82b8b0f88e17ae53611e6dd7f167bc38&btt=2&from=&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com",
-        //     "https://m.pgsoft-games.com/130/index.html?l=id&ot=82b8b0f88e17ae53611e6dd7f167bc38&btt=2&from=&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com",
-        //     "https://m.pgsoft-games.com/26/index.html?l=id&ot=ca7094186b309ee149c55c8822e7ecf2&btt=2&from=https://&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com&utm_medium=social",
-        //     "https://m.pgsoft-games.com/103/index.html?l=id&ot=ca7094186b309ee149c55c8822e7ecf2&btt=2&from=https://&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com",
-        //     "https://m.pgsoft-games.com/65/index.html?l=id&ot=ca7094186b309ee149c55c8822e7ecf2&btt=2&from=https://&language=id-ID&__refer=m.pg-redirect.net&or=static.pgsoft-games.com&utm_medium=social"
-        // ]
-
-        // const i = Math.floor((Math.random() * game_arr.length))
-
-        // if (state.permission.user_device == 'h5') {
-        //     location.href = game_arr[i]
-        // } else {
-        //     game_url.value = game_arr[i]
-        // }
-        // return
-
+        startbS.post("", {
+            gameUid: cur_data.gameCode,
+            channel: state.permission.user_device == 'h5' ? 'WebInMobile' : 'WebInDesktop'
+        }).then(res => {
+            loading.value = false
+            if (res.code == "000000") {
+                collectionGame.post("", { gameId: cur_data.id, way: 'N' })
+                if (state.permission.user_device == 'h5') {
+                    location.href = res.data
+                } else {
+                    game_url.value = res.data
+                }
+            } else if (res.code == "888888") {
+                dispatch('permission/RESET_PERMISSION')
+                back()
+            } else if (res.code == "999999") {
+                showNotify.danger('El juego no está disponible temporalmente, juega otro juego.')
+            }
+        })
 
         // startAWC.post("", {
         //     ...cur_data
@@ -123,27 +123,27 @@ export default function () {
         // })
 
 
-        startGS.post("", {
-            gameID: cur_data.gameCode,
-            gameType: Number(cur_data.gameType),
-            platform: state.permission.user_device == 'h5' ? 1 : 0,
-            productID: gameCompanyId.value == 1 ? 1006 : 1007
-        }).then(res => {
-            loading.value = false
-            if (res.code == "000000") {
-                collectionGame.post("", { gameId: cur_data.id, way: 'N' })
-                if (state.permission.user_device == 'h5') {
-                    location.href = res.data
-                } else {
-                    game_url.value = res.data
-                }
-            } else if (res.code == "888888") {
-                dispatch('permission/RESET_PERMISSION')
-                back()
-            } else if (res.code == "999999") {
-                showNotify.danger(res.msg)
-            }
-        })
+        // startGS.post("", {
+        //     gameID: cur_data.gameCode,
+        //     gameType: Number(cur_data.gameType),
+        //     platform: state.permission.user_device == 'h5' ? 1 : 0,
+        //     productID: gameCompanyId.value == 1 ? 1006 : 1007
+        // }).then(res => {
+        //     loading.value = false
+        //     if (res.code == "000000") {
+        //         collectionGame.post("", { gameId: cur_data.id, way: 'N' })
+        //         if (state.permission.user_device == 'h5') {
+        //             location.href = res.data
+        //         } else {
+        //             game_url.value = res.data
+        //         }
+        //     } else if (res.code == "888888") {
+        //         dispatch('permission/RESET_PERMISSION')
+        //         back()
+        //     } else if (res.code == "999999") {
+        //         showNotify.danger(res.msg)
+        //     }
+        // })
     }
 
     const iframeRef = ref(null)

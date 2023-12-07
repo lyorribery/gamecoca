@@ -18,3 +18,5 @@ export const startGS = new baseApiServer('/third/gs/doLoginAndLaunchGame')
 
 export const slot1_play = new baseApiServer('/custom/user/userPlayGame')
 
+export const startbS = new baseApiServer('/third/bs/doLoginAndLaunchGame')
+

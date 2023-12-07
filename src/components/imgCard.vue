@@ -75,6 +75,14 @@ export default {
     const { state, commit } = useStore();
     const goDetail = (data) => {
       if (state.permission.is_login) {
+        router.push({
+          path: "/startGame",
+          query: {
+            gameOptions: JSON.stringify(data),
+          },
+        });
+        return;
+
         if (data.gameCompanyName == "PP") {
           router.push({
             path: "/startGame",
@@ -119,7 +127,7 @@ export default {
 
   .card-name {
     text-align: center;
-    color: #FAF5F9;
+    color: #faf5f9;
     font-size: 11px;
     width: 100%;
     box-sizing: border-box;
@@ -163,7 +171,7 @@ export default {
       opacity: 0;
 
       i {
-        color: #FAF5F9;
+        color: #faf5f9;
         font-size: 38px;
       }
     }
