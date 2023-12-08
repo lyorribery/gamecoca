@@ -21,7 +21,10 @@ export default function () {
                 pc_width.value = document.getElementsByClassName("content-item")[0].offsetWidth
             })
         }
-        return state.game.home_game_list
+        let arr = state.game.home_game_list.filter(item => {
+            return item.categoryName == 'New'
+        })
+        return arr
     })
     const goGame = (id, name) => {
         router.push({

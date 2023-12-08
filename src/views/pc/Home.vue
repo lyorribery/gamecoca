@@ -47,7 +47,8 @@
               src="@/assets/images/hot.svg"
               v-if="item.categoryName == 'Hot'"
             />
-            <span>{{ item.categoryName }}</span>
+            <!-- <span>{{ item.categoryName }}</span> -->
+            <span>Slots</span>
           </div>
           <div style="display: flex; align-items: center">
             <div class="more-btn" @click="goGame(item.categoryId, item.categoryName)">

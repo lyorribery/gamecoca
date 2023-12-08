@@ -40,7 +40,8 @@
               src="@/assets/images/hot.svg"
               v-if="item.categoryName == 'Hot'"
             />
-            <span>{{ item.categoryName }}</span>
+            <!-- <span>{{ item.categoryName }}</span> -->
+            <span>Slots</span>
           </div>
           <div style="display: flex; align-items: center">
             <div class="more-btn" @click="goGame(item.categoryId, item.categoryName)">
@@ -141,7 +142,7 @@ const {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #D4BD78;
+    background: #d4bd78;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,7 +181,7 @@ const {
     .title {
       width: 100%;
       height: 40px;
-      color: #FAF5F9;
+      color: #faf5f9;
       box-sizing: border-box;
       padding: 0 10px;
       font-size: 15px;
@@ -195,7 +196,7 @@ const {
 
         i {
           font-size: 18px;
-          color: #FAF5F9;
+          color: #faf5f9;
           padding-right: 8px;
         }
       }
@@ -204,7 +205,7 @@ const {
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #FAF5F9;
+        color: #faf5f9;
         font-weight: bold;
         span {
           font-size: 11px;
