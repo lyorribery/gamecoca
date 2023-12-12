@@ -17,7 +17,7 @@
     <div class="description-box">
       This site offers games with a risky experience. To be a user of our website, you
       must be at least 18 years old. We are not responsible for violating your local laws
-      regarding online gambling. Play responsibly and have fun in win100.com.
+      regarding online gambling. Play responsibly and have fun in fortunapg777.com.
     </div>
 
     <div

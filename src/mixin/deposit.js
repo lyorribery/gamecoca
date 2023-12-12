@@ -55,7 +55,7 @@ export default function () {
         }
         return arr
     })
-    const quickAmountList = [30, 58, 100, 200, 300, 500, 1000, 2000, 3000, 5000, 8000]
+    const quickAmountList = [30, 50, 100, 200, 300, 500, 1000, 2000, 3000, 5000, 8000]
     const couponList = computed(() => {
         const list = state.permission.coupon_list.filter(item => {
             return item.giveType == 2 && item.status == 0
@@ -71,7 +71,7 @@ export default function () {
     const payurl = ref('')
     const placeText = ref('')
     const depositForm = reactive({
-        amount: 58,
+        amount: 50,
         rechargeActivityId: "",
         activityId: "",
         ip: ""
@@ -165,7 +165,7 @@ export default function () {
         depositLoading.value = false
         activeType.value = ''
         payurl.value = ''
-        depositForm.amount = 58
+        depositForm.amount = 50
         depositForm.rechargeActivityId = ""
         depositForm.activityId = ""
         giftType.value = ''
