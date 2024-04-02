@@ -1,4 +1,4 @@
-# c_project
+# gamecoca
 
 ## Project setup
 ```
