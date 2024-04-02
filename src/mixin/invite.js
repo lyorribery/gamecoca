@@ -28,7 +28,7 @@ export default function () {
         return state.permission.is_login
     })
     const initData = () => {
-        inviteLink.value = state.permission.user_infos.inviteCode ? `fortunapg777.com/?code=${state.permission.user_infos.inviteCode}#/home` : 'fortunapg777.com'
+        inviteLink.value = state.permission.user_infos.inviteCode ? `gamecoca.com/?code=${state.permission.user_infos.inviteCode}#/home` : 'gamecoca.com'
         if (state.permission.is_login) {
             getAgentData.post("", {})
                 .then(res => {

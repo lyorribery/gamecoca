@@ -15,12 +15,6 @@ export const loopNotice = (flag) => {
 	}
 }
 
-export const scrollToTop = (selector) => {
-	document.getElementsByClassName(selector)[0].scrollIntoView({
-		behavior: "smooth"
-	})
-}
-
 export const _validname = (val) => {
 	if (!val) return false
 	return /^[a-zA-Z0-9]{6,12}$/.test(val)
@@ -43,58 +37,8 @@ export const _validphone = (val) => {
 
 export const _validpassword = (pass) => {
 	if (!pass) return false
-	return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/.test(pass)
-}
-
-export const _validfuncpassword = (pass) => {
-	if (!pass) return false
-	const reg = /^[0-9]{6,6}$/gim;
-	if (reg.test(pass)) {
-		return true;
-	}
-	return false;
-}
-
-export const _validbirth = (val) => {
-	const date = val;
-	const result = date.match(/^([0]?[1-9]|[1|2][0-9]|[3][0|1])[/]([0]?[1-9]|[1][0-2])[/]([0-9]{4}|[0-9]{2})$/);
-	if (result == null)
-		return false;
-	const d = new Date(result[3], result[2] - 1, result[1]);
-	let flag1 = false
-	let flag2 = false
-	let flag3 = false
-	if (d.getFullYear() == result[3] && (d.getMonth() + 1) == result[2] && d.getDate() == result[1]) {
-		flag1 = true
-	} else {
-		return false
-	}
-
-	if (new Date().valueOf() > d.valueOf()) flag2 = true
-
-	let today = new Date(),
-		year = today.getFullYear(),
-		month = today.getMonth() + 1,
-		day = today.getDate()
-	if (Number(result[3]) + 18 < year) {
-		flag3 = true
-	} else if (Number(result[3]) + 18 > year) {
-		flag3 = false
-	} else {
-		if (Number(result[2]) < month) {
-			flag3 = true
-		} else if (Number(result[2]) > month) {
-			flag3 = false
-		} else {
-			if (Number(result[1]) < day) {
-				flag3 = true
-			} else {
-				flag3 = false
-			}
-		}
-	}
-	if (flag1 && flag2 && flag3) return true
-	return false
+	return /^\w{6,16}$/.test(pass)
+	// return /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/.test(pass)
 }
 
 export const formatDate = (objDate, fmt) => {

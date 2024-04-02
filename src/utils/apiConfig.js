@@ -1,7 +1,7 @@
 
 
 const apiconfig = {
-    baseURL: "https://api.fortunapg777.com",
+    baseURL: "https://api.gamecoca.com",
     fileURL: 'https://vencer77.com/images/'
 }
 

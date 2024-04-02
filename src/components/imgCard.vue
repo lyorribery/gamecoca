@@ -1,19 +1,10 @@
 <template>
-  <div class="card-item" :style="{ width: cardWidth + 'px' }" @click="goDetail(cardInfo)">
+  <div class="card-item" :style="{ width: (cardWidth - 30) / 2 + 'px' }">
     <div class="card-image-box">
-      <div
-        class="mask"
-        :style="{
-          width: (cardWidth - 10).toString() + 'px',
-          height: ((cardWidth - 10) / 1).toString() + 'px',
-        }"
-      >
-        <i class="iconfont icon-bofang" style="font-size: 16; font-weight: 500"></i>
-      </div>
       <nut-image
-        :src="cardInfo.mobileIcon"
-        :width="(cardWidth - 10).toString()"
-        :height="((cardWidth - 10) / 1).toString()"
+        :src="cardInfo.img"
+        :width="((cardWidth - 30) / 2).toString()"
+        :height="((cardWidth - 30) / 2 / 1.79).toString()"
         show-loading
         show-error
         round
@@ -24,23 +15,33 @@
           <img
             class="img-loading"
             src="../assets/images/img-loading.jpg"
-            :style="{ width: cardWidth - 10 + 'px', height: (cardWidth - 10) / 1 + 'px' }"
+            :style="{
+              width: (cardWidth - 30) / 2 + 'px',
+              height: (cardWidth - 30) / 2 / 1.79 + 'px',
+            }"
           />
         </template>
         <template #error>
           <img
             class="img-loading"
             src="../assets/images/img-loading.jpg"
-            :style="{ width: cardWidth - 10 + 'px', height: (cardWidth - 10) / 1 + 'px' }"
+            :style="{
+              width: (cardWidth - 30) / 2 + 'px',
+              height: (cardWidth - 30) / 2 / 1.79 + 'px',
+            }"
           />
         </template>
       </nut-image>
+      <div class="card-count">
+        <img src="@/assets/images/img_people.png" width="8" />
+        <span>{{ cardInfo.count }}</span>
+      </div>
+      <div class="card-name line-text-overflow">{{ cardInfo.name }}</div>
     </div>
-    <div
-      class="card-name"
-      :class="overflowText ? 'line-text-overflow' : ''"
-      v-html="highLight(cardInfo.name)"
-    ></div>
+    <div class="game-btn-box">
+      <div class="btn play" @click="goDetail(cardInfo, 'real')">PLAY NOW</div>
+      <div class="btn demo" @click="goDetail(cardInfo), 'demo'">DEMO</div>
+    </div>
   </div>
 </template>
 
@@ -54,26 +55,21 @@ export default {
       type: Object,
       default: {
         name: "",
-        mobileIcon: "",
+        img: "",
+        count: 0,
       },
-    },
-    cardWidth: {
-      type: Number,
-      default: 120,
-    },
-    overflowText: {
-      type: Boolean,
-      default: true,
-    },
-    searchKey: {
-      type: String,
-      default: "",
     },
   },
   setup(props, ctx) {
     const router = useRouter();
     const { state, commit } = useStore();
-    const goDetail = (data) => {
+    const cardWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+    const goDetail = (data, type) => {
+      console.log(data);
+      return;
       if (state.permission.is_login) {
         router.push({
           path: "/startGame",
@@ -99,20 +95,9 @@ export default {
         commit("permission/show_permission_modal", { type: "login", show: true });
       }
     };
-    const highLight = (text) => {
-      if (text.includes(props.searchKey)) {
-        text = text.replace(
-          props.searchKey,
-          '<font style="color:#D4BD78!important;">' + props.searchKey + "</font>"
-        );
-        return text;
-      } else {
-        return text;
-      }
-    };
     return {
-      highLight,
       goDetail,
+      cardWidth,
     };
   },
 };
@@ -120,60 +105,70 @@ export default {
 
 <style scoped lang="scss">
 .card-item {
-  display: inline-block;
-  box-sizing: border-box;
-  padding-left: 10px;
-  padding-top: 10px;
-
-  .card-name {
-    text-align: center;
-    color: #faf5f9;
-    font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  .game-btn-box {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     box-sizing: border-box;
-    padding: 5px 5px 0 5px;
-  }
-
-  .line-text-overflow {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .card-image-box {
-    border-radius: 8px;
-    width: 100%;
-    height: 0;
-    position: relative;
-    padding-bottom: 100%;
-    overflow: hidden;
-    cursor: pointer;
-
-    &:hover {
-      .mask {
-        transition: all 0.5s ease-in-out;
-        opacity: 1;
-      }
-    }
-
-    .mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 2;
-      border-radius: 8px;
+    padding: 10px 0;
+    .btn {
       display: flex;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      transition: all 0.5s ease-in-out;
-      opacity: 0;
-
-      i {
-        color: #faf5f9;
-        font-size: 38px;
+      align-content: center;
+      box-sizing: border-box;
+      border-radius: 12px;
+      padding: 5px 15px;
+      font-size: 12px;
+      color: #fff;
+    }
+    .play {
+      background: linear-gradient(-90deg, rgba(191, 53, 253, 0.61), #5b2efa);
+      font-weight: bold;
+    }
+    .demo {
+      background: #382b63;
+    }
+  }
+  .card-image-box {
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    .card-count {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 0px 3px 0px #000000;
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      box-sizing: border-box;
+      padding: 1px 5px;
+      span {
+        padding-left: 5px;
+        font-size: 9px;
+        color: #fff;
       }
+    }
+    .card-name {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      z-index: 2;
+      text-align: left;
+      color: #fff;
+      font-size: 11px;
+      width: 100%;
+    }
+
+    .line-text-overflow {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .img-loading {
