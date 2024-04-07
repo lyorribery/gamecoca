@@ -1,8 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import mobile from './mobile/mobile'
-// import pc from './pc/pc'
-
-
 
 // const isMobile = () => {
 //   const flag = navigator.userAgent.match(
@@ -52,7 +48,15 @@ const router = createRouter({
           meta: {
             keepAlive: true
           }
-        }
+        },
+        {
+          path: '/profile',
+          name: 'profile',
+          component: () => import('@/views/Profile.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
       ]
     },
     {
@@ -83,6 +87,38 @@ const router = createRouter({
       path: '/records',
       name: 'records',
       component: () => import('@/views/Records.vue'),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/withdraw',
+      name: 'withdraw',
+      component: () => import('@/views/Withdraw.vue'),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/setting',
+      name: 'setting',
+      component: () => import('@/views/Setting.vue'),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/changePass',
+      name: 'changePass',
+      component: () => import('@/views/ChangePass.vue'),
+      meta: {
+        keepAlive: false
+      },
+    },
+    {
+      path: '/invite',
+      name: 'invite',
+      component: () => import('@/views/Invite.vue'),
       meta: {
         keepAlive: false
       },

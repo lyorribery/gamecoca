@@ -23,6 +23,31 @@
           />
         </nut-form-item>
         <nut-form-item
+          prop="code"
+          :rules="[
+            { required: true, message: 'Enter Captcha Code' },
+            { validator: customValidatorCode },
+          ]"
+        >
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <nut-input
+              style="flex: 1"
+              v-model="registerForm.code"
+              placeholder="Enter Captcha Code"
+              type="number"
+              @blur="customBlurValidate('code')"
+            />
+            <div class="code-btn">Get CAPTCHA</div>
+          </div>
+        </nut-form-item>
+        <nut-form-item
           prop="password"
           :rules="[
             { required: true, message: 'Enter password' },
@@ -69,6 +94,7 @@ const registerRef = ref(null);
 const is_check = ref(true);
 const registerForm = ref({
   phone: "",
+  code: "",
   password: "",
 });
 const is_enter = ref(false);
@@ -109,13 +135,18 @@ const customValidatorPhone = (val) => {
     return Promise.reject("Please enter the correct phone number");
   }
 };
+const customValidatorCode = (val) => {
+  if (val.length != 6) {
+    return Promise.reject("Please enter correct verify code");
+  } else {
+    return Promise.resolve();
+  }
+};
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject(
-      "Please enter a 6-16 digit password."
-    );
+    return Promise.reject("Please enter a 6-16 digit password.");
   }
 };
 const back = () => {
@@ -139,6 +170,17 @@ const back = () => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    .code-btn {
+      font-size: 10.7px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #9A87C8;
+      border-radius: 16px;
+      width: 86.6px;
+      height: 26.7px;
+    }
     .submit-btn {
       margin: 30px 0;
       width: 100%;

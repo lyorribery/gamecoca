@@ -29,11 +29,11 @@
         <img src="@/assets/images/icon_coins.png" width="47" />
         <span>Get Coins</span>
       </div>
-      <div class="active-item">
+      <div class="active-item" @click="goPath('/spin')">
         <img src="@/assets/images/icon_spin.png" width="47" />
         <span>Coins Spin</span>
       </div>
-      <div class="active-item">
+      <div class="active-item" @click="goPath('/invite')">
         <img src="@/assets/images/icon_cash.png" width="47" />
         <span>Get Cash</span>
       </div>
@@ -207,6 +207,11 @@ const showDailyCheck = (type) => {
     daily_visible.value = false;
   }
 };
+const goPath = (path) => {
+  router.push({
+    path,
+  });
+};
 const goPermission = (type) => {
   router.push({
     path: type,
@@ -278,7 +283,7 @@ const type_list = ref([
         img: "",
         name: "Medusa2",
         count: 888,
-      }
+      },
     ],
   },
   {
@@ -299,7 +304,7 @@ const type_list = ref([
         img: "",
         name: "Medusa2",
         count: 888,
-      }
+      },
     ],
   },
   {
@@ -488,11 +493,11 @@ const type_list = ref([
         .line {
           flex: 1;
           height: 0.5px;
-          background: #b4b7be;
+          background: #666666;
         }
         span {
           font-size: 12px;
-          color: #b4b7be;
+          color: #666666;
           padding: 0 5px;
         }
       }
@@ -545,7 +550,7 @@ const type_list = ref([
       justify-content: center;
       align-items: center;
       span {
-        color: #9a87c8;
+        color: #fefefe;
         font-size: 11px;
         font-weight: bold;
       }

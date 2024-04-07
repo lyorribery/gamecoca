@@ -5,7 +5,7 @@
     </div>
 
     <div class="form-container">
-      <nut-form ref="forgetRef" :model-value="forgetForm" v-show="!valid_phone">
+      <nut-form ref="forgetRef" :model-value="forgetForm">
         <nut-form-item
           prop="phone"
           :rules="[
@@ -20,13 +20,31 @@
             @blur="customBlurValidate('phone')"
           />
         </nut-form-item>
-        <nut-form-item>
-          <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="goOn">
-            Continue
+        <nut-form-item
+          prop="code"
+          :rules="[
+            { required: true, message: 'Enter Captcha Code' },
+            { validator: customValidatorCode },
+          ]"
+        >
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <nut-input
+              style="flex: 1"
+              v-model="forgetForm.code"
+              placeholder="Enter Captcha Code"
+              type="number"
+              @blur="customBlurValidate('code')"
+            />
+            <div class="code-btn">Get CAPTCHA</div>
           </div>
         </nut-form-item>
-      </nut-form>
-      <nut-form ref="passRef" :model-value="passForm" v-show="valid_phone">
         <nut-form-item
           prop="password"
           :rules="[
@@ -35,9 +53,10 @@
           ]"
         >
           <nut-input
-            v-model="passForm.password"
+            v-model="forgetForm.password"
             placeholder="Enter new password"
             type="password"
+            maxLength="16"
             @blur="customBlurValidatePass('password')"
           />
         </nut-form-item>
@@ -70,20 +89,18 @@ import { showNotify } from "@nutui/nutui";
 import { _validpassword } from "@/utils/utils";
 const router = useRouter();
 const forgetRef = ref(null);
-const passRef = ref(null);
 const valid_phone = ref(false);
 const is_check = ref(true);
 const forgetForm = ref({
   phone: "",
-});
-const passForm = ref({
+  code: "",
   password: "",
 });
 const is_enter = ref(false);
 watch(
   () => forgetForm,
   (newValue, oldValue) => {
-    if (newValue.value.phone) {
+    if (newValue.value.phone && newValue.value.code && newValue.value.code) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -91,15 +108,7 @@ watch(
   },
   { deep: true }
 );
-const goOn = () => {
-  forgetRef.value.validate().then(({ valid, errors }) => {
-    if (valid) {
-      valid_phone.value = true;
-    } else {
-      console.warn("error:", errors);
-    }
-  });
-};
+
 const submit = () => {
   forgetRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
@@ -120,7 +129,14 @@ const customBlurValidate = (prop) => {
   forgetRef.value.validate(prop);
 };
 const customBlurValidatePass = (prop) => {
-  passRef.value.validate(prop);
+  forgetRef.value.validate(prop);
+};
+const customValidatorCode = (val) => {
+  if (val.length != 6) {
+    return Promise.reject("Please enter correct verify code");
+  } else {
+    return Promise.resolve();
+  }
 };
 const customValidatorPhone = (val) => {
   if (/^\d+$/.test(val)) {
@@ -130,12 +146,10 @@ const customValidatorPhone = (val) => {
   }
 };
 const customValidatorPass = (val) => {
-    if (_validpassword(val)) {
+  if (_validpassword(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject(
-      "Please enter a 6-16 digit password."
-    );
+    return Promise.reject("Please enter a 6-16 digit password.");
   }
 };
 const back = () => {
@@ -159,6 +173,17 @@ const back = () => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    .code-btn {
+      font-size: 10.7px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #9a87c8;
+      border-radius: 16px;
+      width: 86.6px;
+      height: 26.7px;
+    }
     .submit-btn {
       margin: 30px 0;
       width: 100%;

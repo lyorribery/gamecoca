@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 // import Vconsole from 'vconsole'
 
-import { Locale, Tabbar, TabbarItem, Tabs, TabPane, Noticebar, Swiper, SwiperItem, Input, Image, Form, FormItem, Checkbox, Overlay } from "@nutui/nutui"
+import { Locale, Tabbar, TabbarItem, Tabs, TabPane, Noticebar, Swiper, SwiperItem, Input, Image, Form, FormItem, Checkbox, Overlay, Popup, Switch } from "@nutui/nutui"
 import "@nutui/nutui/dist/style.css"
 
 import './assets/styles/common.scss'
@@ -29,6 +29,8 @@ app.use(Form)
 app.use(FormItem)
 app.use(Checkbox)
 app.use(Overlay)
+app.use(Popup)
+app.use(Switch)
 
 // app.use(vConsole)
 

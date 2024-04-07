@@ -1,7 +1,7 @@
 
 
 const apiconfig = {
-    baseURL: "https://api.gamecoca.com",
+    baseURL: "https://www.gamecoca.com",
     fileURL: 'https://vencer77.com/images/'
 }
 
