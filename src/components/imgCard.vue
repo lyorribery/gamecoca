@@ -1,5 +1,5 @@
 <template>
-  <div class="card-item" :style="{ width: (cardWidth - 30) / 2 + 'px' }">
+  <div class="card-item" :style="{ width: (cardWidth - 30) / 2 + 'px' }" @click="goDetail(cardInfo)">
     <div class="card-image-box">
       <nut-image
         :src="cardInfo.img"
@@ -38,10 +38,10 @@
       </div>
       <div class="card-name line-text-overflow">{{ cardInfo.name }}</div>
     </div>
-    <div class="game-btn-box">
+    <!-- <div class="game-btn-box">
       <div class="btn play" @click="goDetail(cardInfo, 'real')">PLAY NOW</div>
       <div class="btn demo" @click="goDetail(cardInfo), 'demo'">DEMO</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -69,31 +69,7 @@ export default {
       document.body.clientWidth;
     const goDetail = (data, type) => {
       console.log(data);
-      return;
-      if (state.permission.is_login) {
-        router.push({
-          path: "/startGame",
-          query: {
-            gameOptions: JSON.stringify(data),
-          },
-        });
-        return;
-
-        if (data.gameCompanyName == "PP") {
-          router.push({
-            path: "/startGame",
-            query: {
-              gameOptions: JSON.stringify(data),
-            },
-          });
-        } else {
-          router.push({
-            path: "/pgslot",
-          });
-        }
-      } else {
-        commit("permission/show_permission_modal", { type: "login", show: true });
-      }
+      
     };
     return {
       goDetail,
@@ -107,6 +83,7 @@ export default {
 .card-item {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   .game-btn-box {
     width: 100%;
     display: flex;

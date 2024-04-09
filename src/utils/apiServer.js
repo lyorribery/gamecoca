@@ -10,13 +10,13 @@ baseApiServer.prototype.post = function (url, data) {
     data
   })
 }
-// baseApiServer.prototype.get = function (url, params) {
-//   return request({
-//     method: 'get',
-//     url: this.url + url,
-//     params
-//   })
-// }
+baseApiServer.prototype.get = function (url, params) {
+  return request({
+    method: 'get',
+    url: this.url + url,
+    params
+  })
+}
 // baseApiServer.prototype.put = function (url, data) {
 //   return request({
 //     method: 'put',

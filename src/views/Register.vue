@@ -9,21 +9,21 @@
     <div class="form-container">
       <nut-form ref="registerRef" :model-value="registerForm">
         <nut-form-item
-          prop="phone"
+          prop="identifier"
           :rules="[
             { required: true, message: 'Enter phone number' },
             { validator: customValidatorPhone },
           ]"
         >
           <nut-input
-            v-model="registerForm.phone"
-            placeholder="Enter phone number(233xxxxxxxxxx)"
+            v-model="registerForm.identifier"
+            placeholder="Enter phone number"
             type="number"
-            @blur="customBlurValidate('phone')"
+            @blur="customBlurValidate('identifier')"
           />
         </nut-form-item>
         <nut-form-item
-          prop="code"
+          prop="authCode"
           :rules="[
             { required: true, message: 'Enter Captcha Code' },
             { validator: customValidatorCode },
@@ -39,27 +39,29 @@
           >
             <nut-input
               style="flex: 1"
-              v-model="registerForm.code"
+              v-model="registerForm.authCode"
               placeholder="Enter Captcha Code"
               type="number"
-              @blur="customBlurValidate('code')"
+              @blur="customBlurValidate('authCode')"
             />
-            <div class="code-btn">Get CAPTCHA</div>
+            <div class="code-btn" @click="getVerify">
+              {{ code_second == 60 ? "GET CAPTCHA" : code_second + "s" }}
+            </div>
           </div>
         </nut-form-item>
         <nut-form-item
-          prop="password"
+          prop="certificate"
           :rules="[
             { required: true, message: 'Enter password' },
             { validator: customValidatorPass },
           ]"
         >
           <nut-input
-            v-model="registerForm.password"
+            v-model="registerForm.certificate"
             placeholder="Enter password"
             type="password"
             maxLength="16"
-            @blur="customBlurValidate('password')"
+            @blur="customBlurValidate('certificate')"
           />
         </nut-form-item>
         <nut-form-item>
@@ -88,20 +90,30 @@ import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
 import { showNotify } from "@nutui/nutui";
+import { register, getVerifyCode } from "@/apis/apis";
 
+let timer = null;
 const router = useRouter();
 const registerRef = ref(null);
 const is_check = ref(true);
 const registerForm = ref({
-  phone: "",
-  code: "",
-  password: "",
+  loginType: "phone",
+  identifier: "",
+  certificate: "",
+  authCode: "",
+  deviceId: localStorage.getItem("d_id"),
+  invateCode: "",
 });
 const is_enter = ref(false);
+const code_second = ref(60);
 watch(
   () => registerForm,
   (newValue, oldValue) => {
-    if (newValue.value.phone && newValue.value.password) {
+    if (
+      newValue.value.identifier &&
+      newValue.value.authCode &&
+      newValue.value.certificate
+    ) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -109,16 +121,58 @@ watch(
   },
   { deep: true }
 );
+const getVerify = () => {
+  if (code_second.value != 60) return;
+  if (!registerForm.value.identifier) {
+    showNotify.text("Please Enter your phone number", {
+      color: "#fff",
+      background: "#9a87c8",
+    });
+  } else {
+    getVerifyCode
+      .post("", { loginType: "phone", identifier: registerForm.value.identifier })
+      .then((res) => {
+        if (res.code == 200) {
+          showNotify.text(
+            "The SMS verification code has been sent, please check it carefully.",
+            {
+              color: "#fff",
+              background: "#9a87c8",
+            }
+          );
+          timer = setInterval(() => {
+            if (code_second.value > 0) {
+              code_second.value -= 1;
+            } else {
+              clearInterval(timer);
+              code_second.value = 60;
+              timer = null;
+            }
+          }, 1000);
+        }
+      });
+  }
+};
 const submit = () => {
   registerRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
-      console.log("success:", registerForm.value);
       if (!is_check.value) {
         showNotify.text(
           "Please check GameCoca’s Service Agreement,Terms and Conditions & Privacy Policy",
           { color: "#fff", background: "#9a87c8" }
         );
       } else {
+        register.post("", registerForm.value).then((res) => {
+          if (res.code == 200) {
+            showNotify.text("Registration successful, please sign in", {
+              color: "#fff",
+              background: "#9a87c8",
+            });
+            router.push({
+              path: "/login",
+            });
+          }
+        });
       }
     } else {
       console.warn("error:", errors);
@@ -136,7 +190,7 @@ const customValidatorPhone = (val) => {
   }
 };
 const customValidatorCode = (val) => {
-  if (val.length != 6) {
+  if (val.length < 4) {
     return Promise.reject("Please enter correct verify code");
   } else {
     return Promise.resolve();
@@ -176,7 +230,7 @@ const back = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #9A87C8;
+      border: 1px solid #9a87c8;
       border-radius: 16px;
       width: 86.6px;
       height: 26.7px;

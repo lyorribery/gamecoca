@@ -26,6 +26,30 @@ input::-ms-input-placeholder {
     color: #9A87C8;
 }
 
+textarea::input-placeholder {
+    color: #54478C;
+}
+
+textarea::-webkit-input-placeholder {
+    /* Chrome */
+    color: #54478C;
+}
+
+textarea::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #54478C;
+}
+
+textarea:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #54478C;
+}
+
+textarea::-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #54478C;
+}
+
 .nut-tabbar{
     background-color: #19152D;
     border-bottom:0;
@@ -96,6 +120,14 @@ input::-ms-input-placeholder {
 
 .nut-popup{
    background-color: transparent;
+}
+
+.nut-textarea{
+    background: #19142b;
+}
+
+.nut-textarea__textarea{
+    color:#fff;
 }
 
 ul{

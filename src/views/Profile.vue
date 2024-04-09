@@ -4,7 +4,7 @@
       <div class="avatar">
         <img src="@/assets/images/img_tx.png" width="20.3" />
       </div>
-      <span>2029123123</span>
+      <span>{{ user_info.id ? user_info.id : "" }}</span>
     </div>
     <div class="header-btn">
       <img src="@/assets/images/icon-sett.png" width="19" @click="goPath('/setting')" />
@@ -15,22 +15,32 @@
     <div class="wallet-box">
       <div class="info-box">
         <div class="label">Main Wallet(GHS)</div>
-        <div class="value">65.00</div>
+        <div class="value">{{ user_info.gold ? user_info.gold.toFixed(2) : "0.00" }}</div>
       </div>
       <div class="wallet-row">
         <div class="info-box">
-          <div class="label">Withdrawable:50</div>
+          <div class="label">
+            Withdrawable:{{
+              user_info.bindGold
+                ? (user_info.gold - user_info.bindGold).toFixed(2)
+                : "0.00"
+            }}
+          </div>
           <div class="wallet-btn w-btn" @click="goPath('/withdraw')">WITHDRAW</div>
         </div>
         <div class="info-box">
-          <div class="label">Frozen:15</div>
+          <div class="label">
+            Frozen:{{ user_info.bindGold ? user_info.bindGold.toFixed(2) : "0.00" }}
+          </div>
           <div class="wallet-btn d-btn" @click="goPath('/deposit')">DEPOSIT</div>
         </div>
       </div>
       <div class="coin-box">
         <div class="left">
           <div class="label">Coins</div>
-          <div class="value" style="font-size: 20px">20</div>
+          <div class="value" style="font-size: 20px">
+            {{ user_info.point ? user_info.point : "0" }}
+          </div>
         </div>
         <div class="coin-btn" @click="goPath('/spin')">
           <span>Win Cash</span>
@@ -72,7 +82,7 @@
         <RectRight color="#9A87C8" width="13" height="13" />
       </div>
     </div>
-    <div class="cell-row">
+    <div class="cell-row" @click="goPath('/contact')">
       <div class="left">
         <img src="@/assets/images/bnt_contact.png" width="40.3" />
         <span>Contact Us</span>
@@ -95,14 +105,23 @@
 </template>
 
 <script setup>
+import { onActivated, computed } from "vue";
 import { RectRight } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 const router = useRouter();
+let { state, dispatch } = useStore();
 const goPath = (path) => {
   router.push({
     path,
   });
 };
+const user_info = computed(() => {
+  return state.user_info;
+});
+onActivated(() => {
+  dispatch("GET_USER_INFO");
+});
 </script>
 
 <style lang="scss" scoped>

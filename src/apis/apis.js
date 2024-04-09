@@ -1,10 +1,19 @@
 import baseApiServer from '@/utils/apiServer'
 
-export const register = new baseApiServer('/custom/user/register')
+export const getVerifyCode = new baseApiServer('/account/v1/auth_code')
 
-export const getUserInfo = new baseApiServer(`/custom/user/getUserInfo?${new Date().getTime()}`)
+export const register = new baseApiServer('/account/v1/register')
 
-export const getWallet = new baseApiServer(`/custom/wallet/getBalance?${new Date().getTime()}`)
+export const login = new baseApiServer('/account/v1/login')
+
+export const changePass = new baseApiServer('/account/v1/reset_password')
+
+export const getUserInfo = new baseApiServer(`/account/v1/detail?${new Date().getTime()}`)
+
+export const getGameList = new baseApiServer('/account/v1/game_list')
+
+export const startGame = new baseApiServer('/account/v1/enter_game')
+
 
 
 

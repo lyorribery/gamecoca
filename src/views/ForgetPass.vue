@@ -1,27 +1,29 @@
 <template>
-  <div class="permission">
-    <div class="close">
-      <Close color="#9A87C8" width="13px" height="13px" @click="back" />
+  <div class="change-pass-header">
+    <div class="arrow">
+      <RectLeft color="#fff" width="18px" height="18px" @click="goBack" />
     </div>
-
+    <div class="title">Change Password</div>
+  </div>
+  <div class="change-pass">
     <div class="form-container">
-      <nut-form ref="forgetRef" :model-value="forgetForm">
+      <nut-form ref="changepassRef" :model-value="changepassForm">
         <nut-form-item
-          prop="phone"
+          prop="identifier"
           :rules="[
             { required: true, message: 'Enter phone number' },
             { validator: customValidatorPhone },
           ]"
         >
           <nut-input
-            v-model="forgetForm.phone"
-            placeholder="Enter phone number(233xxxxxxxxxx)"
+            v-model="changepassForm.identifier"
+            placeholder="Enter phone number"
             type="number"
-            @blur="customBlurValidate('phone')"
+            @blur="customBlurValidate('identifier')"
           />
         </nut-form-item>
         <nut-form-item
-          prop="code"
+          prop="authCode"
           :rules="[
             { required: true, message: 'Enter Captcha Code' },
             { validator: customValidatorCode },
@@ -37,43 +39,34 @@
           >
             <nut-input
               style="flex: 1"
-              v-model="forgetForm.code"
+              v-model="changepassForm.authCode"
               placeholder="Enter Captcha Code"
               type="number"
-              @blur="customBlurValidate('code')"
+              @blur="customBlurValidate('authCode')"
             />
-            <div class="code-btn">Get CAPTCHA</div>
+            <div class="code-btn" @click="getVerify">
+              {{ code_second == 60 ? "GET CAPTCHA" : code_second + "s" }}
+            </div>
           </div>
         </nut-form-item>
         <nut-form-item
-          prop="password"
+          prop="certificate"
           :rules="[
             { required: true, message: 'Enter new password' },
             { validator: customValidatorPass },
           ]"
         >
           <nut-input
-            v-model="forgetForm.password"
+            v-model="changepassForm.certificate"
             placeholder="Enter new password"
             type="password"
             maxLength="16"
-            @blur="customBlurValidatePass('password')"
+            @blur="customBlurValidate('certificate')"
           />
         </nut-form-item>
-
         <nut-form-item>
           <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
-            Confirm
-          </div>
-          <div class="text-box">
-            <nut-checkbox
-              v-model="is_check"
-              icon-size="11"
-              style="display: inline-block; width: 0; height: 0; margin-right: 15px"
-            ></nut-checkbox>
-            By signing up,I agree to GameCoca’s
-            <span>Service Agreement</span>,<span> Terms and Conditions</span> &
-            <span>Privacy Policy</span>, You must be 18yrs and above in order to sign up.
+            Submit
           </div>
         </nut-form-item>
       </nut-form>
@@ -83,24 +76,33 @@
 
 <script setup>
 import { ref, watch } from "vue";
+import { RectLeft } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
-import { Close } from "@nutui/icons-vue";
-import { showNotify } from "@nutui/nutui";
 import { _validpassword } from "@/utils/utils";
+import { changePass,getVerifyCode } from "@/apis/apis";
+import { useStore } from "vuex";
+import { showNotify } from "@nutui/nutui";
+
+let timer = null;
+let { commit } = useStore();
 const router = useRouter();
-const forgetRef = ref(null);
-const valid_phone = ref(false);
-const is_check = ref(true);
-const forgetForm = ref({
-  phone: "",
-  code: "",
-  password: "",
+const changepassRef = ref(null);
+const changepassForm = ref({
+  loginType: "phone",
+  identifier: "",
+  certificate: "",
+  authCode: "",
 });
 const is_enter = ref(false);
+const code_second = ref(60);
 watch(
-  () => forgetForm,
+  () => changepassForm,
   (newValue, oldValue) => {
-    if (newValue.value.phone && newValue.value.code && newValue.value.code) {
+    if (
+      newValue.value.identifier &&
+      newValue.value.certificate &&
+      newValue.value.authCode
+    ) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -108,41 +110,68 @@ watch(
   },
   { deep: true }
 );
-
+const getVerify = () => {
+  if (code_second.value != 60) return;
+  if (!changepassForm.value.identifier) {
+    showNotify.text("Please Enter your phone number", {
+      color: "#fff",
+      background: "#9a87c8",
+    });
+  } else {
+    getVerifyCode
+      .post("", { loginType: "phone", identifier: changepassForm.value.identifier })
+      .then((res) => {
+        if (res.code == 200) {
+          showNotify.text(
+            "The SMS verification code has been sent, please check it carefully.",
+            {
+              color: "#fff",
+              background: "#9a87c8",
+            }
+          );
+          timer = setInterval(() => {
+            if (code_second.value > 0) {
+              code_second.value -= 1;
+            } else {
+              clearInterval(timer);
+              code_second.value = 60;
+              timer = null;
+            }
+          }, 1000);
+        }
+      });
+  }
+};
 const submit = () => {
-  forgetRef.value.validate().then(({ valid, errors }) => {
+  changepassRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
-      console.log("success:", forgetForm.value);
-      if (!is_check.value) {
-        showNotify.text(
-          "Please check GameCoca’s Service Agreement,Terms and Conditions & Privacy Policy",
-          { color: "#fff", background: "#9a87c8" }
-        );
-      } else {
-      }
+      changePass.post("", changepassForm.value).then((res) => {
+        if (res.code == 200) {
+          localStorage.removeItem("token");
+          commit("set_user_info", {});
+          router.replace("/");
+        }
+      });
     } else {
       console.warn("error:", errors);
     }
   });
 };
 const customBlurValidate = (prop) => {
-  forgetRef.value.validate(prop);
-};
-const customBlurValidatePass = (prop) => {
-  forgetRef.value.validate(prop);
-};
-const customValidatorCode = (val) => {
-  if (val.length != 6) {
-    return Promise.reject("Please enter correct verify code");
-  } else {
-    return Promise.resolve();
-  }
+  changepassRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
   if (/^\d+$/.test(val)) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");
+  }
+};
+const customValidatorCode = (val) => {
+  if (val.length < 4) {
+    return Promise.reject("Please enter correct verify code");
+  } else {
+    return Promise.resolve();
   }
 };
 const customValidatorPass = (val) => {
@@ -152,22 +181,21 @@ const customValidatorPass = (val) => {
     return Promise.reject("Please enter a 6-16 digit password.");
   }
 };
-const back = () => {
+const goBack = () => {
   router.go(-1);
 };
 </script>
 
 <style lang="scss" scoped>
-.permission {
+.change-pass {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: 90px 0 0 0;
+  padding: calc(70px + env(safe-area-inset-top)) 15px 0 15px;
   .form-container {
-    margin-top: 60px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -213,15 +241,28 @@ const back = () => {
       }
     }
   }
-  .close {
+}
+.change-pass-header {
+  z-index: 9;
+  background: #19142b;
+  position: fixed;
+  width: 100%;
+  top: env(safe-area-inset-top);
+  left: 0;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid #29213d;
+  .arrow {
     position: fixed;
-    top: calc(env(safe-area-inset-top) + 25px);
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    box-sizing: border-box;
-    padding: 0 25px;
+    left: 15px;
+    top: calc(env(safe-area-inset-top) + 18.5px);
+  }
+  .title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
   }
 }
 </style>

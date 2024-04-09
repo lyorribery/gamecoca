@@ -30,7 +30,8 @@ const router = createRouter({
           name: 'home',
           component: () => import('@/views/Home.vue'),
           meta: {
-            keepAlive: true
+            keepAlive: true,
+            auth: false
           }
         },
         {
@@ -38,7 +39,8 @@ const router = createRouter({
           name: 'deposit',
           component: () => import('@/views/Deposit.vue'),
           meta: {
-            keepAlive: false
+            keepAlive: false,
+            auth: false
           }
         },
         {
@@ -46,7 +48,8 @@ const router = createRouter({
           name: 'promotion',
           component: () => import('@/views/Promotion.vue'),
           meta: {
-            keepAlive: true
+            keepAlive: true,
+            auth: false
           }
         },
         {
@@ -54,7 +57,8 @@ const router = createRouter({
           name: 'profile',
           component: () => import('@/views/Profile.vue'),
           meta: {
-            keepAlive: true
+            keepAlive: true,
+            auth: true
           }
         },
       ]
@@ -64,7 +68,8 @@ const router = createRouter({
       name: 'login',
       component: () => import('@/views/Login.vue'),
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: false
       },
     },
     {
@@ -72,7 +77,8 @@ const router = createRouter({
       name: 'register',
       component: () => import('@/views/Register.vue'),
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: false
       },
     },
     {
@@ -80,7 +86,8 @@ const router = createRouter({
       name: 'forgetPass',
       component: () => import('@/views/ForgetPass.vue'),
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: false
       },
     },
     {
@@ -88,7 +95,8 @@ const router = createRouter({
       name: 'records',
       component: () => import('@/views/Records.vue'),
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: true
       },
     },
     {
@@ -96,7 +104,8 @@ const router = createRouter({
       name: 'withdraw',
       component: () => import('@/views/Withdraw.vue'),
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: true
       },
     },
     {
@@ -104,15 +113,8 @@ const router = createRouter({
       name: 'setting',
       component: () => import('@/views/Setting.vue'),
       meta: {
-        keepAlive: false
-      },
-    },
-    {
-      path: '/changePass',
-      name: 'changePass',
-      component: () => import('@/views/ChangePass.vue'),
-      meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: true
       },
     },
     {
@@ -120,8 +122,27 @@ const router = createRouter({
       name: 'invite',
       component: () => import('@/views/Invite.vue'),
       meta: {
-        keepAlive: false
+        keepAlive: false,
+        auth: false
       },
+    },
+    {
+      path: '/spin',
+      name: 'spin',
+      component: () => import('@/views/Spin.vue'),
+      meta: {
+        keepAlive: false,
+        auth: false
+      }
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: () => import('@/views/Contact.vue'),
+      meta: {
+        keepAlive: false,
+        auth: true
+      }
     }
   ]
 })
@@ -129,8 +150,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   if (!token) {
-    if (to.path == '/startGame' || to.path == '/partnerDetail') {
-      next({ path: '/' })
+    if (to.meta.auth) {
+      next({ path: '/login' })
     } else {
       next()
     }

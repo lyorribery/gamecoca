@@ -21,7 +21,7 @@
     <div class="contact-box">
       <div class="contact-item">
         <span>Contact us online:</span>
-        <img src="../assets/images/icon_wechat.png" width="20" />
+        <img src="../assets/images/icon_whatsapp.png" width="20" />
       </div>
       <div class="contact-item">
         <span>Follow us on:</span>
@@ -37,21 +37,14 @@
       </div>
     </div>
 
-    <div
-      class="des"
-      style="
-        font-weight: bold;
-        margin: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      "
-    >
-      <span>SUITABLE FOR</span>
-      <div class="icon-box">18+</div>
+    <div class="contact-box">
+      <div class="contact-item-bank">
+        <span>Make deposit via</span>
+        <img src="../assets/images/img_bank.png" height="13.3" />
+      </div>
     </div>
 
-    <div class="des">
+    <div class="des" style="color: #fff">
       This product is intended for use by those 18 or old and is for amusement purposes
       only.
     </div>
@@ -61,11 +54,21 @@
       money gambling and gaming
     </div>
 
-    <div class="des" style="font-weight: bold; margin: 10px">LICENCE</div>
+    <div class="des" style="font-weight: bold; margin: 10px; color: #fff">LICENCE</div>
+
+    <div class="des" style="color: #fff">
+      GOLDEN HONEY BADGER TECHNOLOGY LTD ,the proprietor and operator of this website is
+      licensed by Gaming Coming Commission of Ghana with register No.GCRG23P1036T
+    </div>
+
+    <div class="img-box">
+      <img src="@/assets/images/img_18.png" style="margin-right: 10px" />
+      <img src="@/assets/images/img_biaozhi.png" />
+    </div>
 
     <div class="des">
-      GameCoca is licensed by BCLB under the Betting,lotteries and Gaming Act,Cap
-      131,Laws of Kenya under license number:0000344
+      This game is only for people over the age of 18 years. Betting can be addictive,
+      please bet responsibly.
     </div>
   </div>
 </template>
@@ -74,17 +77,42 @@
 .page-footer {
   width: 100%;
   box-sizing: border-box;
-  padding: 50px 15px 0 15px;
+  padding: 30px 15px 0 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  .img-box {
+    margin: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 23.3px;
+    }
+  }
   .contact-box {
     margin-top: 5px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    .contact-item-bank {
+      margin: 10px 0 15px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        color: #fff;
+        font-size: 11px;
+        font-weight: bold;
+      }
+      img {
+        margin-left: 10px;
+      }
+    }
     .contact-item-email {
       width: 50%;
       display: flex;
@@ -119,6 +147,7 @@
     text-align: center;
     color: #9a87c8;
     font-size: 11px;
+    line-height: 15px;
     .icon-box {
       border-radius: 4px;
       margin-left: 8px;

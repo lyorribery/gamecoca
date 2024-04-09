@@ -90,7 +90,7 @@ const goBack = () => {
   align-items: center;
   background: #360c7e;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(55px + env(safe-area-inset-top)) 15px calc(env(safe-area-inset-bottom) + 15px) 15px;
   .invite-box {
     margin-top: 15px;
     width: 100%;

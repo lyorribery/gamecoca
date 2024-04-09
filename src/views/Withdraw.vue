@@ -5,7 +5,7 @@
         <RectLeft color="#fff" width="15px" height="15px" @click="goBack" />
       </div>
       <div class="title">Withdraw</div>
-      <div class="sub-title">Records</div>
+      <div class="sub-title" @click="goRecords()">Records</div>
     </div>
     <div class="label">
       <span class="l">Withdrawable Amount</span>
@@ -81,6 +81,14 @@ const showChannels = () => {
 };
 const goBack = () => {
   router.go(-1);
+};
+const goRecords = () => {
+  router.push({
+    path: "/records",
+    query: {
+      type: 2,
+    },
+  });
 };
 </script>
 

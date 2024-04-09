@@ -1,9 +1,13 @@
 <template>
   <div class="main-header">
     <img src="@/assets/images/logo.png" width="105" />
-    <div class="btn-box">
+    <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
       <div class="log-btn" @click="goPermission('/login')">SIGN IN</div>
       <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
+    </div>
+    <div class="btn-box" v-else>
+      <span>₵{{ user_info.gold.toFixed(2) }}</span>
+      <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
     </div>
   </div>
   <div class="home">
@@ -180,6 +184,81 @@
         </div>
       </div>
     </nut-overlay>
+
+    <div class="first-deposit-tip" @click="showFisrtDeposit(1)">
+      <div class="label-box">
+        <div class="label">First Deposit Gifts</div>
+        <div class="label" style="font-weight: bold">Up To ₵ <span>500 Gifts</span></div>
+      </div>
+      <div class="first-btn">
+        <span>GO</span>
+        <RectRight color="#fff" width="12" height="12" />
+      </div>
+    </div>
+    <img src="@/assets/images/img_lihe.png" class="gift-img" />
+
+    <nut-overlay
+      v-model:visible="fisrt_deposit_visilbe"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+      :duration="0.8"
+    >
+      <div
+        style="display: flex; height: 100%; align-items: center; justify-content: center"
+      >
+        <div class="f-d-box">
+          <div class="f-d-icon">
+            <img src="@/assets/images/img_lihe.png" width="66" />
+          </div>
+          <div class="f-d-close">
+            <Close color="#fff" width="16px" height="16px" @click="showFisrtDeposit(2)" />
+          </div>
+          <div class="f-d-title">
+            <img src="@/assets/images/img_dian.png" />
+            <span>GAMECOCA</span>
+            <img src="@/assets/images/img_dian.png" />
+          </div>
+          <div class="line-back"></div>
+          <div class="d-option-box">
+            <template v-for="(item, index) in f_d_list" :key="index">
+              <div :class="item.active ? 'item-active' : 'item'" @click="changeFD(index)">
+                <div class="top">
+                  <div class="l-1">Deposit</div>
+                  <div class="l-2">₵{{ item.amount }}</div>
+                </div>
+                <div class="bottom">
+                  <div class="b-content">
+                    <div class="l-1">Get GHS</div>
+                    <div class="l-2">{{ item.total }}</div>
+                    <div class="l-3">Cash Gifts</div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="f-d-bottom">
+            <div class="btn">Deposit {{ f_d_val }} Now</div>
+            <div class="tip">
+              After you do this,the funds and cash gifts will appear in your account
+              immediately
+            </div>
+            <div class="des-t">Terms and conditions</div>
+            <div class="des">
+              1.Make a first deposit of ₵ 48/95/477,and you get Cash Gifts of ₵
+              80/150/550.
+            </div>
+            <div class="des">2.Each account can get these Cash Gifts only once.</div>
+            <div class="des">
+              3.You will receive the Gift once you make the first deposit.
+            </div>
+            <div class="des">4.Cash Gift can only be used in the game.</div>
+            <div class="des">
+              5.GameCoca reserves the final rights of these Cash Gifts.
+            </div>
+          </div>
+        </div>
+      </div>
+    </nut-overlay>
   </div>
 </template>
 
@@ -195,11 +274,52 @@ export default {
 </script>
 
 <script setup>
-import { ref } from "vue";
-import { Close } from "@nutui/icons-vue";
+import { computed, ref } from "vue";
+import { Close, RectRight } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+let { state } = useStore();
+const user_info = computed(() => {
+  return state.user_info;
+});
 const router = useRouter();
 const daily_visible = ref(false);
+const fisrt_deposit_visilbe = ref(false);
+const showFisrtDeposit = (type) => {
+  if (type == 1) {
+    fisrt_deposit_visilbe.value = true;
+  } else {
+    fisrt_deposit_visilbe.value = false;
+  }
+};
+const f_d_val = ref(48);
+const f_d_list = ref([
+  {
+    active: true,
+    amount: 48,
+    total: 80,
+  },
+  {
+    active: false,
+    amount: 95,
+    total: 150,
+  },
+  {
+    active: false,
+    amount: 477,
+    total: 550,
+  },
+]);
+const changeFD = (index) => {
+  for (let i in f_d_list.value) {
+    if (i == index) {
+      f_d_list.value[i].active = true;
+      f_d_val.value = f_d_list.value[i].amount;
+    } else {
+      f_d_list.value[i].active = false;
+    }
+  }
+};
 const showDailyCheck = (type) => {
   if (type == 1) {
     daily_visible.value = true;
@@ -347,6 +467,306 @@ const type_list = ref([
 </script>
 
 <style lang="scss" scoped>
+.f-d-box {
+  position: relative;
+  width: calc(100% - 20px);
+  // background: linear-gradient(-90deg, #741cb1, #6b4ee1);
+  background: #741cb1;
+  border-radius: 16.7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .d-option-box {
+    margin-top: -12px;
+    width: calc(100% - 20px);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    .item {
+      width: 97.9px;
+      height: 159px;
+      background: linear-gradient(-20deg, #ff8c8c, #f1eab9);
+      box-shadow: 0px 1.3px 2px 0px rgba(0, 0, 0, 0.29);
+      background-color: #f56c6c;
+      -webkit-mask: radial-gradient(circle at 0 35%, #0000 6px, red 0),
+        radial-gradient(circle at right 35%, #0000 6px, red 0);
+      -webkit-mask-size: 51%;
+      -webkit-mask-position: 0, 100%;
+      -webkit-mask-repeat: no-repeat;
+      position: relative;
+      .bottom {
+        width: 100%;
+        height: calc(65% - 2px);
+        box-sizing: border-box;
+        padding: 6px;
+        .b-content {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(-20deg, #fff6cb, #fffcf0);
+          border-radius: 6.7px;
+          font-weight: bold;
+          color: #dd9478;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          .l-1 {
+            font-size: 14px;
+          }
+          .l-2 {
+            font-size: 31.3px;
+          }
+          .l-3 {
+            font-size: 12.7px;
+          }
+        }
+      }
+      .top {
+        width: 100%;
+        height: calc(35% + 2px);
+        box-sizing: border-box;
+        border-bottom: 2px dashed #360c7e;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #d5884f;
+        .l-1 {
+          font-size: 15px;
+          margin-bottom: 5px;
+        }
+        .l-2 {
+          font-weight: bold;
+          font-size: 16.7px;
+        }
+      }
+    }
+    .item::after {
+      content: " ";
+      width: 100%;
+      height: 0;
+      position: absolute;
+      border-bottom: 6px dotted #741cb1;
+      bottom: -3px;
+      left: 0px;
+    }
+    .item-active {
+      width: 107.7px;
+      height: 175px;
+      background: linear-gradient(-20deg, #ff8818, #ffcf18);
+      box-shadow: 0px 1.3px 2px 0px rgba(0, 0, 0, 0.29);
+      -webkit-mask: radial-gradient(circle at 0 35%, #0000 6px, red 0),
+        radial-gradient(circle at right 35%, #0000 6px, red 0);
+      -webkit-mask-size: 51%;
+      -webkit-mask-position: 0, 100%;
+      -webkit-mask-repeat: no-repeat;
+      position: relative;
+      .bottom {
+        width: 100%;
+        height: calc(65% - 2px);
+        box-sizing: border-box;
+        padding: 6px;
+        .b-content {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(-20deg, #ffdd78, #fff1d2);
+          border-radius: 6.7px;
+          font-weight: bold;
+          color: #de531d;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          .l-1 {
+            font-size: 15.3px;
+          }
+          .l-2 {
+            font-size: 34.3px;
+          }
+          .l-3 {
+            font-size: 14px;
+          }
+        }
+      }
+      .top {
+        width: 100%;
+        height: calc(35% + 2px);
+        box-sizing: border-box;
+        border-bottom: 2px dashed #360c7e;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #c16744;
+        .l-1 {
+          font-size: 16.7px;
+          margin-bottom: 5px;
+        }
+        .l-2 {
+          font-weight: bold;
+          font-size: 18.3px;
+        }
+      }
+    }
+    .item-active::after {
+      content: " ";
+      width: 100%;
+      height: 0;
+      position: absolute;
+      border-bottom: 6px dotted #741cb1;
+      bottom: -3px;
+      left: 0px;
+    }
+  }
+  .f-d-icon {
+    position: absolute;
+    top: -33px;
+    left: 0;
+  }
+  .f-d-bottom {
+    background: #ffffff;
+    box-shadow: 0px 0.3px 1px 0px #ffffff;
+    border-radius: 16.7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 100%;
+    margin-top: 10px;
+    .des {
+      width: 100%;
+      text-align: left;
+      font-size: 10.7px;
+      color: #583188;
+      line-height: 13.3px;
+    }
+    .des-t {
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 15.3px;
+      color: #9932fc;
+    }
+    .tip {
+      margin: 15px 0;
+      width: calc(100% - 50px);
+      text-align: center;
+      font-size: 12px;
+      color: #583188;
+    }
+    .btn {
+      width: calc(100% - 50px);
+      height: 40px;
+      background: linear-gradient(-90deg, #9932fc, #5b2efa);
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 18.6px;
+    }
+  }
+  .line-back {
+    width: calc(100% - 20px);
+    height: 9.6px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    border: 3.3px solid rgba(25, 12, 12, 0.3);
+  }
+  .f-d-title {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    span {
+      font-weight: bold;
+      font-size: 20.6px;
+      color: #ffffff;
+      padding: 0 20px;
+    }
+    img {
+      width: 9.3px;
+    }
+  }
+  .f-d-close {
+    position: absolute;
+    top: -25px;
+    right: 10px;
+  }
+}
+.gift-img {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 80px);
+  left: calc((100% - 69.6px) / 2);
+  width: 69.6px;
+  z-index: 7;
+  animation-name: scaleDraw;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  @keyframes scaleDraw {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.05);
+    }
+    50% {
+      transform: scale(1);
+    }
+    75% {
+      transform: scale(1.05);
+    }
+  }
+}
+.first-deposit-tip {
+  position: fixed;
+  bottom: calc(env(safe-area-inset-bottom) + 50px);
+  left: calc((100% - 193px) / 2);
+  width: 193px;
+  height: 40px;
+  background: linear-gradient(270deg, #f9c170, #f9e170);
+  box-shadow: 0px 0.3px 1px 0px #fab876;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 5px 0 15px;
+  z-index: 8;
+  .first-btn {
+    width: 48.3px;
+    height: 26.6px;
+    background: linear-gradient(270deg, #ff7352, #ff692e);
+    border-radius: 13.3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #ffffff;
+    box-sizing: border-box;
+    padding: 0 5px;
+  }
+  .label-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    .label {
+      color: #a84e06;
+      font-size: 12.6px;
+      line-height: 15px;
+      span {
+        color: #ff6a31;
+      }
+    }
+  }
+}
 .main-header {
   width: 100%;
   position: fixed;
@@ -391,6 +811,11 @@ const type_list = ref([
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    span {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: bold;
     }
   }
 }

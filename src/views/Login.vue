@@ -9,31 +9,31 @@
     <div class="form-container">
       <nut-form ref="loginRef" :model-value="loginForm">
         <nut-form-item
-          prop="phone"
+          prop="identifier"
           :rules="[
             { required: true, message: 'Enter phone number' },
             { validator: customValidatorPhone },
           ]"
         >
           <nut-input
-            v-model="loginForm.phone"
+            v-model="loginForm.identifier"
             placeholder="Enter phone number"
             type="number"
-            @blur="customBlurValidate('phone')"
+            @blur="customBlurValidate('identifier')"
           />
         </nut-form-item>
         <nut-form-item
-          prop="password"
+          prop="certificate"
           :rules="[
             { required: true, message: 'Enter password' },
             { validator: customValidatorPass },
           ]"
         >
           <nut-input
-            v-model="loginForm.password"
+            v-model="loginForm.certificate"
             placeholder="Enter password"
             type="password"
-            @blur="customBlurValidate('password')"
+            @blur="customBlurValidate('certificate')"
           />
         </nut-form-item>
         <nut-form-item>
@@ -53,17 +53,22 @@ import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
+import { login } from "@/apis/apis";
+import { useStore } from "vuex";
+let { dispatch } = useStore();
 const router = useRouter();
 const loginRef = ref(null);
 const loginForm = ref({
-  phone: "",
-  password: "",
+  loginType: "phone",
+  identifier: "",
+  certificate: "",
+  deviceId: localStorage.getItem("d_id"),
 });
 const is_enter = ref(false);
 watch(
   () => loginForm,
   (newValue, oldValue) => {
-    if (newValue.value.phone && newValue.value.password) {
+    if (newValue.value.identifier && newValue.value.certificate) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -74,7 +79,15 @@ watch(
 const submit = () => {
   loginRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
-      console.log("success:", loginForm.value);
+      login.post("", loginForm.value).then((res) => {
+        if (res.code == 200) {
+          localStorage.setItem("token", res.data.accessToken);
+          dispatch("GET_USER_INFO");
+          router.push({
+            path: "/home",
+          });
+        }
+      });
     } else {
       console.warn("error:", errors);
     }
@@ -94,9 +107,7 @@ const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject(
-      "Please enter a 6-16 digit password."
-    );
+    return Promise.reject("Please enter a 6-16 digit password.");
   }
 };
 const back = () => {

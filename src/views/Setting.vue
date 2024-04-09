@@ -9,7 +9,7 @@
     <div class="item">
       <div class="label">Phone Number</div>
       <div class="right">
-        <span>+228 0785151252</span>
+        <span>+228 {{ user_info.mobile ? user_info.mobile : "" }}</span>
       </div>
     </div>
     <div class="item">
@@ -25,11 +25,13 @@
           }
         "
       >
-        <span style="padding-right: 5px">Player_h951422</span>
+        <span style="padding-right: 5px">{{
+          user_info.name ? user_info.name : "Player" + user_info.id ? user_info.id : ""
+        }}</span>
         <RectRight color="#9A87C8" width="13px" height="13px" />
       </div>
     </div>
-    <div class="item" @click="goPath('changePass')">
+    <div class="item" @click="goPath('/forgetPass')">
       <div class="label">Change Password</div>
       <div class="right">
         <RectRight color="#9A87C8" width="13px" height="13px" />
@@ -79,18 +81,20 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import { RectLeft, RectRight, Close } from "@nutui/icons-vue";
 const router = useRouter();
 const name_visible = ref(false);
 const sound_val = ref(true);
 const name_val = ref("");
 const is_enter = ref(false);
+let { state } = useStore();
 watch(
   () => name_val,
   (newValue, oldValue) => {
-    if (newValue.value && newValue.value.length >= 6) {
+    if (newValue.value && newValue.value.length >= 6 && newValue.value.length <= 16) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -98,6 +102,10 @@ watch(
   },
   { deep: true }
 );
+const user_info = computed(() => {
+  name_val.value = state.user_info.name ? state.user_info.name : "";
+  return state.user_info;
+});
 const submit = () => {};
 const clearVal = () => {
   name_val.value = "";
