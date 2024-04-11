@@ -1,12 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-// const isMobile = () => {
-//   const flag = navigator.userAgent.match(
-//     /(phone|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows phone)/i
-//   )
-//   return flag
-// }
-
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -141,7 +134,7 @@ const router = createRouter({
       component: () => import('@/views/Contact.vue'),
       meta: {
         keepAlive: false,
-        auth: true
+        auth: false
       }
     }
   ]

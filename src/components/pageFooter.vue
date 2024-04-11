@@ -1,6 +1,6 @@
 <template>
   <div class="page-footer">
-    <img src="@/assets/images/logo.png" height="15" style="margin-bottom: 20px" />
+    <img src="@/assets/images/logo.svg" height="15" style="margin-bottom: 20px" />
     <div class="content-box">
       <div class="item">ABOUT US</div>
       <div class="item">CONTACT US</div>

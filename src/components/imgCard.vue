@@ -1,33 +1,37 @@
 <template>
-  <div class="card-item" :style="{ width: (cardWidth - 30) / 2 + 'px' }" @click="goDetail(cardInfo)">
+  <div
+    class="card-item"
+    :style="{ width: (cardWidth - 36) / 3 + 'px' }"
+    @click="goDetail(cardInfo)"
+  >
     <div class="card-image-box">
       <nut-image
-        :src="cardInfo.img"
-        :width="((cardWidth - 30) / 2).toString()"
-        :height="((cardWidth - 30) / 2 / 1.79).toString()"
+        :src="cardInfo.icon"
+        :width="((cardWidth - 36) / 3).toString()"
+        :height="((cardWidth - 36) / 3).toString()"
         show-loading
         show-error
         round
-        :radius="8"
+        :radius="12"
         lazy-load
       >
         <template #loading>
           <img
             class="img-loading"
-            src="../assets/images/img-loading.jpg"
+            src="../assets/images/img-loading.svg"
             :style="{
-              width: (cardWidth - 30) / 2 + 'px',
-              height: (cardWidth - 30) / 2 / 1.79 + 'px',
+              width: (cardWidth - 36) / 3 + 'px',
+              height: (cardWidth - 36) / 3 + 'px',
             }"
           />
         </template>
         <template #error>
           <img
             class="img-loading"
-            src="../assets/images/img-loading.jpg"
+            src="../assets/images/img-loading.svg"
             :style="{
-              width: (cardWidth - 30) / 2 + 'px',
-              height: (cardWidth - 30) / 2 / 1.79 + 'px',
+              width: (cardWidth - 36) / 3 + 'px',
+              height: (cardWidth - 36) / 3 + 'px',
             }"
           />
         </template>
@@ -36,7 +40,7 @@
         <img src="@/assets/images/img_people.png" width="8" />
         <span>{{ cardInfo.count }}</span>
       </div>
-      <div class="card-name line-text-overflow">{{ cardInfo.name }}</div>
+      <!-- <div class="card-name line-text-overflow">{{ cardInfo.name }}</div> -->
     </div>
     <!-- <div class="game-btn-box">
       <div class="btn play" @click="goDetail(cardInfo, 'real')">PLAY NOW</div>
@@ -48,6 +52,7 @@
 <script>
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { startGame } from "@/apis/apis";
 export default {
   name: "imgCard",
   props: {
@@ -67,9 +72,21 @@ export default {
       window.innerWidth ||
       document.documentElement.clientWidth ||
       document.body.clientWidth;
-    const goDetail = (data, type) => {
-      console.log(data);
-      
+    const goDetail = async (data) => {
+      if (!localStorage.getItem("token")) {
+        commit("set_tip_info", "You have not logged in yet,please login.");
+        commit("set_tip_modal", true);
+        return;
+      }
+      const res = await startGame.post("", {
+        gameId: data.id,
+        platform: "H5",
+      });
+      if (res.code != 200) {
+        commit("set_tip_info", res.msg);
+        commit("set_tip_modal", true);
+        return;
+      }
     };
     return {
       goDetail,
@@ -83,7 +100,11 @@ export default {
 .card-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
   .game-btn-box {
     width: 100%;
     display: flex;
@@ -110,7 +131,7 @@ export default {
     }
   }
   .card-image-box {
-    border-radius: 8px;
+    border-radius: 12px;
     position: relative;
     overflow: hidden;
     .card-count {
@@ -129,6 +150,7 @@ export default {
         padding-left: 5px;
         font-size: 9px;
         color: #fff;
+        font-weight: bold;
       }
     }
     .card-name {

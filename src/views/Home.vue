@@ -1,6 +1,6 @@
 <template>
   <div class="main-header">
-    <img src="@/assets/images/logo.png" width="105" />
+    <img src="@/assets/images/logo.svg" width="105" />
     <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
       <div class="log-btn" @click="goPermission('/login')">SIGN IN</div>
       <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
@@ -338,132 +338,9 @@ const goPermission = (type) => {
   });
 };
 const type = ref("c1");
-const type_list = ref([
-  {
-    title: "Popular",
-    paneKey: "c1",
-    content: [
-      {
-        img: "@/assets/images/img_game_entrance.png",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-    ],
-  },
-  {
-    title: "For You",
-    paneKey: "c2",
-    content: [
-      {
-        img: "@/assets/images/img_game_entrance.png",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-    ],
-  },
-  {
-    title: "Spin",
-    paneKey: "c3",
-    content: [
-      {
-        img: "@/assets/images/img_game_entrance.png",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-    ],
-  },
-  {
-    title: "Slots",
-    paneKey: "c4",
-    content: [
-      {
-        img: "@/assets/images/img_game_entrance.png",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-      {
-        img: "",
-        name: "Medusa2",
-        count: 888,
-      },
-    ],
-  },
-]);
+const type_list = computed(() => {
+  return state.game_list;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -932,7 +809,7 @@ const type_list = ref([
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   .custom-tab-item {
     display: flex;
