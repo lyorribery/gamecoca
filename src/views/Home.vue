@@ -681,7 +681,7 @@ const type_list = computed(() => {
       height: 24px;
       background: linear-gradient(-90deg, #bf35fd, #5b2efa);
       border-radius: 12px;
-      border: 1px solid transparent;
+      // border: 1px solid transparent;
       margin-left: 10px;
       font-size: 12px;
       color: #ffffff;
