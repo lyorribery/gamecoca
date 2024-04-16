@@ -1,7 +1,7 @@
 <template>
   <div class="permission">
     <div class="close">
-      <Close color="#9A87C8" width="13px" height="13px" @click="back" />
+      <Close color="#CCC3E2" width="13px" height="13px" @click="back" />
     </div>
     <div class="title">Hello,</div>
     <div class="title" style="margin-top: 5px">Welcome to GameCoca</div>

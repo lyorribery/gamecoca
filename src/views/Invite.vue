@@ -5,24 +5,24 @@
     </div>
   </div>
   <div class="invite">
-    <img src="@/assets/images/top_img.png" style="width: 100%" />
+    <img :src="img_url + 'invite/top_img.png'" style="width: 100%" />
     <div class="invite-btn">Invite Friends Now</div>
     <div class="label">
-      Click this button to generate a link which include your referra
+      Click this button to generate a link containing your invitation code
     </div>
     <div class="invite-box">
       <div class="title-box">Invite Friends <span>Bonus</span></div>
       <div class="invite-step">
         <div class="step-item">
-          <img src="@/assets/images/icon_yqhy.png" width="33.3" />
+          <img :src="img_url + 'invite/icon_yqhy.png'" width="33.3" />
         </div>
-        <img src="@/assets/images/img_dijin.png" width="23.6" />
+        <img :src="img_url + 'invite/img_dijin.png'" width="23.6" />
         <div class="step-item">
-          <img src="@/assets/images/icon_100.png" width="33.3" />
+          <img :src="img_url + 'invite/icon_100.png'" width="33.3" />
         </div>
-        <img src="@/assets/images/img_dijin.png" width="23.6" />
+        <img :src="img_url + 'invite/img_dijin.png'" width="23.6" />
         <div class="step-item">
-          <img src="@/assets/images/icon_bankcard.png" width="33.3" />
+          <img :src="img_url + 'invite/icon_bankcard.png'" width="33.3" />
         </div>
       </div>
       <div class="invite-des">
@@ -31,7 +31,7 @@
         <span>Get ₵5</span>
       </div>
       <div class="invite-label">
-        There is a limit of <span>₵500.00 Cash</span>,please contact us to increase the
+        There is a limit of <span>₵500.00 Cash</span>, please contact us to increase the
         limitation.
       </div>
       <div class="cur-title">Current Yield</div>
@@ -75,6 +75,8 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
+import apiconfig from "@/utils/apiConfig";
+const img_url = apiconfig.fileURL;
 const router = useRouter();
 const goBack = () => {
   router.go(-1);
@@ -90,7 +92,8 @@ const goBack = () => {
   align-items: center;
   background: #360c7e;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px calc(env(safe-area-inset-bottom) + 15px) 15px;
+  padding: calc(55px + env(safe-area-inset-top)) 15px
+    calc(env(safe-area-inset-bottom) + 15px) 15px;
   .invite-box {
     margin-top: 15px;
     width: 100%;
@@ -228,7 +231,7 @@ const goBack = () => {
     box-sizing: border-box;
     padding: 0 15px 5px 15px;
     font-size: 12.7px;
-    color: #9a87c8;
+    color: #ccc3e2;
   }
   .label {
     margin: 15px 0;
@@ -236,7 +239,7 @@ const goBack = () => {
     box-sizing: border-box;
     padding: 0 15px;
     font-size: 12.7px;
-    color: #9a87c8;
+    color: #ccc3e2;
   }
   .invite-btn {
     margin-top: -15px;

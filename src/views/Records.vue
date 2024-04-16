@@ -169,7 +169,7 @@ onMounted(() => {
 });
 const r_list = ref([
   {
-    title: "Recharge Record",
+    title: "Deposit Records",
     paneKey: 1,
     content: [
       {
@@ -202,7 +202,7 @@ const r_list = ref([
     ],
   },
   {
-    title: "Withdrawals record",
+    title: "Withdrawals Records",
     paneKey: 2,
     content: [
       {
@@ -303,11 +303,12 @@ const goBack = () => {
             }
             .s-color {
               color: #8174ac;
-              font-size: 11px;
+              font-size: 12px;
             }
             .c-btn {
               color: #e556ff;
-              font-size: 8px;
+              font-size: 9px;
+              font-weight: 600;
               border: 1px solid #bd35fc;
               display: flex;
               justify-content: center;
@@ -327,10 +328,11 @@ const goBack = () => {
         margin-bottom: 10px;
         .time {
           color: #fefefe;
-          font-size: 12px;
+          font-size: 13px;
         }
         .status {
           font-size: 13px;
+          font-weight: 600;
         }
         .status-1 {
           color: #e556ff;
@@ -362,7 +364,8 @@ const goBack = () => {
   }
   .custom-title {
     color: #fff;
-    font-size: 13.3px;
+    font-size: 13px;
+    font-weight: 600;
   }
   .custom-title.active {
     color: #e556ff;

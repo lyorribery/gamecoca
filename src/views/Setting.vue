@@ -28,13 +28,13 @@
         <span style="padding-right: 5px">{{
           user_info.name ? user_info.name : "Player" + user_info.id ? user_info.id : ""
         }}</span>
-        <RectRight color="#9A87C8" width="13px" height="13px" />
+        <RectRight color="#CCC3E2" width="13px" height="13px" />
       </div>
     </div>
     <div class="item" @click="goPath('/forgetPass')">
       <div class="label">Change Password</div>
       <div class="right">
-        <RectRight color="#9A87C8" width="13px" height="13px" />
+        <RectRight color="#CCC3E2" width="13px" height="13px" />
       </div>
     </div>
     <div class="item">
@@ -71,7 +71,7 @@
           placeholder="Enter a 6-16 digit name"
           maxLength="16"
         />
-        <Close color="#9A87C8" width="13px" height="13px" @click="clearVal" />
+        <Close color="#CCC3E2" width="13px" height="13px" @click="clearVal" />
       </div>
       <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
         Submit
@@ -199,7 +199,7 @@ const goBack = () => {
       .des {
         padding-top: 3px;
         font-size: 11px;
-        color: #54478c;
+        color: #CCC3E2;
         span {
           color: #e556ff;
         }

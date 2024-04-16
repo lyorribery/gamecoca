@@ -1,14 +1,19 @@
 import { createStore } from 'vuex'
 import { getUserInfo, getGameList } from '@/apis/apis'
-import '../router'
+import { useRouter } from 'vue-router'
 export default createStore({
   state: () => ({
+    loading_visible: false,
     user_info: {},
     game_list: [],
     tip_visible: false,
-    tip_info: 'You have not logged in yet,please login.'
+    tip_info: 'You have not logged in yet,please login.',
+    loading_visible: false
   }),
   mutations: {
+    set_loading_modal(state, val) {
+      state.loading_visible = val
+    },
     set_tip_modal(state, val) {
       state.tip_visible = val
     },
@@ -29,52 +34,71 @@ export default createStore({
           if (res.code == 200) {
             ctx.commit('set_user_info', res.data)
           } else if (res.code == 2002) {
+            ctx.commit('set_user_info', {})
             localStorage.removeItem('token')
-            router.push({ path: '/' })
+            ctx.commit('set_tip_info', 'You have not logged in yet,please login.')
+            ctx.commit('set_tip_modal', true)
+            useRouter().push({ path: '/' })
           }
         })
     },
     async GET_GAME_LIST(ctx) {
       if (ctx.state.game_list.length != 0) return
-      const res_hot = await getGameList.get("", { page: 1, pageSize: 30, searchType: 2 })
-      res_hot.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+      ctx.commit("set_loading_modal", true);
+      const res = await getGameList.get("", { page: 1, pageSize: 30 })
+      res.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (800 - 500 + 1)) + 500;
       })
-      const res_recommend = await getGameList.get("", { page: 1, pageSize: 30, searchType: 1 })
-      res_recommend.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+      const res_hot = res.data.list.filter(item => {
+        return item.isHot
       })
-      const res_slot = await getGameList.get("", { page: 1, pageSize: 15, gameType: 1 })
-      res_slot.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+      const res_slot = res.data.list.filter(item => {
+        return item.gameType === 1
       })
-      const res_spin = await getGameList.get("", { page: 1, pageSize: 15, gameType: 2 })
-      res_spin.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+      const res_live = res.data.list.filter(item => {
+        return item.gameType === 2
       })
+      const res_poker = res.data.list.filter(item => {
+        return item.gameType === 3
+      })
+      const res_fish = res.data.list.filter(item => {
+        return item.gameType === 4
+      })
+
       const result = [
         {
-          title: "For you",
+          title: "All",
           paneKey: "c1",
-          content: res_recommend.data.list,
+          content: res.data.list,
         },
         {
           title: "Popular",
           paneKey: "c2",
-          content: res_hot.data.list,
+          content: res_hot,
         },
         {
-          title: "Slots",
+          title: "Slot",
           paneKey: "c3",
-          content: res_slot.data.list,
+          content: res_slot,
         },
         {
-          title: "Spin",
+          title: "Live",
           paneKey: "c4",
-          content: res_spin.data.list,
+          content: res_live,
+        },
+        {
+          title: "Poker",
+          paneKey: "c5",
+          content: res_poker,
+        },
+        {
+          title: "Fish",
+          paneKey: "c6",
+          content: res_fish,
         },
       ]
       ctx.commit('set_game_list', result)
+      ctx.commit("set_loading_modal", false);
     }
   }
 })

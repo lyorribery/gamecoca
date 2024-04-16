@@ -23,7 +23,7 @@ const router = createRouter({
           name: 'home',
           component: () => import('@/views/Home.vue'),
           meta: {
-            keepAlive: true,
+            keepAlive: false,
             auth: false
           }
         },
@@ -132,6 +132,15 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: () => import('@/views/Contact.vue'),
+      meta: {
+        keepAlive: false,
+        auth: false
+      }
+    },
+    {
+      path: '/description',
+      name: 'description',
+      component: () => import('@/views/Description.vue'),
       meta: {
         keepAlive: false,
         auth: false

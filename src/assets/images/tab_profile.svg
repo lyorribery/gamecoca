@@ -1,0 +1,26 @@
+<svg id="icon_Profile2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46.312" height="56" viewBox="0 0 46.312 56">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-width: 2px;
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        stroke: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        stroke: #666091;
+        stroke-linecap: round;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="728" y1="626" x2="728" y2="572" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6f6ba3"/>
+      <stop offset="1" stop-color="#514d71"/>
+    </linearGradient>
+  </defs>
+  <path id="椭圆_643_拷贝" data-name="椭圆 643 拷贝" class="cls-1" d="M750.039,622.4A2.941,2.941,0,0,1,748,626H708a2.968,2.968,0,0,1-2.039-3.6,23.039,23.039,0,0,1,15.811-15.529,18,18,0,1,1,12.456,0A23.037,23.037,0,0,1,750.039,622.4Z" transform="translate(-704.844 -571)"/>
+  <path id="椭圆_643_拷贝_3" data-name="椭圆 643 拷贝 3" class="cls-2" d="M738.141,597.418a12,12,0,0,1-20.271.018" transform="translate(-704.844 -571)"/>
+</svg>

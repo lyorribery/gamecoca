@@ -12,7 +12,7 @@
     </div>
     <div class="label">
       <span class="i">₵</span>
-      <span class="d">65.00</span>
+      <span class="d">{{ max_amount ? max_amount.toFixed(2) : "--" }}</span>
     </div>
     <div class="withdraw-box">
       <div class="sub-title">Withdrawal Amount</div>
@@ -29,7 +29,7 @@
       <div class="pay-type-row">
         <span>Withdrawal channels</span>
         <div class="right" @click="showChannels">
-          <span>MOMO</span>
+          <span>{{ cur_channel }}</span>
           <RectRight color="#fff" width="13px" height="13px" />
         </div>
       </div>
@@ -52,33 +52,69 @@
           <Close color="#fff" width="15px" height="15px" />
         </div>
       </div>
-      <div class="channel-item">
-        <span>MOMO</span>
-        <Check color="#49BF6A" width="16px" height="16px" />
-      </div>
-      <div class="channel-item">
-        <span>MOMO</span>
-      </div>
-      <div class="channel-item">
-        <span>MOMO</span>
+      <div
+        class="channel-item"
+        v-for="(item, index) in channel_list"
+        :key="index"
+        @click="chooseChannel(index)"
+      >
+        <div>
+          <img :src="item.icon" />
+          <span>{{ item.name }}</span>
+        </div>
+        <Check v-if="item.isChecked" color="#49BF6A" width="16px" height="16px" />
       </div>
     </div>
   </nut-popup>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { RectLeft, RectRight, Close, Check } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 const router = useRouter();
+let { state } = useStore();
+const max_amount = computed(() => {
+  return state.user_info.gold / 100;
+});
 const amount_val = ref("");
 const channel_visible = ref(false);
+const cur_channel = ref("MoMo");
 const quick = () => {
-  amount_val.value = "65";
+  amount_val.value = max_amount.value.toString();
 };
 const showChannels = () => {
   channel_visible.value = true;
 };
+const chooseChannel = (index) => {
+  for (let i in channel_list.value) {
+    if (i == index) {
+      channel_list.value[i].isChecked = true;
+      cur_channel.value = channel_list.value[i].name;
+    } else {
+      channel_list.value[i].isChecked = false;
+    }
+  }
+  channel_visible.value = false;
+};
+const channel_list = ref([
+  {
+    name: "MoMo",
+    isChecked: true,
+    icon: require("../assets/images/img_zf_1.svg"),
+  },
+  {
+    name: "Vodafone",
+    isChecked: false,
+    icon: require("../assets/images/img_zf_2.svg"),
+  },
+  {
+    name: "AirtelTigo",
+    isChecked: false,
+    icon: require("../assets/images/img_zf_3.svg"),
+  },
+]);
 const goBack = () => {
   router.go(-1);
 };
@@ -105,9 +141,17 @@ const goRecords = () => {
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #514380;
-    span {
-      font-size: 13px;
-      color: #fff;
+    div {
+      display: flex;
+      align-items: center;
+      img {
+        width: 25px;
+        margin-right: 8px;
+      }
+      span {
+        font-size: 13px;
+        color: #fff;
+      }
     }
   }
   .channel-title {
@@ -216,6 +260,7 @@ const goRecords = () => {
     color: #ffffff;
     .l {
       font-size: 13.3px;
+      font-weight: 600;
     }
     .i {
       font-weight: bold;
@@ -245,7 +290,8 @@ const goRecords = () => {
     }
     .sub-title {
       color: #fff;
-      font-size: 13px;
+      font-size: 12.5px;
+      font-weight: 600;
       position: fixed;
       top: 21px;
       right: 15px;

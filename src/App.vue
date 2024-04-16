@@ -2,18 +2,21 @@
   <div id="app">
     <router-view />
     <tipModal />
+    <loading />
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { onActivated, onMounted } from "vue";
 import { useStore } from "vuex";
 import tipModal from "@/components/tipModal.vue";
+import loading from "@/components/loading.vue";
 const uuid = require("uuid");
 export default {
   name: "App",
   components: {
     tipModal,
+    loading,
   },
   setup() {
     let { dispatch } = useStore();
@@ -27,6 +30,10 @@ export default {
       dispatch("GET_GAME_LIST");
       if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
       localStorage.setItem("d_id", uuid.v1());
+    });
+    onActivated(() => {
+      dispatch("GET_GAME_LIST");
+      if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
     });
   },
 };

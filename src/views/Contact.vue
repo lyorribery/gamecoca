@@ -13,24 +13,24 @@
         listed below.
       </div>
     </div>
-    <div class="live-btn">
+    <!-- <div class="live-btn">
       <Comment color="#fff" width="18px" height="18px" />
       <span>Live Chat</span>
+    </div> -->
+    <div class="channel-row">
+      <img src="@/assets/images/icon_whatsapp.svg" width="20" />
+      <span>017858145 / 841245452</span>
     </div>
     <div class="channel-row">
-      <img src="@/assets/images/icon_whatsapp.png" width="20" />
-      <span>017858145/841245452</span>
-    </div>
-    <div class="channel-row">
-      <img src="@/assets/images/icon_email.png" width="20" />
+      <img src="@/assets/images/icon_email.svg" width="20" />
       <span>kenyagmservice@gmail.com</span>
     </div>
     <div class="channel-row">
-      <img src="@/assets/images/icon_facebook.png" width="20" />
+      <img src="@/assets/images/icon_facebook.svg" width="20" />
       <span>kenyagmservice@gmail.com</span>
     </div>
     <div class="channel-row">
-      <img src="@/assets/images/icon_ins.png" width="20" />
+      <img src="@/assets/images/icon_ins.svg" width="20" />
       <span>kenyagmservice@gmail.com</span>
     </div>
     <div class="divide-des">Available form 08:00-00:00</div>
@@ -75,6 +75,7 @@ const goBack = () => {
 
     .title {
       font-size: 12px;
+      font-weight: 600;
       color: #ffffff;
       margin-bottom: 8px;
     }
@@ -94,7 +95,8 @@ const goBack = () => {
           height: 24px;
           background: linear-gradient(-90deg, #9932fc, #5b2efa);
           border-radius: 12px;
-          font-size: 11.7px;
+          font-size: 12px;
+          font-weight: 600;
           color: #ffffff;
           display: flex;
           justify-content: center;
@@ -106,11 +108,12 @@ const goBack = () => {
   .divide-line {
     width: 100%;
     height: 0.5px;
-    background: #9a87c8;
+    background: #CCC3E2;
   }
   .divide-des {
-    font-size: 10.7px;
-    color: #9a87c8;
+    font-size: 11px;
+    font-weight: 600;
+    color: #CCC3E2;
     box-sizing: border-box;
     padding: 10px;
   }
@@ -159,6 +162,7 @@ const goBack = () => {
     }
     .t-2 {
       font-size: 12px;
+      font-weight: 600;
       color: #ffffff;
       line-height: 15px;
     }

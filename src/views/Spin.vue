@@ -7,9 +7,9 @@
   </div>
   <div class="spin">
     <div class="spin-container" :style="{ width: s_w + 'px', height: s_w + 'px' }">
-      <img src="@/assets/images/spin/zp_zhizhen.png" width="70" style="z-index: 2" />
+      <img :src="img_url + 'spin/zp_zhizhen.png'" width="70" style="z-index: 2" />
       <div class="spin-box" ref="prizeBack">
-        <img src="@/assets/images/spin/zp_di.png" style="width: 100%" />
+        <img :src="img_url + 'spin/zp_di.png'" style="width: 100%" />
       </div>
       <div class="spin-back"></div>
 
@@ -29,17 +29,16 @@
       </div>
     </div>
 
-    <img
-      src="@/assets/images/spin/zp_dizuo.png"
-      width="253.7"
-      style="margin-top: -30px"
-    />
+    <img :src="img_url + 'spin/zp_dizuo.png'" width="253.7" style="margin-top: -30px" />
 
     <div class="data-box">
       <div class="item b-r">
         My coins：<span>{{ user_info.point ? user_info.point : "--" }}</span>
       </div>
-      <div class="item"><span>3</span>Remaining draws</div>
+      <div class="item">
+        <span>{{ spin_count }}</span
+        >Remaining draws
+      </div>
     </div>
     <div class="btn" @click="start">PLAY<span class="tip">(20COINS)</span></div>
     <div class="des">It takes 20 coins per spin;</div>
@@ -52,9 +51,11 @@
       <span>Grand Prize Winners</span>
       <div class="line"></div>
     </div>
-    <div class="winner-box">
-      <div class="item" v-for="(item, index) in winner_list" :key="index">
-        {{ item.name }} win <span>₵{{ item.amount }}</span>
+    <div class="winner-container">
+      <div class="winner-box">
+        <div class="item" v-for="(item, index) in winner_list" :key="index">
+          {{ item.name }} win <span>₵{{ item.amount }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -65,6 +66,9 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import { useStore } from "vuex";
+import apiConfig from "@/utils/apiConfig";
+
+const img_url = apiConfig.fileURL;
 
 let { state } = useStore();
 const router = useRouter();
@@ -73,42 +77,174 @@ const goBack = () => {
 };
 const s_w = ref(0);
 
+const spin_count = computed(() => {
+  return state.user_info.point ? Math.floor(state.user_info.point / 20) : "--";
+});
+
 const user_info = computed(() => {
   return state.user_info;
 });
 const winner_list = [
   {
-    name: "test",
-    amount: 100,
-  },
-  {
-    name: "test",
+    name: "057***4308",
     amount: 10,
   },
   {
-    name: "test",
+    name: "059***8607",
     amount: 1,
   },
   {
-    name: "test",
+    name: "024***4281",
+    amount: 1,
+  },
+  {
+    name: "024***7696",
     amount: 100,
+  },
+  {
+    name: "055***5850",
+    amount: 10,
+  },
+  {
+    name: "024***5372",
+    amount: 500,
+  },
+  {
+    name: "057***4308",
+    amount: 10,
+  },
+  {
+    name: "059***8607",
+    amount: 1,
+  },
+  {
+    name: "024***4281",
+    amount: 1,
+  },
+  {
+    name: "024***7696",
+    amount: 100,
+  },
+  {
+    name: "055***5850",
+    amount: 10,
+  },
+  {
+    name: "024***5372",
+    amount: 500,
+  },
+  {
+    name: "057***4308",
+    amount: 10,
+  },
+  {
+    name: "059***8607",
+    amount: 1,
+  },
+  {
+    name: "024***4281",
+    amount: 1,
+  },
+  {
+    name: "024***7696",
+    amount: 100,
+  },
+  {
+    name: "055***5850",
+    amount: 10,
+  },
+  {
+    name: "024***5372",
+    amount: 500,
+  },
+  {
+    name: "057***4308",
+    amount: 10,
+  },
+  {
+    name: "059***8607",
+    amount: 1,
+  },
+  {
+    name: "024***4281",
+    amount: 1,
+  },
+  {
+    name: "024***7696",
+    amount: 100,
+  },
+  {
+    name: "055***5850",
+    amount: 10,
+  },
+  {
+    name: "024***5372",
+    amount: 500,
+  },
+  {
+    name: "057***4308",
+    amount: 10,
+  },
+  {
+    name: "059***8607",
+    amount: 1,
+  },
+  {
+    name: "024***4281",
+    amount: 1,
+  },
+  {
+    name: "024***7696",
+    amount: 100,
+  },
+  {
+    name: "055***5850",
+    amount: 10,
+  },
+  {
+    name: "024***5372",
+    amount: 500,
+  },
+  {
+    name: "057***4308",
+    amount: 10,
+  },
+  {
+    name: "059***8607",
+    amount: 1,
+  },
+  {
+    name: "024***4281",
+    amount: 1,
+  },
+  {
+    name: "024***7696",
+    amount: 100,
+  },
+  {
+    name: "055***5850",
+    amount: 10,
+  },
+  {
+    name: "024***5372",
+    amount: 500,
   },
 ];
 
 const prizeObj = reactive({
   prizeList: [
-    { name: 0, pic: require("../assets/images/spin/img_xiaolian.png") },
-    { name: 1000, pic: require("../assets/images/spin/img_coins_5.png") },
-    { name: 500, pic: require("../assets/images/spin/img_coins_4.png") },
-    { name: 100, pic: require("../assets/images/spin/img_coins_3.png") },
-    { name: 10, pic: require("../assets/images/spin/img_coins_2.png") },
-    { name: 1, pic: require("../assets/images/spin/img_coins_1.png") },
-    { name: 0, pic: require("../assets/images/spin/img_xiaolian.png") },
-    { name: 1000, pic: require("../assets/images/spin/img_coins_5.png") },
-    { name: 500, pic: require("../assets/images/spin/img_coins_4.png") },
-    { name: 100, pic: require("../assets/images/spin/img_coins_3.png") },
-    { name: 10, pic: require("../assets/images/spin/img_coins_2.png") },
-    { name: 1, pic: require("../assets/images/spin/img_coins_1.png") },
+    { name: 0, pic: img_url + "spin/img_xiaolian.png" },
+    { name: 1000, pic: img_url + "spin/img_coins_5.png" },
+    { name: 500, pic: img_url + "spin/img_coins_4.png" },
+    { name: 100, pic: img_url + "spin/img_coins_3.png" },
+    { name: 10, pic: img_url + "spin/img_coins_2.png" },
+    { name: 1, pic: img_url + "spin/img_coins_1.png" },
+    { name: 0, pic: img_url + "spin/img_xiaolian.png" },
+    { name: 1000, pic: img_url + "spin/img_coins_5.png" },
+    { name: 500, pic: img_url + "spin/img_coins_4.png" },
+    { name: 100, pic: img_url + "spin/img_coins_3.png" },
+    { name: 10, pic: img_url + "spin/img_coins_2.png" },
+    { name: 1, pic: img_url + "spin/img_coins_1.png" },
   ], // 后台配置的奖品数据
   isRunning: false, // 是否正在抽奖
   baseRunAngle: 360 * 5, // 总共转动角度 至少5圈
@@ -186,7 +322,6 @@ const stopRun = (e) => {
   prizeBack.value.style = `
             transform: rotate(${totalRunAngle.value - prizeObj.baseRunAngle - 15}deg);
           `;
-
 };
 </script>
 
@@ -254,11 +389,11 @@ const stopRun = (e) => {
     }
     @keyframes changeBg {
       0% {
-        background-image: url("../assets/images/spin/zp_deng_1.png");
+        background-image: url("https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/spin/zp_deng_1.png");
       }
 
       100% {
-        background-image: url("../assets/images/spin/zp_deng_2.png");
+        background-image: url("https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/spin/zp_deng_2.png");
       }
     }
     .spin-box {
@@ -269,30 +404,42 @@ const stopRun = (e) => {
       height: 100%;
     }
   }
-
-  .winner-box {
+  .winner-container {
     width: 100%;
-    height: 118px;
+    max-height: 150px;
+    overflow: hidden;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
     box-sizing: border-box;
     padding: 0 15px;
-    .item {
-      width: 100%;
-      height: calc(118px / 4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      border-bottom: 0.6px solid rgba(255, 255, 255, 0.1);
-      font-size: 12px;
-      color: #fff;
-      span {
-        color: #fefd46;
-        padding-left: 5px;
+    .winner-box {
+      animation: scroll 18s linear infinite;
+      @keyframes scroll {
+        0% {
+          transform: translateY(0); /* 初始位置 */
+        }
+        100% {
+          transform: translateY(-100%); /* 向上滚动 100% 的高度 */
+        }
+      }
+      .item {
+        width: 100%;
+        height: calc(150px / 5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        border-bottom: 0.6px solid rgba(255, 255, 255, 0.1);
+        font-size: 12px;
+        color: #fff;
+        span {
+          color: #fefd46;
+          padding-left: 5px;
+        }
       }
     }
   }
+
   .divide {
     margin: 20px 0;
     width: calc(100% - 30px);
@@ -308,7 +455,7 @@ const stopRun = (e) => {
     .line {
       flex: 1;
       height: 0.7px;
-      background: #9a87c8;
+      background: #ccc3e2;
     }
   }
   .des {
@@ -327,7 +474,7 @@ const stopRun = (e) => {
     box-sizing: border-box;
     align-items: center;
     .b-r {
-      border-right: 0.6px solid #9a87c8;
+      border-right: 0.6px solid #ccc3e2;
     }
     .item {
       width: 50%;

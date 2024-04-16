@@ -115,7 +115,7 @@ const getVerify = () => {
   if (!changepassForm.value.identifier) {
     showNotify.text("Please Enter your phone number", {
       color: "#fff",
-      background: "#9a87c8",
+      background: "#CCC3E2",
     });
   } else {
     getVerifyCode
@@ -126,7 +126,7 @@ const getVerify = () => {
             "The SMS verification code has been sent, please check it carefully.",
             {
               color: "#fff",
-              background: "#9a87c8",
+              background: "#CCC3E2",
             }
           );
           timer = setInterval(() => {
@@ -207,7 +207,7 @@ const goBack = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #9a87c8;
+      border: 1px solid #CCC3E2;
       border-radius: 16px;
       width: 86.6px;
       height: 26.7px;
@@ -234,7 +234,7 @@ const goBack = () => {
       box-sizing: border-box;
       padding: 0 20px;
       font-size: 13px;
-      color: #9a87c8;
+      color: #CCC3E2;
       span {
         color: #e556ff;
         text-decoration-line: underline;

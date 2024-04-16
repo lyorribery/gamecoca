@@ -1,7 +1,7 @@
 <template>
   <div class="permission">
     <div class="close">
-      <Close color="#9A87C8" width="13px" height="13px" @click="back" />
+      <Close color="#CCC3E2" width="13px" height="13px" @click="back" />
     </div>
     <div class="title">Sign up</div>
     <div class="title" style="margin-top: 5px">To GameCoca</div>
@@ -75,8 +75,9 @@
               style="display: inline-block; width: 0; height: 0; margin-right: 15px"
             ></nut-checkbox>
             By signing up,I agree to GameCoca’s
-            <span>Service Agreement</span>,<span> Terms and Conditions</span> &
-            <span>Privacy Policy</span>, You must be 18yrs and above in order to sign up.
+            <span @click="goDescription('3')"> Terms and Conditions</span> &
+            <span @click="goDescription('1')">Privacy Policy</span>, You must be 18yrs and
+            above in order to sign up.
           </div>
         </nut-form-item>
       </nut-form>
@@ -126,7 +127,7 @@ const getVerify = () => {
   if (!registerForm.value.identifier) {
     showNotify.text("Please Enter your phone number", {
       color: "#fff",
-      background: "#9a87c8",
+      background: "#CCC3E2",
     });
   } else {
     getVerifyCode
@@ -137,7 +138,7 @@ const getVerify = () => {
             "The SMS verification code has been sent, please check it carefully.",
             {
               color: "#fff",
-              background: "#9a87c8",
+              background: "#CCC3E2",
             }
           );
           timer = setInterval(() => {
@@ -159,14 +160,14 @@ const submit = () => {
       if (!is_check.value) {
         showNotify.text(
           "Please check GameCoca’s Service Agreement,Terms and Conditions & Privacy Policy",
-          { color: "#fff", background: "#9a87c8" }
+          { color: "#fff", background: "#CCC3E2" }
         );
       } else {
         register.post("", registerForm.value).then((res) => {
           if (res.code == 200) {
             showNotify.text("Registration successful, please sign in", {
               color: "#fff",
-              background: "#9a87c8",
+              background: "#CCC3E2",
             });
             router.push({
               path: "/login",
@@ -206,6 +207,14 @@ const customValidatorPass = (val) => {
 const back = () => {
   router.go(-1);
 };
+const goDescription = (type) => {
+  router.push({
+    path: "/description",
+    query: {
+      type,
+    },
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -230,7 +239,7 @@ const back = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #9a87c8;
+      border: 1px solid #CCC3E2;
       border-radius: 16px;
       width: 86.6px;
       height: 26.7px;
@@ -257,7 +266,7 @@ const back = () => {
       box-sizing: border-box;
       padding: 0 20px;
       font-size: 13px;
-      color: #9a87c8;
+      color: #CCC3E2;
       span {
         color: #e556ff;
         text-decoration-line: underline;

@@ -18,7 +18,7 @@
         <template #loading>
           <img
             class="img-loading"
-            src="../assets/images/img-loading.svg"
+            src="../assets/images/img_load.svg"
             :style="{
               width: (cardWidth - 36) / 3 + 'px',
               height: (cardWidth - 36) / 3 + 'px',
@@ -28,7 +28,7 @@
         <template #error>
           <img
             class="img-loading"
-            src="../assets/images/img-loading.svg"
+            src="../assets/images/img_load.svg"
             :style="{
               width: (cardWidth - 36) / 3 + 'px',
               height: (cardWidth - 36) / 3 + 'px',
@@ -37,7 +37,7 @@
         </template>
       </nut-image>
       <div class="card-count">
-        <img src="@/assets/images/img_people.png" width="8" />
+        <img :src="img_url + 'other/img_people.png'" width="12.5" />
         <span>{{ cardInfo.count }}</span>
       </div>
       <!-- <div class="card-name line-text-overflow">{{ cardInfo.name }}</div> -->
@@ -50,9 +50,11 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { startGame } from "@/apis/apis";
+import apiconfig from "@/utils/apiConfig";
 export default {
   name: "imgCard",
   props: {
@@ -66,8 +68,10 @@ export default {
     },
   },
   setup(props, ctx) {
+    const img_url = apiconfig.fileURL;
     const router = useRouter();
     const { state, commit } = useStore();
+    const is_req = ref(false);
     const cardWidth =
       window.innerWidth ||
       document.documentElement.clientWidth ||
@@ -78,17 +82,33 @@ export default {
         commit("set_tip_modal", true);
         return;
       }
+      if (!state.user_info.bindGold) {
+        commit("set_tip_info", "The current balance is insufficient, please deposit.");
+        commit("set_tip_modal", true);
+        return;
+      }
+      if (is_req.value) return;
+      is_req.value = true;
+      commit("set_loading_modal", true);
       const res = await startGame.post("", {
         gameId: data.id,
         platform: "H5",
       });
-      if (res.code != 200) {
-        commit("set_tip_info", res.msg);
-        commit("set_tip_modal", true);
+      if (res.code == 2002) {
+        is_req.value = false;
+        commit("set_loading_modal", false);
+        ctx.commit("set_user_info", {});
+        localStorage.removeItem("token");
+        ctx.commit("set_tip_info", "You have not logged in yet,please login.");
+        ctx.commit("set_tip_modal", true);
         return;
       }
+      if (res.code == 200) location.href = res.data.url;
+      // is_req.value = false;
+      // commit("set_loading_modal", false);
     };
     return {
+      img_url,
       goDetail,
       cardWidth,
     };
@@ -136,21 +156,17 @@ export default {
     overflow: hidden;
     .card-count {
       position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(0, 0, 0, 0.3);
-      box-shadow: 0px 0px 3px 0px #000000;
-      border-radius: 6px;
+      top: 5px;
+      left: 5px;
       display: flex;
-      justify-content: center;
-      align-content: center;
+      align-items: center;
       box-sizing: border-box;
-      padding: 1px 5px;
+      padding: 2px 5px;
       span {
-        padding-left: 5px;
-        font-size: 9px;
+        padding-left: 3px;
+        font-size: 12px;
         color: #fff;
-        font-weight: bold;
+        font-weight: 600;
       }
     }
     .card-name {

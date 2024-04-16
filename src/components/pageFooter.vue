@@ -1,17 +1,20 @@
 <template>
   <div class="page-footer">
-    <img src="@/assets/images/logo.svg" width="105" style="margin-bottom: 20px" />
+    <img src="@/assets/images/logo.svg" width="130" style="margin-bottom: 20px" />
     <div class="content-box">
-      <div class="item">ABOUT US</div>
-      <div class="item">CONTACT US</div>
-      <div class="item" style="border-right: 0">HOW TO PLAY</div>
+      <div class="item" @click="goDescription('1')">Privacy Policy</div>
+      <div class="item" @click="goDescription('2')">About Us</div>
+      <div class="item" @click="goPath('/contact')" style="border-right: 0">
+        Contact Us
+      </div>
+      <!-- <div class="item" style="border-right: 0">Terms And Conditions</div> -->
     </div>
-    <div class="content-box">
+    <!-- <div class="content-box">
       <div class="item-line">Terms and Conditions</div>
       <div class="item-line" style="padding: 0 10px 5px 10px">Service Agreement</div>
       <div class="item-line">Privacy Policy</div>
-      <div class="item-line">Respomsible Gaming Policy</div>
-    </div>
+      <div class="item-line" style="padding: 0 0 0 10px">Respomsible Gaming Policy</div>
+    </div> -->
 
     <div class="des">
       GameCoca will respond to all of your requests.Contact us using amusement purposes
@@ -21,18 +24,18 @@
     <div class="contact-box">
       <div class="contact-item">
         <span>Contact us online:</span>
-        <img src="../assets/images/icon_whatsapp.png" width="20" />
+        <img src="../assets/images/icon_whatsapp.svg" width="22" />
       </div>
       <div class="contact-item">
         <span>Follow us on:</span>
-        <img src="../assets/images/icon_facebook.png" width="20" />
-        <img src="../assets/images/icon_ins.png" width="20" />
+        <img src="../assets/images/icon_facebook.svg" width="22" />
+        <img src="../assets/images/icon_ins.svg" width="22" />
       </div>
     </div>
 
     <div class="contact-box">
       <div class="contact-item-email">
-        <img src="../assets/images/icon_email.png" width="20" />
+        <img src="../assets/images/icon_email.svg" width="22" />
         <span>kenyagmservice@gmail.com</span>
       </div>
     </div>
@@ -40,7 +43,9 @@
     <div class="contact-box">
       <div class="contact-item-bank">
         <span>Make deposit via</span>
-        <img src="../assets/images/img_bank.png" height="13.3" />
+        <img src="../assets/images/img_zf_1.svg" width="22" />
+        <img src="../assets/images/img_zf_2.svg" width="22" />
+        <img src="../assets/images/img_zf_3.svg" width="22" />
       </div>
     </div>
 
@@ -62,8 +67,8 @@
     </div>
 
     <div class="img-box">
-      <img src="@/assets/images/img_18.png" style="margin-right: 10px" />
-      <img src="@/assets/images/img_biaozhi.png" />
+      <img src="@/assets/images/img_18+.svg" style="margin-right: 10px" />
+      <img src="@/assets/images/img_biaozhi.svg" />
     </div>
 
     <div class="des">
@@ -72,6 +77,24 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+const goPath = (path) => {
+  router.push({
+    path,
+  });
+};
+const goDescription = (type) => {
+  router.push({
+    path: "/description",
+    query: {
+      type,
+    },
+  });
+};
+</script>
 
 <style lang="scss" scoped>
 .page-footer {
@@ -89,7 +112,7 @@
     justify-content: center;
     align-items: center;
     img {
-      width: 23.3px;
+      width: 25px;
     }
   }
   .contact-box {
@@ -106,7 +129,7 @@
       align-items: center;
       span {
         color: #fff;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: bold;
       }
       img {
@@ -120,7 +143,7 @@
       align-items: center;
       span {
         color: #fff;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: bold;
       }
       img {
@@ -133,8 +156,8 @@
       justify-content: flex-start;
       align-items: center;
       span {
-        color: #9a87c8;
-        font-size: 11px;
+        color: #CCC3E2;
+        font-size: 12px;
         font-weight: bold;
       }
       img {
@@ -145,8 +168,8 @@
   .des {
     width: 100%;
     text-align: center;
-    color: #9a87c8;
-    font-size: 11px;
+    color: #CCC3E2;
+    font-size: 12px;
     line-height: 15px;
     .icon-box {
       border-radius: 4px;
@@ -157,7 +180,7 @@
       box-sizing: border-box;
       width: 22px;
       height: 22px;
-      border: 1px solid #9a87c8;
+      border: 1px solid #CCC3E2;
     }
   }
   .content-box {
@@ -167,21 +190,22 @@
     align-content: center;
     margin-bottom: 15px;
     flex-wrap: wrap;
-    .item-line {
-      text-decoration-line: underline;
-      color: #fff;
-      font-size: 11px;
-    }
+    // .item-line {
+    //   text-decoration-line: underline;
+    //   color: #fff;
+    //   font-size: 12px;
+    // }
     .item {
       font-weight: bold;
       color: #fff;
-      font-size: 11px;
+      font-size: 12px;
       width: calc(100% / 3);
       display: flex;
       box-sizing: border-box;
       padding: 1px 0;
       justify-content: center;
-      border-right: 2px solid #fff;
+      border-right: 1.5px solid #fff;
+      // text-decoration-line: underline;
     }
   }
 }

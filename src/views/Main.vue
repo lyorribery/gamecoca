@@ -36,26 +36,26 @@
   >
     <nut-tabbar-item tab-title="Home">
       <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/icon_home.png" />
-        <img v-else src="@/assets/images/icon_home_1.png" />
+        <img v-if="props.active" src="@/assets/images/tab_home_act.svg" />
+        <img v-else src="@/assets/images/tab_home.svg" />
       </template>
     </nut-tabbar-item>
     <nut-tabbar-item tab-title="Deposit">
       <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/icon_deposit.png" />
-        <img v-else src="@/assets/images/icon_deposit_1.png" />
+        <img v-if="props.active" src="@/assets/images/tab_dep_act.svg" />
+        <img v-else src="@/assets/images/tab_dep.svg" />
       </template>
     </nut-tabbar-item>
     <nut-tabbar-item tab-title="Pomotion">
       <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/icon_promotion.png" />
-        <img v-else src="@/assets/images/icon_promotion_1.png" />
+        <img v-if="props.active" src="@/assets/images/tab_promotion_act.svg" />
+        <img v-else src="@/assets/images/tab_promotion.svg" />
       </template>
     </nut-tabbar-item>
     <nut-tabbar-item tab-title="Profile">
       <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/icon_profile.png" />
-        <img v-else src="@/assets/images/icon_profile_1.png" />
+        <img v-if="props.active" src="@/assets/images/tab_profile_act.svg" />
+        <img v-else src="@/assets/images/tab_profile.svg" />
       </template>
     </nut-tabbar-item>
   </nut-tabbar>

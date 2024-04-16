@@ -2,7 +2,7 @@
 
 const apiconfig = {
     baseURL: "https://www.gamecoca.com",
-    fileURL: 'https://vencer77.com/images/'
+    fileURL: 'https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/'
 }
 
 export default apiconfig

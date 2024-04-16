@@ -6,7 +6,6 @@
     <div class="item" v-for="(item, index) in list" :key="index">
       <img src="../assets/images/banner.png" style="width: 100%" />
       <div class="item-content">
-        <span>01/04/24 - 01/04/24</span>
         <div class="btn">Get Cash</div>
       </div>
     </div>
@@ -65,26 +64,22 @@ const list = ref([
       width: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       box-sizing: border-box;
       padding: 5px 10px;
 
       .btn {
-        background: linear-gradient(-90deg, #9932fc, #5b2efa);
-        border-radius: 12px;
+        font-size: 13px;
+        color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 16px;
+        background: linear-gradient(-90deg, #9932fc, #5b2efa);
+        font-weight: bold;
         box-sizing: border-box;
-        padding: 5px 15px;
-        font-weight: 900;
-        font-size: 11px;
-        color: #ffffff;
-      }
-      span {
-        font-size: 11px;
-        color: #fff;
+        padding: 8px 15px;
       }
     }
   }

@@ -2,35 +2,41 @@
   <div class="profile-header">
     <div class="user-avtar">
       <div class="avatar">
-        <img src="@/assets/images/img_tx.png" width="20.3" />
+        <img :src="img_url + 'other/img_tx.png'" width="20.3" />
       </div>
       <span>{{ user_info.id ? user_info.id : "" }}</span>
     </div>
     <div class="header-btn">
-      <img src="@/assets/images/icon-sett.png" width="19" @click="goPath('/setting')" />
-      <img src="@/assets/images/icon_kefu.png" width="19" style="margin-left: 10px" />
+      <img
+        :src="img_url + 'other/icon-sett.png'"
+        width="19"
+        @click="goPath('/setting')"
+      />
+      <img :src="img_url + 'other/icon_kefu.png'" width="19" style="margin-left: 10px" />
     </div>
   </div>
   <div class="profile">
     <div class="wallet-box">
       <div class="info-box">
         <div class="label">Main Wallet(GHS)</div>
-        <div class="value">{{ user_info.gold ? user_info.gold.toFixed(2) : "0.00" }}</div>
+        <div class="value">
+          {{ user_info.bindGold ? (user_info.bindGold / 100).toFixed(2) : "0.00" }}
+        </div>
       </div>
       <div class="wallet-row">
         <div class="info-box">
           <div class="label">
-            Withdrawable:{{
-              user_info.bindGold
-                ? (user_info.gold - user_info.bindGold).toFixed(2)
-                : "0.00"
-            }}
+            Withdrawable:{{ user_info.gold ? (user_info.gold / 100).toFixed(2) : "0.00" }}
           </div>
           <div class="wallet-btn w-btn" @click="goPath('/withdraw')">WITHDRAW</div>
         </div>
         <div class="info-box">
           <div class="label">
-            Frozen:{{ user_info.bindGold ? user_info.bindGold.toFixed(2) : "0.00" }}
+            Frozen:{{
+              user_info.bindGold
+                ? ((user_info.bindGold - user_info.gold) / 100).toFixed(2)
+                : "0.00"
+            }}
           </div>
           <div class="wallet-btn d-btn" @click="goPath('/deposit')">DEPOSIT</div>
         </div>
@@ -65,39 +71,39 @@
     </div>
     <div class="cell-row" @click="goPath('/records')">
       <div class="left">
-        <img src="@/assets/images/bnt_history.png" width="40.3" />
+        <img src="@/assets/images/bnt_history.svg" width="43" />
         <span>Transaction Records</span>
       </div>
       <div class="right">
-        <RectRight color="#9A87C8" width="13" height="13" />
+        <RectRight color="#CCC3E2" width="13" height="13" />
       </div>
     </div>
     <div class="cell-row" @click="goPath('/invite')">
       <div class="left">
-        <img src="@/assets/images/bnt_invite.png" width="40.3" />
+        <img src="@/assets/images/bnt_invite.svg" width="43" />
         <span>Invite Friends</span>
       </div>
       <div class="right">
         <span>Get Cash</span>
-        <RectRight color="#9A87C8" width="13" height="13" />
+        <RectRight color="#CCC3E2" width="13" height="13" />
       </div>
     </div>
     <div class="cell-row" @click="goPath('/contact')">
       <div class="left">
-        <img src="@/assets/images/bnt_contact.png" width="40.3" />
+        <img src="@/assets/images/bnt_contact.svg" width="43" />
         <span>Contact Us</span>
       </div>
       <div class="right">
-        <RectRight color="#9A87C8" width="13" height="13" />
+        <RectRight color="#CCC3E2" width="13" height="13" />
       </div>
     </div>
-    <div class="cell-row">
+    <div class="cell-row" @click="goDescription()">
       <div class="left">
-        <img src="@/assets/images/bnt_terms.png" width="40.3" />
+        <img src="@/assets/images/bnt_terms.svg" width="43" />
         <span>Terms and Conditions</span>
       </div>
       <div class="right">
-        <RectRight color="#9A87C8" width="13" height="13" />
+        <RectRight color="#CCC3E2" width="13" height="13" />
       </div>
     </div>
     <div class="quit-btn">Log out</div>
@@ -109,16 +115,41 @@ import { onActivated, computed } from "vue";
 import { RectRight } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import apiconfig from "@/utils/apiConfig";
+const img_url = apiconfig.fileURL;
 const router = useRouter();
-let { state, dispatch } = useStore();
+let { state, dispatch, commit } = useStore();
 const goPath = (path) => {
-  router.push({
-    path,
-  });
+  if (path != "/withdraw") {
+    router.push({
+      path,
+    });
+  } else {
+    const num = state.user_info.gold;
+    if (num <= 0) {
+      commit(
+        "set_tip_info",
+        "Your current available quota is insufficient and you cannot apply for this business."
+      );
+      commit("set_tip_modal", true);
+      return;
+    }
+    router.push({
+      path,
+    });
+  }
 };
 const user_info = computed(() => {
   return state.user_info;
 });
+const goDescription = () => {
+  router.push({
+    path: "/description",
+    query: {
+      type: "3",
+    },
+  });
+};
 onActivated(() => {
   dispatch("GET_USER_INFO");
 });
@@ -141,7 +172,7 @@ onActivated(() => {
     border-radius: 22.6px;
     font-weight: bold;
     font-size: 17.3px;
-    color: #9a87c8;
+    color: #ccc3e2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,7 +186,8 @@ onActivated(() => {
     .left {
       display: flex;
       align-items: center;
-      font-size: 12.3px;
+      font-size: 13px;
+      font-weight: 600;
       color: #ffffff;
       span {
         padding-left: 8px;
@@ -167,7 +199,7 @@ onActivated(() => {
       align-items: center;
       span {
         padding-right: 10px;
-        font-size: 11.3px;
+        font-size: 12px;
         color: #e556ff;
       }
     }
@@ -237,7 +269,7 @@ onActivated(() => {
       }
     }
     .label {
-      font-weight: 400;
+      font-weight: 600;
       font-size: 13px;
       color: #ffffff;
       padding-bottom: 5px;
