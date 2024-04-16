@@ -3,29 +3,46 @@
     <span class="title">Promotion</span>
   </div>
   <div class="promotion">
-    <div class="item" v-for="(item, index) in list" :key="index">
-      <img src="../assets/images/banner.png" style="width: 100%" />
+    <div class="item" v-for="(item, index) in list" :key="index" @click="goPath(item)">
+      <img :src="item.img" style="width: 100%" />
       <div class="item-content">
-        <div class="btn">Get Cash</div>
+        <div class="btn">{{ item.btn }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-const list = ref([
-  {
-    img: "",
-    status: "",
-    type: "",
-  },
-  {
-    img: "",
-    status: "",
-    type: "",
-  },
-]);
+import { computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+let { state } = useStore();
+const router = useRouter();
+const list = computed(() => {
+  return state.promotion_list;
+});
+const goPath = (data) => {
+  switch (data.type) {
+    case 1:
+      break;
+    case 2:
+      router.push({
+        path: "/spin",
+      });
+      break;
+    case 3:
+      router.push({
+        path: "/invite",
+      });
+      break;
+    case 4:
+      router.push({
+        path: "/deposit",
+      });
+    case 5:
+      break;
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -79,7 +96,7 @@ const list = ref([
         background: linear-gradient(-90deg, #9932fc, #5b2efa);
         font-weight: bold;
         box-sizing: border-box;
-        padding: 8px 15px;
+        padding: 5px 15px;
       }
     }
   }

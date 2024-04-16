@@ -31,25 +31,19 @@
     </div>
 
     <nut-swiper
-      :auto-play="3000"
+      :auto-play="2500"
       pagination-visible
       pagination-color="#fff"
       pagination-unselected-color="#808080"
-      style="margin-bottom: 15px"
+      style="margin-bottom: 15px; height: 113.33px"
+      direction="vertical"
     >
-      <nut-swiper-item style="height: 76.7px">
-        <img
-          src="@/assets/images/img_banner.png"
-          style="height: 100%; width: 100%"
-          draggable="false"
-        />
-      </nut-swiper-item>
-      <nut-swiper-item style="height: 76.7px">
-        <img
-          src="@/assets/images/img_banner.png"
-          style="height: 100%; width: 100%"
-          draggable="false"
-        />
+      <nut-swiper-item
+        style="height: 113.33px"
+        v-for="(item, index) in promotion_list"
+        :key="index"
+      >
+        <img :src="item.img" style="height: 100%; width: 100%" draggable="false" />
       </nut-swiper-item>
     </nut-swiper>
 
@@ -310,6 +304,9 @@ import { useStore } from "vuex";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
 let { state } = useStore();
+const promotion_list = computed(() => {
+  return state.promotion_list;
+});
 const user_info = computed(() => {
   return state.user_info;
 });

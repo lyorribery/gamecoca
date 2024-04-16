@@ -1,8 +1,36 @@
 import { createStore } from 'vuex'
 import { getUserInfo, getGameList } from '@/apis/apis'
 import { useRouter } from 'vue-router'
+import apiconfig from '@/utils/apiConfig'
 export default createStore({
   state: () => ({
+    promotion_list: [
+      {
+        type: 1,
+        btn: "Get Coins",
+        img: apiconfig.fileURL + 'promotion/check.png'
+      },
+      {
+        type: 2,
+        btn: "Go Spin",
+        img: apiconfig.fileURL + 'promotion/spin.png'
+      },
+      {
+        type: 3,
+        btn: "Get Cash",
+        img: apiconfig.fileURL + 'promotion/invite.png'
+      },
+      {
+        type: 4,
+        btn: "Get Bonus",
+        img: apiconfig.fileURL + 'promotion/deposit.png'
+      },
+      {
+        type: 5,
+        btn: "Get Bonus",
+        img: apiconfig.fileURL + 'promotion/f_d.png'
+      },
+    ],
     loading_visible: false,
     user_info: {},
     game_list: [],
