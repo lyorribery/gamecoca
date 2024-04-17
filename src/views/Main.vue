@@ -59,15 +59,22 @@
       </template>
     </nut-tabbar-item>
   </nut-tabbar>
+  <dailyCheck />
+  <firstDeposit />
 </template>
 
 <script>
 import { watch } from "vue";
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useStore } from "vuex";
+import dailyCheck from "@/components/dailyCheck.vue";
+import firstDeposit from "@/components/firstDeposit.vue";
 
 export default {
+  components: {
+    dailyCheck,
+    firstDeposit,
+  },
   setup() {
     const route = useRoute();
     const router = useRouter();

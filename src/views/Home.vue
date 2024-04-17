@@ -12,7 +12,7 @@
   </div>
   <div class="home">
     <div class="active-box">
-      <div class="active-item" @click="showDailyCheck(1)">
+      <div class="active-item" @click="showDailyCheck()">
         <img src="@/assets/images/act_coin.svg" width="47" />
         <span>Get Coins</span>
       </div>
@@ -47,11 +47,7 @@
       </nut-swiper-item>
     </nut-swiper>
 
-    <nut-noticebar
-      background="#382B63"
-      color="#fff"
-      text="The first recharge will give you game experience money. Invite friends to place bets and get up to 500 bonuses."
-    >
+    <nut-noticebar background="#382B63" color="#fff" :text="msg_list">
       <template #left-icon>
         <img src="../assets/images/laba.svg" style="width: 12px; height: 12px" />
       </template>
@@ -91,101 +87,7 @@
     </nut-tabs>
     <pageFooter />
 
-    <nut-overlay
-      v-model:visible="daily_visible"
-      :lock-scroll="true"
-      :close-on-click-overlay="false"
-      :duration="0.8"
-    >
-      <div class="daily-close">
-        <Close color="#fff" width="16px" height="16px" @click="showDailyCheck(2)" />
-      </div>
-      <div class="daily-box">
-        <img :src="img_url + 'other/daily_top.png'" style="width: 100%" />
-        <div class="daily-container">
-          <div class="daily-line-box">
-            <div class="item">
-              <div class="coin">+20</div>
-              <div class="step">
-                <div class="step-line" style="background: transparent"></div>
-                <div class="step-container check-step">1</div>
-                <div class="step-line"></div>
-              </div>
-              <div class="day">Day 1</div>
-            </div>
-            <div class="item">
-              <div class="coin">+20</div>
-              <div class="step">
-                <div class="step-line"></div>
-                <div class="step-container">2</div>
-                <div class="step-line"></div>
-              </div>
-              <div class="day">Day 2</div>
-            </div>
-            <div class="item">
-              <div class="coin">+40</div>
-              <div class="step">
-                <div class="step-line"></div>
-                <div class="step-container">3</div>
-                <div class="step-line"></div>
-              </div>
-              <div class="day">Day 3</div>
-            </div>
-            <div class="item">
-              <div class="coin">+40</div>
-              <div class="step">
-                <div class="step-line"></div>
-                <div class="step-container">4</div>
-                <div class="step-line" style="background: transparent"></div>
-              </div>
-              <div class="day">Day 4</div>
-            </div>
-          </div>
-          <div class="daily-line-box" style="margin-top: 10px">
-            <div class="item">
-              <div class="coin" style="color: #ffc23e">+60</div>
-              <div class="step">
-                <div class="step-line" style="background: transparent"></div>
-                <div class="step-container">5</div>
-                <div class="step-line"></div>
-              </div>
-              <div class="day">Day 5</div>
-            </div>
-            <div class="item">
-              <div class="coin" style="color: #ffc23e">+60</div>
-              <div class="step">
-                <div class="step-line"></div>
-                <div class="step-container">6</div>
-                <div class="step-line"></div>
-              </div>
-              <div class="day">Day 6</div>
-            </div>
-            <div class="item">
-              <div class="coin" style="color: #ffc23e">+100</div>
-              <div class="step">
-                <div class="step-line"></div>
-                <div class="step-container">7</div>
-                <div class="step-line" style="background: transparent"></div>
-              </div>
-              <div class="day">Day 7</div>
-            </div>
-          </div>
-          <div class="check-btn">Check in</div>
-          <div class="line-box">
-            <div class="line"></div>
-            <span>Instructions</span>
-            <div class="line"></div>
-          </div>
-          <ul>
-            <li>Check-in daily to claim up to 100 coins</li>
-            <li>Check-in 7 days continuously to claim 340 coins</li>
-            <li>Coins can only be used to win Cash Gift by playing Coins Spin</li>
-          </ul>
-        </div>
-      </div>
-    </nut-overlay>
-
-    <div class="first-deposit-tip" @click="showFisrtDeposit(1)">
+    <div class="first-deposit-tip" @click="showFisrtDeposit()">
       <div class="label-box">
         <div class="label">First Deposit Gifts</div>
         <div class="label" style="font-weight: bold">Up To ₵ <span>550 Gifts</span></div>
@@ -196,69 +98,6 @@
       </div>
     </div>
     <img :src="img_url + 'invite/img_lihe.png'" class="gift-img" />
-
-    <nut-overlay
-      v-model:visible="fisrt_deposit_visilbe"
-      :lock-scroll="true"
-      :close-on-click-overlay="false"
-      :duration="0.8"
-    >
-      <div
-        style="display: flex; height: 100%; align-items: center; justify-content: center"
-      >
-        <div class="f-d-box">
-          <div class="f-d-icon">
-            <img :src="img_url + 'invite/img_lihe.png'" width="66" />
-          </div>
-          <div class="f-d-close">
-            <Close color="#fff" width="16px" height="16px" @click="showFisrtDeposit(2)" />
-          </div>
-          <div class="f-d-title">
-            <img :src="img_url + 'other/img_dian.png'" />
-            <span>GAMECOCA</span>
-            <img :src="img_url + 'other/img_dian.png'" />
-          </div>
-          <div class="line-back"></div>
-          <div class="d-option-box">
-            <template v-for="(item, index) in f_d_list" :key="index">
-              <div :class="item.active ? 'item-active' : 'item'" @click="changeFD(index)">
-                <div class="top">
-                  <div class="l-1">Deposit</div>
-                  <div class="l-2">₵{{ item.amount }}</div>
-                </div>
-                <div class="bottom">
-                  <div class="b-content">
-                    <div class="l-1">Get GHS</div>
-                    <div class="l-2">{{ item.total }}</div>
-                    <div class="l-3">Cash Gifts</div>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>
-          <div class="f-d-bottom">
-            <div class="btn">Deposit {{ f_d_val }} Now</div>
-            <div class="tip">
-              After you do this,the funds and cash gifts will appear in your account
-              immediately
-            </div>
-            <div class="des-t">Terms and conditions</div>
-            <div class="des">
-              1.Make a first deposit of ₵ 48/95/477,and you get Cash Gifts of ₵
-              80/150/550.
-            </div>
-            <div class="des">2.Each account can get these Cash Gifts only once.</div>
-            <div class="des">
-              3.You will receive the Gift once you make the first deposit.
-            </div>
-            <div class="des">4.Cash Gift can only be used in the game.</div>
-            <div class="des">
-              5.GameCoca reserves the final rights of these Cash Gifts.
-            </div>
-          </div>
-        </div>
-      </div>
-    </nut-overlay>
   </div>
 
   <nut-popup v-model:visible="down_visible" position="bottom" round>
@@ -303,7 +142,7 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
-let { state } = useStore();
+let { state, commit } = useStore();
 const promotion_list = computed(() => {
   return state.promotion_list;
 });
@@ -311,49 +150,13 @@ const user_info = computed(() => {
   return state.user_info;
 });
 const router = useRouter();
-const daily_visible = ref(false);
-const fisrt_deposit_visilbe = ref(false);
-const showFisrtDeposit = (type) => {
-  if (type == 1) {
-    fisrt_deposit_visilbe.value = true;
-  } else {
-    fisrt_deposit_visilbe.value = false;
-  }
+
+const showFisrtDeposit = () => {
+  commit("set_fisrt_deposit_visilbe", true);
 };
-const f_d_val = ref(95);
-const f_d_list = ref([
-  {
-    active: false,
-    amount: 48,
-    total: 80,
-  },
-  {
-    active: true,
-    amount: 95,
-    total: 150,
-  },
-  {
-    active: false,
-    amount: 477,
-    total: 550,
-  },
-]);
-const changeFD = (index) => {
-  for (let i in f_d_list.value) {
-    if (i == index) {
-      f_d_list.value[i].active = true;
-      f_d_val.value = f_d_list.value[i].amount;
-    } else {
-      f_d_list.value[i].active = false;
-    }
-  }
-};
-const showDailyCheck = (type) => {
-  if (type == 1) {
-    daily_visible.value = true;
-  } else {
-    daily_visible.value = false;
-  }
+
+const showDailyCheck = () => {
+  commit("set_daily_visible", true);
 };
 const goPath = (path) => {
   router.push({
@@ -374,6 +177,13 @@ const changeDown = (type) => {
   type == 1 ? (down_visible.value = true) : (down_visible.value = false);
 };
 const divice = ref(false);
+const msg_list = computed(() => {
+  let text = "";
+  state.msg_list.map((item) => {
+    text += `${item.content}.`;
+  });
+  return text;
+});
 onMounted(() => {
   const userAgent = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
@@ -412,211 +222,6 @@ onMounted(() => {
   img {
     margin: 15px 0;
     width: 100%;
-  }
-}
-.f-d-box {
-  position: relative;
-  width: calc(100% - 20px);
-  // background: linear-gradient(-90deg, #741cb1, #6b4ee1);
-  background: #741cb1;
-  border-radius: 16.7px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .d-option-box {
-    margin-top: -12px;
-    width: calc(100% - 20px);
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    .item {
-      width: 97.9px;
-      height: 159px;
-      background-image: url("https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/other/hd_fl_di_2.png");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      .bottom {
-        width: 100%;
-        height: calc(65% - 2px);
-        box-sizing: border-box;
-        padding: 6px;
-        .b-content {
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(-20deg, #fff6cb, #fffcf0);
-          border-radius: 6.7px;
-          font-weight: bold;
-          color: #dd9478;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          align-items: center;
-          .l-1 {
-            font-size: 14px;
-          }
-          .l-2 {
-            font-size: 31.3px;
-          }
-          .l-3 {
-            font-size: 12.7px;
-          }
-        }
-      }
-      .top {
-        width: 100%;
-        height: calc(35% + 2px);
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #d5884f;
-        .l-1 {
-          font-size: 15px;
-          margin-bottom: 5px;
-        }
-        .l-2 {
-          font-weight: bold;
-          font-size: 16.7px;
-        }
-      }
-    }
-
-    .item-active {
-      width: 107.7px;
-      height: 175px;
-      background-image: url("https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/other/hd_fl_di_1.png");
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      .bottom {
-        width: 100%;
-        height: calc(65% - 2px);
-        box-sizing: border-box;
-        padding: 6px;
-        .b-content {
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(-20deg, #ffdd78, #fff1d2);
-          border-radius: 6.7px;
-          font-weight: bold;
-          color: #de531d;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          align-items: center;
-          .l-1 {
-            font-size: 15.3px;
-          }
-          .l-2 {
-            font-size: 34.3px;
-          }
-          .l-3 {
-            font-size: 14px;
-          }
-        }
-      }
-      .top {
-        width: 100%;
-        height: calc(35% + 2px);
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #c16744;
-        .l-1 {
-          font-size: 16.7px;
-          margin-bottom: 5px;
-        }
-        .l-2 {
-          font-weight: bold;
-          font-size: 18.3px;
-        }
-      }
-    }
-  }
-  .f-d-icon {
-    position: absolute;
-    top: -33px;
-    left: 0;
-  }
-  .f-d-bottom {
-    background: #ffffff;
-    box-shadow: 0px 0.3px 1px 0px #ffffff;
-    border-radius: 16.7px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 20px;
-    width: 100%;
-    margin-top: 10px;
-    .des {
-      width: 100%;
-      text-align: left;
-      font-size: 11px;
-      font-weight: 600;
-      color: #583188;
-      line-height: 18px;
-    }
-    .des-t {
-      margin-bottom: 15px;
-      font-weight: bold;
-      font-size: 15.3px;
-      color: #9932fc;
-      font-weight: 600;
-    }
-    .tip {
-      margin: 15px 0;
-      width: calc(100% - 50px);
-      text-align: center;
-      font-size: 12px;
-      font-weight: 600;
-      color: #583188;
-    }
-    .btn {
-      width: calc(100% - 50px);
-      height: 40px;
-      background: linear-gradient(-90deg, #9932fc, #5b2efa);
-      border-radius: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-weight: bold;
-      font-size: 18.6px;
-    }
-  }
-  .line-back {
-    width: calc(100% - 20px);
-    height: 9.6px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 5px;
-    border: 3.3px solid rgba(25, 12, 12, 0.3);
-  }
-  .f-d-title {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    span {
-      font-weight: bold;
-      font-size: 20.6px;
-      color: #ffffff;
-      padding: 0 20px;
-    }
-    img {
-      width: 9.3px;
-    }
-  }
-  .f-d-close {
-    position: absolute;
-    top: -25px;
-    right: 10px;
   }
 }
 .gift-img {
@@ -743,113 +348,6 @@ onMounted(() => {
   box-sizing: border-box;
   padding: 55px 10px 0 10px;
 
-  .daily-close {
-    position: fixed;
-    right: 20px;
-    top: calc(20% - 30px);
-  }
-  .daily-box {
-    position: fixed;
-    left: 20px;
-    top: 20%;
-    width: calc(100% - 40px);
-
-    .daily-container {
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      border-left: 5px solid #ac8fff;
-      border-bottom: 5px solid #ac8fff;
-      border-right: 5px solid #ac8fff;
-      background: linear-gradient(-24deg, rgba(204, 186, 255), #f7fdfd);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 15px;
-      .daily-line-box {
-        width: calc(100% - 20px);
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        .item {
-          width: 25%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-
-          .coin {
-            font-size: 12px;
-            font-weight: 600;
-            color: #c1c1c1;
-          }
-          .day {
-            color: #ccc3e2;
-            font-weight: 600;
-            font-size: 13px;
-          }
-          .step {
-            margin: 3px 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .step-line {
-              flex: 1;
-              background: #e4d8fe;
-              height: 5px;
-            }
-            .step-container {
-              width: 28px;
-              height: 28px;
-              border-radius: 100%;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              background: #e4d8fe;
-              font-size: 14px;
-              color: #af62ff;
-            }
-            .check-step {
-              background: #af62ff;
-              color: #fff;
-            }
-          }
-        }
-      }
-      .check-btn {
-        width: calc(100% - 20px);
-        height: 42px;
-        background: linear-gradient(-90deg, #9932fc, #5b2efa);
-        border-radius: 22px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        font-size: 17px;
-        font-weight: bold;
-        margin: 15px 0;
-      }
-      .line-box {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .line {
-          flex: 1;
-          height: 0.5px;
-          background: #666666;
-        }
-        span {
-          font-size: 12px;
-          font-weight: 600;
-          color: #666666;
-          padding: 0 5px;
-        }
-      }
-    }
-  }
   .game-container {
     width: 100%;
     display: flex;

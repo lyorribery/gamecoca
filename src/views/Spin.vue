@@ -22,8 +22,8 @@
         >
           <img :src="item.pic" />
           <div class="prize-txt">
-            <div class="amount">{{ item.name != 0 ? item.name : "Try" }}</div>
-            <div class="unit">{{ item.name != 0 ? "GHS" : "Again" }}</div>
+            <div class="amount">{{ item.reward != 0 ? item.reward : "Try" }}</div>
+            <div class="unit">{{ item.reward != 0 ? "GHS" : "Again" }}</div>
           </div>
         </div>
       </div>
@@ -232,20 +232,7 @@ const winner_list = [
 ];
 
 const prizeObj = reactive({
-  prizeList: [
-    { name: 0, pic: img_url + "spin/img_xiaolian.png" },
-    { name: 1000, pic: img_url + "spin/img_coins_5.png" },
-    { name: 500, pic: img_url + "spin/img_coins_4.png" },
-    { name: 100, pic: img_url + "spin/img_coins_3.png" },
-    { name: 10, pic: img_url + "spin/img_coins_2.png" },
-    { name: 1, pic: img_url + "spin/img_coins_1.png" },
-    { name: 0, pic: img_url + "spin/img_xiaolian.png" },
-    { name: 1000, pic: img_url + "spin/img_coins_5.png" },
-    { name: 500, pic: img_url + "spin/img_coins_4.png" },
-    { name: 100, pic: img_url + "spin/img_coins_3.png" },
-    { name: 10, pic: img_url + "spin/img_coins_2.png" },
-    { name: 1, pic: img_url + "spin/img_coins_1.png" },
-  ], // 后台配置的奖品数据
+  prizeList: [], // 后台配置的奖品数据
   isRunning: false, // 是否正在抽奖
   baseRunAngle: 360 * 5, // 总共转动角度 至少5圈
   prizeId: 0, // 中奖id
@@ -282,6 +269,7 @@ const prizeStyle = computed(() => {
 });
 onMounted(() => {
   s_w.value = window.innerWidth - 30;
+  prizeObj.prizeList = state.spin_config;
 });
 
 // 获取随机数

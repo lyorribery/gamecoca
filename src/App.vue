@@ -28,11 +28,13 @@ export default {
     // };
     onMounted(() => {
       dispatch("GET_GAME_LIST");
+      dispatch("GET_CONFIG")
       if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
       localStorage.setItem("d_id", uuid.v1());
     });
     onActivated(() => {
       dispatch("GET_GAME_LIST");
+      dispatch("GET_CONFIG")
       if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
     });
   },

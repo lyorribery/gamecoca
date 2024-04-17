@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { getUserInfo, getGameList } from '@/apis/apis'
+import { getUserInfo, getGameList, getMsgList, getDepositConfig, getInviteConfig, getFirstDepositConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
 import { useRouter } from 'vue-router'
 import apiconfig from '@/utils/apiConfig'
 export default createStore({
@@ -32,15 +32,28 @@ export default createStore({
       },
     ],
     loading_visible: false,
+    daily_visible: false,
+    fisrt_deposit_visilbe: false,
     user_info: {},
     game_list: [],
     tip_visible: false,
     tip_info: 'You have not logged in yet,please login.',
-    loading_visible: false
+    global_config: [],
+    msg_list: [],
+    deposit_config: [],
+    invite_config: {},
+    f_d_config: [],
+    spin_config: []
   }),
   mutations: {
     set_loading_modal(state, val) {
       state.loading_visible = val
+    },
+    set_daily_visible(state, val) {
+      state.daily_visible = val
+    },
+    set_fisrt_deposit_visilbe(state, val) {
+      state.fisrt_deposit_visilbe = val
     },
     set_tip_modal(state, val) {
       state.tip_visible = val
@@ -53,6 +66,24 @@ export default createStore({
     },
     set_game_list(state, val) {
       state.game_list = val
+    },
+    set_msg_list(state, val) {
+      state.msg_list = val
+    },
+    set_deposit_config(state, val) {
+      state.deposit_config = val
+    },
+    set_invite_config(state, val) {
+      state.invite_config = val
+    },
+    set_f_d_config(state, val) {
+      state.f_d_config = val
+    },
+    set_spin_config(state, val) {
+      state.spin_config = val
+    },
+    set_global_config(state, val) {
+      state.global_config = val
     }
   },
   actions: {
@@ -67,6 +98,71 @@ export default createStore({
             ctx.commit('set_tip_info', 'You have not logged in yet,please login.')
             ctx.commit('set_tip_modal', true)
             useRouter().push({ path: '/' })
+          }
+        })
+    },
+    GET_CONFIG(ctx) {
+      getGlobalConfig.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            ctx.commit("set_global_config", res.data)
+          }
+        })
+      getMsgList.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            ctx.commit('set_msg_list', res.data.list)
+          }
+        })
+      getDepositConfig.get("", {})
+        .then(res => {
+          res.list.map((item, index) => {
+            item.amount = (item.amount / 100).toString()
+            item.gift = (item.gift / 100).toString()
+            if (index == 0) {
+              item.checked = true
+            } else {
+              item.checked = false
+            }
+          })
+          ctx.commit('set_deposit_config', res.list)
+        })
+      getInviteConfig.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            for (let i in res.data) {
+              res.data[i] = res.data[i] / 100
+            }
+            ctx.commit('set_invite_config', res.data)
+          }
+        })
+      getFirstDepositConfig.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            res.data.list.map((item, index) => {
+              item.amount = (item.amount / 100).toString()
+              item.reward = (item.reward / 100).toString()
+              if (index == 1) {
+                item.active = true
+              } else {
+                item.active = false
+              }
+            })
+            ctx.commit('set_f_d_config', res.data.list)
+          }
+        })
+      getSpinConfig.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            const data = []
+            for (let i in res.data.list) {
+              res.data.list[i].reward = res.data.list[i].reward / 100
+              res.data.list[i].pic = res.data.list[i].reward == 0 ? apiconfig.fileURL + "spin/img_xiaolian.png" : res.data.list[i].reward == 1 ? apiconfig.fileURL + "spin/img_coins_1.png" : res.data.list[i].reward == 10 ? apiconfig.fileURL + "spin/img_coins_2.png" : res.data.list[i].reward == 100 ? apiconfig.fileURL + "spin/img_coins_3.png" : res.data.list[i].reward == 500 ? apiconfig.fileURL + "spin/img_coins_4.png" : res.data.list[i].reward == 1000 ? apiconfig.fileURL + "spin/img_coins_5.png" : ""
+              if (i < 12) {
+                data.unshift(res.data.list[i])
+              }
+            }
+            ctx.commit("set_spin_config", data)
           }
         })
     },

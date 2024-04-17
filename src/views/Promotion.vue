@@ -6,7 +6,9 @@
     <div class="item" v-for="(item, index) in list" :key="index" @click="goPath(item)">
       <img :src="item.img" style="width: 100%" />
       <div class="item-content">
-        <div class="btn">{{ item.btn }}</div>
+        <div class="btn">
+          {{ item.btn }}
+        </div>
       </div>
     </div>
   </div>
@@ -16,7 +18,7 @@
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-let { state } = useStore();
+let { state, commit } = useStore();
 const router = useRouter();
 const list = computed(() => {
   return state.promotion_list;
@@ -24,6 +26,7 @@ const list = computed(() => {
 const goPath = (data) => {
   switch (data.type) {
     case 1:
+      commit("set_daily_visible", true);
       break;
     case 2:
       router.push({
@@ -40,6 +43,7 @@ const goPath = (data) => {
         path: "/deposit",
       });
     case 5:
+    commit("set_fisrt_deposit_visilbe", true);
       break;
   }
 };
@@ -87,16 +91,16 @@ const goPath = (data) => {
       padding: 5px 10px;
 
       .btn {
-        font-size: 13px;
         color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 16px;
-        background: linear-gradient(-90deg, #9932fc, #5b2efa);
-        font-weight: bold;
+        font-size: 12px;
+        font-weight: 600;
         box-sizing: border-box;
         padding: 5px 15px;
+        background: linear-gradient(-90deg, #9932fc, #5b2efa);
+        border-radius: 16px;
       }
     }
   }

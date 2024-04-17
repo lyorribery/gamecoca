@@ -14,8 +14,8 @@
         @click="chooseQuick(index)"
       >
         <div class="hot" v-if="item.is_hot">Hot</div>
-        <div class="r-amount">₵ {{ item.r_amount }}</div>
-        <div class="p-amount">Get ₵{{ item.p_amount }}</div>
+        <div class="r-amount">₵ {{ item.amount }}</div>
+        <div class="p-amount">Get ₵{{ Number(item.amount) + Number(item.gift) }}</div>
       </div>
     </div>
     <div class="ipt-box">
@@ -81,13 +81,23 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 import { Close, Issue } from "@nutui/icons-vue";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
-const amount_val = ref("95");
+let { state } = useStore();
+const amount_val = ref("5");
 const router = useRouter();
+watch(
+  () => state.deposit_config,
+  (newValue) => {
+    quickList.value = newValue;
+    amount_val.value = newValue[3].amount;
+  }
+);
+const quickList = ref(state.deposit_config);
 const goRecords = () => {
   router.push({
     path: "/records",
@@ -100,7 +110,7 @@ const chooseQuick = (index) => {
   for (let i in quickList.value) {
     if (index == i) {
       quickList.value[i].checked = true;
-      amount_val.value = quickList.value[i].r_amount;
+      amount_val.value = quickList.value[i].amount;
     } else {
       quickList.value[i].checked = false;
     }
@@ -135,61 +145,6 @@ const chanelList = ref([
     name: "AirtelTigo",
     icon: require("../assets/images/img_zf_3.svg"),
     status: "",
-    checked: false,
-  },
-]);
-const quickList = ref([
-  {
-    r_amount: "5",
-    p_amount: "5",
-    checked: false,
-    is_hot: false,
-  },
-  {
-    r_amount: "10",
-    p_amount: "10",
-    checked: false,
-    is_hot: false,
-  },
-  {
-    r_amount: "19.6",
-    p_amount: "20",
-    checked: true,
-    is_hot: true,
-  },
-  {
-    r_amount: "49.5",
-    p_amount: "50",
-    checked: false,
-    is_hot: true,
-  },
-  {
-    r_amount: "99",
-    p_amount: "100",
-    checked: false,
-    is_hot: true,
-  },
-  {
-    r_amount: "198",
-    p_amount: "200",
-    checked: false,
-    is_hot: true,
-  },
-  {
-    r_amount: "495",
-    p_amount: "500",
-    checked: false,
-    is_hot: true,
-  },
-  {
-    r_amount: "990",
-    p_amount: "1000",
-    checked: false,
-    is_hot: true,
-  },
-  {
-    r_amount: "2000",
-    p_amount: "2000",
     checked: false,
   },
 ]);
