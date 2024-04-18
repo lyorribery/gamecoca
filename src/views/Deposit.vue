@@ -13,7 +13,7 @@
         :class="item.checked ? 'in-checked' : ''"
         @click="chooseQuick(index)"
       >
-        <div class="hot" v-if="item.is_hot">Hot</div>
+        <div class="hot" v-if="item.isRecommend==2">Hot</div>
         <div class="r-amount">₵ {{ item.amount }}</div>
         <div class="p-amount">Get ₵{{ Number(item.amount) + Number(item.gift) }}</div>
       </div>
@@ -88,13 +88,13 @@ import { Close, Issue } from "@nutui/icons-vue";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
 let { state } = useStore();
-const amount_val = ref("5");
+const amount_val = ref("19.6");
 const router = useRouter();
 watch(
   () => state.deposit_config,
   (newValue) => {
     quickList.value = newValue;
-    amount_val.value = newValue[3].amount;
+    amount_val.value = newValue[2].amount;
   }
 );
 const quickList = ref(state.deposit_config);

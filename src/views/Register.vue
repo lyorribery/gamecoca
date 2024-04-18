@@ -92,8 +92,10 @@ import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
 import { showNotify } from "@nutui/nutui";
 import { register, getVerifyCode } from "@/apis/apis";
+import { useStore } from "vuex";
 
 let timer = null;
+const { commit } = useStore();
 const router = useRouter();
 const registerRef = ref(null);
 const is_check = ref(true);
@@ -103,7 +105,6 @@ const registerForm = ref({
   certificate: "",
   authCode: "",
   deviceId: localStorage.getItem("d_id"),
-  invateCode: "",
 });
 const is_enter = ref(false);
 const code_second = ref(60);
@@ -125,22 +126,20 @@ watch(
 const getVerify = () => {
   if (code_second.value != 60) return;
   if (!registerForm.value.identifier) {
-    showNotify.text("Please Enter your phone number", {
-      color: "#fff",
-      background: "#CCC3E2",
-    });
+    commit("set_tip_info", "Please Enter your phone number.");
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
   } else {
     getVerifyCode
       .post("", { loginType: "phone", identifier: registerForm.value.identifier })
       .then((res) => {
         if (res.code == 200) {
-          showNotify.text(
-            "The SMS verification code has been sent, please check it carefully.",
-            {
-              color: "#fff",
-              background: "#CCC3E2",
-            }
+          commit(
+            "set_tip_info",
+            "The SMS verification code has been sent, please check it carefully."
           );
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
           timer = setInterval(() => {
             if (code_second.value > 0) {
               code_second.value -= 1;
@@ -158,20 +157,28 @@ const submit = () => {
   registerRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
       if (!is_check.value) {
-        showNotify.text(
-          "Please check GameCoca’s Service Agreement,Terms and Conditions & Privacy Policy",
-          { color: "#fff", background: "#CCC3E2" }
+        commit(
+          "set_tip_info",
+          "Please check GameCoca’s Service Agreement,Terms and Conditions & Privacy Policy."
         );
+        commit("set_tip_type", 3);
+        commit("set_tip_modal", true);
       } else {
-        register.post("", registerForm.value).then((res) => {
+        const param = localStorage.getItem("i_code")
+          ? {
+              ...registerForm.value,
+              invateCode: Number(localStorage.getItem("i_code")),
+            }
+          : registerForm.value;
+        register.post("", param).then((res) => {
           if (res.code == 200) {
-            showNotify.text("Registration successful, please sign in", {
-              color: "#fff",
-              background: "#CCC3E2",
-            });
-            router.push({
-              path: "/login",
-            });
+            commit("set_tip_info", "Registration successful, please log in.");
+            commit("set_tip_type", 1);
+            commit("set_tip_modal", true);
+          } else {
+            commit("set_tip_info", res.msg);
+            commit("set_tip_type", 1);
+            commit("set_tip_modal", true);
           }
         });
       }
@@ -239,7 +246,7 @@ const goDescription = (type) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #CCC3E2;
+      border: 1px solid #ccc3e2;
       border-radius: 16px;
       width: 86.6px;
       height: 26.7px;
@@ -266,7 +273,7 @@ const goDescription = (type) => {
       box-sizing: border-box;
       padding: 0 20px;
       font-size: 13px;
-      color: #CCC3E2;
+      color: #ccc3e2;
       span {
         color: #e556ff;
         text-decoration-line: underline;

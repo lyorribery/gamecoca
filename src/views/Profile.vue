@@ -12,7 +12,7 @@
         width="19"
         @click="goPath('/setting')"
       />
-      <img :src="img_url + 'other/icon_kefu.png'" width="19" style="margin-left: 10px" />
+      <!-- <img :src="img_url + 'other/icon_kefu.png'" width="19" style="margin-left: 10px" /> -->
     </div>
   </div>
   <div class="profile">
@@ -106,7 +106,7 @@
         <RectRight color="#CCC3E2" width="13" height="13" />
       </div>
     </div>
-    <div class="quit-btn">Log out</div>
+    <div class="quit-btn" @click="exit">Log out</div>
   </div>
 </template>
 
@@ -129,8 +129,9 @@ const goPath = (path) => {
     if (num <= 0) {
       commit(
         "set_tip_info",
-        "Your current available quota is insufficient and you cannot apply for this business."
+        "Your current available quota is insufficient and you cannot apply for withdrawal."
       );
+      commit("set_tip_type", 5);
       commit("set_tip_modal", true);
       return;
     }
@@ -149,6 +150,11 @@ const goDescription = () => {
       type: "3",
     },
   });
+};
+const exit = () => {
+  commit("set_tip_info", "Do you confirm to log out of the current account?");
+  commit("set_tip_type", 2);
+  commit("set_tip_modal", true);
 };
 onActivated(() => {
   dispatch("GET_USER_INFO");

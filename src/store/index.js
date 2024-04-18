@@ -25,11 +25,11 @@ export default createStore({
         btn: "Get Bonus",
         img: apiconfig.fileURL + 'promotion/deposit.png'
       },
-      {
-        type: 5,
-        btn: "Get Bonus",
-        img: apiconfig.fileURL + 'promotion/f_d.png'
-      },
+      // {
+      //   type: 5,
+      //   btn: "Get Bonus",
+      //   img: apiconfig.fileURL + 'promotion/f_d.png'
+      // },
     ],
     loading_visible: false,
     daily_visible: false,
@@ -37,6 +37,7 @@ export default createStore({
     user_info: {},
     game_list: [],
     tip_visible: false,
+    tip_type: 1,
     tip_info: 'You have not logged in yet,please login.',
     global_config: [],
     msg_list: [],
@@ -57,6 +58,9 @@ export default createStore({
     },
     set_tip_modal(state, val) {
       state.tip_visible = val
+    },
+    set_tip_type(state, val) {
+      state.tip_type = val
     },
     set_tip_info(state, val) {
       state.tip_info = val
@@ -119,7 +123,7 @@ export default createStore({
           res.list.map((item, index) => {
             item.amount = (item.amount / 100).toString()
             item.gift = (item.gift / 100).toString()
-            if (index == 0) {
+            if (index == 2) {
               item.checked = true
             } else {
               item.checked = false
@@ -165,6 +169,12 @@ export default createStore({
             ctx.commit("set_spin_config", data)
           }
         })
+        // getSignConfig.get("",{})
+        //   .then(res=>{
+        //     if(res.code==200){
+        //       console.log(res.data)
+        //     }
+        //   })
     },
     async GET_GAME_LIST(ctx) {
       if (ctx.state.game_list.length != 0) return

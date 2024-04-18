@@ -17,33 +17,39 @@
             <div class="step">
               <div class="step-line" style="background: transparent"></div>
               <div class="step-container check-step">1</div>
-              <div class="step-line"></div>
+              <div class="step-line" :class="check_times > 0 ? 'check-line' : ''"></div>
             </div>
             <div class="day">Day 1</div>
           </div>
           <div class="item">
             <div class="coin">+20</div>
             <div class="step">
-              <div class="step-line"></div>
-              <div class="step-container">2</div>
-              <div class="step-line"></div>
+              <div class="step-line" :class="check_times > 1 ? 'check-line' : ''"></div>
+              <div class="step-container" :class="check_times > 1 ? 'check-step' : ''">
+                2
+              </div>
+              <div class="step-line" :class="check_times > 1 ? 'check-line' : ''"></div>
             </div>
             <div class="day">Day 2</div>
           </div>
           <div class="item">
             <div class="coin">+40</div>
             <div class="step">
-              <div class="step-line"></div>
-              <div class="step-container">3</div>
-              <div class="step-line"></div>
+              <div class="step-line" :class="check_times > 2 ? 'check-line' : ''"></div>
+              <div class="step-container" :class="check_times > 2 ? 'check-step' : ''">
+                3
+              </div>
+              <div class="step-line" :class="check_times > 2 ? 'check-line' : ''"></div>
             </div>
             <div class="day">Day 3</div>
           </div>
           <div class="item">
             <div class="coin">+40</div>
             <div class="step">
-              <div class="step-line"></div>
-              <div class="step-container">4</div>
+              <div class="step-line" :class="check_times > 3 ? 'check-line' : ''"></div>
+              <div class="step-container" :class="check_times > 3 ? 'check-step' : ''">
+                4
+              </div>
               <div class="step-line" style="background: transparent"></div>
             </div>
             <div class="day">Day 4</div>
@@ -54,31 +60,37 @@
             <div class="coin" style="color: #ffc23e">+60</div>
             <div class="step">
               <div class="step-line" style="background: transparent"></div>
-              <div class="step-container">5</div>
-              <div class="step-line"></div>
+              <div class="step-container" :class="check_times > 4 ? 'check-step' : ''">
+                5
+              </div>
+              <div class="step-line" :class="check_times > 4 ? 'check-line' : ''"></div>
             </div>
             <div class="day">Day 5</div>
           </div>
           <div class="item">
             <div class="coin" style="color: #ffc23e">+60</div>
             <div class="step">
-              <div class="step-line"></div>
-              <div class="step-container">6</div>
-              <div class="step-line"></div>
+              <div class="step-line" :class="check_times > 5 ? 'check-line' : ''"></div>
+              <div class="step-container" :class="check_times > 5 ? 'check-step' : ''">
+                6
+              </div>
+              <div class="step-line" :class="check_times > 5 ? 'check-line' : ''"></div>
             </div>
             <div class="day">Day 6</div>
           </div>
           <div class="item">
             <div class="coin" style="color: #ffc23e">+100</div>
             <div class="step">
-              <div class="step-line"></div>
-              <div class="step-container">7</div>
+              <div class="step-line" :class="check_times > 6 ? 'check-line' : ''"></div>
+              <div class="step-container" :class="check_times > 6 ? 'check-step' : ''">
+                7
+              </div>
               <div class="step-line" style="background: transparent"></div>
             </div>
             <div class="day">Day 7</div>
           </div>
         </div>
-        <div class="check-btn">Check in</div>
+        <div class="check-btn" @click="checkIn">Check in</div>
         <div class="line-box">
           <div class="line"></div>
           <span>Instructions</span>
@@ -95,12 +107,60 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { Close } from "@nutui/icons-vue";
 import apiconfig from "@/utils/apiConfig";
+import { signCheck } from "@/apis/apis";
 const img_url = apiconfig.fileURL;
-const { state, commit } = useStore();
+const { state, commit, dispatch } = useStore();
+const check_times = computed(() => {
+  return state.user_info.signTimes ? state.user_info.signTimes : 0;
+});
+const check_loading = ref(false);
+const checkIn = () => {
+  if (!localStorage.getItem("token")) {
+    close();
+    commit("set_tip_info", "You have not logged in yet,please login.");
+    commit("set_tip_type", 1);
+    commit("set_tip_modal", true);
+    return;
+  }
+  if (
+    state.user_info.signTime &&
+    new Date().getTime() / 1000 - state.user_info.signTime < 86400
+  ) {
+    close();
+    commit(
+      "set_tip_info",
+      "Sign in has been completed today, go to the coins spin to get cash rewards."
+    );
+    commit("set_tip_type", 6);
+    commit("set_tip_modal", true);
+    return;
+  }
+  if (check_loading.value) return;
+  check_loading.value = true;
+  signCheck.post("", {}).then((res) => {
+    if (res.code == 200) {
+      dispatch("GET_USER_INFO");
+      commit(
+        "set_tip_info",
+        "Sign in has been completed today, go to the coins spin to get cash rewards."
+      );
+      commit("set_tip_type", 6);
+      commit("set_tip_modal", true);
+    } else if (res.code == 2002) {
+      ctx.commit("set_user_info", {});
+      localStorage.removeItem("token");
+      commit("set_tip_info", "You have not logged in yet,please login.");
+      commit("set_tip_type", 1);
+      commit("set_tip_modal", true);
+    }
+    close();
+    check_loading.value = false;
+  });
+};
 const daily_visible = computed(() => {
   return state.daily_visible;
 });
@@ -181,6 +241,9 @@ const close = () => {
           .check-step {
             background: #af62ff;
             color: #fff;
+          }
+          .check-line {
+            background: #af62ff;
           }
         }
       }

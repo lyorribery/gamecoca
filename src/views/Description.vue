@@ -145,16 +145,16 @@
       validated by your payment is not refundable.
     </p>
     <p>
-      LUCKY PICK: A selection of numbers which are randomly selected by WIN-WIN’s computer
+      LUCKY PICK: A selection of numbers which are randomly selected by GameCoca’s computer
       system on the player’s behalf for the purposes of making a play.
     </p>
     <p>
-      PLAYER: A user of WIN-WIN’s game services. It also means the holder of an account
+      PLAYER: A user of GameCoca’s game services. It also means the holder of an account
       who is eligible to buy entries using that account, and whose account has not been
       terminated, cancelled, suspended or closed.
     </p>
     <p>
-      PRIVACY POLICY: WIN-WIN’s policy relating to the use and storage of Your personal
+      PRIVACY POLICY: GameCoca’s policy relating to the use and storage of Your personal
       information (including but not limited to Games-Related Information), as amended
       from time to time.
     </p>
@@ -177,7 +177,7 @@
     <p>TICKET: The textual or graphical representation of Your play.</p>
     <p>
       TICKET NUMBER: The alphanumeric reference included as part of a ticket which
-      identifies and is unique to a particular Game and which is recorded in WIN-WIN’s
+      identifies and is unique to a particular Game and which is recorded in GameCoca’s
       computer system and, for entries bought using your account, in your transaction
       history.
     </p>
@@ -260,7 +260,7 @@
       remaining provisions shall be enforced.
     </p>
     <p>
-      WIN-WIN’s failure to act with respect to a breach by you or others does not waive
+      GameCoca’s failure to act with respect to a breach by you or others does not waive
       the right to act with respect to subsequent or similar breaches. This Site User
       Agreement sets forth the entire understanding and agreement between us with respect
       to the subject matter hereof. Your use of this gaming site marks your acceptance in
@@ -290,7 +290,7 @@
     </p>
     <p>
       In the absence of a confirmed opt-out, if a user attempts to play over the default
-      maximum play, at WIN-WIN’s discretion, the play may be rejected or the User may be
+      maximum play, at GameCoca’s discretion, the play may be rejected or the User may be
       automatically refunded the difference less the cost of the mobile transaction.
     </p>
     <p>

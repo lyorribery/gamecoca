@@ -79,11 +79,13 @@ export default {
     const goDetail = async (data) => {
       if (!localStorage.getItem("token")) {
         commit("set_tip_info", "You have not logged in yet,please login.");
+        commit("set_tip_type", 1);
         commit("set_tip_modal", true);
         return;
       }
       if (!state.user_info.bindGold) {
         commit("set_tip_info", "The current balance is insufficient, please deposit.");
+        commit("set_tip_type", 3);
         commit("set_tip_modal", true);
         return;
       }
@@ -99,13 +101,20 @@ export default {
         commit("set_loading_modal", false);
         ctx.commit("set_user_info", {});
         localStorage.removeItem("token");
-        ctx.commit("set_tip_info", "You have not logged in yet,please login.");
-        ctx.commit("set_tip_modal", true);
+        commit("set_tip_info", "You have not logged in yet,please login.");
+        commit("set_tip_type", 1);
+        commit("set_tip_modal", true);
         return;
       }
-      if (res.code == 200) location.href = res.data.url;
-      // is_req.value = false;
-      // commit("set_loading_modal", false);
+      if (res.code == 200) {
+        location.href = res.data.url;
+      } else {
+        is_req.value = false;
+        commit("set_loading_modal", false);
+        commit("set_tip_info", res.msg);
+        commit("set_tip_type", 10);
+        commit("set_tip_modal", true);
+      }
     };
     return {
       img_url,

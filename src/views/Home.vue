@@ -2,7 +2,7 @@
   <div class="main-header">
     <img src="@/assets/images/logo.svg" width="130" />
     <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
-      <div class="log-btn" @click="goPermission('/login')">SIGN IN</div>
+      <div class="log-btn" @click="goPermission('/login')">LOGIN</div>
       <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
     </div>
     <div class="btn-box" v-else>
@@ -11,6 +11,23 @@
     </div>
   </div>
   <div class="home">
+    <nut-swiper
+      :auto-play="2500"
+      pagination-visible
+      pagination-color="#fff"
+      pagination-unselected-color="#808080"
+      style="height: 113.33px"
+      direction="vertical"
+    >
+      <nut-swiper-item
+        style="height: 113.33px"
+        v-for="(item, index) in promotion_list"
+        :key="index"
+      >
+        <img :src="item.img" style="height: 100%; width: 100%" draggable="false" />
+      </nut-swiper-item>
+    </nut-swiper>
+
     <div class="active-box">
       <div class="active-item" @click="showDailyCheck()">
         <img src="@/assets/images/act_coin.svg" width="47" />
@@ -29,23 +46,6 @@
         <span>Download</span>
       </div>
     </div>
-
-    <nut-swiper
-      :auto-play="2500"
-      pagination-visible
-      pagination-color="#fff"
-      pagination-unselected-color="#808080"
-      style="margin-bottom: 15px; height: 113.33px"
-      direction="vertical"
-    >
-      <nut-swiper-item
-        style="height: 113.33px"
-        v-for="(item, index) in promotion_list"
-        :key="index"
-      >
-        <img :src="item.img" style="height: 100%; width: 100%" draggable="false" />
-      </nut-swiper-item>
-    </nut-swiper>
 
     <nut-noticebar background="#382B63" color="#fff" :text="msg_list">
       <template #left-icon>
@@ -87,7 +87,11 @@
     </nut-tabs>
     <pageFooter />
 
-    <div class="first-deposit-tip" @click="showFisrtDeposit()">
+    <div
+      class="first-deposit-tip"
+      @click="showFisrtDeposit()"
+      v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
+    >
       <div class="label-box">
         <div class="label">First Deposit Gifts</div>
         <div class="label" style="font-weight: bold">Up To ₵ <span>550 Gifts</span></div>
@@ -97,7 +101,11 @@
         <RectRight color="#fff" width="12" height="12" />
       </div>
     </div>
-    <img :src="img_url + 'invite/img_lihe.png'" class="gift-img" />
+    <img
+      v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
+      :src="img_url + 'invite/img_lihe.png'"
+      class="gift-img"
+    />
   </div>
 
   <nut-popup v-model:visible="down_visible" position="bottom" round>
@@ -138,7 +146,7 @@ export default {
 <script setup>
 import { computed, ref, onMounted } from "vue";
 import { Close, RectRight } from "@nutui/icons-vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
@@ -149,6 +157,7 @@ const promotion_list = computed(() => {
 const user_info = computed(() => {
   return state.user_info;
 });
+const route = useRoute();
 const router = useRouter();
 
 const showFisrtDeposit = () => {
@@ -185,6 +194,7 @@ const msg_list = computed(() => {
   return text;
 });
 onMounted(() => {
+  if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   const userAgent = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
   const isAndroid = /Android/.test(userAgent) && !/Windows Phone/.test(userAgent);

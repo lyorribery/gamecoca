@@ -6,6 +6,8 @@ export const register = new baseApiServer('/account/v1/register')
 
 export const login = new baseApiServer('/account/v1/login')
 
+export const exit = new baseApiServer('/account/v1/logout')
+
 export const changePass = new baseApiServer('/account/v1/reset_password')
 
 export const getUserInfo = new baseApiServer(`/account/v1/detail?t=${new Date().getTime()}`)
@@ -25,6 +27,12 @@ export const getFirstDepositConfig = new baseApiServer('/activity/v1/first_recha
 export const getSpinConfig = new baseApiServer('/activity/v1/spin')
 
 export const getGlobalConfig = new baseApiServer("/account/v1/global")
+
+export const getSignConfig = new baseApiServer("/activity/v1/sign")
+
+export const signCheck = new baseApiServer("/activity/v1/sign")
+
+export const spinAct = new baseApiServer("/activity/v1/spin")
 
 
 

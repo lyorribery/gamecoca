@@ -6,7 +6,7 @@
   </div>
   <div class="invite">
     <img :src="img_url + 'invite/top_img.png'" style="width: 100%" />
-    <div class="invite-btn">Invite Friends Now</div>
+    <div class="invite-btn" @click="shareLink">Invite Friends Now</div>
     <div class="label">
       Click this button to generate a link containing your invitation code
     </div>
@@ -50,7 +50,9 @@
         </div>
       </div>
       <div class="no-data-label">
-        There is no friend yet,invite friends now to get reward!<span> Invite Now</span>
+        There is no friend yet,invite friends now to get reward!<span @click="shareLink">
+          Invite Now</span
+        >
       </div>
     </div>
     <div class="tip-label">TERMS AND CONDITIONS</div>
@@ -76,8 +78,35 @@
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import apiconfig from "@/utils/apiConfig";
+import { useStore } from "vuex";
 const img_url = apiconfig.fileURL;
+const { state, commit } = useStore();
 const router = useRouter();
+const shareLink = () => {
+  if (JSON.stringify(state.user_info) == "{}") {
+    commit("set_tip_info", "You have not logged in yet,please login.");
+    commit("set_tip_type", 1);
+    commit("set_tip_modal", true);
+  } else {
+    copyToClipboard(`www.gamecoca.com/#/home?i_code=${state.user_info.id}`);
+    commit(
+      "set_tip_info",
+      `The link with your invitation code has been copied, please send it to your friends. www.gamecoca.com/#/home?i_code=${state.user_info.id}.`
+    );
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+  }
+};
+const copyToClipboard = (text) => {
+  var textarea = document.createElement("textarea");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = 0;
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+};
 const goBack = () => {
   router.go(-1);
 };

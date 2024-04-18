@@ -67,10 +67,11 @@ import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import { useStore } from "vuex";
 import apiConfig from "@/utils/apiConfig";
+import { spinAct } from "@/apis/apis";
 
 const img_url = apiConfig.fileURL;
 
-let { state } = useStore();
+let { state, commit, dispatch } = useStore();
 const router = useRouter();
 const goBack = () => {
   router.go(-1);
@@ -277,15 +278,46 @@ const getRandomNum = () => {
   const num = Math.floor(Math.random() * prizeObj.prizeList.length);
   return num;
 };
-const start = () => {
+const start = async () => {
+  if (!localStorage.getItem("token")) {
+    commit("set_tip_info", "You have not logged in yet,please login.");
+    commit("set_tip_type", 1);
+    commit("set_tip_modal", true);
+    return;
+  }
+  if (state.user_info.point < 20) {
+    commit("set_tip_info", "Current coins are less than 20.");
+    commit("set_tip_type", 7);
+    commit("set_tip_modal", true);
+    return;
+  }
   if (!prizeObj.isRunning) {
     prizeObj.isRunning = true;
-    console.log("开始抽奖，后台请求中奖奖品");
-    // 请求返回的奖品编号 这里使用随机数
-    const prizeId = getRandomNum();
-    console.log("中奖ID>>>", prizeId, prizeObj.prizeList[prizeId]);
-    prizeObj.prizeId = prizeId;
-    startRun();
+    // 请求返回的奖品编号
+    let prizeId = "";
+    const res = await spinAct.post("", {});
+    if (res.code == 200) {
+      for (let i in state.spin_config) {
+        if (state.spin_config[i].id == res.data.rewardId) {
+          prizeId = i;
+          break;
+        }
+      }
+      console.log("中奖ID>>>", prizeId, prizeObj.prizeList[prizeId]);
+      prizeObj.prizeId = prizeId;
+      startRun();
+      dispatch("GET_USER_INFO");
+    } else if (res.code == 2002) {
+      ctx.commit("set_user_info", {});
+      localStorage.removeItem("token");
+      commit("set_tip_info", "You have not logged in yet,please login.");
+      commit("set_tip_type", 1);
+      commit("set_tip_modal", true);
+    } else {
+      commit("set_tip_info", res.msg);
+      commit("set_tip_type", 8);
+      commit("set_tip_modal", true);
+    }
   }
 };
 const startRun = () => {
@@ -310,6 +342,12 @@ const stopRun = (e) => {
   prizeBack.value.style = `
             transform: rotate(${totalRunAngle.value - prizeObj.baseRunAngle - 15}deg);
           `;
+  commit(
+    "set_tip_info",
+    `You hit ₵ ${prizeObj.prizeList[prizeObj.prizeId].reward} cash rewards.`
+  );
+  commit("set_tip_type", 9);
+  commit("set_tip_modal", true);
 };
 </script>
 
@@ -447,7 +485,7 @@ const stopRun = (e) => {
     }
   }
   .des {
-    line-height: 15px;
+    line-height: 16px;
     width: 100%;
     font-size: 12px;
     color: #ffffff;

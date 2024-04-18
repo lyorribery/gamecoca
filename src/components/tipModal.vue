@@ -7,7 +7,7 @@
   >
     <div class="tip-modal">
       <div class="close-box">
-        <div class="close-icon" @click="closeModal"></div>
+        <div class="close-icon" @click="close"></div>
       </div>
       <div class="tip-box">
         <div class="tip-header"></div>
@@ -35,12 +35,17 @@ export default {
       return state.tip_info;
     });
     const closeModal = () => {
+      ctx.emit("callBack", state.tip_type);
+      commit("set_tip_modal", false);
+    };
+    const close = () => {
       commit("set_tip_modal", false);
     };
     return {
       tip_visible,
       tip_info,
       closeModal,
+      close,
     };
   },
 };
