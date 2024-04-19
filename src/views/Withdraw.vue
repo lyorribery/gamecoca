@@ -177,14 +177,14 @@ const goRecords = () => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #432084, #19142b);
+  background: linear-gradient(to bottom, #432084, #161326);
   .btn {
     width: calc(100% - 60px);
     position: fixed;
     bottom: calc(env(safe-area-inset-bottom) + 30px);
     left: 30px;
     height: 45.7px;
-    background: linear-gradient(-90deg, #9932fc, #5b2efa);
+    background: linear-gradient(-90deg, #9343C4, #614AE6);
     border-radius: 22.7px;
     display: flex;
     justify-content: center;

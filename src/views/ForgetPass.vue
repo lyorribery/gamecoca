@@ -226,7 +226,7 @@ const goBack = () => {
       font-weight: bold;
     }
     .active-btn {
-      background: linear-gradient(-90deg, #9932fc, #5b2efa);
+      background: linear-gradient(-90deg, #9343C4, #614AE6);
     }
     .text-box {
       position: relative;
@@ -244,7 +244,7 @@ const goBack = () => {
 }
 .change-pass-header {
   z-index: 9;
-  background: #19142b;
+  background: #161326;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);

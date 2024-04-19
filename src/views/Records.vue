@@ -373,7 +373,7 @@ const goBack = () => {
 }
 .records-header {
   z-index: 9;
-  background: #19142b;
+  background: #161326;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);

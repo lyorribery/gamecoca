@@ -25,7 +25,7 @@
     </router-view>
   </div>
 
-  <nut-tabbar
+  <!-- <nut-tabbar
     bottom
     safe-area-inset-bottom
     placeholder
@@ -58,7 +58,41 @@
         <img v-else src="@/assets/images/tab_profile.svg" />
       </template>
     </nut-tabbar-item>
-  </nut-tabbar>
+  </nut-tabbar> -->
+  <div class="tab-box">
+    <div class="tab-item" @click="tabSwitch(0)">
+      <img v-if="active_tab === 0" src="@/assets/images/tab_home_act.png" />
+      <img v-else src="@/assets/images/tab_home.png" />
+      <span :style="{ color: active_tab === 0 ? '#C98FFF' : '' }">Home</span>
+      <div class="back" v-if="active_tab === 0">
+        <img src="@/assets/images/tab_act.svg" />
+      </div>
+    </div>
+    <div class="tab-item" @click="tabSwitch(1)">
+      <img v-if="active_tab === 1" src="@/assets/images/tab_dep_act.png" />
+      <img v-else src="@/assets/images/tab_dep.png" />
+      <span :style="{ color: active_tab === 1 ? '#C98FFF' : '' }">Deposit</span>
+      <div class="back" v-if="active_tab === 1">
+        <img src="@/assets/images/tab_act.svg" />
+      </div>
+    </div>
+    <div class="tab-item" @click="tabSwitch(2)">
+      <img v-if="active_tab === 2" src="@/assets/images/tab_promotion_act.png" />
+      <img v-else src="@/assets/images/tab_promotion.png" />
+      <span :style="{ color: active_tab === 2 ? '#C98FFF' : '' }">Promotion</span>
+      <div class="back" v-if="active_tab === 2">
+        <img src="@/assets/images/tab_act.svg" />
+      </div>
+    </div>
+    <div class="tab-item" @click="tabSwitch(3)">
+      <img v-if="active_tab === 3" src="@/assets/images/tab_profile_act.png" />
+      <img v-else src="@/assets/images/tab_profile.png" />
+      <span :style="{ color: active_tab === 3 ? '#C98FFF' : '' }">Profile</span>
+      <div class="back" v-if="active_tab === 3">
+        <img src="@/assets/images/tab_act.svg" />
+      </div>
+    </div>
+  </div>
   <dailyCheck />
   <firstDeposit />
 </template>
@@ -115,7 +149,7 @@ export default {
           break;
       }
     });
-    const tabSwitch = (item, index) => {
+    const tabSwitch = (index) => {
       switch (index) {
         case 0:
           router.push({
@@ -156,11 +190,53 @@ export default {
 .router_animate-leave-active {
   animation: slideOutRight 0.3s;
 }
+.tab-box {
+  z-index: 3;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(50px + env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: #181b2c;
+  box-shadow: 0px 1px 0px 0px #242630;
+  border-radius: 18px 18px 0px 0px;
+  overflow: hidden;
+  .tab-item {
+    width: calc((100% - 45px) / 4);
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img {
+      width: 22px;
+    }
+    span {
+      font-size: 12px;
+      color: #505666;
+      padding-top: 3px;
+    }
+    .back {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
 .content {
   width: 100%;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 15px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 65px);
   overflow-y: auto;
 }
 </style>

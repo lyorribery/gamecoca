@@ -260,7 +260,7 @@ const changeFD = (index) => {
     .btn {
       width: calc(100% - 50px);
       height: 40px;
-      background: linear-gradient(-90deg, #9932fc, #5b2efa);
+      background: linear-gradient(-90deg, #9343C4, #614AE6);
       border-radius: 20px;
       display: flex;
       justify-content: center;

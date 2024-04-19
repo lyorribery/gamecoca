@@ -195,7 +195,7 @@ const chanelList = ref([
     width: calc(100% - 30px);
     margin: 25px 0 0 15px;
     height: 42px;
-    background: linear-gradient(-90deg, #9932fc, #5b2efa);
+    background: linear-gradient(-90deg, #9343C4, #614AE6);
     border-radius: 22px;
     display: flex;
     justify-content: center;
@@ -325,7 +325,7 @@ const chanelList = ref([
 }
 .deposit-header {
   z-index: 9;
-  background: #19142b;
+  background: #161326;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);

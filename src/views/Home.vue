@@ -53,38 +53,38 @@
       </template>
     </nut-noticebar>
 
-    <nut-tabs v-model="type" auto-height title-scroll>
-      <template #titles>
-        <div
-          v-for="item in type_list"
-          :key="item.paneKey"
-          class="custom-tab-item"
-          @click="type = item.paneKey"
-        >
-          <div
-            class="custom-title"
-            :class="{
-              active: type === item.paneKey,
-            }"
-          >
-            {{ item.title }}
-          </div>
-        </div>
-      </template>
-      <nut-tab-pane
-        v-for="item in type_list"
-        :key="item.paneKey"
-        :pane-key="item.paneKey"
+    <div class="custom-tab" id="gameName">
+      <div
+        @click="changeTab(index)"
+        v-for="(item, index) in game_list"
+        :key="index"
+        class="custom-title"
+        :class="active_type === index ? 'active' : ''"
       >
-        <div class="game-container">
-          <imgCard
-            v-for="(items, indexs) in item.content"
-            :key="indexs"
-            :cardInfo="items"
-          />
+        {{ item.name }}
+      </div>
+    </div>
+
+    <div class="game-content" v-for="(item, index) in game_list" :key="index">
+      <div class="title" :id="'game' + index">
+        <div class="name">
+          <span>{{ item.name }}</span
+          >GAME
         </div>
-      </nut-tab-pane>
-    </nut-tabs>
+        <div
+          class="more"
+          v-if="item.list.length < item.total"
+          @click="getMore(index, item.param, item.total)"
+        >
+          <span>View All</span>
+          <div class="more-count">{{ item.total }}</div>
+        </div>
+      </div>
+      <div class="game-container">
+        <imgCard v-for="(items, indexs) in item.list" :key="indexs" :cardInfo="items" />
+      </div>
+    </div>
+
     <pageFooter />
 
     <div
@@ -130,6 +130,26 @@
       <img :src="img_url + 'down/down/ios_3.png'" />
     </div>
   </nut-popup>
+
+  <nut-backtop :distance="200" :bottom="90" @click="toTop">
+    <svg
+      t="1713510475738"
+      class="icon"
+      viewBox="0 0 1024 1024"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      p-id="4415"
+      id="mx_n_1713510475739"
+      width="22"
+      height="22"
+    >
+      <path
+        d="M825.568 555.328l-287.392-289.28c-6.368-6.4-14.688-9.472-22.976-9.408-1.12-0.096-2.08-0.64-3.2-0.64-4.672 0-9.024 1.088-13.024 2.88-4.032 1.536-7.872 3.872-11.136 7.136l-259.328 258.88c-12.512 12.48-12.544 32.736-0.032 45.248 6.24 6.272 14.432 9.408 22.656 9.408 8.192 0 16.352-3.136 22.624-9.344L480 364.288V928c0 17.696 14.336 32 32 32s32-14.304 32-32V362.72l236.192 237.728c6.24 6.272 14.496 9.44 22.688 9.44s16.32-3.104 22.56-9.312c12.576-12.448 12.608-32.736 0.128-45.248zM864 192H160c-17.664 0-32-14.336-32-32s14.336-32 32-32h704c17.696 0 32 14.336 32 32s-14.304 32-32 32z"
+        fill="#5297ff"
+        p-id="4416"
+      ></path>
+    </svg>
+  </nut-backtop>
 </template>
 
 <script>
@@ -148,6 +168,7 @@ import { computed, ref, onMounted } from "vue";
 import { Close, RectRight } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
+import { getGameList } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
 let { state, commit } = useStore();
@@ -159,11 +180,9 @@ const user_info = computed(() => {
 });
 const route = useRoute();
 const router = useRouter();
-
 const showFisrtDeposit = () => {
   commit("set_fisrt_deposit_visilbe", true);
 };
-
 const showDailyCheck = () => {
   commit("set_daily_visible", true);
 };
@@ -177,10 +196,45 @@ const goPermission = (type) => {
     path: type,
   });
 };
-const type = ref("c1");
-const type_list = computed(() => {
+const game_list = computed(() => {
   return state.game_list;
 });
+const game_loading = ref(false);
+const getMore = async (index, param, total) => {
+  if (game_loading.value) return;
+  game_loading.value = true;
+  const res = await getGameList.get("", { ...param, page: 1, pageSize: total });
+  if (res.code == 200) {
+    const arr = [];
+    res.data.list.map((items, indexs) => {
+      if (indexs > 5) {
+        arr.push({
+          ...items,
+          count: Math.floor(Math.random() * (150 - 80 + 1)) + 80,
+        });
+      }
+    });
+    const cur_game_list = state.game_list;
+    cur_game_list[index].list = [...cur_game_list[index].list, ...arr];
+    commit("set_game_list", cur_game_list);
+  }
+  game_loading.value = false;
+};
+const active_type = ref(0);
+const toTop = () => {
+  document.getElementById("gameName").scrollLeft = 0;
+  active_type.value = 0;
+};
+const changeTab = (index) => {
+  document.getElementById("gameName").scrollLeft = 30 * (index + 1);
+  active_type.value = index;
+  let selector = "game" + index;
+  document.getElementById(selector).scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+};
+
 const down_visible = ref(false);
 const changeDown = (type) => {
   type == 1 ? (down_visible.value = true) : (down_visible.value = false);
@@ -357,19 +411,69 @@ onMounted(() => {
   width: 100%;
   box-sizing: border-box;
   padding: 55px 10px 0 10px;
+  .game-content {
+    width: 100%;
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 5px 0 10px 0;
 
-  .game-container {
+      .more {
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+        span {
+          color: #cccccc;
+        }
+        .more-count {
+          margin-left: 5px;
+          background: #cccccc;
+          border-radius: 15px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-weight: bold;
+          color: #161326;
+          box-sizing: border-box;
+          padding: 2px 5px;
+        }
+      }
+
+      .name {
+        font-size: 12px;
+        font-weight: bold;
+        color: #fff;
+        span {
+          color: #5297ff;
+          padding-right: 5px;
+        }
+      }
+    }
+    .game-container {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  }
+
+  .custom-tab {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
     justify-content: flex-start;
-  }
-  .custom-tab-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 10px 8px 10px 0;
+    overflow-x: scroll;
+    box-sizing: border-box;
+    padding: 15px 0 10px 0;
+  }
+  .custom-tab::-webkit-scrollbar {
+    width: 0;
+  }
+  .custom-tab::-webkit-scrollbar {
+    height: 0;
   }
   .custom-title {
     background: #382b63;
@@ -383,16 +487,14 @@ onMounted(() => {
     box-sizing: border-box;
     padding: 5px 15px;
     min-width: 75px;
+    margin-right: 5px;
   }
-  .custom-title.active {
-    background: linear-gradient(-90deg, #9932fc, #5b2efa);
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+
+  .active {
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
     font-weight: bold;
   }
+
   .active-box {
     width: 100%;
     display: flex;

@@ -251,7 +251,7 @@ const close = () => {
     .check-btn {
       width: calc(100% - 20px);
       height: 42px;
-      background: linear-gradient(-90deg, #9932fc, #5b2efa);
+      background: linear-gradient(-90deg, #9343C4, #614AE6);
       border-radius: 22px;
       display: flex;
       justify-content: center;

@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 // import Vconsole from 'vconsole'
 
-import { Locale, Tabbar, TabbarItem, Tabs, TabPane, Noticebar, Swiper, SwiperItem, Input, Image, Form, FormItem, Checkbox, Overlay, Popup, Switch, Textarea } from "@nutui/nutui"
+import { Locale, Tabs, TabPane, Noticebar, Swiper, SwiperItem, Input, Image, Form, FormItem, Checkbox, Overlay, Popup, Switch, Textarea, Backtop } from "@nutui/nutui"
 import "@nutui/nutui/dist/style.css"
 
 import './assets/styles/common.scss'
@@ -16,8 +16,6 @@ Locale.use('en-US', enUS)
 // let vConsole = new Vconsole()
 const app = createApp(App)
 
-app.use(Tabbar)
-app.use(TabbarItem)
 app.use(Tabs)
 app.use(TabPane)
 app.use(Noticebar)
@@ -32,6 +30,7 @@ app.use(Overlay)
 app.use(Popup)
 app.use(Switch)
 app.use(Textarea)
+app.use(Backtop)
 // app.use(vConsole)
 
 app.use(router).use(store).mount('#app')

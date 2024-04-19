@@ -130,7 +130,7 @@ export default {
     .tip-header {
       width: 100%;
       height: 30px;
-      background: linear-gradient(-90deg, #9932fc, #5b2efa);
+      background: linear-gradient(-90deg, #9343C4, #614AE6);
     }
   }
 }

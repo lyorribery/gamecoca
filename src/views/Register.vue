@@ -265,7 +265,7 @@ const goDescription = (type) => {
       font-weight: bold;
     }
     .active-btn {
-      background: linear-gradient(-90deg, #9932fc, #5b2efa);
+      background: linear-gradient(-90deg, #9343C4, #614AE6);
     }
     .text-box {
       position: relative;

@@ -115,7 +115,7 @@ textarea::-ms-input-placeholder {
 }
 
 .nut-tabs__titles{
-    background-color: #19142b;
+    background-color: #161326;
 }
 
 .nut-popup{
@@ -123,7 +123,7 @@ textarea::-ms-input-placeholder {
 }
 
 .nut-textarea{
-    background: #19142b;
+    background: #161326;
 }
 
 .nut-textarea__textarea{
@@ -143,6 +143,11 @@ textarea::-ms-input-placeholder {
 .nut-tabbar-item_icon-box_icon img{
     width: 22px;
     height: 22px;
+}
+
+.nut-backtop.show{
+    background-color: #181b2c;
+    border:none;
 }
 
 ul{

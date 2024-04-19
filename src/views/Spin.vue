@@ -33,7 +33,7 @@
 
     <div class="data-box">
       <div class="item b-r">
-        My coins：<span>{{ user_info.point ? user_info.point : "--" }}</span>
+        My coins：<span>{{ user_info.point ? user_info.point : "0" }}</span>
       </div>
       <div class="item">
         <span>{{ spin_count }}</span
@@ -79,7 +79,7 @@ const goBack = () => {
 const s_w = ref(0);
 
 const spin_count = computed(() => {
-  return state.user_info.point ? Math.floor(state.user_info.point / 20) : "--";
+  return state.user_info.point ? Math.floor(state.user_info.point / 20) : "0";
 });
 
 const user_info = computed(() => {
@@ -522,7 +522,7 @@ const stopRun = (e) => {
     margin-bottom: 20px;
     width: calc(100% - 30px);
     height: 45.7px;
-    background: linear-gradient(-90deg, #9932fc, #5b2efa);
+    background: linear-gradient(-90deg, #9343C4, #614AE6);
     border-radius: 22.7px;
     font-weight: bold;
     font-size: 17.3px;

@@ -170,10 +170,13 @@ export default {
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      padding: 2px 5px;
+      padding: 3px 8px;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0px 0px 1px 0px #000000;
+      border-radius: 16px;
       span {
         padding-left: 3px;
-        font-size: 12px;
+        font-size: 11.7px;
         color: #fff;
         font-weight: 600;
       }

@@ -42,6 +42,7 @@ const goPath = (data) => {
       router.push({
         path: "/deposit",
       });
+      break
     case 5:
     commit("set_fisrt_deposit_visilbe", true);
       break;
@@ -52,7 +53,7 @@ const goPath = (data) => {
 <style lang="scss" scoped>
 .promotion-header {
   z-index: 9;
-  background: #19142b;
+  background: #161326;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -99,7 +100,7 @@ const goPath = (data) => {
         font-weight: 600;
         box-sizing: border-box;
         padding: 5px 15px;
-        background: linear-gradient(-90deg, #9932fc, #5b2efa);
+        background: linear-gradient(-90deg, #9343C4, #614AE6);
         border-radius: 16px;
       }
     }

@@ -25,11 +25,11 @@ export default createStore({
         btn: "Get Bonus",
         img: apiconfig.fileURL + 'promotion/deposit.png'
       },
-      // {
-      //   type: 5,
-      //   btn: "Get Bonus",
-      //   img: apiconfig.fileURL + 'promotion/f_d.png'
-      // },
+      {
+        type: 5,
+        btn: "Get Bonus",
+        img: apiconfig.fileURL + 'promotion/f_d.png'
+      },
     ],
     loading_visible: false,
     daily_visible: false,
@@ -169,67 +169,107 @@ export default createStore({
             ctx.commit("set_spin_config", data)
           }
         })
-        // getSignConfig.get("",{})
-        //   .then(res=>{
-        //     if(res.code==200){
-        //       console.log(res.data)
-        //     }
-        //   })
+      // getSignConfig.get("",{})
+      //   .then(res=>{
+      //     if(res.code==200){
+      //       console.log(res.data)
+      //     }
+      //   })
     },
     async GET_GAME_LIST(ctx) {
       if (ctx.state.game_list.length != 0) return
       ctx.commit("set_loading_modal", true);
-      const res = await getGameList.get("", { page: 1, pageSize: 30 })
-      res.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (800 - 500 + 1)) + 500;
+      const res_recommend = await getGameList.get("", { page: 1, pageSize: 6, searchType: 1 })
+      res_recommend.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-      const res_hot = res.data.list.filter(item => {
-        return item.isHot
+      const recommend_obj = {
+        ...res_recommend.data,
+        name: "For You",
+        param: {
+          searchType: 1
+        }
+      }
+      const res_hot = await getGameList.get("", { page: 1, pageSize: 6, searchType: 2 })
+      res_hot.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-      const res_slot = res.data.list.filter(item => {
-        return item.gameType === 1
+      const hot_obj = {
+        ...res_hot.data,
+        name: "Popular",
+        param: {
+          searchType: 2
+        }
+      }
+      const res_slot = await getGameList.get("", { page: 1, pageSize: 6, gameType: 1 })
+      res_slot.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-      const res_live = res.data.list.filter(item => {
-        return item.gameType === 2
+      const slot_obj = {
+        ...res_slot.data,
+        name: "Slot",
+        param: {
+          gameType: 1
+        }
+      }
+      const res_live = await getGameList.get("", { page: 1, pageSize: 6, gameType: 2 })
+      res_live.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-      const res_poker = res.data.list.filter(item => {
-        return item.gameType === 3
+      const live_obj = {
+        ...res_live.data,
+        name: "Live",
+        param: {
+          gameType: 2
+        }
+      }
+      const res_poker = await getGameList.get("", { page: 1, pageSize: 6, gameType: 3 })
+      res_poker.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-      const res_fish = res.data.list.filter(item => {
-        return item.gameType === 4
+      const poker_obj = {
+        ...res_poker.data,
+        name: "Poker",
+        param: {
+          gameType: 3
+        }
+      }
+      const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
+      res_fish.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-
+      const fish_obj = {
+        ...res_fish.data,
+        name: "Fish",
+        param: {
+          gameType: 4
+        }
+      }
       const result = [
         {
-          title: "All",
-          paneKey: "c1",
-          content: res.data.list,
+          ...recommend_obj,
+          key: 'recommend'
         },
         {
-          title: "Popular",
-          paneKey: "c2",
-          content: res_hot,
+          ...hot_obj,
+          key: 'hot'
         },
         {
-          title: "Slot",
-          paneKey: "c3",
-          content: res_slot,
+          ...slot_obj,
+          key: 'slot'
         },
         {
-          title: "Live",
-          paneKey: "c4",
-          content: res_live,
+          ...live_obj,
+          key: 'live'
         },
         {
-          title: "Poker",
-          paneKey: "c5",
-          content: res_poker,
+          ...poker_obj,
+          key: 'poker'
         },
         {
-          title: "Fish",
-          paneKey: "c6",
-          content: res_fish,
-        },
+          ...fish_obj,
+          key: 'fish'
+        }
       ]
       ctx.commit('set_game_list', result)
       ctx.commit("set_loading_modal", false);

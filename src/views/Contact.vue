@@ -93,7 +93,7 @@ const goBack = () => {
         .send-btn {
           width: 76.7px;
           height: 24px;
-          background: linear-gradient(-90deg, #9932fc, #5b2efa);
+          background: linear-gradient(-90deg, #9343C4, #614AE6);
           border-radius: 12px;
           font-size: 12px;
           font-weight: 600;
@@ -133,7 +133,7 @@ const goBack = () => {
     margin-bottom: 15px;
     width: calc(100% - 30px);
     height: 45.7px;
-    background: linear-gradient(-90deg, #9932fc, #5b2efa);
+    background: linear-gradient(-90deg, #9343C4, #614AE6);
     border-radius: 22.7px;
     display: flex;
     justify-content: center;
@@ -170,7 +170,7 @@ const goBack = () => {
 }
 .contact-header {
   z-index: 9;
-  background: #19142b;
+  background: #161326;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
