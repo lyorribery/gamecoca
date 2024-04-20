@@ -196,7 +196,7 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: calc(50px + env(safe-area-inset-bottom));
+  height: calc(55px + env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -204,23 +204,23 @@ export default {
   padding-bottom: env(safe-area-inset-bottom);
   background: #181b2c;
   box-shadow: 0px 1px 0px 0px #242630;
-  border-radius: 18px 18px 0px 0px;
+  border-radius: 22px 22px 0px 0px;
   overflow: hidden;
   .tab-item {
     width: calc((100% - 45px) / 4);
-    height: 50px;
+    height: 55px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     img {
-      width: 22px;
+      width: 28px;
     }
     span {
-      font-size: 12px;
-      color: #505666;
-      padding-top: 3px;
+      font-size: 13px;
+      color: #77777d;
+      padding-top: 1px;
     }
     .back {
       position: absolute;
@@ -236,7 +236,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 65px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 70px);
   overflow-y: auto;
 }
 </style>

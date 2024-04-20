@@ -10,7 +10,7 @@
       <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
     </div>
   </div>
-  <div class="home">
+  <div class="home" ref="homeContainer" @scroll="scroll">
     <nut-swiper
       :auto-play="2500"
       pagination-visible
@@ -30,19 +30,19 @@
 
     <div class="active-box">
       <div class="active-item" @click="showDailyCheck()">
-        <img src="@/assets/images/act_coin.svg" width="47" />
+        <img src="@/assets/images/act_coins.png" width="47" />
         <span>Get Coins</span>
       </div>
       <div class="active-item" @click="goPath('/spin')">
-        <img src="@/assets/images/act_spin.svg" width="47" />
+        <img src="@/assets/images/act_spin.png" width="47" />
         <span>Coins Spin</span>
       </div>
       <div class="active-item" @click="goPath('/invite')">
-        <img src="@/assets/images/act_cash.svg" width="47" />
+        <img src="@/assets/images/act_cash.png" width="47" />
         <span>Get Cash</span>
       </div>
       <div class="active-item" @click="changeDown(1)">
-        <img src="@/assets/images/act_down.svg" width="47" />
+        <img src="@/assets/images/act_down.png" width="47" />
         <span>Download</span>
       </div>
     </div>
@@ -53,17 +53,21 @@
       </template>
     </nut-noticebar>
 
-    <div class="custom-tab" id="gameName">
-      <div
-        @click="changeTab(index)"
-        v-for="(item, index) in game_list"
-        :key="index"
-        class="custom-title"
-        :class="active_type === index ? 'active' : ''"
-      >
-        {{ item.name }}
+    <nut-sticky top="55" :container="homeContainer">
+      <div class="custom-content">
+        <div class="custom-tab" id="gameName">
+          <div
+            @click="changeTab(index)"
+            v-for="(item, index) in game_list"
+            :key="index"
+            class="custom-title"
+            :class="active_type === index ? 'active' : ''"
+          >
+            {{ item.name }}
+          </div>
+        </div>
       </div>
-    </div>
+    </nut-sticky>
 
     <div class="game-content" v-for="(item, index) in game_list" :key="index">
       <div class="title" :id="'game' + index">
@@ -130,26 +134,6 @@
       <img :src="img_url + 'down/down/ios_3.png'" />
     </div>
   </nut-popup>
-
-  <nut-backtop :distance="200" :bottom="90" @click="toTop">
-    <svg
-      t="1713510475738"
-      class="icon"
-      viewBox="0 0 1024 1024"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      p-id="4415"
-      id="mx_n_1713510475739"
-      width="22"
-      height="22"
-    >
-      <path
-        d="M825.568 555.328l-287.392-289.28c-6.368-6.4-14.688-9.472-22.976-9.408-1.12-0.096-2.08-0.64-3.2-0.64-4.672 0-9.024 1.088-13.024 2.88-4.032 1.536-7.872 3.872-11.136 7.136l-259.328 258.88c-12.512 12.48-12.544 32.736-0.032 45.248 6.24 6.272 14.432 9.408 22.656 9.408 8.192 0 16.352-3.136 22.624-9.344L480 364.288V928c0 17.696 14.336 32 32 32s32-14.304 32-32V362.72l236.192 237.728c6.24 6.272 14.496 9.44 22.688 9.44s16.32-3.104 22.56-9.312c12.576-12.448 12.608-32.736 0.128-45.248zM864 192H160c-17.664 0-32-14.336-32-32s14.336-32 32-32h704c17.696 0 32 14.336 32 32s-14.304 32-32 32z"
-        fill="#5297ff"
-        p-id="4416"
-      ></path>
-    </svg>
-  </nut-backtop>
 </template>
 
 <script>
@@ -172,6 +156,7 @@ import { getGameList } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
 let { state, commit } = useStore();
+const homeContainer = ref(null);
 const promotion_list = computed(() => {
   return state.promotion_list;
 });
@@ -221,12 +206,16 @@ const getMore = async (index, param, total) => {
   game_loading.value = false;
 };
 const active_type = ref(0);
-const toTop = () => {
-  document.getElementById("gameName").scrollLeft = 0;
-  active_type.value = 0;
+const scroll = (e) => {
+  // console.log(e.target.scrollTop)
+  // if(e.target.scrollTop)
 };
 const changeTab = (index) => {
-  document.getElementById("gameName").scrollLeft = 30 * (index + 1);
+  if (index > 2) {
+    document.getElementById("gameName").scrollLeft = 80 * index;
+  } else {
+    document.getElementById("gameName").scrollLeft = 0;
+  }
   active_type.value = index;
   let selector = "game" + index;
   document.getElementById(selector).scrollIntoView({
@@ -409,17 +398,18 @@ onMounted(() => {
 }
 .home {
   width: 100%;
+  height: calc(100vh - 55px - env(safe-area-inset-bottom) - env(safe-area-inset-top));
+  overflow-y: auto;
   box-sizing: border-box;
   padding: 55px 10px 0 10px;
   .game-content {
     width: 100%;
     .title {
       width: 100%;
+      height: 35px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-sizing: border-box;
-      padding: 5px 0 10px 0;
 
       .more {
         display: flex;
@@ -459,15 +449,21 @@ onMounted(() => {
       justify-content: flex-start;
     }
   }
-
-  .custom-tab {
+  .custom-content {
     width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: hidden;
+    background-color: #161326;
+  }
+  .custom-tab {
+    height: 45px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     overflow-x: scroll;
-    box-sizing: border-box;
-    padding: 15px 0 10px 0;
   }
   .custom-tab::-webkit-scrollbar {
     width: 0;
