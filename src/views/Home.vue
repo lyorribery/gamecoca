@@ -438,12 +438,12 @@ onMounted(() => {
           font-weight: bold;
           color: #161326;
           box-sizing: border-box;
-          padding: 2px 5px;
+          padding: 2px 8px;
         }
       }
 
       .name {
-        font-size: 12px;
+        font-size: 13px;
         font-weight: bold;
         color: #fff;
         span {
