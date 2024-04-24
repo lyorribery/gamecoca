@@ -108,6 +108,7 @@ export default {
       }
       if (res.code == 200) {
         location.href = res.data.url;
+        commit("set_loading_modal", false);
       } else {
         is_req.value = false;
         commit("set_loading_modal", false);

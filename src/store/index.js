@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
 import { getUserInfo, getGameList, getMsgList, getDepositConfig, getInviteConfig, getFirstDepositConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
-import { useRouter } from 'vue-router'
 import apiconfig from '@/utils/apiConfig'
 export default createStore({
   state: () => ({
@@ -101,7 +100,6 @@ export default createStore({
             localStorage.removeItem('token')
             ctx.commit('set_tip_info', 'You have not logged in yet,please login.')
             ctx.commit('set_tip_modal', true)
-            useRouter().push({ path: '/' })
           }
         })
     },

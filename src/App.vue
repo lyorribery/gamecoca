@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { onActivated, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import tipModal from "@/components/tipModal.vue";
@@ -63,11 +63,11 @@ export default {
       if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
       localStorage.setItem("d_id", uuid.v1());
     });
-    onActivated(() => {
-      dispatch("GET_GAME_LIST");
-      dispatch("GET_CONFIG");
-      if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
-    });
+    // onActivated(() => {
+    //   dispatch("GET_GAME_LIST");
+    //   dispatch("GET_CONFIG");
+    //   if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
+    // });
     return {
       modalFunc,
     };
