@@ -416,6 +416,7 @@ onMounted(() => {
   overflow-y: auto;
   box-sizing: border-box;
   padding: 55px 10px 0 10px;
+  background: linear-gradient(35deg, #161326, #241E44);
   .game-content {
     width: 100%;
     .title {

@@ -244,7 +244,7 @@ const goBack = () => {
 }
 .change-pass-header {
   z-index: 9;
-  background: #161326;
+  background: #181b2c;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
