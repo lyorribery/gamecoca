@@ -154,7 +154,7 @@ const chanelList = ref([
 .deposit {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(55px + env(safe-area-inset-top)) 15px 10px 15px;
   .des {
     margin: 20px 0;
     width: 100%;

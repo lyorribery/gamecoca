@@ -37,12 +37,12 @@
         <RectRight color="#CCC3E2" width="13px" height="13px" />
       </div>
     </div>
-    <div class="item">
+    <!-- <div class="item">
       <div class="label">Sound</div>
       <div class="right">
         <nut-switch v-model="sound_val" active-color="#E556FF" inactive-color="#382B63" />
       </div>
-    </div>
+    </div> -->
   </div>
   <nut-overlay
     v-model:visible="name_visible"

@@ -36,10 +36,36 @@
             @blur="customBlurValidate('certificate')"
           />
         </nut-form-item>
-        <nut-form-item>
+        <nut-form-item prop="btn">
           <div class="forget" @click="goPath('/forgetPass')">Forgot password?</div>
           <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
-            Login
+            <svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="25px"
+              height="25px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#FFFFFF"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+            <span v-else>Login</span>
           </div>
           <div class="des" @click="goPath('/register')">Create New Account ></div>
         </nut-form-item>
@@ -55,7 +81,7 @@ import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
 import { login } from "@/apis/apis";
 import { useStore } from "vuex";
-let { dispatch } = useStore();
+let { commit, dispatch } = useStore();
 const router = useRouter();
 const loginRef = ref(null);
 const loginForm = ref({
@@ -64,6 +90,7 @@ const loginForm = ref({
   certificate: "",
   deviceId: localStorage.getItem("d_id"),
 });
+const is_loading = ref(false);
 const is_enter = ref(false);
 watch(
   () => loginForm,
@@ -79,6 +106,8 @@ watch(
 const submit = () => {
   loginRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
+      if (is_loading.value) return;
+      is_loading.value = true;
       login.post("", loginForm.value).then((res) => {
         if (res.code == 200) {
           localStorage.setItem("token", res.data.accessToken);
@@ -86,7 +115,12 @@ const submit = () => {
           router.push({
             path: "/home",
           });
+        } else {
+          commit("set_tip_info", res.msg);
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
         }
+        is_loading.value = false;
       });
     } else {
       console.warn("error:", errors);
@@ -150,7 +184,7 @@ const goPath = (path) => {
       font-weight: bold;
     }
     .active-btn {
-      background: linear-gradient(-90deg, #9343C4, #614AE6);
+      background: linear-gradient(-90deg, #9343c4, #614ae6);
     }
     .des {
       width: 100%;

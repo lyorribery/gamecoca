@@ -66,7 +66,33 @@
         </nut-form-item>
         <nut-form-item>
           <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
-            Create Account
+            <svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="25px"
+              height="25px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#FFFFFF"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+            <span v-else>Create Account</span>
           </div>
           <div class="text-box">
             <nut-checkbox
@@ -96,6 +122,7 @@ import { useStore } from "vuex";
 
 let timer = null;
 const { commit } = useStore();
+const is_loading = ref(false);
 const router = useRouter();
 const registerRef = ref(null);
 const is_check = ref(true);
@@ -149,6 +176,10 @@ const getVerify = () => {
               timer = null;
             }
           }, 1000);
+        } else {
+          commit("set_tip_info", res.msg);
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
         }
       });
   }
@@ -164,6 +195,8 @@ const submit = () => {
         commit("set_tip_type", 3);
         commit("set_tip_modal", true);
       } else {
+        if (is_loading.value) return;
+        is_loading.value = true;
         const param = localStorage.getItem("i_code")
           ? {
               ...registerForm.value,
@@ -177,9 +210,10 @@ const submit = () => {
             commit("set_tip_modal", true);
           } else {
             commit("set_tip_info", res.msg);
-            commit("set_tip_type", 1);
+            commit("set_tip_type", 3);
             commit("set_tip_modal", true);
           }
+          is_loading.value = false;
         });
       }
     } else {
@@ -265,7 +299,7 @@ const goDescription = (type) => {
       font-weight: bold;
     }
     .active-btn {
-      background: linear-gradient(-90deg, #9343C4, #614AE6);
+      background: linear-gradient(-90deg, #9343c4, #614ae6);
     }
     .text-box {
       position: relative;

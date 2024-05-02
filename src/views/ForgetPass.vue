@@ -66,7 +66,33 @@
         </nut-form-item>
         <nut-form-item>
           <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
-            Submit
+            <svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="25px"
+              height="25px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#FFFFFF"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+            <span v-else>Submit</span>
           </div>
         </nut-form-item>
       </nut-form>
@@ -79,7 +105,7 @@ import { ref, watch } from "vue";
 import { RectLeft } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { _validpassword } from "@/utils/utils";
-import { changePass,getVerifyCode } from "@/apis/apis";
+import { changePass, getVerifyCode } from "@/apis/apis";
 import { useStore } from "vuex";
 import { showNotify } from "@nutui/nutui";
 
@@ -95,6 +121,7 @@ const changepassForm = ref({
 });
 const is_enter = ref(false);
 const code_second = ref(60);
+const is_loading = ref(false);
 watch(
   () => changepassForm,
   (newValue, oldValue) => {
@@ -138,6 +165,10 @@ const getVerify = () => {
               timer = null;
             }
           }, 1000);
+        } else {
+          commit("set_tip_info", res.msg);
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
         }
       });
   }
@@ -145,12 +176,21 @@ const getVerify = () => {
 const submit = () => {
   changepassRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
+      if (is_loading.value) return;
+      is_loading.value = true;
       changePass.post("", changepassForm.value).then((res) => {
         if (res.code == 200) {
           localStorage.removeItem("token");
           commit("set_user_info", {});
-          router.replace("/");
+          commit("set_tip_info", "Password has been changed.");
+          commit("set_tip_type", 1);
+          commit("set_tip_modal", true);
+        } else {
+          commit("set_tip_info", res.msg);
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
         }
+        is_loading.value = false;
       });
     } else {
       console.warn("error:", errors);
@@ -207,7 +247,7 @@ const goBack = () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid #CCC3E2;
+      border: 1px solid #ccc3e2;
       border-radius: 16px;
       width: 86.6px;
       height: 26.7px;
@@ -226,7 +266,7 @@ const goBack = () => {
       font-weight: bold;
     }
     .active-btn {
-      background: linear-gradient(-90deg, #9343C4, #614AE6);
+      background: linear-gradient(-90deg, #9343c4, #614ae6);
     }
     .text-box {
       position: relative;
@@ -234,7 +274,7 @@ const goBack = () => {
       box-sizing: border-box;
       padding: 0 20px;
       font-size: 13px;
-      color: #CCC3E2;
+      color: #ccc3e2;
       span {
         color: #e556ff;
         text-decoration-line: underline;
@@ -244,7 +284,7 @@ const goBack = () => {
 }
 .change-pass-header {
   z-index: 9;
-  background: #181b2c;
+  background: #161326;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);

@@ -1,120 +1,116 @@
 <template>
-
-    <div class="main-header" id="mainHeader">
-      <img src="@/assets/images/logo.svg" width="130" />
-      <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
-        <div class="log-btn" @click="goPermission('/login')">LOGIN</div>
-        <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
-      </div>
-      <div class="btn-box" v-else>
-        <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
-        <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
-      </div>
+  <div class="main-header" id="mainHeader">
+    <img src="@/assets/images/logo.svg" width="130" />
+    <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
+      <div class="log-btn" @click="goPermission('/login')">LOGIN</div>
+      <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
     </div>
-    <div class="home" ref="homeContainer" @scroll="scroll">
-      <nut-swiper
-        :auto-play="2500"
-        pagination-visible
-        pagination-color="#fff"
-        pagination-unselected-color="#808080"
+    <div class="btn-box" v-else>
+      <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
+      <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
+    </div>
+  </div>
+  <div class="home" ref="homeContainer" @scroll="scroll">
+    <nut-swiper
+      :auto-play="2500"
+      pagination-visible
+      pagination-color="#fff"
+      pagination-unselected-color="#808080"
+      style="height: 113.33px"
+      direction="vertical"
+    >
+      <nut-swiper-item
         style="height: 113.33px"
-        direction="vertical"
+        v-for="(item, index) in promotion_list"
+        :key="index"
       >
-        <nut-swiper-item
-          style="height: 113.33px"
-          v-for="(item, index) in promotion_list"
-          :key="index"
-        >
-          <img :src="item.img" style="height: 100%; width: 100%" draggable="false" />
-        </nut-swiper-item>
-      </nut-swiper>
+        <img :src="item.img" style="height: 100%; width: 100%" draggable="false" />
+      </nut-swiper-item>
+    </nut-swiper>
 
-      <div class="active-box">
-        <div class="active-item" @click="showDailyCheck()">
-          <img src="@/assets/images/act_coins.png" width="47" />
-          <span>Get Coins</span>
-        </div>
-        <div class="active-item" @click="goPath('/spin')">
-          <img src="@/assets/images/act_spin.png" width="47" />
-          <span>Coins Spin</span>
-        </div>
-        <div class="active-item" @click="goPath('/invite')">
-          <img src="@/assets/images/act_cash.png" width="47" />
-          <span>Get Cash</span>
-        </div>
-        <div class="active-item" @click="changeDown(1)">
-          <img src="@/assets/images/act_down.png" width="47" />
-          <span>Download</span>
-        </div>
+    <div class="active-box">
+      <div class="active-item" @click="showDailyCheck()">
+        <img src="@/assets/images/act_coins.png" width="47" />
+        <span>Get Coins</span>
       </div>
-
-      <nut-noticebar background="#382B63" color="#fff" :text="msg_list">
-        <template #left-icon>
-          <img src="../assets/images/laba.svg" style="width: 12px; height: 12px" />
-        </template>
-      </nut-noticebar>
-
-      <nut-sticky top="55" :container="homeContainer">
-        <div class="custom-content" id="customContent">
-          <div class="custom-tab" id="gameName">
-            <div
-              @click="changeTab(index)"
-              v-for="(item, index) in game_list"
-              :key="index"
-              class="custom-title"
-              :class="active_type === index ? 'active' : ''"
-            >
-              {{ item.name }}
-            </div>
-          </div>
-        </div>
-      </nut-sticky>
-
-      <div class="game-content" v-for="(item, index) in game_list" :key="index">
-        <div class="title" :id="'game' + index">
-          <div class="name">
-            <span>{{ item.name }}</span
-            >GAME
-          </div>
-          <div
-            class="more"
-            v-if="item.list.length < item.total"
-            @click="getMore(index, item.param, item.total)"
-          >
-            <span>View All</span>
-            <div class="more-count">{{ item.total }}</div>
-          </div>
-        </div>
-        <div class="game-container">
-          <imgCard v-for="(items, indexs) in item.list" :key="indexs" :cardInfo="items" />
-        </div>
+      <div class="active-item" @click="goPath('/spin')">
+        <img src="@/assets/images/act_spin.png" width="47" />
+        <span>Coins Spin</span>
       </div>
-
-      <pageFooter />
-
-      <div
-        class="first-deposit-tip"
-        @click="showFisrtDeposit()"
-        v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
-      >
-        <div class="label-box">
-          <div class="label">First Deposit Gifts</div>
-          <div class="label" style="font-weight: bold">
-            Up To ₵ <span>550 Gifts</span>
-          </div>
-        </div>
-        <div class="first-btn">
-          <span>GO</span>
-          <RectRight color="#fff" width="12" height="12" />
-        </div>
+      <div class="active-item" @click="goPath('/invite')">
+        <img src="@/assets/images/act_cash.png" width="47" />
+        <span>Get Cash</span>
       </div>
-      <img
-        v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
-        :src="img_url + 'invite/img_lihe.png'"
-        class="gift-img"
-      />
+      <div class="active-item" @click="changeDown(1)">
+        <img src="@/assets/images/act_down.png" width="47" />
+        <span>Download</span>
+      </div>
     </div>
 
+    <nut-noticebar background="#382B63" color="#fff" :text="msg_list">
+      <template #left-icon>
+        <img src="../assets/images/laba.svg" style="width: 12px; height: 12px" />
+      </template>
+    </nut-noticebar>
+
+    <nut-sticky top="55" :container="homeContainer">
+      <div class="custom-content" id="customContent">
+        <div class="custom-tab" id="gameName">
+          <div
+            @click="changeTab(index)"
+            v-for="(item, index) in game_list"
+            :key="index"
+            class="custom-title"
+            :class="active_type === index ? 'active' : ''"
+          >
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+    </nut-sticky>
+
+    <div class="game-content" v-for="(item, index) in game_list" :key="index">
+      <div class="title" :id="'game' + index">
+        <div class="name">
+          <span>{{ item.name }}</span
+          >GAME
+        </div>
+        <div
+          class="more"
+          v-if="item.list.length < item.total"
+          @click="getMore(index, item.param, item.total)"
+        >
+          <span>View All</span>
+          <div class="more-count">{{ item.total }}</div>
+        </div>
+      </div>
+      <div class="game-container">
+        <imgCard v-for="(items, indexs) in item.list" :key="indexs" :cardInfo="items" />
+      </div>
+    </div>
+
+    <pageFooter />
+
+    <div
+      class="first-deposit-tip"
+      @click="showFisrtDeposit()"
+      v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
+    >
+      <div class="label-box">
+        <div class="label">First Deposit Gifts</div>
+        <div class="label" style="font-weight: bold">Up To ₵ <span>550 Gifts</span></div>
+      </div>
+      <div class="first-btn">
+        <span>GO</span>
+        <RectRight color="#fff" width="12" height="12" />
+      </div>
+    </div>
+    <img
+      v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
+      :src="img_url + 'invite/img_lihe.png'"
+      class="gift-img"
+    />
+  </div>
 
   <nut-popup v-model:visible="down_visible" position="bottom" round>
     <div class="down-box" v-if="divice == 'android'">
@@ -159,7 +155,7 @@ import { useStore } from "vuex";
 import { getGameList } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
-let { state, commit } = useStore();
+let { state, commit, dispatch } = useStore();
 const homeContainer = ref(null);
 const promotion_list = computed(() => {
   return state.promotion_list;
@@ -228,10 +224,6 @@ const changeTab = (index) => {
   active_type.value = index;
   let selector = "game" + index;
 
-  // window.scrollTo({
-  //   top: 200,
-  //   behavior: "smooth",
-  // });
   document.getElementById(selector).scrollIntoView({
     behavior: "smooth",
     block: "center",
@@ -259,6 +251,13 @@ onMounted(() => {
     divice.value = "ios";
   } else if (isAndroid) {
     divice.value = "android";
+  }
+});
+
+window.addEventListener("pageshow", function (event) {
+  if (event.persisted) {
+    commit("set_loading_modal", false);
+    if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
   }
 });
 </script>
@@ -412,11 +411,11 @@ onMounted(() => {
 }
 .home {
   width: 100%;
-  height: calc(100vh - 55px - env(safe-area-inset-bottom) - env(safe-area-inset-top));
+  height: calc(100vh - 110px - env(safe-area-inset-bottom) - env(safe-area-inset-top));
   overflow-y: auto;
   box-sizing: border-box;
-  padding: 55px 10px 0 10px;
-  background: linear-gradient(35deg, #161326, #241E44);
+  padding: calc(55px + env(safe-area-inset-top)) 10px 55px 10px;
+  background: linear-gradient(35deg, #161326, #241e44);
   .game-content {
     width: 100%;
     .title {

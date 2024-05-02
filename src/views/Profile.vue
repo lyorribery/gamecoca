@@ -165,7 +165,7 @@ onActivated(() => {
 .profile {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(70px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(70px + env(safe-area-inset-top)) 15px 10px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;

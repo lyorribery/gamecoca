@@ -72,7 +72,7 @@ const goPath = (data) => {
 .promotion {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(55px + env(safe-area-inset-top)) 15px 10px 15px;
   .item {
     width: 100%;
     border-radius: 8px;

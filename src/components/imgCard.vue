@@ -51,10 +51,10 @@
 
 <script>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { startGame } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
+
 export default {
   name: "imgCard",
   props: {
@@ -69,7 +69,6 @@ export default {
   },
   setup(props, ctx) {
     const img_url = apiconfig.fileURL;
-    const router = useRouter();
     const { state, commit } = useStore();
     const is_req = ref(false);
     const cardWidth =
@@ -99,7 +98,7 @@ export default {
       if (res.code == 2002) {
         is_req.value = false;
         commit("set_loading_modal", false);
-        ctx.commit("set_user_info", {});
+        commit("set_user_info", {});
         localStorage.removeItem("token");
         commit("set_tip_info", "You have not logged in yet,please login.");
         commit("set_tip_type", 1);
@@ -108,7 +107,6 @@ export default {
       }
       if (res.code == 200) {
         location.href = res.data.url;
-        commit("set_loading_modal", false);
       } else {
         is_req.value = false;
         commit("set_loading_modal", false);

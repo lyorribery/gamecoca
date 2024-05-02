@@ -82,7 +82,7 @@ const goBack = () => {
     .content {
       width: 100%;
       border-radius: 16.3px;
-      border: 0.6px solid #382b63;
+      border: 0.8px solid #29213d;
       overflow: hidden;
       .send-row {
         width: 100%;
