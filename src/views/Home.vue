@@ -1,5 +1,9 @@
 <template>
-  <div class="main-header" id="mainHeader">
+  <div
+    class="main-header"
+    id="mainHeader"
+    :style="{ background: page_num > 0 ? '#241e44' : '' }"
+  >
     <img src="@/assets/images/logo.svg" width="130" />
     <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
       <div class="log-btn" @click="goPermission('/login')">LOGIN</div>
@@ -10,7 +14,7 @@
       <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
     </div>
   </div>
-  <div class="home" ref="homeContainer" @scroll="scroll">
+  <div class="home">
     <nut-swiper
       :auto-play="2500"
       pagination-visible
@@ -53,21 +57,23 @@
       </template>
     </nut-noticebar>
 
-    <nut-sticky top="55" :container="homeContainer">
-      <div class="custom-content" id="customContent">
-        <div class="custom-tab" id="gameName">
-          <div
-            @click="changeTab(index)"
-            v-for="(item, index) in game_list"
-            :key="index"
-            class="custom-title"
-            :class="active_type === index ? 'active' : ''"
-          >
-            {{ item.name }}
-          </div>
+    <div
+      class="custom-content"
+      :class="page_num >= 220 ? 'sticky-type' : ''"
+      id="customContent"
+    >
+      <div class="custom-tab" id="gameName">
+        <div
+          @click="changeTab(index)"
+          v-for="(item, index) in game_list"
+          :key="index"
+          class="custom-title"
+          :class="active_type === index ? 'active' : ''"
+        >
+          {{ item.name }}
         </div>
       </div>
-    </nut-sticky>
+    </div>
 
     <div class="game-content" v-for="(item, index) in game_list" :key="index">
       <div class="title" :id="'game' + index">
@@ -105,6 +111,7 @@
         <RectRight color="#fff" width="12" height="12" />
       </div>
     </div>
+
     <img
       v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
       :src="img_url + 'invite/img_lihe.png'"
@@ -156,7 +163,7 @@ import { getGameList } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
 const img_url = apiconfig.fileURL;
 let { state, commit, dispatch } = useStore();
-const homeContainer = ref(null);
+
 const promotion_list = computed(() => {
   return state.promotion_list;
 });
@@ -206,15 +213,7 @@ const getMore = async (index, param, total) => {
   game_loading.value = false;
 };
 const active_type = ref(0);
-const scroll = (e) => {
-  if (e.target.scrollTop > 0) {
-    document.getElementById("mainHeader").style.backgroundColor = "#241E44";
-    document.getElementById("customContent").style.backgroundColor = "#241E44";
-  } else {
-    document.getElementById("mainHeader").style.backgroundColor = "transparent";
-    document.getElementById("customContent").style.backgroundColor = "transparent";
-  }
-};
+
 const changeTab = (index) => {
   if (index > 2) {
     document.getElementById("gameName").scrollLeft = 80 * index;
@@ -222,11 +221,18 @@ const changeTab = (index) => {
     document.getElementById("gameName").scrollLeft = 0;
   }
   active_type.value = index;
-  let selector = "game" + index;
-
-  document.getElementById(selector).scrollIntoView({
+  let top_num = 0;
+  if (index != 0) {
+    let selector = "game" + index;
+    if (page_num.value >= 220) {
+      top_num = document.getElementById(selector).offsetTop - 100;
+    } else {
+      top_num = document.getElementById(selector).offsetTop - 140;
+    }
+  }
+  window.scrollTo({
+    top: top_num,
     behavior: "smooth",
-    block: "center",
   });
 };
 
@@ -254,6 +260,12 @@ onMounted(() => {
   }
 });
 
+const page_num = ref(0);
+
+window.addEventListener("scroll", () => {
+  page_num.value = document.documentElement.scrollTop || document.body.scrollTop || 0;
+});
+
 window.addEventListener("pageshow", function (event) {
   if (event.persisted) {
     commit("set_loading_modal", false);
@@ -263,6 +275,13 @@ window.addEventListener("pageshow", function (event) {
 </script>
 
 <style lang="scss" scoped>
+.sticky-type {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 55px);
+  left: 0;
+  z-index: 2;
+  background: #241e44 !important;
+}
 .down-box {
   width: 100%;
   box-sizing: border-box;
@@ -411,10 +430,8 @@ window.addEventListener("pageshow", function (event) {
 }
 .home {
   width: 100%;
-  height: calc(100vh - 110px - env(safe-area-inset-bottom) - env(safe-area-inset-top));
-  overflow-y: auto;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 10px 55px 10px;
+  padding: calc(55px + env(safe-area-inset-top)) 10px 10px 10px;
   background: linear-gradient(35deg, #161326, #241e44);
   .game-content {
     width: 100%;
@@ -470,7 +487,7 @@ window.addEventListener("pageshow", function (event) {
     justify-content: flex-start;
     align-items: center;
     overflow-x: hidden;
-    background-color: transparent;
+    background: transparent;
   }
   .custom-tab {
     height: 45px;

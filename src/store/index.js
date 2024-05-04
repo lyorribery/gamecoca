@@ -34,7 +34,206 @@ export default createStore({
     daily_visible: false,
     fisrt_deposit_visilbe: false,
     user_info: {},
-    game_list: [],
+    game_list: [
+      // {
+      //   name: "For you",
+      //   param: {
+      //     searchType: 2
+      //   },
+      //   total: 6,
+      //   list: [
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: "Popular",
+      //   param: {
+      //     searchType: 2
+      //   },
+      //   total: 6,
+      //   list: [
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: "Slots",
+      //   param: {
+      //     searchType: 2
+      //   },
+      //   total: 6,
+      //   list: [
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: "Live",
+      //   param: {
+      //     searchType: 2
+      //   },
+      //   total: 6,
+      //   list: [
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: "Fish",
+      //   param: {
+      //     searchType: 2
+      //   },
+      //   total: 6,
+      //   list: [
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: "Poker",
+      //   param: {
+      //     searchType: 2
+      //   },
+      //   total: 6,
+      //   list: [
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     },
+      //     {
+      //       count: 1,
+      //       icon: '123'
+      //     }
+      //   ]
+      // },
+    ],
     tip_visible: false,
     tip_type: 1,
     tip_info: 'You have not logged in yet,please login.',

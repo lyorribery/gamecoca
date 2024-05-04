@@ -7,7 +7,7 @@ const router = createRouter({
       path: '/',
       redirect: '/home',
       meta: {
-        keepAlive: true
+        keepAlive: false
       }
     },
     {
@@ -15,7 +15,7 @@ const router = createRouter({
       name: 'main',
       component: () => import('@/views/Main.vue'),
       meta: {
-        keepAlive: true
+        keepAlive: false
       },
       children: [
         {
@@ -23,7 +23,7 @@ const router = createRouter({
           name: 'home',
           component: () => import('@/views/Home.vue'),
           meta: {
-            keepAlive: true,
+            keepAlive: false,
             auth: false
           }
         },
