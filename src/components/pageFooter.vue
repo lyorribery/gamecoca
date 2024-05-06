@@ -29,14 +29,13 @@
       <div class="contact-item">
         <span>Follow us on:</span>
         <img src="../assets/images/icon_facebook.svg" width="22" />
-        <img src="../assets/images/icon_ins.svg" width="22" />
       </div>
     </div>
 
     <div class="contact-box">
       <div class="contact-item-email">
         <img src="../assets/images/icon_email.svg" width="22" />
-        <span>kenyagmservice@gmail.com</span>
+        <span>gamecoca88@gmail.com</span>
       </div>
     </div>
 
@@ -49,20 +48,10 @@
       </div>
     </div>
 
-    <div class="des" style="color: #fff">
-      This product is intended for use by those 18 or old and is for amusement purposes
-      only.
-    </div>
-
-    <div class="des">
-      Practice or success at social casino gaming does not imply futu success at real
-      money gambling and gaming
-    </div>
-
     <div class="des" style="font-weight: bold; margin: 10px; color: #fff">LICENCE</div>
 
     <div class="des" style="color: #fff">
-      GOLDEN HONEY BADGER TECHNOLOGY LTD ,the proprietor and operator of this website is
+      GAMECOCA ,the proprietor and operator of this website is
       licensed by Gaming Coming Commission of Ghana with register No.GCRG23P1036T
     </div>
 

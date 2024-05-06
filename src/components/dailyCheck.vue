@@ -151,7 +151,7 @@ const checkIn = () => {
       commit("set_tip_type", 6);
       commit("set_tip_modal", true);
     } else if (res.code == 2002) {
-      ctx.commit("set_user_info", {});
+      commit("set_user_info", {});
       localStorage.removeItem("token");
       commit("set_tip_info", "You have not logged in yet,please login.");
       commit("set_tip_type", 1);

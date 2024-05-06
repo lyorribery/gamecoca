@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import { onMounted, onActivated } from "vue";
+import { onMounted } from "vue";
 import { useStore } from "vuex";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import tipModal from "@/components/tipModal.vue";
 import loading from "@/components/loading.vue";
 import { exit } from "@/apis/apis";
@@ -24,10 +24,9 @@ export default {
     const router = useRouter();
     let { commit, dispatch } = useStore();
     // const isMobile = () => {
-    //   const flag = navigator.userAgent.match(
-    //     /(phone|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows phone)/i
+    //   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    //     navigator.userAgent
     //   );
-    //   return flag;
     // };
     const modalFunc = (obj) => {
       switch (obj) {

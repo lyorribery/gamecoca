@@ -145,6 +145,15 @@ const router = createRouter({
         keepAlive: false,
         auth: false
       }
+    },
+    {
+      path: '/pay',
+      name: 'pay',
+      component: () => import('@/views/Pay.vue'),
+      meta: {
+        keepAlive: false,
+        auth: false
+      }
     }
   ]
 })

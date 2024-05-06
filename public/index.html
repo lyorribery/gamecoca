@@ -10,6 +10,21 @@
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <!-- Chrome, Firefox, Opera and Android Browser -->
+  <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>icon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="<%= BASE_URL %>icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>icon.png">
+
+  <!-- iOS and Android -->
+  <link rel="shortcut icon" href="<%= BASE_URL %>favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="72x72" href="<%= BASE_URL %>icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="<%= BASE_URL %>icon.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="<%= BASE_URL %>icon.png">
+
+  <!-- Windows 8 IE 10+ -->
+  <meta name="msapplication-TileImage" content="<%= BASE_URL %>icon.png">
+  <meta name="msapplication-TileColor" content="#000000">
+
   <meta property="og:title" content="gamecoca.com" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="gamecoca.com" />
@@ -53,7 +68,6 @@
     body {
       margin: 0;
       padding: 0;
-      /* background: linear-gradient(35deg, #161326, #241E44); */
       background-color: #161326;
       font-weight: 400;
       font-family: Arial;
@@ -61,7 +75,6 @@
     }
 
     .pre-load-box {
-      /* background: linear-gradient(35deg, #161326, #241E44); */
       background-color: #161326;
       width: 100%;
       height: 100vh;

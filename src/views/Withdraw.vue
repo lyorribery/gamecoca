@@ -35,7 +35,35 @@
       </div>
     </div>
 
-    <div class="btn">Confirm</div>
+    <div class="btn" @click="submit">
+      <svg
+        v-if="is_loading"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="25px"
+        height="25px"
+        viewBox="0 0 50 50"
+        style="enable-background: new 0 0 50 50"
+        xml:space="preserve"
+      >
+        <path
+          fill="#FFFFFF"
+          d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+          transform="rotate(275.098 25 25)"
+        >
+          <animateTransform
+            attributeType="xml"
+            attributeName="transform"
+            type="rotate"
+            from="0 25 25"
+            to="360 25 25"
+            dur="0.6s"
+            repeatCount="indefinite"
+          ></animateTransform>
+        </path>
+      </svg>
+      <span v-else>Confirm</span>
+    </div>
   </div>
   <nut-popup v-model:visible="channel_visible" position="bottom" round>
     <div class="channel-box">
@@ -62,7 +90,7 @@
           <img :src="item.icon" />
           <span>{{ item.name }}</span>
         </div>
-        <Check v-if="item.isChecked" color="#49BF6A" width="16px" height="16px" />
+        <Check v-if="item.checked" color="#49BF6A" width="16px" height="16px" />
       </div>
     </div>
   </nut-popup>
@@ -73,14 +101,68 @@ import { ref, computed } from "vue";
 import { RectLeft, RectRight, Close, Check } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import { withdraw } from "@/apis/apis";
 const router = useRouter();
-let { state } = useStore();
+let { state, commit } = useStore();
 const max_amount = computed(() => {
   return state.user_info.gold / 100;
 });
+const is_loading = ref(false);
+const submit = () => {
+  if (!localStorage.getItem("token")) {
+    commit("set_tip_info", "You have not logged in yet,please login.");
+    commit("set_tip_type", 1);
+    commit("set_tip_modal", true);
+    return;
+  }
+  if (
+    !amount_val.value ||
+    Number(amount_val.value) < state.global_config.minWithdraw / 100
+  ) {
+    commit("set_tip_info", "The minimum withdrawal amount is ₵20.00");
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+    return;
+  }
+  let chanel_name = "";
+  for (let i in channel_list.value) {
+    if (channel_list.value[i].checked) {
+      chanel_name = channel_list.value[i].name;
+      break;
+    }
+  }
+  if (is_loading.value) return;
+  is_loading.value = true;
+  withdraw
+    .post("", {
+      channel: chanel_name,
+      amount: Number((Number(amount_val.value) * 100).toFixed(0)),
+    })
+    .then((res) => {
+      is_loading.value = false;
+      if (res.code == 200) {
+        router.push({
+          path: "/pay",
+          query: {
+            type: 2,
+          },
+        });
+      } else if (res.code == 2002) {
+        commit("set_user_info", {});
+        localStorage.removeItem("token");
+        commit("set_tip_info", "You have not logged in yet,please login.");
+        commit("set_tip_type", 1);
+        commit("set_tip_modal", true);
+      } else {
+        commit("set_tip_info", res.msg);
+        commit("set_tip_type", 3);
+        commit("set_tip_modal", true);
+      }
+    });
+};
 const amount_val = ref("");
 const channel_visible = ref(false);
-const cur_channel = ref("MoMo");
+const cur_channel = ref("vodafone-gh");
 const quick = () => {
   amount_val.value = max_amount.value.toString();
 };
@@ -90,29 +172,32 @@ const showChannels = () => {
 const chooseChannel = (index) => {
   for (let i in channel_list.value) {
     if (i == index) {
-      channel_list.value[i].isChecked = true;
+      channel_list.value[i].checked = true;
       cur_channel.value = channel_list.value[i].name;
     } else {
-      channel_list.value[i].isChecked = false;
+      channel_list.value[i].checked = false;
     }
   }
   channel_visible.value = false;
 };
 const channel_list = ref([
   {
-    name: "MoMo",
-    isChecked: true,
+    name: "vodafone-gh",
     icon: require("../assets/images/img_zf_1.svg"),
+    status: "",
+    checked: true,
   },
   {
-    name: "Vodafone",
-    isChecked: false,
+    name: "tigo-gh",
     icon: require("../assets/images/img_zf_2.svg"),
+    status: "",
+    checked: false,
   },
   {
-    name: "AirtelTigo",
-    isChecked: false,
+    name: "MTN-gh",
     icon: require("../assets/images/img_zf_3.svg"),
+    status: "",
+    checked: false,
   },
 ]);
 const goBack = () => {
@@ -184,7 +269,7 @@ const goRecords = () => {
     bottom: calc(env(safe-area-inset-bottom) + 30px);
     left: 30px;
     height: 45.7px;
-    background: linear-gradient(-90deg, #9343C4, #614AE6);
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
     border-radius: 22.7px;
     display: flex;
     justify-content: center;

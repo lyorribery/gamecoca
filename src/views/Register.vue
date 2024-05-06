@@ -15,12 +15,26 @@
             { validator: customValidatorPhone },
           ]"
         >
-          <nut-input
-            v-model="registerForm.identifier"
-            placeholder="Enter phone number"
-            type="number"
-            @blur="customBlurValidate('identifier')"
-          />
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <span
+              style="color: #fff; font-size: 15px; font-weight: bold; padding-right: 10px"
+              >+233</span
+            >
+            <nut-input
+              v-model="registerForm.identifier"
+              placeholder="Enter phone number"
+              type="number"
+              maxLength="9"
+              @blur="customBlurValidate('identifier')"
+            />
+          </div>
         </nut-form-item>
         <nut-form-item
           prop="authCode"
@@ -152,13 +166,13 @@ watch(
 );
 const getVerify = () => {
   if (code_second.value != 60) return;
-  if (!registerForm.value.identifier) {
+  if (!registerForm.value.identifier || registerForm.value.identifier.length != 9) {
     commit("set_tip_info", "Please Enter your phone number.");
     commit("set_tip_type", 3);
     commit("set_tip_modal", true);
   } else {
     getVerifyCode
-      .post("", { loginType: "phone", identifier: registerForm.value.identifier })
+      .post("", { loginType: "phone", identifier: "233" + registerForm.value.identifier })
       .then((res) => {
         if (res.code == 200) {
           commit(
@@ -200,9 +214,10 @@ const submit = () => {
         const param = localStorage.getItem("i_code")
           ? {
               ...registerForm.value,
+              identifier: "233" + registerForm.value.identifier,
               invateCode: Number(localStorage.getItem("i_code")),
             }
-          : registerForm.value;
+          : { ...registerForm.value, identifier: "233" + registerForm.value.identifier };
         register.post("", param).then((res) => {
           if (res.code == 200) {
             commit("set_tip_info", "Registration successful, please log in.");
@@ -225,7 +240,7 @@ const customBlurValidate = (prop) => {
   registerRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val)) {
+  if (/^\d+$/.test(val) && val.length == 9) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");

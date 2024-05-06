@@ -15,12 +15,26 @@
             { validator: customValidatorPhone },
           ]"
         >
-          <nut-input
-            v-model="changepassForm.identifier"
-            placeholder="Enter phone number"
-            type="number"
-            @blur="customBlurValidate('identifier')"
-          />
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <span
+              style="color: #fff; font-size: 15px; font-weight: bold; padding-right: 10px"
+              >+233</span
+            >
+            <nut-input
+              v-model="changepassForm.identifier"
+              placeholder="Enter phone number"
+              type="number"
+              maxLength="9"
+              @blur="customBlurValidate('identifier')"
+            />
+          </div>
         </nut-form-item>
         <nut-form-item
           prop="authCode"
@@ -107,7 +121,6 @@ import { useRouter } from "vue-router";
 import { _validpassword } from "@/utils/utils";
 import { changePass, getVerifyCode } from "@/apis/apis";
 import { useStore } from "vuex";
-import { showNotify } from "@nutui/nutui";
 
 let timer = null;
 let { commit } = useStore();
@@ -139,23 +152,24 @@ watch(
 );
 const getVerify = () => {
   if (code_second.value != 60) return;
-  if (!changepassForm.value.identifier) {
-    showNotify.text("Please Enter your phone number", {
-      color: "#fff",
-      background: "#CCC3E2",
-    });
+  if (!changepassForm.value.identifier || changepassForm.value.identifier.length != 9) {
+    commit("set_tip_info", "Please Enter your phone number.");
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
   } else {
     getVerifyCode
-      .post("", { loginType: "phone", identifier: changepassForm.value.identifier })
+      .post("", {
+        loginType: "phone",
+        identifier: "233" + changepassForm.value.identifier,
+      })
       .then((res) => {
         if (res.code == 200) {
-          showNotify.text(
-            "The SMS verification code has been sent, please check it carefully.",
-            {
-              color: "#fff",
-              background: "#CCC3E2",
-            }
+          commit(
+            "set_tip_info",
+            "The SMS verification code has been sent, please check it carefully."
           );
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
           timer = setInterval(() => {
             if (code_second.value > 0) {
               code_second.value -= 1;
@@ -178,20 +192,25 @@ const submit = () => {
     if (valid) {
       if (is_loading.value) return;
       is_loading.value = true;
-      changePass.post("", changepassForm.value).then((res) => {
-        if (res.code == 200) {
-          localStorage.removeItem("token");
-          commit("set_user_info", {});
-          commit("set_tip_info", "Password has been changed.");
-          commit("set_tip_type", 1);
-          commit("set_tip_modal", true);
-        } else {
-          commit("set_tip_info", res.msg);
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        }
-        is_loading.value = false;
-      });
+      changePass
+        .post("", {
+          ...changepassForm.value,
+          identifier: "233" + changepassForm.value.identifier,
+        })
+        .then((res) => {
+          if (res.code == 200) {
+            localStorage.removeItem("token");
+            commit("set_user_info", {});
+            commit("set_tip_info", "Password has been changed.");
+            commit("set_tip_type", 1);
+            commit("set_tip_modal", true);
+          } else {
+            commit("set_tip_info", res.msg);
+            commit("set_tip_type", 3);
+            commit("set_tip_modal", true);
+          }
+          is_loading.value = false;
+        });
     } else {
       console.warn("error:", errors);
     }
@@ -201,7 +220,7 @@ const customBlurValidate = (prop) => {
   changepassRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val)) {
+  if (/^\d+$/.test(val) && val.length == 9) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");

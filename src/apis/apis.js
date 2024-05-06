@@ -34,6 +34,14 @@ export const signCheck = new baseApiServer("/activity/v1/sign")
 
 export const spinAct = new baseApiServer("/activity/v1/spin")
 
+export const deposit = new baseApiServer("/account/v1/recharge")
+
+export const depositRecord = new baseApiServer("/account/v1/recharge/record")
+
+export const withdraw = new baseApiServer("//account/v1/withdraw")
+
+export const withdrawRecord = new baseApiServer("/account/v1/withdraw/record")
+
 
 
 

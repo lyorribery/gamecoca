@@ -15,12 +15,27 @@
             { validator: customValidatorPhone },
           ]"
         >
-          <nut-input
-            v-model="loginForm.identifier"
-            placeholder="Enter phone number"
-            type="number"
-            @blur="customBlurValidate('identifier')"
-          />
+          <div
+            style="
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <span
+              style="color: #fff; font-size: 15px; font-weight: bold; padding-right: 10px"
+              >+233</span
+            >
+            <nut-input
+              style="flex: 1"
+              v-model="loginForm.identifier"
+              placeholder="Enter phone number"
+              type="number"
+              maxLength="9"
+              @blur="customBlurValidate('identifier')"
+            />
+          </div>
         </nut-form-item>
         <nut-form-item
           prop="certificate"
@@ -33,6 +48,7 @@
             v-model="loginForm.certificate"
             placeholder="Enter password"
             type="password"
+            maxLength="16"
             @blur="customBlurValidate('certificate')"
           />
         </nut-form-item>
@@ -108,20 +124,22 @@ const submit = () => {
     if (valid) {
       if (is_loading.value) return;
       is_loading.value = true;
-      login.post("", loginForm.value).then((res) => {
-        if (res.code == 200) {
-          localStorage.setItem("token", res.data.accessToken);
-          dispatch("GET_USER_INFO");
-          router.push({
-            path: "/home",
-          });
-        } else {
-          commit("set_tip_info", res.msg);
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        }
-        is_loading.value = false;
-      });
+      login
+        .post("", { ...loginForm.value, identifier: "233" + loginForm.value.identifier })
+        .then((res) => {
+          if (res.code == 200) {
+            localStorage.setItem("token", res.data.accessToken);
+            dispatch("GET_USER_INFO");
+            router.push({
+              path: "/home",
+            });
+          } else {
+            commit("set_tip_info", res.msg);
+            commit("set_tip_type", 3);
+            commit("set_tip_modal", true);
+          }
+          is_loading.value = false;
+        });
     } else {
       console.warn("error:", errors);
     }
@@ -131,7 +149,7 @@ const customBlurValidate = (prop) => {
   loginRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val)) {
+  if (/^\d+$/.test(val) && val.length == 9) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");

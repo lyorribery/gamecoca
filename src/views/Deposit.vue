@@ -13,7 +13,7 @@
         :class="item.checked ? 'in-checked' : ''"
         @click="chooseQuick(index)"
       >
-        <div class="hot" v-if="item.isRecommend==2">Hot</div>
+        <div class="hot" v-if="item.isRecommend == 2">Hot</div>
         <div class="r-amount">₵ {{ item.amount }}</div>
         <div class="p-amount">Get ₵{{ Number(item.amount) + Number(item.gift) }}</div>
       </div>
@@ -55,7 +55,35 @@
         </div>
       </div>
     </div>
-    <div class="btn">Pay ₵{{ amount_val ? amount_val : "--" }}</div>
+    <div class="btn" @click="submit">
+      <svg
+        v-if="is_loading"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="25px"
+        height="25px"
+        viewBox="0 0 50 50"
+        style="enable-background: new 0 0 50 50"
+        xml:space="preserve"
+      >
+        <path
+          fill="#FFFFFF"
+          d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+          transform="rotate(275.098 25 25)"
+        >
+          <animateTransform
+            attributeType="xml"
+            attributeName="transform"
+            type="rotate"
+            from="0 25 25"
+            to="360 25 25"
+            dur="0.6s"
+            repeatCount="indefinite"
+          ></animateTransform>
+        </path>
+      </svg>
+      <span v-else> Pay ₵{{ amount_val ? amount_val : "--" }} </span>
+    </div>
     <div class="des">
       You can only use your register number to top up your wallet,if not correct please
       register with your mobile money number again.
@@ -85,16 +113,17 @@ import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { Close, Issue } from "@nutui/icons-vue";
-import apiconfig from "@/utils/apiConfig";
-const img_url = apiconfig.fileURL;
-let { state } = useStore();
+import { deposit } from "@/apis/apis";
+const { state, commit } = useStore();
 const amount_val = ref("19.6");
+const amount_id = ref(0);
 const router = useRouter();
 watch(
   () => state.deposit_config,
   (newValue) => {
     quickList.value = newValue;
     amount_val.value = newValue[2].amount;
+    amount_id.value = newValue[2].id;
   }
 );
 const quickList = ref(state.deposit_config);
@@ -111,6 +140,7 @@ const chooseQuick = (index) => {
     if (index == i) {
       quickList.value[i].checked = true;
       amount_val.value = quickList.value[i].amount;
+      amount_id.value = quickList.value[i].id;
     } else {
       quickList.value[i].checked = false;
     }
@@ -127,27 +157,90 @@ const chooseChanel = (index) => {
 };
 const clearVal = () => {
   amount_val.value = "";
+  amount_id.value = 0;
 };
 const chanelList = ref([
   {
-    name: "MoMo",
+    name: "vodafone-gh",
     icon: require("../assets/images/img_zf_1.svg"),
     status: "",
     checked: true,
   },
   {
-    name: "Vodafone",
+    name: "tigo-gh",
     icon: require("../assets/images/img_zf_2.svg"),
     status: "",
     checked: false,
   },
   {
-    name: "AirtelTigo",
+    name: "MTN-gh",
     icon: require("../assets/images/img_zf_3.svg"),
     status: "",
     checked: false,
   },
 ]);
+const is_loading = ref(false);
+const submit = () => {
+  if (!localStorage.getItem("token")) {
+    commit("set_tip_info", "You have not logged in yet,please login.");
+    commit("set_tip_type", 1);
+    commit("set_tip_modal", true);
+    return;
+  }
+  if (
+    !amount_val.value ||
+    Number(amount_val.value) < state.global_config.minRecharge / 100
+  ) {
+    commit("set_tip_info", "The minimum amount is ₵5.00");
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+    return;
+  }
+  let chanel_name = "";
+  for (let i in chanelList.value) {
+    if (chanelList.value[i].checked) {
+      chanel_name = chanelList.value[i].name;
+      break;
+    }
+  }
+  let flag = false;
+  for (let i in quickList.value) {
+    if (quickList.value[i].amount == amount_val.value) {
+      flag = true;
+      break;
+    }
+  }
+  if (is_loading.value) return;
+  is_loading.value = true;
+  deposit
+    .post("", {
+      channel: chanel_name,
+      amount: Number((Number(amount_val.value) * 100).toFixed(0)),
+      phone: state.user_info.mobile,
+      id: flag ? amount_id.value : 0,
+    })
+    .then((res) => {
+      is_loading.value = false;
+      if (res.code == 200) {
+        router.push({
+          path: "/pay",
+          query: {
+            type: 1,
+          },
+        });
+      } else if (res.code == 2002) {
+        commit("set_user_info", {});
+        localStorage.removeItem("token");
+        commit("set_tip_info", "You have not logged in yet,please login.");
+        commit("set_tip_type", 1);
+        commit("set_tip_modal", true);
+      } else {
+        commit("set_tip_info", res.msg);
+        commit("set_tip_type", 3);
+        commit("set_tip_modal", true);
+      }
+    });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -195,7 +288,7 @@ const chanelList = ref([
     width: calc(100% - 30px);
     margin: 25px 0 0 15px;
     height: 42px;
-    background: linear-gradient(-90deg, #9343C4, #614AE6);
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
     border-radius: 22px;
     display: flex;
     justify-content: center;

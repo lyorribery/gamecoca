@@ -33,18 +33,18 @@
             :key="indexs"
           >
             <div class="top">
-              <span class="time">{{ items.time }}</span>
+              <span class="time">{{ items.updatedAt }}</span>
               <span
                 class="status"
                 :class="
-                  items.status == 1
+                  items.status == 2
                     ? 'status-1'
-                    : items.status == 2
+                    : items.status == 1
                     ? 'status-2'
                     : 'status-3'
                 "
                 >{{
-                  items.status == 1 ? "Done" : items.status == 2 ? "Forward" : "Failed"
+                  items.status == 2 ? "Done" : items.status == 1 ? "Forward" : "Failed"
                 }}</span
               >
             </div>
@@ -69,31 +69,32 @@
               </div>
               <div class="right">
                 <div class="r-row">
-                  <span class="m-color">{{ items.chanel }}</span>
-                  <span class="m-color">₵{{ items.amount.toFixed(2) }}</span>
+                  <span class="m-color">{{ items.channel }}</span>
+                  <span class="m-color">₵{{ (items.amount / 100).toFixed(2) }}</span>
                 </div>
                 <div class="r-row">
-                  <span class="s-color">Order No: {{ items.order }}</span>
-                  <div class="c-btn">Copy</div>
+                  <span class="s-color">Order No: {{ items.orderId }}</span>
+                  <div class="c-btn" @click="copyorder(items.orderId)">Copy</div>
                 </div>
                 <div class="r-row">
-                  <span class="s-color">User ID: {{ items.userid }}</span>
+                  <span class="s-color">User Mobile: {{ items.mobile }}</span>
                 </div>
-                <div class="r-row" v-if="items.gift">
+                <!-- <div class="r-row" v-if="items.gift">
                   <div class="val">(Of funds) arrive:</div>
                   <div class="val">₵{{ (items.amount + items.gift).toFixed(2) }}</div>
                 </div>
                 <div class="r-row" v-if="items.gift">
                   <div class="val">Offers:</div>
                   <div class="val">₵{{ items.gift.toFixed(2) }}</div>
-                </div>
-                <div class="r-row">
+                </div> -->
+                <!-- <div class="r-row">
                   <div class="b-val">Payment:</div>
                   <div class="b-val">₵{{ items.amount.toFixed(2) }}</div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
+          <div class="no-data" v-if="item.content.length == 0">No Data</div>
         </div>
         <div class="records-item" v-if="active == 2">
           <div
@@ -102,18 +103,18 @@
             :key="indexs"
           >
             <div class="top">
-              <span class="time">{{ items.time }}</span>
+              <span class="time">{{ items.updatedAt }}</span>
               <span
                 class="status"
                 :class="
-                  items.status == 1
+                  items.status == 4
                     ? 'status-1'
-                    : items.status == 2
+                    : items.status == 1 || item.status == 2
                     ? 'status-2'
                     : 'status-3'
                 "
                 >{{
-                  items.status == 1 ? "Done" : items.status == 2 ? "Forward" : "Failed"
+                  items.status == 4 ? "Done" : items.status == 2 ? "Forward" : "Failed"
                 }}</span
               >
             </div>
@@ -139,18 +140,19 @@
               <div class="right">
                 <div class="r-row">
                   <span class="m-color">{{ items.chanel }}</span>
-                  <span class="m-color">₵{{ items.amount.toFixed(2) }}</span>
+                  <span class="m-color">₵{{ (items.amount / 100).toFixed(2) }}</span>
                 </div>
                 <div class="r-row">
-                  <span class="s-color">Order No: {{ items.order }}</span>
-                  <div class="c-btn">Copy</div>
+                  <span class="s-color">Order No: {{ items.orderId }}</span>
+                  <div class="c-btn" @click="copyorder(items.orderId)">Copy</div>
                 </div>
                 <div class="r-row">
-                  <span class="s-color">User ID: {{ items.userid }}</span>
+                  <span class="s-color">User Mobile: {{ items.mobile }}</span>
                 </div>
               </div>
             </div>
           </div>
+          <div class="no-data" v-if="item.content.length == 0">No Data</div>
         </div>
       </nut-tab-pane>
     </nut-tabs>
@@ -161,83 +163,79 @@
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
+import { depositRecord, withdrawRecord } from "@/apis/apis";
+import { formatDate } from "@/utils/utils";
+import { useStore } from "vuex";
+const { commit } = useStore();
 const route = useRoute();
 const router = useRouter();
 const active = ref(1);
 onMounted(() => {
   if (route.query.type) active.value = route.query.type;
+  getList();
 });
+const getList = () => {
+  depositRecord.post("", { page: 1, pageSize: 100 }).then((res) => {
+    if (res.list) {
+      res.list.map((item) => {
+        item.updatedAt = formatDate(item.updatedAt * 1000, "-");
+      });
+      r_list.value[0].content = res.list;
+    }
+  });
+  withdrawRecord.post("", { page: 1, pageSize: 100 }).then((res) => {
+    console.log(res.list);
+    if (res.list) {
+      res.list.map((item) => {
+        item.updatedAt = formatDate(item.updatedAt * 1000, "-");
+      });
+      r_list.value[1].content = res.list;
+    }
+  });
+};
 const r_list = ref([
   {
     title: "Deposit Records",
     paneKey: 1,
-    content: [
-      {
-        time: "2024-04-01 23:00:12",
-        status: 1,
-        chanel: "MOMO",
-        order: "2024040123567",
-        userid: "2021239",
-        amount: 500,
-        gift: 5,
-      },
-      {
-        time: "2024-04-01 23:00:12",
-        status: 2,
-        chanel: "MOMO",
-        order: "2024040123567",
-        userid: "2021239",
-        amount: 500,
-        gift: 5,
-      },
-      {
-        time: "2024-04-01 23:00:12",
-        status: 3,
-        chanel: "MOMO",
-        order: "2024040123567",
-        userid: "2021239",
-        amount: 500,
-        gift: 5,
-      },
-    ],
+    content: [],
   },
   {
     title: "Withdrawals Records",
     paneKey: 2,
-    content: [
-      {
-        time: "2024-04-01 23:00:12",
-        status: 1,
-        chanel: "MOMO",
-        order: "2024040123567",
-        userid: "2021239",
-        amount: 500,
-      },
-      {
-        time: "2024-04-01 23:00:12",
-        status: 2,
-        chanel: "MOMO",
-        order: "2024040123567",
-        userid: "2021239",
-        amount: 500,
-      },
-      {
-        time: "2024-04-01 23:00:12",
-        status: 3,
-        chanel: "MOMO",
-        order: "2024040123567",
-        userid: "2021239",
-        amount: 500,
-      },
-    ],
+    content: [],
   },
 ]);
 const goBack = () => {
   router.go(-1);
 };
+const copyorder = (order) => {
+  copyToClipboard(order);
+  commit("set_tip_info", `Order number copied`);
+  commit("set_tip_type", 3);
+  commit("set_tip_modal", true);
+};
+const copyToClipboard = (text) => {
+  var textarea = document.createElement("textarea");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = 0;
+  textarea.value = text;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  document.body.removeChild(textarea);
+};
 </script>
 
 <style lang="scss" scoped>
+.no-data {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px 0;
+  text-align: center;
+  color: #8174ac;
+  font-size: 16px;
+  font-weight: 600;
+}
 .records {
   width: 100%;
   box-sizing: border-box;

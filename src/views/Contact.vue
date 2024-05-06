@@ -23,15 +23,11 @@
     </div>
     <div class="channel-row">
       <img src="@/assets/images/icon_email.svg" width="20" />
-      <span>kenyagmservice@gmail.com</span>
+      <span>gamecoca88@gmail.com</span>
     </div>
     <div class="channel-row">
       <img src="@/assets/images/icon_facebook.svg" width="20" />
-      <span>kenyagmservice@gmail.com</span>
-    </div>
-    <div class="channel-row">
-      <img src="@/assets/images/icon_ins.svg" width="20" />
-      <span>kenyagmservice@gmail.com</span>
+      <span>gamecoca88@gmail.com</span>
     </div>
     <div class="divide-des">Available form 08:00-00:00</div>
     <div class="divide-line"></div>
