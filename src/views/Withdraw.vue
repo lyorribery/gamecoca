@@ -119,7 +119,10 @@ const submit = () => {
     !amount_val.value ||
     Number(amount_val.value) < state.global_config.minWithdraw / 100
   ) {
-    commit("set_tip_info", "The minimum withdrawal amount is ₵20.00");
+    commit(
+        "set_tip_info",
+        `The minimum withdrawal amount is ₵${state.global_config.minWithdraw / 100}`
+      );
     commit("set_tip_type", 3);
     commit("set_tip_modal", true);
     return;
