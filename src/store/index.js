@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import { getUserInfo, getGameList, getMsgList, getDepositConfig, getInviteConfig, getFirstDepositConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
 import apiconfig from '@/utils/apiConfig'
-export default createStore({
+const store = createStore({
   state: () => ({
     promotion_list: [
       {
@@ -294,5 +294,7 @@ export default createStore({
     }
   }
 })
+
+export default store
 
 

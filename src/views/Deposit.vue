@@ -41,7 +41,7 @@
       </div>
       <div class="right">
         <div class="chanel-name" :style="{ color: item.checked ? '#fff' : '' }">
-          {{ item.name }}
+          {{ item.showname }}
         </div>
         <div class="status-des">
           <Issue
@@ -161,18 +161,21 @@ const clearVal = () => {
 };
 const chanelList = ref([
   {
+    showname: "Vodafone",
     name: "vodafone-gh",
     icon: require("../assets/images/vodafone.png"),
     status: "",
     checked: true,
   },
   {
+    showname: "AirtelTigo",
     name: "tigo-gh",
     icon: require("../assets/images/tigo.png"),
     status: "",
     checked: false,
   },
   {
+    showname: "MoMo",
     name: "MTN-gh",
     icon: require("../assets/images/mtn.png"),
     status: "",

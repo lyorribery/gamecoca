@@ -27,11 +27,11 @@
       </div>
       <div class="invite-des">
         <span>Invite Friend</span>
-        <span>Friend bets over 100</span>
-        <span>Get ₵5</span>
+        <span>Friend bets ₵{{state.invite_config.bet}}</span>
+        <span>Get ₵{{state.invite_config.reward}}</span>
       </div>
       <div class="invite-label">
-        There is a limit of <span>₵500.00 Cash</span>, please contact us to increase the
+        There is a limit of <span>₵ {{state.invite_config.max}} Cash</span>, please contact us to increase the
         limitation.
       </div>
       <div class="cur-title">Current Yield</div>
@@ -61,7 +61,7 @@
       not hold any account at GameCoca.
     </div>
     <div class="tip">
-      2. Inviter can get ₵ 5 Cash if the invitee’s betting amount reach ₵ 100.
+      2. Inviter can get ₵ {{state.invite_config.reward}} Cash if the invitee’s betting amount reach ₵ {{state.invite_config.bet}}.
     </div>
     <div class="tip">
       3. GameCoca reserves itself the right to amend, cancel, reclaim or refuse any

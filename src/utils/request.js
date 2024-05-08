@@ -1,5 +1,6 @@
 import axios from "axios"
 import apiConfig from "@/utils/apiConfig"
+import store from "../store/index"
 
 const request = axios.create({
   baseURL: apiConfig.baseURL,
@@ -37,6 +38,13 @@ request.interceptors.response.use(
     }
   },
   (err) => {
+    store.commit("set_loading_modal", false);
+    store.commit("set_user_info", {});
+    localStorage.removeItem("token");
+    store.commit("set_tip_info", "You have not logged in yet,please login.");
+    store.commit("set_tip_type", 1);
+    store.commit("set_tip_modal", true);
+
     return Promise.reject(err)
   }
 );

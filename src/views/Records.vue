@@ -68,7 +68,15 @@
               </div>
               <div class="right">
                 <div class="r-row">
-                  <span class="m-color">{{ items.channel }}</span>
+                  <span class="m-color">{{
+                    items.channel == "vodafone-gh"
+                      ? "Vodafone"
+                      : item.channel == "tigo-gh"
+                      ? "AirtelTigo"
+                      : item.channel == "MTN-gh"
+                      ? "MoMo"
+                      : ""
+                  }}</span>
                   <span class="m-color">₵{{ (items.amount / 100).toFixed(2) }}</span>
                 </div>
                 <div class="r-row">
@@ -159,7 +167,15 @@
               </div>
               <div class="right">
                 <div class="r-row">
-                  <span class="m-color">{{ items.chanel }}</span>
+                  <span class="m-color">{{
+                    items.channel == "vodafone-gh"
+                      ? "Vodafone"
+                      : item.channel == "tigo-gh"
+                      ? "AirtelTigo"
+                      : item.channel == "MTN-gh"
+                      ? "MoMo"
+                      : ""
+                  }}</span>
                   <span class="m-color">₵{{ (items.amount / 100).toFixed(2) }}</span>
                 </div>
                 <div class="r-row">

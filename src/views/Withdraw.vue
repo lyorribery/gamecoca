@@ -88,7 +88,7 @@
       >
         <div>
           <img :src="item.icon" />
-          <span>{{ item.name }}</span>
+          <span>{{ item.showname }}</span>
         </div>
         <Check v-if="item.checked" color="#49BF6A" width="16px" height="16px" />
       </div>
@@ -120,9 +120,9 @@ const submit = () => {
     Number(amount_val.value) < state.global_config.minWithdraw / 100
   ) {
     commit(
-        "set_tip_info",
-        `The minimum withdrawal amount is ₵${state.global_config.minWithdraw / 100}`
-      );
+      "set_tip_info",
+      `The minimum withdrawal amount is ₵${state.global_config.minWithdraw / 100}`
+    );
     commit("set_tip_type", 3);
     commit("set_tip_modal", true);
     return;
@@ -165,7 +165,7 @@ const submit = () => {
 };
 const amount_val = ref("");
 const channel_visible = ref(false);
-const cur_channel = ref("vodafone-gh");
+const cur_channel = ref("Vodafone");
 const quick = () => {
   amount_val.value = max_amount.value.toString();
 };
@@ -176,7 +176,7 @@ const chooseChannel = (index) => {
   for (let i in channel_list.value) {
     if (i == index) {
       channel_list.value[i].checked = true;
-      cur_channel.value = channel_list.value[i].name;
+      cur_channel.value = channel_list.value[i].showname;
     } else {
       channel_list.value[i].checked = false;
     }
@@ -185,18 +185,21 @@ const chooseChannel = (index) => {
 };
 const channel_list = ref([
   {
+    showname: "Vodafone",
     name: "vodafone-gh",
     icon: require("../assets/images/vodafone.png"),
     status: "",
     checked: true,
   },
   {
+    showname: "AirtelTigo",
     name: "tigo-gh",
     icon: require("../assets/images/tigo.png"),
     status: "",
     checked: false,
   },
   {
+    showname: "MoMo",
     name: "MTN-gh",
     icon: require("../assets/images/mtn.png"),
     status: "",
