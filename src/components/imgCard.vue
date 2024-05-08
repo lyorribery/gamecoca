@@ -91,12 +91,17 @@ export default {
       if (is_req.value) return;
       is_req.value = true;
       commit("set_loading_modal", true);
+      if (data.clientUrl) {
+        is_req.value = false
+        location.href = `${data.clientUrl}?t_code=${localStorage.getItem("token")}`;
+        return;
+      }
       const res = await startGame.post("", {
         gameId: data.id,
         platform: "H5",
       });
+      is_req.value = false;
       if (res.code == 2002) {
-        is_req.value = false;
         commit("set_loading_modal", false);
         commit("set_user_info", {});
         localStorage.removeItem("token");
@@ -108,7 +113,6 @@ export default {
       if (res.code == 200) {
         location.href = res.data.url;
       } else {
-        is_req.value = false;
         commit("set_loading_modal", false);
         commit("set_tip_info", res.msg);
         commit("set_tip_type", 10);

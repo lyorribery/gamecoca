@@ -34,206 +34,7 @@ export default createStore({
     daily_visible: false,
     fisrt_deposit_visilbe: false,
     user_info: {},
-    game_list: [
-      // {
-      //   name: "For you",
-      //   param: {
-      //     searchType: 2
-      //   },
-      //   total: 6,
-      //   list: [
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: "Popular",
-      //   param: {
-      //     searchType: 2
-      //   },
-      //   total: 6,
-      //   list: [
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: "Slots",
-      //   param: {
-      //     searchType: 2
-      //   },
-      //   total: 6,
-      //   list: [
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: "Live",
-      //   param: {
-      //     searchType: 2
-      //   },
-      //   total: 6,
-      //   list: [
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: "Fish",
-      //   param: {
-      //     searchType: 2
-      //   },
-      //   total: 6,
-      //   list: [
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     }
-      //   ]
-      // },
-      // {
-      //   name: "Poker",
-      //   param: {
-      //     searchType: 2
-      //   },
-      //   total: 6,
-      //   list: [
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     },
-      //     {
-      //       count: 1,
-      //       icon: '123'
-      //     }
-      //   ]
-      // },
-    ],
+    game_list: [],
     tip_visible: false,
     tip_type: 1,
     tip_info: 'You have not logged in yet,please login.',
@@ -376,28 +177,31 @@ export default createStore({
     async GET_GAME_LIST(ctx) {
       if (ctx.state.game_list.length != 0) return
       ctx.commit("set_loading_modal", true);
-      const res_recommend = await getGameList.get("", { page: 1, pageSize: 6, searchType: 1 })
-      res_recommend.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      })
-      const recommend_obj = {
-        ...res_recommend.data,
-        name: "For You",
-        param: {
-          searchType: 1
-        }
-      }
+
       const res_hot = await getGameList.get("", { page: 1, pageSize: 6, searchType: 2 })
       res_hot.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
       const hot_obj = {
         ...res_hot.data,
-        name: "Popular",
+        name: "Hot",
         param: {
           searchType: 2
         }
       }
+
+      const res_recommend = await getGameList.get("", { page: 1, pageSize: 6, searchType: 1 })
+      res_recommend.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      })
+      const recommend_obj = {
+        ...res_recommend.data,
+        name: "Top",
+        param: {
+          searchType: 1
+        }
+      }
+
       const res_slot = await getGameList.get("", { page: 1, pageSize: 6, gameType: 1 })
       res_slot.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
@@ -409,6 +213,19 @@ export default createStore({
           gameType: 1
         }
       }
+
+      const res_spin = await getGameList.get("", { page: 1, pageSize: 6, gameType: 5 })
+      res_spin.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      })
+      const spin_obj = {
+        ...res_spin.data,
+        name: "Spin",
+        param: {
+          gameType: 5
+        }
+      }
+
       const res_live = await getGameList.get("", { page: 1, pageSize: 6, gameType: 2 })
       res_live.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
@@ -431,29 +248,33 @@ export default createStore({
           gameType: 3
         }
       }
-      const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
-      res_fish.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      })
-      const fish_obj = {
-        ...res_fish.data,
-        name: "Fish",
-        param: {
-          gameType: 4
-        }
-      }
+      // const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
+      // res_fish.data.list.map(item => {
+      //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      // })
+      // const fish_obj = {
+      //   ...res_fish.data,
+      //   name: "Fish",
+      //   param: {
+      //     gameType: 4
+      //   }
+      // }
       const result = [
-        {
-          ...recommend_obj,
-          key: 'recommend'
-        },
         {
           ...hot_obj,
           key: 'hot'
         },
         {
+          ...recommend_obj,
+          key: 'recommend'
+        },
+        {
           ...slot_obj,
           key: 'slot'
+        },
+        {
+          ...spin_obj,
+          key: 'spin'
         },
         {
           ...live_obj,
@@ -463,10 +284,10 @@ export default createStore({
           ...poker_obj,
           key: 'poker'
         },
-        {
-          ...fish_obj,
-          key: 'fish'
-        }
+        // {
+        //   ...fish_obj,
+        //   key: 'fish'
+        // }
       ]
       ctx.commit('set_game_list', result)
       ctx.commit("set_loading_modal", false);

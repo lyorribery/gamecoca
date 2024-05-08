@@ -101,22 +101,22 @@
       class="first-deposit-tip"
       @click="showFisrtDeposit()"
       v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
+      :class="active_fd ? 'gift1-img' : 'gift2-img'"
     >
-      <div class="label-box">
-        <div class="label">First Deposit Gifts</div>
-        <div class="label" style="font-weight: bold">Up To ₵ <span>550 Gifts</span></div>
-      </div>
-      <div class="first-btn">
-        <span>GO</span>
-        <RectRight color="#fff" width="12" height="12" />
+      <div class="f-d-bottom">
+        <div
+          class="rowup"
+          style="transition: transform 0.5s ease 0s"
+          :style="{ transform: active_fd ? 'translateY(0px)' : 'translateY(-100%)' }"
+        >
+          <div class="f-d-label">
+            <div>First Deposit</div>
+            <div>Gifts</div>
+          </div>
+          <div class="f-d-label" style="font-size: 12px">GHS 550</div>
+        </div>
       </div>
     </div>
-
-    <img
-      v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
-      :src="img_url + 'invite/img_lihe.png'"
-      class="gift-img"
-    />
   </div>
 
   <nut-popup v-model:visible="down_visible" position="bottom" round>
@@ -258,6 +258,10 @@ onMounted(() => {
   } else if (isAndroid) {
     divice.value = "android";
   }
+
+  setInterval(() => {
+    active_fd.value = !active_fd.value;
+  }, 2500);
 });
 
 const page_num = ref(0);
@@ -272,6 +276,7 @@ window.addEventListener("pageshow", function (event) {
     if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
   }
 });
+const active_fd = ref(true);
 </script>
 
 <style lang="scss" scoped>
@@ -309,70 +314,51 @@ window.addEventListener("pageshow", function (event) {
     width: 100%;
   }
 }
-.gift-img {
-  position: fixed;
-  bottom: calc(env(safe-area-inset-bottom) + 85px);
-  left: calc((100% - 55px) / 2);
-  width: 55px;
-  z-index: 7;
-  animation-name: scaleDraw;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-duration: 1.5s;
-  @keyframes scaleDraw {
-    0% {
-      transform: scale(1);
-    }
-    25% {
-      transform: scale(1.05);
-    }
-    50% {
-      transform: scale(1);
-    }
-    75% {
-      transform: scale(1.05);
-    }
+.gift1-img {
+    background-image: url("../assets/images/gift2.png");
   }
-}
+
+  .gift2-img {
+    background-image: url("../assets/images/gift1.png");
+  }
 .first-deposit-tip {
   position: fixed;
-  bottom: calc(env(safe-area-inset-bottom) + 50px);
-  left: calc((100% - 193px) / 2);
-  width: 193px;
-  height: 40px;
-  background: linear-gradient(270deg, #f9c170, #f9e170);
-  box-shadow: 0px 0.3px 1px 0px #fab876;
-  border-radius: 20px;
+  bottom: calc(50% - 200px);
+  right: 5px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  padding: 0 5px 0 15px;
-  z-index: 8;
-  .first-btn {
-    width: 48.3px;
-    height: 26.6px;
-    background: linear-gradient(270deg, #ff7352, #ff692e);
-    border-radius: 13.3px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    font-size: 14px;
-    color: #ffffff;
-    box-sizing: border-box;
-    padding: 0 5px;
-  }
-  .label-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    .label {
-      color: #a84e06;
-      font-size: 12.6px;
-      line-height: 15px;
-      span {
-        color: #ff6a31;
+  z-index: 9;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 59.3px;
+  height: 56.3px;
+
+
+
+  .f-d-bottom {
+    margin-top: 17.6px;
+    width: 59.3px;
+    height: 38.7px;
+    overflow: hidden;
+
+    .rowup {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      .f-d-label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 8.5px;
+        color: #ffffff;
+        box-sizing: border-box;
+        padding: 0 3px;
       }
     }
   }

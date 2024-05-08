@@ -162,19 +162,19 @@ const clearVal = () => {
 const chanelList = ref([
   {
     name: "vodafone-gh",
-    icon: require("../assets/images/img_zf_1.svg"),
+    icon: require("../assets/images/vodafone.png"),
     status: "",
     checked: true,
   },
   {
     name: "tigo-gh",
-    icon: require("../assets/images/img_zf_2.svg"),
+    icon: require("../assets/images/tigo.png"),
     status: "",
     checked: false,
   },
   {
     name: "MTN-gh",
-    icon: require("../assets/images/img_zf_3.svg"),
+    icon: require("../assets/images/mtn.png"),
     status: "",
     checked: false,
   },

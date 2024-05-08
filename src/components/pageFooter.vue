@@ -42,9 +42,9 @@
     <div class="contact-box">
       <div class="contact-item-bank">
         <span>Make deposit via</span>
-        <img src="../assets/images/img_zf_1.svg" width="22" />
-        <img src="../assets/images/img_zf_2.svg" width="22" />
-        <img src="../assets/images/img_zf_3.svg" width="22" />
+        <img src="../assets/images/vodafone.png" width="22" />
+        <img src="../assets/images/tigo.png" width="22" />
+        <img src="../assets/images/mtn.png" width="22" />
       </div>
     </div>
 

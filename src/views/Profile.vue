@@ -134,15 +134,7 @@ const goPath = (path) => {
       commit("set_tip_type", 5);
       commit("set_tip_modal", true);
       return;
-    } else if (num < state.global_config.minWithdraw / 100) {
-      commit(
-        "set_tip_info",
-        `The minimum withdrawal amount is ₵${state.global_config.minWithdraw / 100}`
-      );
-      commit("set_tip_type", 5);
-      commit("set_tip_modal", true);
-      return;
-    }
+    } 
     router.push({
       path,
     });
