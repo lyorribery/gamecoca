@@ -99,6 +99,7 @@ const store = createStore({
             ctx.commit('set_user_info', {})
             localStorage.removeItem('token')
             ctx.commit('set_tip_info', 'You have not logged in yet,please login.')
+            ctx.commit("set_tip_type", 1);
             ctx.commit('set_tip_modal', true)
           }
         })
@@ -121,11 +122,7 @@ const store = createStore({
           res.list.map((item, index) => {
             item.amount = (item.amount / 100).toString()
             item.gift = (item.gift / 100).toString()
-            if (index == 2) {
-              item.checked = true
-            } else {
-              item.checked = false
-            }
+            item.checked = false
           })
           ctx.commit('set_deposit_config', res.list)
         })
@@ -237,17 +234,17 @@ const store = createStore({
           gameType: 2
         }
       }
-      const res_poker = await getGameList.get("", { page: 1, pageSize: 6, gameType: 3 })
-      res_poker.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      })
-      const poker_obj = {
-        ...res_poker.data,
-        name: "Poker",
-        param: {
-          gameType: 3
-        }
-      }
+      // const res_poker = await getGameList.get("", { page: 1, pageSize: 6, gameType: 3 })
+      // res_poker.data.list.map(item => {
+      //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      // })
+      // const poker_obj = {
+      //   ...res_poker.data,
+      //   name: "Poker",
+      //   param: {
+      //     gameType: 3
+      //   }
+      // }
       // const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
       // res_fish.data.list.map(item => {
       //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
@@ -280,10 +277,10 @@ const store = createStore({
           ...live_obj,
           key: 'live'
         },
-        {
-          ...poker_obj,
-          key: 'poker'
-        },
+        // {
+        //   ...poker_obj,
+        //   key: 'poker'
+        // },
         // {
         //   ...fish_obj,
         //   key: 'fish'

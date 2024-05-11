@@ -221,7 +221,7 @@ const submit = () => {
         register.post("", param).then((res) => {
           if (res.code == 200) {
             commit("set_tip_info", "Registration successful, please log in.");
-            commit("set_tip_type", 1);
+            commit("set_tip_type", 11);
             commit("set_tip_modal", true);
           } else {
             commit("set_tip_info", res.msg);

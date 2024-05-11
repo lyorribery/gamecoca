@@ -115,7 +115,7 @@ const router = createRouter({
       name: 'invite',
       component: () => import('@/views/Invite.vue'),
       meta: {
-        keepAlive: false,
+        keepAlive: true,
         auth: false
       },
     },

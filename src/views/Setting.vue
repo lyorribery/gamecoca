@@ -12,7 +12,7 @@
         <span>{{ user_info.mobile ? user_info.mobile : "" }}</span>
       </div>
     </div>
-    <div class="item">
+    <!-- <div class="item">
       <div class="label">
         <div>Name</div>
         <div class="des">Create your name first time to get <span>5 coins</span></div>
@@ -30,7 +30,7 @@
         }}</span>
         <RectRight color="#CCC3E2" width="13px" height="13px" />
       </div>
-    </div>
+    </div> -->
     <div class="item" @click="goPath('/forgetPass')">
       <div class="label">Change Password</div>
       <div class="right">
@@ -106,7 +106,9 @@ const user_info = computed(() => {
   name_val.value = state.user_info.name ? state.user_info.name : "";
   return state.user_info;
 });
-const submit = () => {};
+const submit = () => {
+  name_visible.value = false;
+};
 const clearVal = () => {
   name_val.value = "";
 };
@@ -148,7 +150,7 @@ const goBack = () => {
     font-weight: bold;
   }
   .active-btn {
-    background: linear-gradient(-90deg, #9343C4, #614AE6);
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
   }
   .name-title {
     width: 100%;
@@ -199,7 +201,7 @@ const goBack = () => {
       .des {
         padding-top: 3px;
         font-size: 11px;
-        color: #CCC3E2;
+        color: #ccc3e2;
         span {
           color: #e556ff;
         }

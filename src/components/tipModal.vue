@@ -23,10 +23,11 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
-
+import { useRouter } from "vue-router";
 export default {
   name: "tipModal",
   setup(props, ctx) {
+    const router = useRouter();
     const { state, commit } = useStore();
     const tip_visible = computed(() => {
       return state.tip_visible;
@@ -39,6 +40,11 @@ export default {
       commit("set_tip_modal", false);
     };
     const close = () => {
+      if (state.tip_type == 11) {
+        router.push({
+          path: "/login",
+        });
+      }
       commit("set_tip_modal", false);
     };
     return {
@@ -130,7 +136,7 @@ export default {
     .tip-header {
       width: 100%;
       height: 30px;
-      background: linear-gradient(-90deg, #9343C4, #614AE6);
+      background: linear-gradient(-90deg, #9343c4, #614ae6);
     }
   }
 }

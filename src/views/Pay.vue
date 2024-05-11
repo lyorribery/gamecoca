@@ -81,6 +81,7 @@ onMounted(() => {
     font-size: 16px;
     color: #ffffff;
     margin: 30px 0 20px 0;
+    text-align: center;
   }
   .sub-label {
     font-family: Arial;

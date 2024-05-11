@@ -27,29 +27,29 @@
       </div>
       <div class="invite-des">
         <span>Invite Friend</span>
-        <span>Friend bets ₵{{state.invite_config.bet}}</span>
-        <span>Get ₵{{state.invite_config.reward}}</span>
+        <span>Friend bets ₵{{ state.invite_config.bet }}</span>
+        <span>Get ₵{{ state.invite_config.reward }}</span>
       </div>
       <div class="invite-label">
-        There is a limit of <span>₵ {{state.invite_config.max}} Cash</span>, please contact us to increase the
-        limitation.
+        There is a limit of <span>₵ {{ state.invite_config.max }} Cash</span>, please
+        contact us to increase the limitation.
       </div>
       <div class="cur-title">Current Yield</div>
       <div class="invite-data-box">
         <div class="item">
-          <div class="value" style="color: #f8e0fd">0</div>
+          <div class="value" style="color: #f8e0fd">{{ infos.promoteCount }}</div>
           <div class="item-label">Invited Friends</div>
         </div>
         <div class="item item-b">
-          <div class="value" style="color: #f45e84">0</div>
+          <div class="value" style="color: #f45e84">{{ infos.betCount / 100 }}</div>
           <div class="item-label">Bets</div>
         </div>
         <div class="item">
-          <div class="value" style="color: #fff76a">0</div>
+          <div class="value" style="color: #fff76a">{{ infos.rewardCount / 100 }}</div>
           <div class="item-label">Cash</div>
         </div>
       </div>
-      <div class="no-data-label">
+      <div class="no-data-label" v-if="infos.promoteCount == 0">
         There is no friend yet,invite friends now to get reward!<span @click="shareLink">
           Invite Now</span
         >
@@ -61,7 +61,8 @@
       not hold any account at GameCoca.
     </div>
     <div class="tip">
-      2. Inviter can get ₵ {{state.invite_config.reward}} Cash if the invitee’s betting amount reach ₵ {{state.invite_config.bet}}.
+      2. Inviter can get ₵ {{ state.invite_config.reward }} Cash if the invitee’s betting
+      amount reach ₵ {{ state.invite_config.bet }}.
     </div>
     <div class="tip">
       3. GameCoca reserves itself the right to amend, cancel, reclaim or refuse any
@@ -75,10 +76,12 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import apiconfig from "@/utils/apiConfig";
 import { useStore } from "vuex";
+import { getInviteInfo } from "@/apis/apis";
 const img_url = apiconfig.fileURL;
 const { state, commit } = useStore();
 const router = useRouter();
@@ -89,27 +92,51 @@ const shareLink = () => {
     commit("set_tip_modal", true);
   } else {
     copyToClipboard(`www.gamecoca.com/#/home?i_code=${state.user_info.id}`);
+  }
+};
+
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
     commit(
       "set_tip_info",
       `The link with your invitation code has been copied, please send it to your friends. www.gamecoca.com/#/home?i_code=${state.user_info.id}.`
     );
     commit("set_tip_type", 3);
     commit("set_tip_modal", true);
+  } catch (err) {
+    console.error("Failed to copy: ", err);
+    commit(
+      "set_tip_info",
+      `The link with your invitation code www.gamecoca.com/#/home?i_code=${state.user_info.id} copy faild.`
+    );
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
   }
 };
-const copyToClipboard = (text) => {
-  var textarea = document.createElement("textarea");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = 0;
-  textarea.value = text;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
-};
+
 const goBack = () => {
   router.go(-1);
 };
+const infos = ref({
+  betCount: 0,
+  promoteCount: 0,
+  rewardCount: 0,
+});
+onMounted(() => {
+  if (!localStorage.getItem("token")) return;
+  getInviteInfo.get("", {}).then((res) => {
+    if (res.code == 2002) {
+      commit("set_user_info", {});
+      localStorage.removeItem("token");
+      commit("set_tip_info", "You have not logged in yet,please login.");
+      commit("set_tip_type", 1);
+      commit("set_tip_modal", true);
+      return;
+    }
+    if (res) infos.value = { ...res };
+  });
+});
 </script>
 
 <style lang="scss" scoped>

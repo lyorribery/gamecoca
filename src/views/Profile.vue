@@ -4,7 +4,7 @@
       <div class="avatar">
         <img :src="img_url + 'other/img_tx.png'" width="20.3" />
       </div>
-      <span>{{ user_info.id ? user_info.id : "" }}</span>
+      <span>{{ user_info.id ? "ID " + user_info.id : "" }}</span>
     </div>
     <div class="header-btn">
       <img
@@ -134,7 +134,7 @@ const goPath = (path) => {
       commit("set_tip_type", 5);
       commit("set_tip_modal", true);
       return;
-    } 
+    }
     router.push({
       path,
     });

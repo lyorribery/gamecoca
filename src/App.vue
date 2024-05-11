@@ -35,6 +35,11 @@ export default {
             path: "/login",
           });
           break;
+        case 11:
+          router.push({
+            path: "/login",
+          });
+          break;
         case 2:
           exit.post("", {}).then((res) => {
             if (res.code == 200) {

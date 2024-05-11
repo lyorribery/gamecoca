@@ -1,8 +1,6 @@
 <template>
   <div class="content">
     <router-view v-slot="{ Component }">
-      <!-- <transition name="router_animate">
-        <div :key="route.path"> -->
       <keep-alive>
         <component
           :is="Component"
@@ -10,55 +8,14 @@
           :key="route.name"
         ></component>
       </keep-alive>
-      <!-- </div>
-      </transition> -->
-
-      <!-- <transition name="router_animate">
-        <div :key="route.path"> -->
       <component
         :is="Component"
         v-if="!route.meta.keepAlive"
         :key="route.name"
       ></component>
-      <!-- </div>
-      </transition> -->
     </router-view>
   </div>
 
-  <!-- <nut-tabbar
-    bottom
-    safe-area-inset-bottom
-    placeholder
-    v-model="active_tab"
-    @tab-switch="tabSwitch"
-    unactive-color="#726CA6"
-    active-color="#B333FB"
-  >
-    <nut-tabbar-item tab-title="Home">
-      <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/tab_home_act.svg" />
-        <img v-else src="@/assets/images/tab_home.svg" />
-      </template>
-    </nut-tabbar-item>
-    <nut-tabbar-item tab-title="Deposit">
-      <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/tab_dep_act.svg" />
-        <img v-else src="@/assets/images/tab_dep.svg" />
-      </template>
-    </nut-tabbar-item>
-    <nut-tabbar-item tab-title="Pomotion">
-      <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/tab_promotion_act.svg" />
-        <img v-else src="@/assets/images/tab_promotion.svg" />
-      </template>
-    </nut-tabbar-item>
-    <nut-tabbar-item tab-title="Profile">
-      <template #icon="props">
-        <img v-if="props.active" src="@/assets/images/tab_profile_act.svg" />
-        <img v-else src="@/assets/images/tab_profile.svg" />
-      </template>
-    </nut-tabbar-item>
-  </nut-tabbar> -->
   <div class="tab-box">
     <div class="tab-item" @click="tabSwitch(0)">
       <img v-if="active_tab === 0" src="@/assets/images/tab_home_act.png" />

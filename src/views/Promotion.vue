@@ -42,9 +42,18 @@ const goPath = (data) => {
       router.push({
         path: "/deposit",
       });
-      break
+      break;
     case 5:
-    commit("set_fisrt_deposit_visilbe", true);
+      if (state.user_info && state.user_info.rechargeTimes > 0) {
+        commit(
+          "set_tip_info",
+          `The current account does not meet the conditions for participating in the first recharge activity.`
+        );
+        commit("set_tip_type", 9);
+        commit("set_tip_modal", true);
+      } else {
+        commit("set_fisrt_deposit_visilbe", true);
+      }
       break;
   }
 };
@@ -100,7 +109,7 @@ const goPath = (data) => {
         font-weight: 600;
         box-sizing: border-box;
         padding: 5px 15px;
-        background: linear-gradient(-90deg, #9343C4, #614AE6);
+        background: linear-gradient(-90deg, #9343c4, #614ae6);
         border-radius: 16px;
       }
     }

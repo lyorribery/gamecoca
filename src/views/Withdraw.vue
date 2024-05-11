@@ -144,12 +144,18 @@ const submit = () => {
     .then((res) => {
       is_loading.value = false;
       if (res.code == 200) {
-        router.push({
-          path: "/pay",
-          query: {
-            type: 2,
-          },
-        });
+        if (res.data.result === 0) {
+          router.push({
+            path: "/pay",
+            query: {
+              type: 2,
+            },
+          });
+        } else if (res.data.result === 1) {
+          commit("set_tip_info", "You have a withdrawal order being processed");
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
+        }
       } else if (res.code == 2002) {
         commit("set_user_info", {});
         localStorage.removeItem("token");

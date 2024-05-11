@@ -50,7 +50,7 @@
             height="15px"
           />
           <span :style="{ color: item.checked ? '#49BF6A' : '#CCC3E2' }"
-            >This channel is currenti normal,please feel feer to deposit</span
+            >This channel is current normal</span
           >
         </div>
       </div>
@@ -109,23 +109,24 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { Close, Issue } from "@nutui/icons-vue";
 import { deposit } from "@/apis/apis";
 const { state, commit } = useStore();
 const amount_val = ref("19.6");
 const amount_id = ref(0);
+const route = useRoute();
 const router = useRouter();
-watch(
-  () => state.deposit_config,
-  (newValue) => {
-    quickList.value = newValue;
-    amount_val.value = newValue[2].amount;
-    amount_id.value = newValue[2].id;
-  }
-);
+// watch(
+//   () => state.deposit_config,
+//   (newValue) => {
+//     quickList.value = newValue;
+//     amount_val.value = newValue[2].amount;
+//     amount_id.value = newValue[2].id;
+//   }
+// );
 const quickList = ref(state.deposit_config);
 const goRecords = () => {
   router.push({
@@ -225,12 +226,18 @@ const submit = () => {
     .then((res) => {
       is_loading.value = false;
       if (res.code == 200) {
-        router.push({
-          path: "/pay",
-          query: {
-            type: 1,
-          },
-        });
+        if (res.data.result === 0) {
+          router.push({
+            path: "/pay",
+            query: {
+              type: 1,
+            },
+          });
+        } else if (res.data.result === 1) {
+          commit("set_tip_info", "You have a recharge order that is being processed");
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
+        }
       } else if (res.code == 2002) {
         commit("set_user_info", {});
         localStorage.removeItem("token");
@@ -244,6 +251,20 @@ const submit = () => {
       }
     });
 };
+onMounted(() => {
+  quickList.value = state.deposit_config;
+  if (route.query.amount) {
+    amount_val.value = route.query.amount;
+    amount_id.value = 0;
+    for (let i in quickList.value) {
+      quickList.value[i].checked = false;
+    }
+  } else {
+    chooseQuick(2);
+    amount_val.value = quickList.value[2].amount;
+    amount_id.value = quickList.value[2].id;
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -338,9 +359,9 @@ const submit = () => {
         justify-content: flex-start;
         align-items: center;
         span {
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 600;
-          padding-left: 5px;
+          padding-left: 8px;
         }
       }
     }

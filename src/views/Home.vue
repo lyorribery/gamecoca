@@ -98,22 +98,28 @@
     <pageFooter />
 
     <div
-      class="first-deposit-tip"
+      class="fd-box"
       @click="showFisrtDeposit()"
       v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
-      :class="active_fd ? 'gift1-img' : 'gift2-img'"
     >
-      <div class="f-d-bottom">
+      <img class="fd-img" src="../assets/images/fd2.png" v-if="active_fd" height="22.6" />
+      <img
+        src="../assets/images/fd3.png"
+        style="transition: transform 0.5s ease 0s"
+        :style="{ transform: active_fd ? 'translateY(100%)' : 'translateY(12px)' }"
+        height="33.6"
+      />
+      <div class="fd-text">
         <div
           class="rowup"
           style="transition: transform 0.5s ease 0s"
           :style="{ transform: active_fd ? 'translateY(0px)' : 'translateY(-100%)' }"
         >
-          <div class="f-d-label">
+          <div class="fd-label">
             <div>First Deposit</div>
             <div>Gifts</div>
           </div>
-          <div class="f-d-label" style="font-size: 12px">GHS 550</div>
+          <div class="fd-label" style="font-size: 12px">GHS 550</div>
         </div>
       </div>
     </div>
@@ -280,6 +286,49 @@ const active_fd = ref(true);
 </script>
 
 <style lang="scss" scoped>
+.fd-box {
+  position: fixed;
+  bottom: calc(50% - 200px);
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .fd-img {
+    z-index: 5;
+    position: fixed;
+    bottom: calc(50% - 166.3px);
+    right: 8.3px;
+  }
+  .fd-text {
+    z-index: 3;
+    width: 59.3px;
+    height: 33.6px;
+    overflow: hidden;
+    background-image: url("../assets/images/fd1.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+
+    .rowup {
+      width: 100%;
+      height: 100%;
+      .fd-label {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 8.5px;
+        color: #ffffff;
+        box-sizing: border-box;
+        padding: 0 3px;
+      }
+    }
+  }
+}
 .sticky-type {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 55px);
@@ -314,55 +363,7 @@ const active_fd = ref(true);
     width: 100%;
   }
 }
-.gift1-img {
-    background-image: url("../assets/images/gift2.png");
-  }
 
-  .gift2-img {
-    background-image: url("../assets/images/gift1.png");
-  }
-.first-deposit-tip {
-  position: fixed;
-  bottom: calc(50% - 200px);
-  right: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  width: 59.3px;
-  height: 56.3px;
-
-
-
-  .f-d-bottom {
-    margin-top: 17.6px;
-    width: 59.3px;
-    height: 38.7px;
-    overflow: hidden;
-
-    .rowup {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      .f-d-label {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        font-size: 8.5px;
-        color: #ffffff;
-        box-sizing: border-box;
-        padding: 0 3px;
-      }
-    }
-  }
-}
 .main-header {
   width: 100%;
   position: fixed;

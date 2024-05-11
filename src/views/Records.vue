@@ -68,15 +68,13 @@
               </div>
               <div class="right">
                 <div class="r-row">
-                  <span class="m-color">{{
-                    items.channel == "vodafone-gh"
-                      ? "Vodafone"
-                      : item.channel == "tigo-gh"
-                      ? "AirtelTigo"
-                      : item.channel == "MTN-gh"
-                      ? "MoMo"
-                      : ""
-                  }}</span>
+                  <span class="m-color" v-if="items.channel == 'vodafone-gh'"
+                    >Vodafone</span
+                  >
+                  <span class="m-color" v-if="items.channel == 'tigo-gh'"
+                    >AirtelTigo</span
+                  >
+                  <span class="m-color" v-if="items.channel == 'MTN-gh'">MoMo</span>
                   <span class="m-color">₵{{ (items.amount / 100).toFixed(2) }}</span>
                 </div>
                 <div class="r-row">
@@ -143,7 +141,11 @@
                     : 'status-3'
                 "
                 >{{
-                  items.status == 4 ? "Done" : items.status == 2 ? "Forward" : "Failed"
+                  items.status == 4
+                    ? "Done"
+                    : items.status == 2 || items.status == 1
+                    ? "Forward"
+                    : "Failed"
                 }}</span
               >
             </div>
@@ -167,15 +169,13 @@
               </div>
               <div class="right">
                 <div class="r-row">
-                  <span class="m-color">{{
-                    items.channel == "vodafone-gh"
-                      ? "Vodafone"
-                      : item.channel == "tigo-gh"
-                      ? "AirtelTigo"
-                      : item.channel == "MTN-gh"
-                      ? "MoMo"
-                      : ""
-                  }}</span>
+                  <span class="m-color" v-if="items.channel == 'vodafone-gh'"
+                    >Vodafone</span
+                  >
+                  <span class="m-color" v-if="items.channel == 'tigo-gh'"
+                    >AirtelTigo</span
+                  >
+                  <span class="m-color" v-if="items.channel == 'MTN-gh'">MoMo</span>
                   <span class="m-color">₵{{ (items.amount / 100).toFixed(2) }}</span>
                 </div>
                 <div class="r-row">
@@ -267,19 +267,20 @@ const goBack = () => {
 };
 const copyorder = (order) => {
   copyToClipboard(order);
-  commit("set_tip_info", `Order number copied`);
-  commit("set_tip_type", 3);
-  commit("set_tip_modal", true);
 };
-const copyToClipboard = (text) => {
-  var textarea = document.createElement("textarea");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = 0;
-  textarea.value = text;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textarea);
+
+const copyToClipboard = async (text) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    commit("set_tip_info", `Order number copied`);
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+  } catch (err) {
+    console.error("Failed to copy: ", err);
+    commit("set_tip_info", `Order number copy faild.`);
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+  }
 };
 </script>
 

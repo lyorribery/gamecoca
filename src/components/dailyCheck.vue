@@ -126,6 +126,7 @@ const checkIn = () => {
     commit("set_tip_modal", true);
     return;
   }
+
   if (
     state.user_info.signTime &&
     new Date().getTime() / 1000 - state.user_info.signTime < 86400

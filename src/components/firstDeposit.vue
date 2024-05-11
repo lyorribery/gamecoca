@@ -39,7 +39,7 @@
           </template>
         </div>
         <div class="f-d-bottom">
-          <div class="btn">Deposit {{ f_d_val }} Now</div>
+          <div class="btn" @click="goPath">Deposit {{ f_d_val }} Now</div>
           <div class="tip">
             After you do this,the funds and cash gifts will appear in your account
             immediately
@@ -65,8 +65,10 @@ import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { Close } from "@nutui/icons-vue";
 import apiconfig from "@/utils/apiConfig";
+import { useRouter } from "vue-router";
 const img_url = apiconfig.fileURL;
 const { state, commit } = useStore();
+const rouer = useRouter();
 const fisrt_deposit_visilbe = computed(() => {
   return state.fisrt_deposit_visilbe;
 });
@@ -80,6 +82,15 @@ watch(
     f_d_val.value = newValue[1].amount;
   }
 );
+const goPath = () => {
+  close();
+  rouer.push({
+    path: "/deposit",
+    query: {
+      amount: f_d_val.value,
+    },
+  });
+};
 const f_d_val = ref(95);
 const f_d_list = ref(state.f_d_config);
 const changeFD = (index) => {
@@ -260,7 +271,7 @@ const changeFD = (index) => {
     .btn {
       width: calc(100% - 50px);
       height: 40px;
-      background: linear-gradient(-90deg, #9343C4, #614AE6);
+      background: linear-gradient(-90deg, #9343c4, #614ae6);
       border-radius: 20px;
       display: flex;
       justify-content: center;

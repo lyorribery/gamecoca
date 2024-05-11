@@ -51,8 +51,8 @@
     <div class="des" style="font-weight: bold; margin: 10px; color: #fff">LICENCE</div>
 
     <div class="des" style="color: #fff">
-      GAMECOCA ,the proprietor and operator of this website is
-      licensed by Gaming Coming Commission of Ghana with register No.GCRG23P1036T
+      GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
+      Commission of Ghana with register No.GCRG23P1036T
     </div>
 
     <div class="img-box">
@@ -145,7 +145,8 @@ const goDescription = (type) => {
       justify-content: flex-start;
       align-items: center;
       span {
-        color: #CCC3E2;
+        // color: #CCC3E2;
+        color: #fff;
         font-size: 12px;
         font-weight: bold;
       }
@@ -157,7 +158,8 @@ const goDescription = (type) => {
   .des {
     width: 100%;
     text-align: center;
-    color: #CCC3E2;
+    // color: #CCC3E2;
+    color: #fff;
     font-size: 12px;
     line-height: 15px;
     .icon-box {
@@ -169,7 +171,7 @@ const goDescription = (type) => {
       box-sizing: border-box;
       width: 22px;
       height: 22px;
-      border: 1px solid #CCC3E2;
+      border: 1px solid #ccc3e2;
     }
   }
   .content-box {

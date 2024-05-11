@@ -38,9 +38,11 @@ export const deposit = new baseApiServer("/account/v1/recharge")
 
 export const depositRecord = new baseApiServer("/account/v1/recharge/record")
 
-export const withdraw = new baseApiServer("//account/v1/withdraw")
+export const withdraw = new baseApiServer("/account/v1/withdraw")
 
 export const withdrawRecord = new baseApiServer("/account/v1/withdraw/record")
+
+export const getInviteInfo = new baseApiServer("/account/v1/promoter_info")
 
 
 
