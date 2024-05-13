@@ -17,18 +17,18 @@
       <Comment color="#fff" width="18px" height="18px" />
       <span>Live Chat</span>
     </div> -->
-    <div class="channel-row">
+    <div class="channel-row" @click="goThrid(1)">
       <img src="@/assets/images/icon_whatsapp.svg" width="20" />
-      <span>017858145 / 841245452</span>
+      <span>017858145</span>
     </div>
-    <div class="channel-row">
+    <div class="channel-row" @click="goThrid(2)">
       <img src="@/assets/images/icon_email.svg" width="20" />
       <span>gamecoca88@gmail.com</span>
     </div>
-    <div class="channel-row">
+    <!-- <div class="channel-row" >
       <img src="@/assets/images/icon_facebook.svg" width="20" />
       <span>gamecoca88@gmail.com</span>
-    </div>
+    </div> -->
     <div class="divide-des">Available form 08:00-00:00</div>
     <div class="divide-line"></div>
     <div class="des">
@@ -37,9 +37,14 @@
     <div class="opinion-box">
       <div class="title">Give us your opinion</div>
       <div class="content">
-        <nut-textarea v-model="val" placeholder="We hope there will be more updates." rows="3" autosize />
+        <nut-textarea
+          v-model="val"
+          placeholder="We hope there will be more updates."
+          rows="3"
+          autosize
+        />
         <div class="send-row">
-          <div class="send-btn">Send</div>
+          <div class="send-btn" @click="sendAdvice">Send</div>
         </div>
       </div>
     </div>
@@ -50,10 +55,35 @@
 import { ref } from "vue";
 import { RectLeft, Comment } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 const router = useRouter();
+const { commit } = useStore();
 const val = ref("");
 const goBack = () => {
   router.go(-1);
+};
+const goThrid = (type) => {
+  if (type == 1) {
+    // location.href = "https://api.whatsapp.com/send?phone=+233203131028&amp;text=Hello";
+    location.href="https://wa.me/+233203131028"
+  } else if (type == 2) {
+    location.href = "mailto:gamecoca88@gmail.com";
+  }
+};
+const sendAdvice = () => {
+  if (!val.value) {
+    commit("set_tip_info", "Please enter your suggestion.");
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+  } else {
+    commit(
+      "set_tip_info",
+      "The platform has received your suggestions, thank you for your support."
+    );
+    commit("set_tip_type", 3);
+    commit("set_tip_modal", true);
+    val.value = "";
+  }
 };
 </script>
 
@@ -85,11 +115,11 @@ const goBack = () => {
         display: flex;
         justify-content: flex-end;
         box-sizing: border-box;
-        padding:0 10px 10px 0;
+        padding: 0 10px 10px 0;
         .send-btn {
           width: 76.7px;
           height: 24px;
-          background: linear-gradient(-90deg, #9343C4, #614AE6);
+          background: linear-gradient(-90deg, #9343c4, #614ae6);
           border-radius: 12px;
           font-size: 12px;
           font-weight: 600;
@@ -104,12 +134,12 @@ const goBack = () => {
   .divide-line {
     width: 100%;
     height: 0.5px;
-    background: #CCC3E2;
+    background: #ccc3e2;
   }
   .divide-des {
     font-size: 11px;
     font-weight: 600;
-    color: #CCC3E2;
+    color: #ccc3e2;
     box-sizing: border-box;
     padding: 10px;
   }
@@ -121,15 +151,17 @@ const goBack = () => {
     align-items: center;
     span {
       font-size: 14px;
+      font-weight: bold;
       color: #ffffff;
-      padding-left: 10px;
+      padding-left: 5px;
+      text-decoration-line: underline;
     }
   }
   .live-btn {
     margin-bottom: 15px;
     width: calc(100% - 30px);
     height: 45.7px;
-    background: linear-gradient(-90deg, #9343C4, #614AE6);
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
     border-radius: 22.7px;
     display: flex;
     justify-content: center;

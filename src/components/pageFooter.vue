@@ -23,19 +23,21 @@
 
     <div class="contact-box">
       <div class="contact-item">
-        <span>Contact us online:</span>
-        <img src="../assets/images/icon_whatsapp.svg" width="22" />
+        <img src="../assets/images/icon_whatsapp.svg" width="20" @click="goThrid(1)" />
+        <span style="font-size: 13px">+233203131028</span>
       </div>
       <div class="contact-item">
-        <span>Follow us on:</span>
-        <img src="../assets/images/icon_facebook.svg" width="22" />
+        <img src="../assets/images/icon_facebook.svg" width="20" />
+        <span style="font-size: 13px">Follow us on</span>
       </div>
     </div>
 
     <div class="contact-box">
-      <div class="contact-item-email">
-        <img src="../assets/images/icon_email.svg" width="22" />
-        <span>gamecoca88@gmail.com</span>
+      <div class="contact-item-email" @click="goThrid(2)">
+        <img src="../assets/images/icon_email.svg" width="20" />
+        <span style="color: #fff; text-decoration-line: underline; font-size: 13px"
+          >gamecoca88@gmail.com</span
+        >
       </div>
     </div>
 
@@ -48,9 +50,9 @@
       </div>
     </div>
 
-    <div class="des" style="font-weight: bold; margin: 10px; color: #fff">LICENCE</div>
+    <div class="des" style="font-weight: bold; margin: 10px">LICENCE</div>
 
-    <div class="des" style="color: #fff">
+    <div class="des">
       GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
       Commission of Ghana with register No.GCRG23P1036T
     </div>
@@ -82,6 +84,14 @@ const goDescription = (type) => {
       type,
     },
   });
+};
+const goThrid = (type) => {
+  if (type == 1) {
+    // location.href = "https://api.whatsapp.com/send?phone=+233203131028&amp;text=Hello";
+    location.href = "https://wa.me/+233203131028";
+  } else if (type == 2) {
+    location.href = "mailto:gamecoca88@gmail.com";
+  }
 };
 </script>
 
@@ -117,7 +127,7 @@ const goDescription = (type) => {
       justify-content: center;
       align-items: center;
       span {
-        color: #fff;
+        color: #ccc3e2;
         font-size: 12px;
         font-weight: bold;
       }
@@ -131,35 +141,34 @@ const goDescription = (type) => {
       justify-content: flex-start;
       align-items: center;
       span {
-        color: #fff;
+        color: #ccc3e2;
         font-size: 12px;
         font-weight: bold;
       }
       img {
-        margin-right: 10px;
+        margin-right: 5px;
       }
     }
     .contact-item {
       width: 50%;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
       span {
-        // color: #CCC3E2;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
+        text-decoration-line: underline;
       }
       img {
-        margin-left: 10px;
+        margin-right: 5px;
       }
     }
   }
   .des {
     width: 100%;
     text-align: center;
-    // color: #CCC3E2;
-    color: #fff;
+    color: #ccc3e2;
     font-size: 12px;
     line-height: 15px;
     .icon-box {

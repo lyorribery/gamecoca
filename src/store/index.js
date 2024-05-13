@@ -234,17 +234,17 @@ const store = createStore({
           gameType: 2
         }
       }
-      // const res_poker = await getGameList.get("", { page: 1, pageSize: 6, gameType: 3 })
-      // res_poker.data.list.map(item => {
-      //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      // })
-      // const poker_obj = {
-      //   ...res_poker.data,
-      //   name: "Poker",
-      //   param: {
-      //     gameType: 3
-      //   }
-      // }
+      const res_poker = await getGameList.get("", { page: 1, pageSize: 6, gameType: 3 })
+      res_poker.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      })
+      const poker_obj = {
+        ...res_poker.data,
+        name: "Poker",
+        param: {
+          gameType: 3
+        }
+      }
       // const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
       // res_fish.data.list.map(item => {
       //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
@@ -277,10 +277,10 @@ const store = createStore({
           ...live_obj,
           key: 'live'
         },
-        // {
-        //   ...poker_obj,
-        //   key: 'poker'
-        // },
+        {
+          ...poker_obj,
+          key: 'poker'
+        },
         // {
         //   ...fish_obj,
         //   key: 'fish'

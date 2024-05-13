@@ -33,8 +33,7 @@
   <div class="description" v-if="page_type == '2'">
     <img src="@/assets/images/logo.svg" width="130" style="margin: 20px 0" />
     <p class="des">
-      GameCoca is licensed by the Gaming Commission of Ghana under the Gaming Act, 2006
-      (Act, 721).
+      GameCoca is licensed by the Gaming Commission of Ghana under the Gaming Act, 2006 (Act, 721). 
     </p>
   </div>
   <div class="description" v-if="page_type == '3'">
