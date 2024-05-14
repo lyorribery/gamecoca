@@ -13,10 +13,10 @@
         listed below.
       </div>
     </div>
-    <!-- <div class="live-btn">
+    <div class="live-btn" @click="goThrid(3)">
       <Comment color="#fff" width="18px" height="18px" />
       <span>Live Chat</span>
-    </div> -->
+    </div>
     <div class="channel-row" @click="goThrid(1)">
       <img src="@/assets/images/icon_whatsapp.svg" width="20" />
       <span>017858145</span>
@@ -64,10 +64,11 @@ const goBack = () => {
 };
 const goThrid = (type) => {
   if (type == 1) {
-    // location.href = "https://api.whatsapp.com/send?phone=+233203131028&amp;text=Hello";
-    location.href="https://wa.me/+233203131028"
+    location.href = "https://wa.me/+233203131028";
   } else if (type == 2) {
     location.href = "mailto:gamecoca88@gmail.com";
+  } else if (type == 3) {
+    location.href = "https://tawk.to/chat/6641bda89a809f19fb303295/1htocpnf9";
   }
 };
 const sendAdvice = () => {
@@ -107,8 +108,8 @@ const sendAdvice = () => {
     }
     .content {
       width: 100%;
-      border-radius: 16.3px;
-      border: 0.8px solid #29213d;
+      border-radius: 16px;
+      border: 0.8px solid #ccc3e2;
       overflow: hidden;
       .send-row {
         width: 100%;
@@ -133,7 +134,7 @@ const sendAdvice = () => {
   }
   .divide-line {
     width: 100%;
-    height: 0.5px;
+    height: 0.3px;
     background: #ccc3e2;
   }
   .divide-des {

@@ -22,22 +22,25 @@
     </div>
 
     <div class="contact-box">
-      <div class="contact-item">
-        <img src="../assets/images/icon_whatsapp.svg" width="20" @click="goThrid(1)" />
-        <span style="font-size: 13px">+233203131028</span>
+      <div class="contact-item" @click="goThrid(1)" style="margin-right: 15px">
+        <img src="../assets/images/icon_whatsapp.svg" width="20" />
+        <span>+233203131028</span>
       </div>
-      <div class="contact-item">
-        <img src="../assets/images/icon_facebook.svg" width="20" />
-        <span style="font-size: 13px">Follow us on</span>
+
+      <div class="contact-item" @click="goThrid(2)">
+        <img src="../assets/images/icon_email.svg" width="20" />
+        <span>gamecoca88@gmail.com</span>
       </div>
     </div>
 
     <div class="contact-box">
-      <div class="contact-item-email" @click="goThrid(2)">
-        <img src="../assets/images/icon_email.svg" width="20" />
-        <span style="color: #fff; text-decoration-line: underline; font-size: 13px"
-          >gamecoca88@gmail.com</span
-        >
+      <div class="contact-item" style="margin-right: 15px">
+        <img src="../assets/images/icon_facebook.svg" width="20" />
+        <span>Follow us on</span>
+      </div>
+      <div class="contact-item" @click="goThrid(3)">
+        <img src="../assets/images/livechat.png" width="20" />
+        <span>Live chat</span>
       </div>
     </div>
 
@@ -50,7 +53,7 @@
       </div>
     </div>
 
-    <div class="des" style="font-weight: bold; margin: 10px">LICENCE</div>
+    <div class="des" style="font-weight: bold; margin: 10px; color: #fff">LICENCE</div>
 
     <div class="des">
       GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
@@ -87,10 +90,11 @@ const goDescription = (type) => {
 };
 const goThrid = (type) => {
   if (type == 1) {
-    // location.href = "https://api.whatsapp.com/send?phone=+233203131028&amp;text=Hello";
     location.href = "https://wa.me/+233203131028";
   } else if (type == 2) {
     location.href = "mailto:gamecoca88@gmail.com";
+  } else if (type == 3) {
+    location.href = "https://tawk.to/chat/6641bda89a809f19fb303295/1htocpnf9";
   }
 };
 </script>
@@ -99,7 +103,7 @@ const goThrid = (type) => {
 .page-footer {
   width: 100%;
   box-sizing: border-box;
-  padding: 30px 15px 0 15px;
+  padding: 30px 10px 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,30 +131,15 @@ const goThrid = (type) => {
       justify-content: center;
       align-items: center;
       span {
-        color: #ccc3e2;
+        color: #fff;
         font-size: 12px;
         font-weight: bold;
       }
       img {
-        margin-left: 10px;
-      }
-    }
-    .contact-item-email {
-      width: 50%;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      span {
-        color: #ccc3e2;
-        font-size: 12px;
-        font-weight: bold;
-      }
-      img {
-        margin-right: 5px;
+        margin-left: 8px;
       }
     }
     .contact-item {
-      width: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
