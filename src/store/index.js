@@ -245,17 +245,17 @@ const store = createStore({
           gameType: 3
         }
       }
-      // const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
-      // res_fish.data.list.map(item => {
-      //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      // })
-      // const fish_obj = {
-      //   ...res_fish.data,
-      //   name: "Fish",
-      //   param: {
-      //     gameType: 4
-      //   }
-      // }
+      const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
+      res_fish.data.list.map(item => {
+        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      })
+      const fish_obj = {
+        ...res_fish.data,
+        name: "Mini",
+        param: {
+          gameType: 4
+        }
+      }
       const result = [
         {
           ...hot_obj,
@@ -281,10 +281,10 @@ const store = createStore({
           ...poker_obj,
           key: 'poker'
         },
-        // {
-        //   ...fish_obj,
-        //   key: 'fish'
-        // }
+        {
+          ...fish_obj,
+          key: 'mini'
+        }
       ]
       ctx.commit('set_game_list', result)
       ctx.commit("set_loading_modal", false);
