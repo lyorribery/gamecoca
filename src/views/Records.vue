@@ -1,7 +1,7 @@
 <template>
   <div class="records-header">
-    <div class="arrow">
-      <RectLeft color="#fff" width="18px" height="18px" @click="goBack" />
+    <div @click="goBack" class="arrow">
+      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
     </div>
     <div class="title">Records</div>
   </div>
@@ -437,9 +437,18 @@ const copyToClipboard = async (text) => {
   align-items: center;
   border-bottom: 0.5px solid #29213d;
   .arrow {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     position: fixed;
     left: 15px;
-    top: calc(env(safe-area-inset-top) + 18.5px);
+    top: 20px;
+    span {
+      font-weight: bold;
+      font-size: 13px;
+      color: #ffffff;
+      padding-left: 5px;
+    }
   }
   .title {
     color: #fff;

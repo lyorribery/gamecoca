@@ -27,13 +27,14 @@
       remove portions of this policy at any time. Please check this page periodically for
       any changes. Publish any changes to these terms if you continue to use our App
       future will mean that you have accepted these adjustments. E-Mail :
-      gamecoca@outlook.com
+      gamecoca88@gmail.com
     </p>
   </div>
   <div class="description" v-if="page_type == '2'">
     <img src="@/assets/images/logo.svg" width="130" style="margin: 20px 0" />
     <p class="des">
-      GameCoca is licensed by the Gaming Commission of Ghana under the Gaming Act, 2006 (Act, 721). 
+      GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
+      Commission of Ghana with register No.GCRG23P1036T
     </p>
   </div>
   <div class="description" v-if="page_type == '3'">

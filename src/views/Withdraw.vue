@@ -1,8 +1,8 @@
 <template>
   <div class="withdraw">
     <div class="withdraw-header">
-      <div class="arrow">
-        <RectLeft color="#fff" width="15px" height="15px" @click="goBack" />
+      <div @click="goBack" class="arrow">
+        <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
       </div>
       <div class="title">Withdraw</div>
       <div class="sub-title" @click="goRecords()">Records</div>
@@ -376,9 +376,18 @@ const goRecords = () => {
     justify-content: center;
     align-items: center;
     .arrow {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       position: fixed;
-      top: 20px;
       left: 15px;
+      top: 20px;
+      span {
+        font-weight: bold;
+        font-size: 13px;
+        color: #ffffff;
+        padding-left: 5px;
+      }
     }
     .title {
       color: #fff;

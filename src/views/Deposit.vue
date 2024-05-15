@@ -55,6 +55,29 @@
         </div>
       </div>
     </div>
+    <div class="des">
+      You can only use your register number to top up your wallet,if not correct please
+      register with your mobile money number again.
+    </div>
+    <div class="line-box">
+      <div class="line"></div>
+      <span>Deposit Tips</span>
+      <div class="line"></div>
+    </div>
+    <div class="tip-row">
+      1.Select or enter the amount to deposit your GameCoca wallet.
+    </div>
+    <div class="tip-row">2.The minimum amount is ₵5.00.</div>
+    <div class="tip-row">
+      3.Please ensure that you choose right network/operator and your mobile wallet has
+      enough money.
+    </div>
+    <div class="tip-row">
+      4.If failed to deposit due to network issue, please try again later or contact our
+      customer service.
+    </div>
+  </div>
+  <div class="btn-row">
     <div class="btn" @click="submit">
       <svg
         v-if="is_loading"
@@ -83,27 +106,6 @@
         </path>
       </svg>
       <span v-else> Pay ₵{{ amount_val ? amount_val : "--" }} </span>
-    </div>
-    <div class="des">
-      You can only use your register number to top up your wallet,if not correct please
-      register with your mobile money number again.
-    </div>
-    <div class="line-box">
-      <div class="line"></div>
-      <span>Deposit Tips</span>
-      <div class="line"></div>
-    </div>
-    <div class="tip-row">
-      1.Select or enter the amount to deposit your GameCoca wallet.
-    </div>
-    <div class="tip-row">2.The minimum amount is ₵5.00.</div>
-    <div class="tip-row">
-      3.Please ensure that you choose right network/operator and your mobile wallet has
-      enough money.
-    </div>
-    <div class="tip-row">
-      4.If failed to deposit due to network issue, please try again later or contact our
-      customer service.
     </div>
   </div>
 </template>
@@ -268,26 +270,52 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.btn-row {
+  position: fixed;
+  z-index: 9;
+  bottom: calc(env(safe-area-inset-bottom) + 55px);
+  left:0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #161326;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+  .btn {
+    width: calc(100% - 60px);
+    height: 42px;
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 17px;
+    font-weight: bold;
+  }
+}
+
 .deposit {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 10px 15px;
+  padding: calc(55px + env(safe-area-inset-top)) 15px
+    calc(env(safe-area-inset-bottom) + 10px + 42px) 15px;
   .des {
-    margin: 20px 0;
+    margin: 10px 0;
     width: 100%;
     box-sizing: border-box;
     padding: 0 20px;
     color: #fff;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
   }
   .tip-row {
     color: #ccc3e2;
-    font-size: 12px;
+    font-size: 11px;
     width: 100%;
     text-align: left;
-    margin-top: 15px;
+    margin-top: 10px;
   }
   .line-box {
     width: 100%;
@@ -308,22 +336,10 @@ onMounted(() => {
       padding: 0 5px;
     }
   }
-  .btn {
-    width: calc(100% - 30px);
-    margin: 25px 0 0 15px;
-    height: 42px;
-    background: linear-gradient(-90deg, #9343c4, #614ae6);
-    border-radius: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 17px;
-    font-weight: bold;
-  }
+
   .chanel {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     border-radius: 16px;
     border: 1.5px solid #382b63;
     display: flex;
@@ -391,7 +407,7 @@ onMounted(() => {
     align-items: center;
     .item {
       position: relative;
-      width: calc((100% - 30px) / 3);
+      width: calc((100% - 20px) / 3);
       border-radius: 16px;
       color: #8068c8;
       border: 1.5px solid #4b3f7a;
@@ -401,7 +417,7 @@ onMounted(() => {
       align-items: center;
       box-sizing: border-box;
       padding: 5px 0;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       .hot {
         position: absolute;
         top: -5px;
@@ -434,7 +450,7 @@ onMounted(() => {
     }
   }
   .label {
-    margin: 20px 0;
+    margin: 12px 0;
     font-weight: bold;
     color: #fff;
     font-size: 14px;

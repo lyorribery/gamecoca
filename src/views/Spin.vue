@@ -1,7 +1,7 @@
 <template>
   <div class="spin-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="15px" height="15px" />
+      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
     </div>
     <span>Coins Spin</span>
   </div>
@@ -85,152 +85,6 @@ const spin_count = computed(() => {
 const user_info = computed(() => {
   return state.user_info;
 });
-// const winner_list = [
-//   {
-//     name: "057***4308",
-//     amount: 10,
-//   },
-//   {
-//     name: "059***8607",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***4281",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***7696",
-//     amount: 100,
-//   },
-//   {
-//     name: "055***5850",
-//     amount: 10,
-//   },
-//   {
-//     name: "024***5372",
-//     amount: 500,
-//   },
-//   {
-//     name: "057***4308",
-//     amount: 10,
-//   },
-//   {
-//     name: "059***8607",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***4281",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***7696",
-//     amount: 100,
-//   },
-//   {
-//     name: "055***5850",
-//     amount: 10,
-//   },
-//   {
-//     name: "024***5372",
-//     amount: 500,
-//   },
-//   {
-//     name: "057***4308",
-//     amount: 10,
-//   },
-//   {
-//     name: "059***8607",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***4281",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***7696",
-//     amount: 100,
-//   },
-//   {
-//     name: "055***5850",
-//     amount: 10,
-//   },
-//   {
-//     name: "024***5372",
-//     amount: 500,
-//   },
-//   {
-//     name: "057***4308",
-//     amount: 10,
-//   },
-//   {
-//     name: "059***8607",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***4281",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***7696",
-//     amount: 100,
-//   },
-//   {
-//     name: "055***5850",
-//     amount: 10,
-//   },
-//   {
-//     name: "024***5372",
-//     amount: 500,
-//   },
-//   {
-//     name: "057***4308",
-//     amount: 10,
-//   },
-//   {
-//     name: "059***8607",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***4281",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***7696",
-//     amount: 100,
-//   },
-//   {
-//     name: "055***5850",
-//     amount: 10,
-//   },
-//   {
-//     name: "024***5372",
-//     amount: 500,
-//   },
-//   {
-//     name: "057***4308",
-//     amount: 10,
-//   },
-//   {
-//     name: "059***8607",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***4281",
-//     amount: 1,
-//   },
-//   {
-//     name: "024***7696",
-//     amount: 100,
-//   },
-//   {
-//     name: "055***5850",
-//     amount: 10,
-//   },
-//   {
-//     name: "024***5372",
-//     amount: 500,
-//   },
-// ];
 
 const prizeObj = reactive({
   prizeList: [], // 后台配置的奖品数据
@@ -303,7 +157,6 @@ const start = async () => {
           break;
         }
       }
-      console.log("中奖ID>>>", prizeId, prizeObj.prizeList[prizeId]);
       prizeObj.prizeId = prizeId;
       startRun();
       dispatch("GET_USER_INFO");
@@ -431,41 +284,6 @@ const stopRun = (e) => {
       height: 100%;
     }
   }
-  // .winner-container {
-  //   width: 100%;
-  //   max-height: 150px;
-  //   overflow: hidden;
-  //   border-radius: 16px;
-  //   background: rgba(255, 255, 255, 0.1);
-  //   box-sizing: border-box;
-  //   padding: 0 15px;
-  //   .winner-box {
-  //     animation: scroll 18s linear infinite;
-  //     @keyframes scroll {
-  //       0% {
-  //         transform: translateY(0); /* 初始位置 */
-  //       }
-  //       100% {
-  //         transform: translateY(-100%); /* 向上滚动 100% 的高度 */
-  //       }
-  //     }
-  //     .item {
-  //       width: 100%;
-  //       height: calc(150px / 5);
-  //       display: flex;
-  //       justify-content: center;
-  //       align-items: center;
-  //       box-sizing: border-box;
-  //       border-bottom: 0.6px solid rgba(255, 255, 255, 0.1);
-  //       font-size: 12px;
-  //       color: #fff;
-  //       span {
-  //         color: #fefd46;
-  //         padding-left: 5px;
-  //       }
-  //     }
-  //   }
-  // }
 
   .divide {
     margin: 20px 0;
@@ -562,6 +380,12 @@ const stopRun = (e) => {
     position: fixed;
     left: 15px;
     top: 20px;
+    span {
+      font-weight: bold;
+      font-size: 13px;
+      color: #ffffff;
+      padding-left: 5px;
+    }
   }
   span {
     font-weight: bold;

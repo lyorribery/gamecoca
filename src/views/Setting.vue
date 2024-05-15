@@ -1,7 +1,7 @@
 <template>
   <div class="setting-header">
-    <div class="arrow">
-      <RectLeft color="#fff" width="18px" height="18px" @click="goBack" />
+    <div @click="goBack" class="arrow">
+      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
     </div>
     <div class="title">Setting</div>
   </div>
@@ -12,37 +12,14 @@
         <span>{{ user_info.mobile ? user_info.mobile : "" }}</span>
       </div>
     </div>
-    <!-- <div class="item">
-      <div class="label">
-        <div>Name</div>
-        <div class="des">Create your name first time to get <span>5 coins</span></div>
-      </div>
-      <div
-        class="right"
-        @click="
-          () => {
-            name_visible = true;
-          }
-        "
-      >
-        <span style="padding-right: 5px">{{
-          user_info.name ? user_info.name : "Player" + user_info.id ? user_info.id : ""
-        }}</span>
-        <RectRight color="#CCC3E2" width="13px" height="13px" />
-      </div>
-    </div> -->
+
     <div class="item" @click="goPath('/forgetPass')">
       <div class="label">Change Password</div>
       <div class="right">
         <RectRight color="#CCC3E2" width="13px" height="13px" />
       </div>
     </div>
-    <!-- <div class="item">
-      <div class="label">Sound</div>
-      <div class="right">
-        <nut-switch v-model="sound_val" active-color="#E556FF" inactive-color="#382B63" />
-      </div>
-    </div> -->
+
   </div>
   <nut-overlay
     v-model:visible="name_visible"
@@ -222,10 +199,19 @@ const goBack = () => {
   align-items: center;
   border-bottom: 0.5px solid #29213d;
   .arrow {
-    position: fixed;
-    left: 15px;
-    top: calc(env(safe-area-inset-top) + 18.5px);
-  }
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: fixed;
+      left: 15px;
+      top: 20px;
+      span {
+        font-weight: bold;
+        font-size: 13px;
+        color: #ffffff;
+        padding-left: 5px;
+      }
+    }
   .title {
     color: #fff;
     font-weight: bold;
