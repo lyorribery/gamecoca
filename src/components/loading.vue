@@ -39,6 +39,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(25, 20, 43, 0.95);
+  background: #18171E;
 }
 </style>

@@ -153,31 +153,32 @@ export default {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: calc(55px + env(safe-area-inset-bottom));
+  height: calc(1.527rem + env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   padding-bottom: env(safe-area-inset-bottom);
   background: #181b2c;
-  box-shadow: 0px 1px 0px 0px #242630;
-  border-radius: 22px 22px 0px 0px;
+  box-shadow: inset 0px 0px .055rem 0px #9F9F9F;
+
+  border-radius: .611rem .611rem 0px 0px;
   overflow: hidden;
   .tab-item {
-    width: calc((100% - 45px) / 4);
-    height: 55px;
+    width: calc((100% - 1.25rem) / 4);
+    height: 1.527rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     img {
-      width: 28px;
+      width: .777rem;
     }
     span {
-      font-size: 13px;
+      font-size: .361rem;
       color: #77777d;
-      padding-top: 1px;
+      padding-top: .027rem;
     }
     .back {
       position: absolute;
@@ -193,7 +194,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 70px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1.944rem);
   overflow-y: auto;
 }
 </style>

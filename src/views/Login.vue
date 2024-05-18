@@ -1,10 +1,10 @@
 <template>
   <div class="permission">
     <div class="close">
-      <Close color="#CCC3E2" width="13px" height="13px" @click="back" />
+      <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="back" />
     </div>
     <div class="title">Hello,</div>
-    <div class="title" style="margin-top: 5px">Welcome to GameCoca</div>
+    <div class="title" style="margin-top: .138rem">Welcome to GameCoca</div>
 
     <div class="form-container">
       <nut-form ref="loginRef" :model-value="loginForm">
@@ -24,7 +24,7 @@
             "
           >
             <span
-              style="color: #fff; font-size: 15px; font-weight: bold; padding-right: 10px"
+              style="color: #fff; font-size: .416rem; font-weight: bold; padding-right: .277rem"
               >+233</span
             >
             <nut-input
@@ -32,7 +32,7 @@
               v-model="loginForm.identifier"
               placeholder="Enter phone number"
               type="number"
-              maxLength="9"
+              maxLength="10"
               @blur="customBlurValidate('identifier')"
             />
           </div>
@@ -59,8 +59,8 @@
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="25px"
-              height="25px"
+              width=".694rem"
+              height=".694rem"
               viewBox="0 0 50 50"
               style="enable-background: new 0 0 50 50"
               xml:space="preserve"
@@ -180,25 +180,25 @@ const goPath = (path) => {
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: 90px 0 0 0;
+  padding: 2.5rem 0 0 0;
   .form-container {
-    margin-top: 80px;
+    margin-top: 2.222rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     .submit-btn {
-      margin: 30px 0;
+      margin: .833rem 0;
       width: 100%;
-      height: 42px;
+      height: 1.166rem;
       background: linear-gradient(-90deg, #351f5f, #2a2059);
-      border-radius: 22px;
+      border-radius: .611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size: 17px;
+      font-size: .472rem;
       font-weight: bold;
     }
     .active-btn {
@@ -207,7 +207,7 @@ const goPath = (path) => {
     .des {
       width: 100%;
       text-align: center;
-      font-size: 14px;
+      font-size: .388rem;
       color: #e556ff;
       text-decoration-line: underline;
     }
@@ -217,25 +217,25 @@ const goPath = (path) => {
       justify-content: flex-end;
       align-items: center;
       color: #e556ff;
-      font-size: 14px;
+      font-size: .388rem;
     }
   }
   .title {
     box-sizing: border-box;
-    padding: 0 16px;
+    padding: 0 .416rem;
     font-weight: bold;
-    font-size: 20px;
+    font-size: .555rem;
     color: #ffffff;
   }
   .close {
     position: fixed;
-    top: calc(env(safe-area-inset-top) + 25px);
+    top: calc(env(safe-area-inset-top) + .694rem);
     left: 0;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box;
-    padding: 0 25px;
+    padding: 0 .694rem;
   }
 }
 </style>

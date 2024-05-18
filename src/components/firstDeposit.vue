@@ -10,10 +10,10 @@
     >
       <div class="f-d-box">
         <div class="f-d-icon">
-          <img :src="img_url + 'invite/img_lihe.png'" width="66" />
+          <img :src="img_url + 'invite/img_lihe.png'" style="width: 1.833rem" />
         </div>
         <div class="f-d-close">
-          <Close color="#fff" width="16px" height="16px" @click="close()" />
+          <Close color="#fff" width=".444rem" height=".444rem" @click="close()" />
         </div>
         <div class="f-d-title">
           <img :src="img_url + 'other/img_dian.png'" />
@@ -108,36 +108,36 @@ const changeFD = (index) => {
 <style lang="scss" scoped>
 .f-d-box {
   position: relative;
-  width: calc(100% - 20px);
+  width: calc(100% - 0.555rem);
   // background: linear-gradient(-90deg, #741cb1, #6b4ee1);
   background: #741cb1;
-  border-radius: 16.7px;
+  border-radius: 0.463rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   .d-option-box {
-    margin-top: -12px;
-    width: calc(100% - 20px);
+    margin-top: -0.333rem;
+    width: calc(100% - 0.555rem);
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     .item {
-      width: 97.9px;
-      height: 159px;
+      width: 2.719rem;
+      height: 4.416rem;
       background-image: url("https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/other/hd_fl_di_2.png");
       background-size: 100% 100%;
       background-repeat: no-repeat;
       .bottom {
         width: 100%;
-        height: calc(65% - 2px);
+        height: calc(65% - 0.055rem);
         box-sizing: border-box;
-        padding: 6px;
+        padding: 0.166rem;
         .b-content {
           width: 100%;
           height: 100%;
           background: linear-gradient(-20deg, #fff6cb, #fffcf0);
-          border-radius: 6.7px;
+          border-radius: 0.186rem;
           font-weight: bold;
           color: #dd9478;
           display: flex;
@@ -145,19 +145,19 @@ const changeFD = (index) => {
           justify-content: space-around;
           align-items: center;
           .l-1 {
-            font-size: 14px;
+            font-size: 0.388rem;
           }
           .l-2 {
-            font-size: 31.3px;
+            font-size: 0.869rem;
           }
           .l-3 {
-            font-size: 12.7px;
+            font-size: 0.352rem;
           }
         }
       }
       .top {
         width: 100%;
-        height: calc(35% + 2px);
+        height: calc(35% + 0.055rem);
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -165,32 +165,32 @@ const changeFD = (index) => {
         align-items: center;
         color: #d5884f;
         .l-1 {
-          font-size: 15px;
-          margin-bottom: 5px;
+          font-size: 0.416rem;
+          margin-bottom: 0.138rem;
         }
         .l-2 {
           font-weight: bold;
-          font-size: 16.7px;
+          font-size: 0.463rem;
         }
       }
     }
 
     .item-active {
-      width: 107.7px;
-      height: 175px;
+      width: 2.991rem;
+      height: 4.861rem;
       background-image: url("https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/other/hd_fl_di_1.png");
       background-size: 100% 100%;
       background-repeat: no-repeat;
       .bottom {
         width: 100%;
-        height: calc(65% - 2px);
+        height: calc(65% - 0.055rem);
         box-sizing: border-box;
-        padding: 6px;
+        padding: 0.166rem;
         .b-content {
           width: 100%;
           height: 100%;
           background: linear-gradient(-20deg, #ffdd78, #fff1d2);
-          border-radius: 6.7px;
+          border-radius: 0.186rem;
           font-weight: bold;
           color: #de531d;
           display: flex;
@@ -198,19 +198,19 @@ const changeFD = (index) => {
           justify-content: space-around;
           align-items: center;
           .l-1 {
-            font-size: 15.3px;
+            font-size: 0.425rem;
           }
           .l-2 {
-            font-size: 34.3px;
+            font-size: 0.952rem;
           }
           .l-3 {
-            font-size: 14px;
+            font-size: 0.388rem;
           }
         }
       }
       .top {
         width: 100%;
-        height: calc(35% + 2px);
+        height: calc(35% + 0.055rem);
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -218,97 +218,97 @@ const changeFD = (index) => {
         align-items: center;
         color: #c16744;
         .l-1 {
-          font-size: 16.7px;
-          margin-bottom: 5px;
+          font-size: 0.463rem;
+          margin-bottom: 0.138rem;
         }
         .l-2 {
           font-weight: bold;
-          font-size: 18.3px;
+          font-size: 0.508rem;
         }
       }
     }
   }
   .f-d-icon {
     position: absolute;
-    top: -33px;
+    top: -0.916rem;
     left: 0;
   }
   .f-d-bottom {
     background: #ffffff;
-    box-shadow: 0px 0.3px 1px 0px #ffffff;
-    border-radius: 16.7px;
+    box-shadow: 0px 0.008rem 0.027rem 0px #ffffff;
+    border-radius: 0.463rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 0.555rem;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0.277rem;
     .des {
       width: 100%;
       text-align: left;
-      font-size: 11px;
+      font-size: 0.319rem;
       font-weight: 600;
       color: #583188;
-      line-height: 18px;
+      line-height: 0.5rem;
     }
     .des-t {
-      margin-bottom: 15px;
+      margin-bottom: 0.416rem;
       font-weight: bold;
-      font-size: 15.3px;
+      font-size: 0.425rem;
       color: #9932fc;
       font-weight: 600;
     }
     .tip {
-      margin: 15px 0;
-      width: calc(100% - 50px);
+      margin: 0.416rem 0;
+      width: calc(100% - 1.388rem);
       text-align: center;
-      font-size: 12px;
+      font-size: 0.333rem;
       font-weight: 600;
       color: #583188;
     }
     .btn {
-      width: calc(100% - 50px);
-      height: 40px;
+      width: calc(100% - 1.388rem);
+      height: 1.111rem;
       background: linear-gradient(-90deg, #9343c4, #614ae6);
-      border-radius: 20px;
+      border-radius: 0.555rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
       font-weight: bold;
-      font-size: 18.6px;
+      font-size: 0.516rem;
     }
   }
   .line-back {
-    width: calc(100% - 20px);
-    height: 9.6px;
+    width: calc(100% - 0.555rem);
+    height: 0.266rem;
     background: rgba(0, 0, 0, 0.7);
-    border-radius: 5px;
-    border: 3.3px solid rgba(25, 12, 12, 0.3);
+    border-radius: 0.027rem;
+    border: 0.091rem solid rgba(25, 12, 12, 0.3);
   }
   .f-d-title {
     width: 100%;
     box-sizing: border-box;
-    padding: 15px 0;
+    padding: 0.416rem 0;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     span {
       font-weight: bold;
-      font-size: 20.6px;
+      font-size: 0.572rem;
       color: #ffffff;
-      padding: 0 20px;
+      padding: 0 0.555rem;
     }
     img {
-      width: 9.3px;
+      width: 0.258rem;
     }
   }
   .f-d-close {
     position: absolute;
-    top: -25px;
-    right: 10px;
+    top: -0.694rem;
+    right: 0.277rem;
   }
 }
 </style>

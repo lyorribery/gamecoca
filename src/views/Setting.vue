@@ -1,7 +1,7 @@
 <template>
   <div class="setting-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
     <div class="title">Setting</div>
   </div>
@@ -16,10 +16,9 @@
     <div class="item" @click="goPath('/forgetPass')">
       <div class="label">Change Password</div>
       <div class="right">
-        <RectRight color="#CCC3E2" width="13px" height="13px" />
+        <RectRight color="#CCC3E2" width=".361rem" height=".361rem" />
       </div>
     </div>
-
   </div>
   <nut-overlay
     v-model:visible="name_visible"
@@ -30,8 +29,8 @@
     <div class="name-close">
       <Close
         color="#fff"
-        width="16px"
-        height="16px"
+        width=".444rem"
+        height=".444rem"
         @click="
           () => {
             name_visible = false;
@@ -48,7 +47,7 @@
           placeholder="Enter a 6-16 digit name"
           maxLength="16"
         />
-        <Close color="#CCC3E2" width="13px" height="13px" @click="clearVal" />
+        <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="clearVal" />
       </div>
       <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
         Submit
@@ -102,28 +101,28 @@ const goBack = () => {
 <style lang="scss" scoped>
 .name-box {
   position: fixed;
-  left: 20px;
+  left: 0.555rem;
   top: 30%;
-  width: calc(100% - 40px);
-  border-radius: 10px;
+  width: calc(100% - 1.111rem);
+  border-radius: 0.277rem;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 0.416rem;
   background: #181b2c;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   .submit-btn {
-    margin-top: 30px;
-    width: calc(100% - 60px);
-    height: 42px;
+    margin-top: 0.833rem;
+    width: calc(100% - 1.666rem);
+    height: 1.166rem;
     background: linear-gradient(-90deg, #351f5f, #2a2059);
-    border-radius: 22px;
+    border-radius: 0.6111rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: 17px;
+    font-size: 0.472rem;
     font-weight: bold;
   }
   .active-btn {
@@ -135,38 +134,38 @@ const goBack = () => {
     justify-content: center;
     color: #fff;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 0.388rem;
   }
   .ipt-box {
-    margin-top: 20px;
+    margin-top: 0.555rem;
     width: 100%;
     height: 40px;
-    border-radius: 13px;
-    border: 1.5px solid #692ddb;
+    border-radius: 0.361rem;
+    border: 0.041rem solid #692ddb;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 15px;
+    padding: 0 0.416rem;
   }
 }
 .name-close {
   position: fixed;
-  right: 20px;
-  top: calc(30% - 30px);
+  right: 0.555rem;
+  top: calc(30% - 0.833rem);
 }
 .setting {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(55px + env(safe-area-inset-top)) 0.416rem 0 0.416rem;
   .item {
     width: 100%;
-    height: 50px;
+    height: 1.388rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .right {
-      font-size: 13.3px;
+      font-size: 0.388rem;
       color: #fff;
       display: flex;
       justify-content: flex-end;
@@ -174,10 +173,10 @@ const goBack = () => {
     }
     .label {
       color: #fff;
-      font-size: 14px;
+      font-size: 0.416rem;
       .des {
-        padding-top: 3px;
-        font-size: 11px;
+        padding-top: 0.083rem;
+        font-size: 0.305rem;
         color: #ccc3e2;
         span {
           color: #e556ff;
@@ -188,7 +187,7 @@ const goBack = () => {
 }
 .setting-header {
   z-index: 9;
-  background: #161326;
+  background: #18171e;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -197,25 +196,25 @@ const goBack = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 0.5px solid #29213d;
+  border-bottom: 0.013rem solid #29213d;
   .arrow {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      position: fixed;
-      left: 15px;
-      top: 20px;
-      span {
-        font-weight: bold;
-        font-size: 13px;
-        color: #ffffff;
-        padding-left: 5px;
-      }
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    left: 0.416rem;
+    top: 0.555rem;
+    span {
+      font-weight: bold;
+      font-size: 0.361rem;
+      color: #ffffff;
+      padding-left: 0.138rem;
     }
+  }
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 0.472rem;
   }
 }
 </style>

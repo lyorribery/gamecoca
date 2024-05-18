@@ -69,24 +69,24 @@ export default {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding: 0 .555rem;
   .close-box {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: .277rem;
     .close-icon {
       position: relative;
-      width: 16px;
-      height: 16px;
+      width: .444rem;
+      height: .444rem;
     }
 
     .close-icon::before,
     .close-icon::after {
       content: "";
       position: absolute;
-      width: 20px;
-      height: 2px;
+      width: .555rem;
+      height: .055rem;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -104,38 +104,38 @@ export default {
   .tip-box {
     width: 100%;
     background: linear-gradient(-24deg, rgba(204, 186, 255), #f7fdfd);
-    border-radius: 8px;
+    border-radius: .222rem;
     overflow: hidden;
     .tip-content {
       width: 100%;
       box-sizing: border-box;
-      padding: 30px 20px;
+      padding: .833rem .555rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       .tip-text {
-        font-size: 13.3px;
+        font-size: .369rem;
         color: #583188;
-        line-height: 15px;
+        line-height: .416rem;
       }
       .btn {
-        width: 111.3px;
-        height: 30px;
-        border-radius: 15px;
-        border: 2px solid #583188;
+        width: 3.091rem;
+        height: .833rem;
+        border-radius: .416rem;
+        border: .055rem solid #583188;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: bold;
-        font-size: 13.3px;
+        font-size: .369rem;
         color: #583188;
-        margin-top: 30px;
+        margin-top: .833rem;
       }
     }
     .tip-header {
       width: 100%;
-      height: 30px;
+      height: .833rem;
       background: linear-gradient(-90deg, #9343c4, #614ae6);
     }
   }

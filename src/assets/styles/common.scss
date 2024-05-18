@@ -3,78 +3,78 @@ input {
 }
 
 .nut-input .input-text{
-    font-size: 15px;
+    font-size: .416rem;
     font-weight: 600;
 }
 
 input::input-placeholder {
-    color: #CCC3E2;
+    color: #999999;
 }
 
 input::-webkit-input-placeholder {
     /* Chrome */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 input::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 input:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 input::-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 textarea::input-placeholder {
-    color: #CCC3E2;
+    color: #999999;
 }
 
 textarea::-webkit-input-placeholder {
     /* Chrome */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 textarea::-moz-placeholder {
     /* Mozilla Firefox 19+ */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 textarea:-moz-placeholder {
     /* Mozilla Firefox 4 to 18 */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 textarea::-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #CCC3E2;
+    color: #999999;
 }
 
 .nut-tabbar{
-    background-color: #19152D;
+    background-color: #18171E;
     border-bottom:0;
     border-top:1px solid #361E5D;
 }
 
 .nut-noticebar__page{
-    height: 20px;
-    font-size: 10px;
-    border-radius: 10px;
-    padding: 0 10px;
+    height: .555rem;
+    border-radius: .277rem;
+    padding: 0 .277rem;
+    font-size: 0.333rem;
 }
 
 .nut-tabs__titles{
-    background-color: #161326;
+    background-color: #18171E;
 }
 
 .nut-tab-pane{
     padding: 0;
-    background-color: #161326;
+    background-color: #18171E;
 }
 
 .nut-form{
@@ -82,17 +82,17 @@ textarea::-ms-input-placeholder {
 }
 
 .nut-cell-group__wrap{
-    background-color: #161326;
+    background-color: #18171E;
     box-shadow: none;
 }
 
 .nut-cell{
-    background: #161326;
-    line-height: 30px;
+    background:#18171E;
+    line-height: .833rem;
 }
 
 .nut-input{
-    background: #161326;
+    background:#18171E;
 }
 
 .nut-input--border{
@@ -116,11 +116,11 @@ textarea::-ms-input-placeholder {
 }
 
 .nut-checkbox__icon--unchecked{
-    color:#CCC3E2;
+    color:#999999;
 }
 
 .nut-tabs__titles{
-    background-color: #161326;
+    background-color: #18171E;
 }
 
 .nut-popup{
@@ -128,26 +128,21 @@ textarea::-ms-input-placeholder {
 }
 
 .nut-textarea{
-    background: #161326;
+    background:#18171E;
 }
 
 .nut-textarea__textarea{
     color:#fff;
 }
 
-.nut-noticebar__page{
-    font-size: 11px;
-    font-weight: bold;
-}
-
 .nut-tabbar-item_icon-box_nav-word{
-    font-size: 11px;
+    font-size: .305rem;
     font-weight: bold;
 }
 
 .nut-tabbar-item_icon-box_icon img{
-    width: 22px;
-    height: 22px;
+    width: .611rem;
+    height: .611rem;
 }
 
 .nut-backtop.show{
@@ -157,9 +152,9 @@ textarea::-ms-input-placeholder {
 
 ul{
     color:#666666;
-    font-size: 11px;
+    font-size: .333rem;
     font-weight: 600;
-    padding-left: 20px;
+    padding-left: .555rem;
 }
 
 

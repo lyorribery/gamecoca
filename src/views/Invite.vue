@@ -1,7 +1,7 @@
 <template>
   <div class="invite-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
   </div>
   <div class="invite">
@@ -14,15 +14,15 @@
       <div class="title-box">Invite Friends <span>Bonus</span></div>
       <div class="invite-step">
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_yqhy.png'" width="33.3" />
+          <img :src="img_url + 'invite/icon_yqhy.png'" style="width:.925rem" />
         </div>
-        <img :src="img_url + 'invite/img_dijin.png'" width="23.6" />
+        <img :src="img_url + 'invite/img_dijin.png'" style="width:.655rem" />
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_100.png'" width="33.3" />
+          <img :src="img_url + 'invite/icon_100.png'" style="width:.925rem" />
         </div>
-        <img :src="img_url + 'invite/img_dijin.png'" width="23.6" />
+        <img :src="img_url + 'invite/img_dijin.png'" style="width:.655rem" />
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_bankcard.png'" width="33.3" />
+          <img :src="img_url + 'invite/icon_bankcard.png'" style="width:.925rem" />
         </div>
       </div>
       <div class="invite-des">
@@ -148,16 +148,16 @@ onMounted(() => {
   align-items: center;
   background: #360c7e;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px
-    calc(env(safe-area-inset-bottom) + 15px) 15px;
+  padding: calc(55px + env(safe-area-inset-top)) .416rem
+    calc(env(safe-area-inset-bottom) + .416rem) .416rem;
   .invite-box {
-    margin-top: 15px;
+    margin-top: .416rem;
     width: 100%;
     background: linear-gradient(-31deg, #af1de4, #4f19cc);
-    border-radius: 16.7px;
+    border-radius: .463rem;
     border: 1.3px solid #de47f9;
     box-sizing: border-box;
-    padding: 15px 10px;
+    padding: .416rem .277rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -166,37 +166,37 @@ onMounted(() => {
     .no-data-label {
       width: 100%;
       color: #fff;
-      font-size: 12.7px;
+      font-size: .361rem;
       span {
         color: #fff76a;
         text-decoration-line: underline;
       }
     }
     .cur-title {
-      width: 87px;
-      height: 23.3px;
+      width: 2.416rem;
+      height: .647rem;
       background: #f8e0fd;
-      box-shadow: 0px 1.3px 0px 0px #df4afd;
-      border-radius: 2.6px 12px 2.6px 12px;
+      box-shadow: 0px .036rem 0px 0px #df4afd;
+      border-radius: .072rem .333rem .072rem .333rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #c14ded;
-      font-size: 12.7px;
+      font-size: .361rem;
     }
     .invite-data-box {
-      margin: 15px 0;
+      margin: .416rem 0;
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 13.3px;
+      border-radius: .369rem;
       box-sizing: border-box;
-      padding: 15px 0;
+      padding: .416rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       .item-b {
-        border-left: 0.5px solid rgba(255, 255, 255, 0.2);
-        border-right: 0.5px solid rgba(255, 255, 255, 0.2);
+        border-left: .013rem solid rgba(255, 255, 255, 0.2);
+        border-right: .013rem solid rgba(255, 255, 255, 0.2);
       }
       .item {
         width: calc(100% / 3);
@@ -206,24 +206,24 @@ onMounted(() => {
         align-items: center;
         box-sizing: border-box;
         .item-label {
-          font-size: 12.6px;
+          font-size: .361rem;
           color: #f8e0fd;
-          margin-top: 5px;
+          margin-top: .138rem;
         }
         .value {
-          font-size: 20.6px;
+          font-size: .555rem;
         }
       }
     }
     .invite-label {
-      margin: 15px 0;
+      margin: .416rem 0;
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 13.3px;
+      border-radius: .369rem;
       box-sizing: border-box;
-      padding: 10px 15px;
+      padding: .277rem .416rem;
       color: #fff;
-      font-size: 14px;
+      font-size: .388rem;
       span {
         color: #fff76a;
       }
@@ -234,18 +234,18 @@ onMounted(() => {
       justify-content: space-around;
       align-items: center;
       color: #fff;
-      font-size: 12.5px;
-      margin-top: 5px;
+      font-size: .361rem;
+      margin-top: .138rem;
     }
     .invite-step {
       width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      margin-top: 15px;
+      margin-top: .416rem;
       .step-item {
-        width: 50px;
-        height: 50px;
+        width: 1.388rem;
+        height: 1.388rem;
         border-radius: 100%;
         background: rgba(0, 0, 0, 0.15);
         display: flex;
@@ -255,19 +255,19 @@ onMounted(() => {
     }
     .title-box {
       position: absolute;
-      top: -18.35px;
-      left: calc((100% - 170px) / 2);
-      width: 170px;
-      height: 36.7px;
+      top: -.509rem;
+      left: calc((100% - 4.722rem) / 2);
+      width: 4.722rem;
+      height: 1.019rem;
       background: linear-gradient(-90deg, #600afd, #7b42fd);
-      border-radius: 3.3px 16.7px 3.3px 16.7px;
-      border: 0.7px solid #de47f9;
-      box-shadow: 0px 2.7px 4.7px 0px #de47f9;
+      border-radius: .091rem .463rem .091rem .463rem;
+      border: .019rem solid #de47f9;
+      box-shadow: 0px .075rem .13rem 0px #de47f9;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: bold;
-      font-size: 15px;
+      font-size: .416rem;
       color: #ffffff;
       span {
         color: #fff76a;
@@ -275,40 +275,40 @@ onMounted(() => {
     }
   }
   .tip-label {
-    margin: 15px 0 10px 0;
+    margin: .416rem 0 .277rem 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 15px;
-    font-size: 13.3px;
+    padding: 0 .416rem;
+    font-size: .388rem;
     color: #fff;
   }
   .tip {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 15px 5px 15px;
-    font-size: 12.7px;
+    padding: 0 .416rem .138rem .416rem;
+    font-size: .361rem;
     color: #ccc3e2;
   }
   .label {
-    margin: 15px 0;
+    margin: .416rem 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 15px;
-    font-size: 12.7px;
+    padding: 0 .416rem;
+    font-size: .361rem;
     color: #ccc3e2;
   }
   .invite-btn {
-    margin-top: -15px;
-    width: calc(100% - 30px);
+    margin-top: -.416rem;
+    width: calc(100% - .833rem);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 45.7px;
+    height: 1.269rem;
     background: linear-gradient(-90deg, #fd823c, #e520fc);
-    box-shadow: 0px 2.7px 4.7px 0px #770dcf;
-    border-radius: 22.7px;
+    box-shadow: 0px .075rem .13rem 0px #770dcf;
+    border-radius: .63rem;
     font-weight: bold;
-    font-size: 17.3px;
+    font-size: .48rem;
     color: #ffffff;
   }
 }
@@ -324,16 +324,16 @@ onMounted(() => {
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding-left: 15px;
+  padding-left: .416rem;
   .arrow {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     span {
       font-weight: bold;
-      font-size: 13px;
+      font-size: .361rem;
       color: #ffffff;
-      padding-left: 5px;
+      padding-left: .138rem;
     }
   }
 }

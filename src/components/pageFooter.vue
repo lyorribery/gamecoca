@@ -1,59 +1,53 @@
 <template>
   <div class="page-footer">
-    <img src="@/assets/images/logo.svg" width="130" style="margin-bottom: 20px" />
+    <img
+      src="@/assets/images/logo.png"
+      style="margin-bottom: .555rem; width: 3.533rem"
+    />
     <div class="content-box">
-      <div class="item" @click="goDescription('1')">Privacy Policy</div>
-      <div class="item" @click="goDescription('2')">About Us</div>
+      <div class="item" @click="goDescription('1')">PRIVACY POLICY</div>
+      <div class="item" @click="goDescription('2')">ABOUT US</div>
       <div class="item" @click="goPath('/contact')" style="border-right: 0">
-        Contact Us
+        CONTACT US
       </div>
-      <!-- <div class="item" style="border-right: 0">Terms And Conditions</div> -->
     </div>
-    <!-- <div class="content-box">
-      <div class="item-line">Terms and Conditions</div>
-      <div class="item-line" style="padding: 0 10px 5px 10px">Service Agreement</div>
-      <div class="item-line">Privacy Policy</div>
-      <div class="item-line" style="padding: 0 0 0 10px">Respomsible Gaming Policy</div>
-    </div> -->
 
     <div class="des">
       GameCoca will respond to all of your requests.Contact us using amusement purposes
       only.
     </div>
 
-    <div class="contact-box">
-      <div class="contact-item" @click="goThrid(1)" style="margin-right: 15px">
-        <img src="../assets/images/icon_whatsapp.svg" width="20" />
-        <span>+233203131028</span>
+    <div class="contact-box" style="margin: .555rem 0 .416rem 0">
+      <div class="contact-item" @click="goThrid(1)">
+        <img src="../assets/images/whatsapp.png" />
+        <span>WhatsApp</span>
       </div>
 
       <div class="contact-item" @click="goThrid(2)">
-        <img src="../assets/images/icon_email.svg" width="20" />
-        <span>gamecoca88@gmail.com</span>
-      </div>
-    </div>
-
-    <div class="contact-box">
-      <div class="contact-item" style="margin-right: 15px">
-        <img src="../assets/images/icon_facebook.svg" width="20" />
-        <span>Follow us on</span>
+        <img src="../assets/images/email.png" />
+        <span>Email</span>
       </div>
       <div class="contact-item" @click="goThrid(3)">
-        <img src="../assets/images/livechat.png" width="20" />
-        <span>Live chat</span>
+        <img src="../assets/images/kefu.png" />
+        <span>Live Chat</span>
       </div>
     </div>
 
-    <div class="contact-box">
+    <div class="contact-box" style="margin-bottom: .555rem">
       <div class="contact-item-bank">
         <span>Make deposit via</span>
-        <img src="../assets/images/vodafone.png" width="22" />
-        <img src="../assets/images/tigo.png" width="22" />
-        <img src="../assets/images/mtn.png" width="22" />
+        <img src="../assets/images/vodafone.png" style="width: .518rem" />
+        <img src="../assets/images/tigo.png" style="width: .518rem" />
+        <img src="../assets/images/mtn.png" style="width: .518rem" />
       </div>
     </div>
 
-    <div class="des" style="font-weight: bold; margin: 10px; color: #fff">LICENCE</div>
+    <div
+      class="des"
+      style="font-weight: bold; margin: .277rem; color: #d9d9d9; font-size: .328rem"
+    >
+      LICENCE
+    </div>
 
     <div class="des">
       GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
@@ -61,8 +55,11 @@
     </div>
 
     <div class="img-box">
-      <img src="@/assets/images/img_18+.svg" style="margin-right: 10px" />
-      <img src="@/assets/images/img_biaozhi.svg" />
+      <img
+        src="@/assets/images/img_18+.svg"
+        style="margin-right: .277rem; width: .648rem"
+      />
+      <img src="@/assets/images/img_biaozhi.svg" style="width: .787rem" />
     </div>
 
     <div class="des">
@@ -103,100 +100,82 @@ const goThrid = (type) => {
 .page-footer {
   width: 100%;
   box-sizing: border-box;
-  padding: 30px 10px 0 10px;
+  padding: .833rem .277rem 0 .277rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   .img-box {
-    margin: 15px 0;
+    margin: .416rem 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    img {
-      width: 25px;
-    }
   }
   .contact-box {
-    margin-top: 5px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 .95rem;
     .contact-item-bank {
-      margin: 10px 0 15px 0;
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       span {
-        color: #fff;
-        font-size: 12px;
+        color: #999999;
+        font-size: .333rem;
         font-weight: bold;
       }
       img {
-        margin-left: 8px;
+        margin-left: .222rem;
       }
     }
     .contact-item {
+      width: calc(100% / 3);
       display: flex;
       justify-content: center;
       align-items: center;
       span {
-        color: #fff;
-        font-size: 12px;
+        color: #999999;
+        font-size: .37rem;
         font-weight: bold;
         text-decoration-line: underline;
       }
       img {
-        margin-right: 5px;
+        width: .555rem;
+        height: .555rem;
+        margin-right: 0.138rem;
       }
     }
   }
   .des {
     width: 100%;
     text-align: center;
-    color: #ccc3e2;
-    font-size: 12px;
-    line-height: 15px;
-    .icon-box {
-      border-radius: 4px;
-      margin-left: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      width: 22px;
-      height: 22px;
-      border: 1px solid #ccc3e2;
-    }
+    color: #999999;
+    font-size: .333rem;
+    line-height: .416rem;
   }
   .content-box {
     width: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
-    margin-bottom: 15px;
+    margin-bottom: .462rem;
     flex-wrap: wrap;
-    // .item-line {
-    //   text-decoration-line: underline;
-    //   color: #fff;
-    //   font-size: 12px;
-    // }
+
     .item {
       font-weight: bold;
-      color: #fff;
-      font-size: 12px;
+      color: #d9d9d9;
+      font-size: .328rem;
       width: calc(100% / 3);
       display: flex;
       box-sizing: border-box;
-      padding: 1px 0;
       justify-content: center;
-      border-right: 1.5px solid #fff;
-      // text-decoration-line: underline;
+      border-right: .055rem solid #d9d9d9;
     }
   }
 }
 </style>
->

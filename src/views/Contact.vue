@@ -1,7 +1,7 @@
 <template>
   <div class="contact-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
     <div class="title">Contact Us</div>
   </div>
@@ -14,21 +14,18 @@
       </div>
     </div>
     <div class="live-btn" @click="goThrid(3)">
-      <Comment color="#fff" width="18px" height="18px" />
+      <Comment color="#fff" width=".5rem" height=".5rem" />
       <span>Live Chat</span>
     </div>
     <div class="channel-row" @click="goThrid(1)">
-      <img src="@/assets/images/icon_whatsapp.svg" width="20" />
+      <img src="@/assets/images/whatsapp.png" style="width:.611rem" />
       <span>017858145</span>
     </div>
     <div class="channel-row" @click="goThrid(2)">
-      <img src="@/assets/images/icon_email.svg" width="20" />
+      <img src="@/assets/images/email.png" style="width:.611rem" />
       <span>gamecoca88@gmail.com</span>
     </div>
-    <!-- <div class="channel-row" >
-      <img src="@/assets/images/icon_facebook.svg" width="20" />
-      <span>gamecoca88@gmail.com</span>
-    </div> -->
+
     <div class="divide-des">Available form 08:00-00:00</div>
     <div class="divide-line"></div>
     <div class="des">
@@ -96,33 +93,33 @@ const sendAdvice = () => {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(55px + env(safe-area-inset-top)) .416rem 0 .416rem;
   .opinion-box {
-    width: calc(100% - 20px);
+    width: calc(100% - .555rem);
 
     .title {
-      font-size: 12px;
+      font-size: .333rem;
       font-weight: 600;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: .222rem;
     }
     .content {
       width: 100%;
-      border-radius: 16px;
-      border: 0.8px solid #ccc3e2;
+      border-radius: .444rem;
+      border: .022rem solid #999999;
       overflow: hidden;
       .send-row {
         width: 100%;
         display: flex;
         justify-content: flex-end;
         box-sizing: border-box;
-        padding: 0 10px 10px 0;
+        padding: 0 .277rem .277rem 0;
         .send-btn {
-          width: 76.7px;
-          height: 24px;
+          width: 2.13rem;
+          height: .666rem;
           background: linear-gradient(-90deg, #9343c4, #614ae6);
-          border-radius: 12px;
-          font-size: 12px;
+          border-radius: .333rem;
+          font-size: .333rem;
           font-weight: 600;
           color: #ffffff;
           display: flex;
@@ -134,72 +131,72 @@ const sendAdvice = () => {
   }
   .divide-line {
     width: 100%;
-    height: 0.3px;
-    background: #ccc3e2;
+    height: .008rem;
+    background: #999999;
   }
   .divide-des {
-    font-size: 11px;
+    font-size: .305rem;
     font-weight: 600;
-    color: #ccc3e2;
+    color: #999999;
     box-sizing: border-box;
-    padding: 10px;
+    padding: .277rem;
   }
   .channel-row {
-    width: calc(100% - 20px);
-    height: 40px;
+    width: calc(100% - .555rem);
+    height: 1.111rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     span {
-      font-size: 14px;
+      font-size: .388rem;
       font-weight: bold;
       color: #ffffff;
-      padding-left: 5px;
-      text-decoration-line: underline;
+      padding-left: .222rem;
+      // text-decoration-line: underline;
     }
   }
   .live-btn {
-    margin-bottom: 15px;
-    width: calc(100% - 30px);
-    height: 45.7px;
+    margin-bottom: .416rem;
+    width: calc(100% - .833rem);
+    height: 1.269rem;
     background: linear-gradient(-90deg, #9343c4, #614ae6);
-    border-radius: 22.7px;
+    border-radius: .63rem;
     display: flex;
     justify-content: center;
     align-items: center;
     span {
       font-weight: bold;
-      font-size: 17.3px;
+      font-size: .472rem;
       color: #ffffff;
-      padding-left: 8px;
+      padding-left: .222rem;
     }
   }
   .des {
-    margin: 20px 0;
+    margin: .555rem 0;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 10px;
+    padding: 0 .277rem;
     .t-1 {
       font-weight: bold;
-      font-size: 14px;
+      font-size: .388rem;
       color: #ffffff;
-      margin-bottom: 15px;
+      margin-bottom: .416rem;
     }
     .t-2 {
-      font-size: 12px;
+      font-size: .333rem;
       font-weight: 600;
       color: #ffffff;
-      line-height: 15px;
+      line-height: .416rem;
     }
   }
 }
 .contact-header {
   z-index: 9;
-  background: #161326;
+  background: #18171e;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -208,25 +205,25 @@ const sendAdvice = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 0.5px solid #29213d;
+  border-bottom: .013rem solid #29213d;
   .arrow {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: fixed;
-    left: 15px;
-    top: 20px;
+    left: .416rem;
+    top: .555rem;
     span {
       font-weight: bold;
-      font-size: 13px;
+      font-size: .361rem;
       color: #ffffff;
-      padding-left: 5px;
+      padding-left: .138rem;
     }
   }
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: .472rem;
   }
 }
 </style>

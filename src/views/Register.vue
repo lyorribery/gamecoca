@@ -1,10 +1,10 @@
 <template>
   <div class="permission">
     <div class="close">
-      <Close color="#CCC3E2" width="13px" height="13px" @click="back" />
+      <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="back" />
     </div>
     <div class="title">Sign up</div>
-    <div class="title" style="margin-top: 5px">To GameCoca</div>
+    <div class="title" style="margin-top: .138rem">To GameCoca</div>
 
     <div class="form-container">
       <nut-form ref="registerRef" :model-value="registerForm">
@@ -24,14 +24,14 @@
             "
           >
             <span
-              style="color: #fff; font-size: 15px; font-weight: bold; padding-right: 10px"
+              style="color: #fff; font-size: .416rem; font-weight: bold; padding-right: .277rem"
               >+233</span
             >
             <nut-input
               v-model="registerForm.identifier"
               placeholder="Enter phone number"
               type="number"
-              maxLength="9"
+              maxLength="10"
               @blur="customBlurValidate('identifier')"
             />
           </div>
@@ -84,8 +84,8 @@
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="25px"
-              height="25px"
+              width=".694rem"
+              height=".694rem"
               viewBox="0 0 50 50"
               style="enable-background: new 0 0 50 50"
               xml:space="preserve"
@@ -112,7 +112,7 @@
             <nut-checkbox
               v-model="is_check"
               icon-size="11"
-              style="display: inline-block; width: 0; height: 0; margin-right: 15px"
+              style="display: inline-block; width: 0; height: 0; margin-right: .416rem"
             ></nut-checkbox>
             By signing up,I agree to GameCoca’s
             <span @click="goDescription('3')"> Terms and Conditions</span> &
@@ -281,36 +281,36 @@ const goDescription = (type) => {
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: 90px 0 0 0;
+  padding: 2.5rem 0 0 0;
   .form-container {
-    margin-top: 80px;
+    margin-top: 2.222rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     .code-btn {
-      font-size: 10.7px;
+      font-size: .297rem;
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid #ccc3e2;
-      border-radius: 16px;
-      width: 86.6px;
-      height: 26.7px;
+      border-radius: .444rem;
+      width: 2.405rem;
+      height: .741rem;
     }
     .submit-btn {
-      margin: 30px 0;
+      margin: .833rem 0;
       width: 100%;
-      height: 42px;
+      height: 1.166rem;
       background: linear-gradient(-90deg, #351f5f, #2a2059);
-      border-radius: 22px;
+      border-radius: .611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size: 17px;
+      font-size:.472rem;
       font-weight: bold;
     }
     .active-btn {
@@ -320,8 +320,8 @@ const goDescription = (type) => {
       position: relative;
       width: 100%;
       box-sizing: border-box;
-      padding: 0 20px;
-      font-size: 13px;
+      padding: 0 .555rem;
+      font-size: .361rem;
       color: #ccc3e2;
       span {
         color: #e556ff;
@@ -331,20 +331,20 @@ const goDescription = (type) => {
   }
   .title {
     box-sizing: border-box;
-    padding: 0 16px;
+    padding: 0 .416rem;
     font-weight: bold;
-    font-size: 20px;
+    font-size: .555rem;
     color: #ffffff;
   }
   .close {
     position: fixed;
-    top: calc(env(safe-area-inset-top) + 25px);
+    top: calc(env(safe-area-inset-top) + .694rem);
     left: 0;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box;
-    padding: 0 25px;
+    padding: 0 .694rem;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="change-pass-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
     <div class="title">Change Password</div>
   </div>
@@ -24,14 +24,14 @@
             "
           >
             <span
-              style="color: #fff; font-size: 15px; font-weight: bold; padding-right: 10px"
+              style="color: #fff; font-size: .416rem; font-weight: bold; padding-right: .277rem"
               >+233</span
             >
             <nut-input
               v-model="changepassForm.identifier"
               placeholder="Enter phone number"
               type="number"
-              maxLength="9"
+              maxLength="10"
               @blur="customBlurValidate('identifier')"
             />
           </div>
@@ -84,8 +84,8 @@
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
-              width="25px"
-              height="25px"
+              width=".694rem"
+              height=".694rem"
               viewBox="0 0 50 50"
               style="enable-background: new 0 0 50 50"
               xml:space="preserve"
@@ -253,7 +253,7 @@ const goBack = () => {
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: calc(70px + env(safe-area-inset-top)) 15px 0 15px;
+  padding: calc(1.944rem + env(safe-area-inset-top)) .416rem 0 .416rem;
   .form-container {
     width: 100%;
     display: flex;
@@ -261,27 +261,27 @@ const goBack = () => {
     align-items: center;
     flex-direction: column;
     .code-btn {
-      font-size: 10.7px;
+      font-size: .297rem;
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid #ccc3e2;
-      border-radius: 16px;
-      width: 86.6px;
-      height: 26.7px;
+      border-radius: .444rem;
+      width: 2.405rem;
+      height: .741rem;
     }
     .submit-btn {
-      margin: 30px 0;
+      margin: .833rem 0;
       width: 100%;
-      height: 42px;
+      height: 1.166rem;
       background: linear-gradient(-90deg, #351f5f, #2a2059);
-      border-radius: 22px;
+      border-radius: .611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size: 17px;
+      font-size: .472rem;
       font-weight: bold;
     }
     .active-btn {
@@ -291,8 +291,8 @@ const goBack = () => {
       position: relative;
       width: 100%;
       box-sizing: border-box;
-      padding: 0 20px;
-      font-size: 13px;
+      padding: 0 .555rem;
+      font-size: .361rem;
       color: #ccc3e2;
       span {
         color: #e556ff;
@@ -303,7 +303,7 @@ const goBack = () => {
 }
 .change-pass-header {
   z-index: 9;
-  background: #161326;
+  background:#18171E;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -312,25 +312,25 @@ const goBack = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 0.5px solid #29213d;
+  border-bottom: .013rem solid #29213d;
   .arrow {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: fixed;
-    left: 15px;
-    top: 20px;
+    left: .416rem;
+    top: .555rem;
     span {
       font-weight: bold;
-      font-size: 13px;
+      font-size: .361rem;
       color: #ffffff;
-      padding-left: 5px;
+      padding-left: .138rem;
     }
   }
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: .472rem;
   }
 }
 </style>

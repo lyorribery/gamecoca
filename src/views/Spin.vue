@@ -1,13 +1,13 @@
 <template>
   <div class="spin-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
     <span>Coins Spin</span>
   </div>
   <div class="spin">
     <div class="spin-container" :style="{ width: s_w + 'px', height: s_w + 'px' }">
-      <img :src="img_url + 'spin/zp_zhizhen.png'" width="70" style="z-index: 2" />
+      <img :src="img_url + 'spin/zp_zhizhen.png'" style="z-index: 2; width: 1.944rem" />
       <div class="spin-box" ref="prizeBack">
         <img :src="img_url + 'spin/zp_di.png'" style="width: 100%" />
       </div>
@@ -118,7 +118,7 @@ const prizeStyle = computed(() => {
               height: ${s_w.value / 2}px;
               transform: rotate(${_degree * i + _degree / 2 - 15}deg);
               transform-origin: 50% 100%;
-              margin-top:10px;
+              margin-top:.277rem;
             `;
   };
 });
@@ -214,7 +214,7 @@ const stopRun = (e) => {
   align-items: center;
   background: linear-gradient(-31deg, #5c41c0, #370f70);
   box-sizing: border-box;
-  padding: calc(60px + env(safe-area-inset-top)) 15px 15px 15px;
+  padding: calc(1.666rem + env(safe-area-inset-top)) 0.416rem 0.416rem 0.416rem;
 
   .spin-container {
     position: relative;
@@ -236,7 +236,7 @@ const stopRun = (e) => {
       position: absolute;
       left: 0;
       right: 0;
-      top: -10px;
+      top: -0.277rem;
       margin: auto;
       &:nth-child(even) {
         color: #ffe48f;
@@ -247,14 +247,14 @@ const stopRun = (e) => {
     }
     .prize-item img {
       width: 40%;
-      margin: 40px auto 10px;
+      margin: 1.111rem auto 0.277rem;
       display: block;
     }
     .prize-item .prize-txt {
-      font-size: 9.33px;
+      font-size: 0.259rem;
       font-weight: bold;
       text-align: center;
-      line-height: 12px;
+      line-height: 0.333rem;
     }
 
     .spin-back {
@@ -286,40 +286,40 @@ const stopRun = (e) => {
   }
 
   .divide {
-    margin: 20px 0;
-    width: calc(100% - 30px);
+    margin: 0.555rem 0;
+    width: calc(100% - 0.833rem);
     display: flex;
     justify-items: center;
     align-items: center;
     span {
       font-weight: bold;
-      font-size: 11px;
+      font-size: 0.305rem;
       color: #49bf6a;
-      padding: 0 8px;
+      padding: 0 0.222rem;
     }
     .line {
       flex: 1;
-      height: 0.7px;
+      height: 0.019rem;
       background: #ccc3e2;
     }
   }
   .des {
-    line-height: 16px;
+    line-height: 0.444rem;
     width: 100%;
-    font-size: 12px;
+    font-size: 0.333rem;
     color: #ffffff;
   }
   .data-box {
-    margin: 20px;
+    margin: 0.555rem;
     width: 100%;
-    height: 46.7px;
-    border-radius: 23.3px;
-    border: 1px solid #bd35fc;
+    height: 1.297rem;
+    border-radius: 0.647rem;
+    border: 0.027rem solid #bd35fc;
     display: flex;
     box-sizing: border-box;
     align-items: center;
     .b-r {
-      border-right: 0.6px solid #ccc3e2;
+      border-right: 0.016rem solid #ccc3e2;
     }
     .item {
       width: 50%;
@@ -327,24 +327,24 @@ const stopRun = (e) => {
       justify-content: space-around;
       align-items: center;
       box-sizing: border-box;
-      padding: 0 10px;
-      font-size: 14px;
+      padding: 0 0.277rem;
+      font-size: 0.402rem;
       color: #ffffff;
       span {
         font-weight: bold;
-        font-size: 20px;
+        font-size: 0.555rem;
         color: #e556ff;
       }
     }
   }
   .btn {
-    margin-bottom: 20px;
-    width: calc(100% - 30px);
-    height: 45.7px;
-    background: linear-gradient(-90deg, #9343C4, #614AE6);
-    border-radius: 22.7px;
+    margin-bottom: 0.555rem;
+    width: calc(100% - 0.833rem);
+    height: 1.269rem;
+    background: linear-gradient(-90deg, #9343c4, #614ae6);
+    border-radius: 0.63rem;
     font-weight: bold;
-    font-size: 17.3px;
+    font-size: 0.472rem;
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -352,9 +352,9 @@ const stopRun = (e) => {
     position: relative;
     .tip {
       position: absolute;
-      right: 50px;
-      bottom: 16.2px;
-      font-size: 13.3px;
+      right: 1.388rem;
+      bottom: 0.45rem;
+      font-size: 0.361rem;
       color: #ffffff;
       font-style: italic;
     }
@@ -378,18 +378,18 @@ const stopRun = (e) => {
     justify-content: flex-start;
     align-items: center;
     position: fixed;
-    left: 15px;
-    top: 20px;
+    left: 0.416rem;
+    top: 0.555rem;
     span {
       font-weight: bold;
-      font-size: 13px;
+      font-size: 0.361rem;
       color: #ffffff;
-      padding-left: 5px;
+      padding-left: 0.138rem;
     }
   }
   span {
     font-weight: bold;
-    font-size: 16.7px;
+    font-size: .472rem;
     color: #ffffff;
   }
 }

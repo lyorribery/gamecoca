@@ -1,14 +1,10 @@
 <template>
-  <div
-    class="card-item"
-    :style="{ width: (cardWidth - 36) / 3 + 'px' }"
-    @click="goDetail(cardInfo)"
-  >
+  <div class="card-item" style="width: 2.964rem" @click="goDetail(cardInfo)">
     <div class="card-image-box">
       <nut-image
         :src="cardInfo.icon"
-        :width="((cardWidth - 36) / 3).toString()"
-        :height="((cardWidth - 36) / 3).toString()"
+        width="2.964rem"
+        height="2.964rem"
         show-loading
         show-error
         round
@@ -19,25 +15,24 @@
           <img
             class="img-loading"
             src="../assets/images/img_load.svg"
-            :style="{
-              width: (cardWidth - 36) / 3 + 'px',
-              height: (cardWidth - 36) / 3 + 'px',
-            }"
+            style="width: 2.964rem; height: 2.964rem"
           />
         </template>
         <template #error>
           <img
             class="img-loading"
             src="../assets/images/img_load.svg"
-            :style="{
-              width: (cardWidth - 36) / 3 + 'px',
-              height: (cardWidth - 36) / 3 + 'px',
-            }"
+            style="width: 2.964rem; height: 2.964rem"
           />
         </template>
       </nut-image>
+
+      <div class="img-mask"></div>
       <div class="card-count">
-        <img :src="img_url + 'other/img_people.png'" width="12.5" />
+        <img
+          src="../assets/images/img_people.png"
+          style="width: 0.188rem; height: 0.2416rem"
+        />
         <span>{{ cardInfo.count }}</span>
       </div>
       <!-- <div class="card-name line-text-overflow">{{ cardInfo.name }}</div> -->
@@ -54,6 +49,7 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 import { startGame } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
+import { useRouter } from "vue-router";
 
 export default {
   name: "imgCard",
@@ -68,13 +64,11 @@ export default {
     },
   },
   setup(props, ctx) {
+    const router = useRouter();
     const img_url = apiconfig.fileURL;
     const { state, commit } = useStore();
     const is_req = ref(false);
-    const cardWidth =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
+
     const goDetail = async (data) => {
       if (!localStorage.getItem("token")) {
         commit("set_tip_info", "You have not logged in yet,please login.");
@@ -92,7 +86,7 @@ export default {
       is_req.value = true;
       commit("set_loading_modal", true);
       if (data.clientUrl) {
-        is_req.value = false
+        is_req.value = false;
         location.href = `${data.clientUrl}?t_code=${localStorage.getItem("token")}`;
         return;
       }
@@ -122,7 +116,6 @@ export default {
     return {
       img_url,
       goDetail,
-      cardWidth,
     };
   },
 };
@@ -132,78 +125,44 @@ export default {
 .card-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 8px;
-  margin-right: 8px;
+  margin-bottom: .277rem;
+  margin-right: .277rem;
   &:nth-child(3n) {
     margin-right: 0;
   }
-  .game-btn-box {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 10px 0;
-    .btn {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      box-sizing: border-box;
-      border-radius: 12px;
-      padding: 5px 15px;
-      font-size: 12px;
-      color: #fff;
-    }
-    .play {
-      background: linear-gradient(-90deg, rgba(191, 53, 253, 0.61), #5b2efa);
-      font-weight: bold;
-    }
-    .demo {
-      background: #382b63;
-    }
-  }
+
   .card-image-box {
-    border-radius: 12px;
+    border-radius: .333rem;
     position: relative;
     overflow: hidden;
+    .img-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+    }
     .card-count {
       position: absolute;
-      top: 5px;
-      left: 5px;
+      top: .138rem;
+      left: .138rem;
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      padding: 3px 8px;
+      padding: .041rem .138rem;
       background: rgba(0, 0, 0, 0.6);
       box-shadow: 0px 0px 1px 0px #000000;
-      border-radius: 16px;
+      border-radius: .277rem;
       span {
-        padding-left: 3px;
-        font-size: 11.7px;
+        padding-left: .083rem;
+        font-size: .222rem;
         color: #fff;
         font-weight: 600;
       }
     }
-    .card-name {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      z-index: 2;
-      text-align: left;
-      color: #fff;
-      font-size: 11px;
-      width: 100%;
-    }
-
-    .line-text-overflow {
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
 
     .img-loading {
-      // animation: lighter 2.5s linear infinite;
-
       @keyframes lighter {
         0% {
           opacity: 1;

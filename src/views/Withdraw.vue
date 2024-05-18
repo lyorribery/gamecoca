@@ -2,7 +2,7 @@
   <div class="withdraw">
     <div class="withdraw-header">
       <div @click="goBack" class="arrow">
-        <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+        <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
       </div>
       <div class="title">Withdraw</div>
       <div class="sub-title" @click="goRecords()">Records</div>
@@ -30,7 +30,7 @@
         <span>Withdrawal channels</span>
         <div class="right" @click="showChannels">
           <span>{{ cur_channel }}</span>
-          <RectRight color="#fff" width="13px" height="13px" />
+          <RectRight color="#fff" width=".361rem" height=".361rem" />
         </div>
       </div>
     </div>
@@ -40,8 +40,8 @@
         v-if="is_loading"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="25px"
-        height="25px"
+        width=".694rem"
+        height=".694rem"
         viewBox="0 0 50 50"
         style="enable-background: new 0 0 50 50"
         xml:space="preserve"
@@ -77,7 +77,7 @@
             }
           "
         >
-          <Close color="#fff" width="15px" height="15px" />
+          <Close color="#fff" width=".416rem" height=".416rem" />
         </div>
       </div>
       <div
@@ -90,14 +90,14 @@
           <img :src="item.icon" />
           <span>{{ item.showname }}</span>
         </div>
-        <Check v-if="item.checked" color="#49BF6A" width="16px" height="16px" />
+        <Check v-if="item.checked" color="#49BF6A" width=".444rem" height=".444rem" />
       </div>
     </div>
   </nut-popup>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { RectLeft, RectRight, Close, Check } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -105,7 +105,11 @@ import { withdraw } from "@/apis/apis";
 const router = useRouter();
 let { state, commit } = useStore();
 const max_amount = computed(() => {
-  return state.user_info.gold / 100;
+  if (state.user_info.gold < state.user_info.bindGold) {
+    return state.user_info.gold / 100;
+  } else {
+    return state.user_info.bindGold / 100;
+  }
 });
 const is_loading = ref(false);
 const submit = () => {
@@ -171,7 +175,7 @@ const submit = () => {
 };
 const amount_val = ref("");
 const channel_visible = ref(false);
-const cur_channel = ref("Vodafone");
+const cur_channel = ref("MoMo");
 const quick = () => {
   amount_val.value = max_amount.value.toString();
 };
@@ -191,23 +195,23 @@ const chooseChannel = (index) => {
 };
 const channel_list = ref([
   {
+    showname: "MoMo",
+    name: "MTN-gh",
+    icon: require("../assets/images/mtn.png"),
+    status: "",
+    checked: false,
+  },
+  {
     showname: "Vodafone",
     name: "vodafone-gh",
     icon: require("../assets/images/vodafone.png"),
     status: "",
-    checked: true,
+    checked: false,
   },
   {
     showname: "AirtelTigo",
     name: "tigo-gh",
     icon: require("../assets/images/tigo.png"),
-    status: "",
-    checked: false,
-  },
-  {
-    showname: "MoMo",
-    name: "MTN-gh",
-    icon: require("../assets/images/mtn.png"),
     status: "",
     checked: false,
   },
@@ -223,6 +227,36 @@ const goRecords = () => {
     },
   });
 };
+onMounted(() => {
+  if (JSON.stringify(state.user_info) != "{}") {
+    const channel_num = state.user_info.mobile.slice(3).slice(0, 3);
+    switch (channel_num) {
+      case "024":
+      case "054":
+      case "055":
+      case "059":
+        cur_channel.value = "MoMo";
+        channel_list.value[0].checked = true;
+        break;
+      case "020":
+      case "050":
+        cur_channel.value = "Vodafone";
+        channel_list.value[1].checked = true;
+        break;
+      case "027":
+      case "057":
+      case "026":
+      case "056":
+        cur_channel.value = "AirtelTigo";
+        channel_list.value[2].checked = true;
+        break;
+      default:
+        cur_channel.value = "MoMo";
+        channel_list.value[0].checked = true;
+        break;
+    }
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -230,41 +264,41 @@ const goRecords = () => {
   width: 100%;
   background: #382b63;
   box-sizing: border-box;
-  padding: 0 15px;
+  padding: 0 0.416rem;
   .channel-item {
     width: 100%;
-    height: 50px;
+    height: 1.388rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #514380;
+    border-top: 0.027rem solid #514380;
     div {
       display: flex;
       align-items: center;
       img {
-        width: 25px;
-        margin-right: 8px;
+        width: 0.694rem;
+        margin-right: 0.222rem;
       }
       span {
-        font-size: 13px;
+        font-size: 0.361rem;
         color: #fff;
       }
     }
   }
   .channel-title {
     width: 100%;
-    height: 40px;
+    height: 1.111rem;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 15.3px;
+    font-size: 0.425rem;
     color: #ffffff;
     .close {
       position: absolute;
       right: 0;
-      top: 15px;
+      top: 0.416rem;
     }
   }
 }
@@ -276,34 +310,34 @@ const goRecords = () => {
   align-items: center;
   background: linear-gradient(to bottom, #432084, #161326);
   .btn {
-    width: calc(100% - 60px);
+    width: calc(100% - 1.666rem);
     position: fixed;
-    bottom: calc(env(safe-area-inset-bottom) + 30px);
-    left: 30px;
-    height: 45.7px;
+    bottom: calc(env(safe-area-inset-bottom) + 0.833rem);
+    left: 0.833rem;
+    height: 1.269rem;
     background: linear-gradient(-90deg, #9343c4, #614ae6);
-    border-radius: 22.7px;
+    border-radius: 0.63rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 17.3px;
+    font-size: 0.472rem;
     color: #ffffff;
   }
   .withdraw-box {
-    width: calc(100% - 30px);
-    border-radius: 16px;
+    width: calc(100% - 0.833rem);
+    border-radius: 0.444rem;
     background: linear-gradient(90deg, #5e30fa, #9932fc);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 0.416rem;
     overflow: hidden;
-    margin-top: 15px;
+    margin-top: 0.416rem;
     .pay-type-row {
-      margin-top: 10px;
+      margin-top: 0.277rem;
       width: 100%;
       display: flex;
       justify-content: space-between;
@@ -313,38 +347,38 @@ const goRecords = () => {
         align-items: center;
       }
       span {
-        font-size: 13px;
+        font-size: 0.361rem;
         color: #fff;
-        padding-right: 3px;
+        padding-right: 0.083rem;
       }
     }
     .sub-title {
       width: 100%;
       text-align: left;
-      font-size: 13px;
+      font-size: 0.361rem;
       color: #ffffff;
     }
     .ipt-box {
       width: 100%;
-      height: 50px;
-      border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
+      height: 1.388rem;
+      border-bottom: 0.041rem solid rgba(255, 255, 255, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
       span {
         color: #fff;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 0.416rem;
       }
       .all-btn {
-        width: 38.3px;
-        height: 19px;
-        border-radius: 9.3px;
-        border: 1px solid #ffffff;
+        width: 1.063rem;
+        height: 0.527rem;
+        border-radius: 0.258rem;
+        border: 0.027rem solid #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 12.7px;
+        font-size: 0.333rem;
         color: #ffffff;
       }
     }
@@ -353,20 +387,20 @@ const goRecords = () => {
     width: 100%;
     text-align: left;
     box-sizing: border-box;
-    padding: 15px 15px 0 15px;
+    padding: 0.416rem 0.416rem 0 0.416rem;
     color: #ffffff;
     .l {
-      font-size: 13.3px;
+      font-size: 0.369rem;
       font-weight: 600;
     }
     .i {
       font-weight: bold;
-      font-size: 26.7px;
-      padding-right: 5px;
+      font-size: 0.741rem;
+      padding-right: 0.138rem;
     }
     .d {
       font-weight: bold;
-      font-size: 43.3px;
+      font-size: 1.202rem;
     }
   }
   .withdraw-header {
@@ -380,27 +414,27 @@ const goRecords = () => {
       justify-content: flex-start;
       align-items: center;
       position: fixed;
-      left: 15px;
-      top: 20px;
+      left: 0.416rem;
+      top: 0.555rem;
       span {
         font-weight: bold;
-        font-size: 13px;
+        font-size: 0.361rem;
         color: #ffffff;
-        padding-left: 5px;
+        padding-left: 0.138rem;
       }
     }
     .title {
       color: #fff;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 0.472rem;
     }
     .sub-title {
       color: #fff;
-      font-size: 12.5px;
+      font-size: 0.347rem;
       font-weight: 600;
       position: fixed;
-      top: 21px;
-      right: 15px;
+      top: 0.583rem;
+      right: 0.416rem;
     }
   }
 }

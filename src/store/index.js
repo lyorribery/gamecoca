@@ -15,11 +15,6 @@ const store = createStore({
         img: apiconfig.fileURL + 'promotion/spin.png'
       },
       {
-        type: 3,
-        btn: "Get Cash",
-        img: apiconfig.fileURL + 'promotion/invite.png'
-      },
-      {
         type: 4,
         btn: "Get Bonus",
         img: apiconfig.fileURL + 'promotion/deposit.png'
@@ -28,6 +23,11 @@ const store = createStore({
         type: 5,
         btn: "Get Bonus",
         img: apiconfig.fileURL + 'promotion/f_d.png'
+      },
+      {
+        type: 3,
+        btn: "Get Cash",
+        img: apiconfig.fileURL + 'promotion/invite.png'
       },
     ],
     loading_visible: false,
@@ -181,23 +181,23 @@ const store = createStore({
       })
       const hot_obj = {
         ...res_hot.data,
-        name: "Hot",
+        name: "Popular",
         param: {
           searchType: 2
         }
       }
 
-      const res_recommend = await getGameList.get("", { page: 1, pageSize: 6, searchType: 1 })
-      res_recommend.data.list.map(item => {
-        item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      })
-      const recommend_obj = {
-        ...res_recommend.data,
-        name: "Top",
-        param: {
-          searchType: 1
-        }
-      }
+      // const res_recommend = await getGameList.get("", { page: 1, pageSize: 6, searchType: 1 })
+      // res_recommend.data.list.map(item => {
+      //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
+      // })
+      // const recommend_obj = {
+      //   ...res_recommend.data,
+      //   name: "Top",
+      //   param: {
+      //     searchType: 1
+      //   }
+      // }
 
       const res_slot = await getGameList.get("", { page: 1, pageSize: 6, gameType: 1 })
       res_slot.data.list.map(item => {
@@ -261,9 +261,13 @@ const store = createStore({
           ...hot_obj,
           key: 'hot'
         },
+        // {
+        //   ...recommend_obj,
+        //   key: 'recommend'
+        // },
         {
-          ...recommend_obj,
-          key: 'recommend'
+          ...live_obj,
+          key: 'live'
         },
         {
           ...slot_obj,
@@ -273,10 +277,7 @@ const store = createStore({
           ...spin_obj,
           key: 'spin'
         },
-        {
-          ...live_obj,
-          key: 'live'
-        },
+
         {
           ...poker_obj,
           key: 'poker'

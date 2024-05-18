@@ -6,7 +6,7 @@
     :duration="0.8"
   >
     <div class="daily-close">
-      <Close color="#fff" width="16px" height="16px" @click="close()" />
+      <Close color="#fff" width=".444rem" height=".444rem" @click="close()" />
     </div>
     <div class="daily-box">
       <img :src="img_url + 'other/daily_top.png'" style="width: 100%" />
@@ -55,7 +55,7 @@
             <div class="day">Day 4</div>
           </div>
         </div>
-        <div class="daily-line-box" style="margin-top: 10px">
+        <div class="daily-line-box" style="margin-top: 0.277rem">
           <div class="item">
             <div class="coin" style="color: #ffc23e">+60</div>
             <div class="step">
@@ -173,30 +173,30 @@ const close = () => {
 <style lang="scss" scoped>
 .daily-close {
   position: fixed;
-  right: 20px;
-  top: calc(20% - 30px);
+  right: 0.555rem;
+  top: calc(20% - 0.833rem);
 }
 .daily-box {
   position: fixed;
-  left: 20px;
+  left: 0.555rem;
   top: 20%;
-  width: calc(100% - 40px);
+  width: calc(100% - 1.111rem);
 
   .daily-container {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-left: 5px solid #ac8fff;
-    border-bottom: 5px solid #ac8fff;
-    border-right: 5px solid #ac8fff;
+    border-bottom-left-radius: 0.277rem;
+    border-bottom-right-radius: 0.277rem;
+    border-left: 0.138rem solid #ac8fff;
+    border-bottom: 0.138rem solid #ac8fff;
+    border-right: 0.138rem solid #ac8fff;
     background: linear-gradient(-24deg, rgba(204, 186, 255), #f7fdfd);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 0.416rem;
     .daily-line-box {
-      width: calc(100% - 20px);
+      width: calc(100% - 0.555rem);
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -208,17 +208,17 @@ const close = () => {
         flex-direction: column;
 
         .coin {
-          font-size: 12px;
+          font-size: 0.361rem;
           font-weight: 600;
           color: #c1c1c1;
         }
         .day {
           color: #ccc3e2;
           font-weight: 600;
-          font-size: 13px;
+          font-size: 0.388rem;
         }
         .step {
-          margin: 3px 0;
+          margin: 0.083rem 0;
           width: 100%;
           display: flex;
           justify-content: center;
@@ -226,17 +226,17 @@ const close = () => {
           .step-line {
             flex: 1;
             background: #e4d8fe;
-            height: 5px;
+            height: 0.138rem;
           }
           .step-container {
-            width: 28px;
-            height: 28px;
+            width: 0.777rem;
+            height: 0.777rem;
             border-radius: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             background: #e4d8fe;
-            font-size: 14px;
+            font-size: 0.416rem;
             color: #af62ff;
           }
           .check-step {
@@ -250,17 +250,17 @@ const close = () => {
       }
     }
     .check-btn {
-      width: calc(100% - 20px);
-      height: 42px;
-      background: linear-gradient(-90deg, #9343C4, #614AE6);
-      border-radius: 22px;
+      width: calc(100% - 0.555rem);
+      height: 1.166rem;
+      background: linear-gradient(-90deg, #9343c4, #614ae6);
+      border-radius: 0.611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size: 17px;
+      font-size: 0.472rem;
       font-weight: bold;
-      margin: 15px 0;
+      margin: 0.416rem 0;
     }
     .line-box {
       width: 100%;
@@ -269,14 +269,14 @@ const close = () => {
       align-items: center;
       .line {
         flex: 1;
-        height: 0.5px;
+        height: 0.0138rem;
         background: #666666;
       }
       span {
-        font-size: 12px;
+        font-size: 0.347rem;
         font-weight: 600;
         color: #666666;
-        padding: 0 5px;
+        padding: 0 0.138rem;
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="description-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
     <span>{{
       page_type == "1"
@@ -31,7 +31,7 @@
     </p>
   </div>
   <div class="description" v-if="page_type == '2'">
-    <img src="@/assets/images/logo.svg" width="130" style="margin: 20px 0" />
+    <img src="@/assets/images/logo.png"  style="margin: .555rem 0;width:3.611rem" />
     <p class="des">
       GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
       Commission of Ghana with register No.GCRG23P1036T
@@ -374,8 +374,8 @@ onMounted(() => {
 .description {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(env(safe-area-inset-top) + 70px) 15px
-    calc(env(safe-area-inset-bottom) + 15px) 15px;
+  padding: calc(env(safe-area-inset-top) + 1.944rem) .416rem
+    calc(env(safe-area-inset-bottom) + .416rem) .416rem;
   color: #ffffff;
   display: flex;
   justify-content: center;
@@ -388,18 +388,18 @@ onMounted(() => {
   .title {
     text-align: left;
     width: 100%;
-    font-size: 15px;
-    margin-bottom: 30px;
+    font-size: .416rem;
+    margin-bottom: .833rem;
   }
   p {
-    font-size: 12px;
-    line-height: 20px;
-    color:#CCC3E2;
+    font-size: .347rem;
+    line-height: .555rem;
+    color:#999999;
   }
 }
 .description-header {
   z-index: 9;
-  background: #161326;
+  background:#18171E;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -410,21 +410,21 @@ onMounted(() => {
   align-items: center;
   span {
     font-weight: bold;
-    font-size: 16.7px;
+    font-size: .472rem;
     color: #ffffff;
   }
   .arrow {
     position: fixed;
-    left: 15px;
-    top: calc(env(safe-area-inset-top + 21px));
+    left: .416rem;
+    top: calc(env(safe-area-inset-top + .583rem));
     display: flex;
     justify-content: flex-start;
     align-items: center;
     span {
       font-weight: bold;
-      font-size: 13px;
+      font-size: .361rem;
       color: #ffffff;
-      padding-left: 5px;
+      padding-left: .138rem;
     }
   }
 }

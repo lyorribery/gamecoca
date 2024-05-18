@@ -1,7 +1,7 @@
 <template>
   <div class="records-header">
     <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width="13px" height="13px" /><span>Back</span>
+      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
     <div class="title">Records</div>
   </div>
@@ -288,7 +288,7 @@ const copyToClipboard = async (text) => {
 .no-data {
   width: 100%;
   box-sizing: border-box;
-  padding: 30px 0;
+  padding: .833rem 0;
   text-align: center;
 }
 .records {
@@ -298,29 +298,27 @@ const copyToClipboard = async (text) => {
   .records-item {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 15px 20px 15px;
+    padding: 0 .416rem .555rem .416rem;
     .records-content {
       width: 100%;
       box-sizing: border-box;
-      padding: 15px;
-      border-radius: 16px;
-      background-color: #382b63;
-      margin-top: 15px;
+      padding: .416rem;
+      border-radius: .333rem;
+      background-color: #3A3745;
+      margin-top: .416rem;
       .bottom {
-        margin-top: 10px;
+        margin-top: .277rem;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: flex-start;
         .left {
-          width: 43px;
-          height: 43px;
-          border-radius: 13px;
-          background: #2f2751;
+          width: 1.194rem;
+          height: 1.194rem;
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-right: 15px;
+          margin-right: .416rem;
         }
         .right {
           flex: 1;
@@ -329,7 +327,7 @@ const copyToClipboard = async (text) => {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: .138rem;
             &:last-child {
               margin-bottom: 0;
             }
@@ -338,7 +336,7 @@ const copyToClipboard = async (text) => {
               display: flex;
               justify-content: flex-end;
               align-items: center;
-              font-size: 13px;
+              font-size: .361rem;
               color: #8174ac;
             }
             .b-val {
@@ -347,28 +345,28 @@ const copyToClipboard = async (text) => {
               justify-content: flex-end;
               align-items: center;
               font-weight: bold;
-              font-size: 13px;
+              font-size: .361rem;
               color: #ffffff;
             }
             .m-color {
-              color: #fefefe;
-              font-size: 13px;
+              color: #fff;
+              font-size: .361rem;
             }
             .s-color {
-              color: #8174ac;
-              font-size: 11px;
+              color: #EBE3FF;
+              font-size: .305rem;
             }
             .c-btn {
               color: #e556ff;
-              font-size: 9px;
+              font-size: .25rem;
               font-weight: 600;
-              border: 1px solid #bd35fc;
+              border: .027rem solid #bd35fc;
               display: flex;
               justify-content: center;
               align-items: center;
-              width: 35px;
-              height: 15.3px;
-              border-radius: 7.3px;
+              width: .972rem;
+              height: .425rem;
+              border-radius: .202rem;
             }
           }
         }
@@ -378,13 +376,13 @@ const copyToClipboard = async (text) => {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
+        margin-bottom: .277rem;
         .time {
           color: #fefefe;
-          font-size: 13px;
+          font-size: .361rem;
         }
         .status {
-          font-size: 13px;
+          font-size: .361rem;
           font-weight: 600;
         }
         .status-1 {
@@ -404,20 +402,20 @@ const copyToClipboard = async (text) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 0.5px solid #29213d;
+    border-bottom: .013rem solid #29213d;
     position: relative;
     .b_border {
       position: absolute;
       bottom: 1px;
-      left: 40px;
-      width: calc(100% - 80px);
-      height: 2px;
+      left: 1.111rem;
+      width: calc(100% - 2.222rem);
+      height: .055rem;
       background-color: #e556ff;
     }
   }
   .custom-title {
     color: #fff;
-    font-size: 13px;
+    font-size: .361rem;
     font-weight: 600;
   }
   .custom-title.active {
@@ -426,7 +424,7 @@ const copyToClipboard = async (text) => {
 }
 .records-header {
   z-index: 9;
-  background: #161326;
+  background:#18171E;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -435,25 +433,25 @@ const copyToClipboard = async (text) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 0.5px solid #29213d;
+  border-bottom: .013rem solid #29213d;
   .arrow {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: fixed;
-    left: 15px;
-    top: 20px;
+    left: .416rem;
+    top: .555rem;
     span {
       font-weight: bold;
-      font-size: 13px;
+      font-size: .361rem;
       color: #ffffff;
-      padding-left: 5px;
+      padding-left: .138rem;
     }
   }
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: .472rem;
   }
 }
 </style>

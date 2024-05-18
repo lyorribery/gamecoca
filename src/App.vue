@@ -14,6 +14,16 @@ import tipModal from "@/components/tipModal.vue";
 import loading from "@/components/loading.vue";
 import { exit } from "@/apis/apis";
 const uuid = require("uuid");
+
+const setFont = () => {
+  document.documentElement.style.fontSize =
+    document.documentElement.offsetWidth / 10 + "px";
+    console.log(document.documentElement.offsetWidth / 10 + "px")
+};
+setFont();
+window.onresize = () => {
+  setFont();
+};
 export default {
   name: "App",
   components: {

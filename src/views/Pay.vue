@@ -7,8 +7,8 @@
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       p-id="4484"
-      width="50"
-      height="50"
+      width="1.388rem"
+      height="1.388rem"
     >
       <path
         d="M512 972.8a460.8 460.8 0 1 0 0-921.6 460.8 460.8 0 0 0 0 921.6z m0 51.2C229.2224 1024 0 794.7776 0 512S229.2224 0 512 0s512 229.2224 512 512-229.2224 512-512 512zM460.8 179.2v358.4a25.6 25.6 0 1 0 51.2 0v-358.4a25.6 25.6 0 0 0-51.2 0z m384 332.8h-358.4a25.6 25.6 0 1 0 0 51.2h358.4a25.6 25.6 0 1 0 0-51.2z"
@@ -58,35 +58,35 @@ onMounted(() => {
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding: 100px 20px 0 20px;
+  padding: 2.777rem 0.555rem 0 0.555rem;
   .btn {
-    width: 308px;
-    height: 45.7px;
+    width: 8.555rem;
+    height: 1.269rem;
     background: linear-gradient(-90deg, #9343c4, #614ae6);
-    border-radius: 22.7px;
+    border-radius: 0.63rem;
     position: fixed;
-    bottom: calc(env(safe-area-inset-bottom) + 50px);
-    left: calc((100% - 308px) / 2);
+    bottom: calc(env(safe-area-inset-bottom) + 1.388rem);
+    left: calc((100% - 8.555rem) / 2);
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial;
     font-weight: bold;
-    font-size: 17.3px;
+    font-size: 0.472rem;
     color: #ffffff;
   }
   .label {
     font-family: Arial;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 0.444rem;
     color: #ffffff;
-    margin: 30px 0 20px 0;
+    margin: 0.833rem 0 0.555rem 0;
     text-align: center;
   }
   .sub-label {
     font-family: Arial;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 0.361rem;
     color: #ccc3e2;
     text-align: center;
   }

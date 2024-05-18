@@ -62,7 +62,7 @@ const goPath = (data) => {
 <style lang="scss" scoped>
 .promotion-header {
   z-index: 9;
-  background: #161326;
+  background:#18171E;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -71,22 +71,22 @@ const goPath = (data) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 0.5px solid #29213d;
+  border-bottom: .0138rem solid #29213d;
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: .472rem;
   }
 }
 .promotion {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px 10px 15px;
+  padding: calc(55px + env(safe-area-inset-top)) .416rem .277rem .416rem;
   .item {
     width: 100%;
-    border-radius: 8px;
+    border-radius: .222rem;
     overflow: hidden;
-    margin-top: 15px;
+    margin-top: .416rem;
     position: relative;
     .item-content {
       position: absolute;
@@ -98,19 +98,19 @@ const goPath = (data) => {
       justify-content: flex-end;
       align-items: center;
       box-sizing: border-box;
-      padding: 5px 10px;
+      padding: .138rem .277rem;
 
       .btn {
         color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 12px;
+        font-size: .361rem;
         font-weight: 600;
         box-sizing: border-box;
-        padding: 5px 15px;
+        padding: .138rem .416rem;
         background: linear-gradient(-90deg, #9343c4, #614ae6);
-        border-radius: 16px;
+        border-radius: .444rem;
       }
     }
   }

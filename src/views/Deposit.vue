@@ -18,6 +18,7 @@
         <div class="p-amount">Get ₵{{ Number(item.amount) + Number(item.gift) }}</div>
       </div>
     </div>
+    <div class="label" style="margin-top: 0">The minimum amount is ₵5.00</div>
     <div class="ipt-box">
       <span>₵</span>
       <nut-input
@@ -26,35 +27,24 @@
         placeholder="Enter amount"
         type="number"
       />
-      <Close color="#CCC3E2" width="13px" height="13px" @click="clearVal" />
+      <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="clearVal" />
     </div>
-    <div class="label">The minimum amount is ₵5.00</div>
-    <div
-      class="chanel"
-      v-for="(item, index) in chanelList"
-      :key="index"
-      :style="{ background: item.checked ? '#322658' : '' }"
-      @click="chooseChanel(index)"
-    >
-      <div class="left">
+    <div class="label">Select pay channel below</div>
+    <div class="chanel-box">
+      <div
+        class="chanel"
+        v-for="(item, index) in chanelList"
+        :key="index"
+        :class="item.checked ? 'in-checked' : ''"
+        @click="chooseChanel(index)"
+      >
         <img :src="item.icon" />
-      </div>
-      <div class="right">
         <div class="chanel-name" :style="{ color: item.checked ? '#fff' : '' }">
           {{ item.showname }}
         </div>
-        <div class="status-des">
-          <Issue
-            :color="item.checked ? '#49BF6A' : '#CCC3E2'"
-            width="15px"
-            height="15px"
-          />
-          <span :style="{ color: item.checked ? '#49BF6A' : '#CCC3E2' }"
-            >This channel is current normal</span
-          >
-        </div>
       </div>
     </div>
+
     <div class="des">
       You can only use your register number to top up your wallet,if not correct please
       register with your mobile money number again.
@@ -83,8 +73,8 @@
         v-if="is_loading"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="25px"
-        height="25px"
+        width=".694rem"
+        height=".694rem"
         viewBox="0 0 50 50"
         style="enable-background: new 0 0 50 50"
         xml:space="preserve"
@@ -164,23 +154,23 @@ const clearVal = () => {
 };
 const chanelList = ref([
   {
+    showname: "MoMo",
+    name: "MTN-gh",
+    icon: require("../assets/images/mtn.png"),
+    status: "",
+    checked: false,
+  },
+  {
     showname: "Vodafone",
     name: "vodafone-gh",
     icon: require("../assets/images/vodafone.png"),
     status: "",
-    checked: true,
+    checked: false,
   },
   {
     showname: "AirtelTigo",
     name: "tigo-gh",
     icon: require("../assets/images/tigo.png"),
-    status: "",
-    checked: false,
-  },
-  {
-    showname: "MoMo",
-    name: "MTN-gh",
-    icon: require("../assets/images/mtn.png"),
     status: "",
     checked: false,
   },
@@ -255,6 +245,32 @@ const submit = () => {
 };
 onMounted(() => {
   quickList.value = state.deposit_config;
+  if (JSON.stringify(state.user_info) != "{}") {
+    const channel_num = state.user_info.mobile.slice(3).slice(0, 3);
+    switch (channel_num) {
+      case "024":
+      case "054":
+      case "055":
+      case "059":
+        chanelList.value[0].checked = true;
+        break;
+      case "020":
+      case "050":
+        chanelList.value[1].checked = true;
+        break;
+      case "027":
+      case "057":
+      case "026":
+      case "056":
+        chanelList.value[2].checked = true;
+        break;
+      default:
+        chanelList.value[0].checked = true;
+        break;
+    }
+  } else {
+    chanelList.value[0].checked = true;
+  }
   if (route.query.amount) {
     amount_val.value = route.query.amount;
     amount_id.value = 0;
@@ -274,23 +290,23 @@ onMounted(() => {
   position: fixed;
   z-index: 9;
   bottom: calc(env(safe-area-inset-bottom) + 55px);
-  left:0;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  background: #161326;
+  background: #18171e;
   box-sizing: border-box;
-  padding-bottom: 10px;
+  padding-bottom: .277rem;
   .btn {
-    width: calc(100% - 60px);
-    height: 42px;
+    width: calc(100% - 1.666rem);
+    height: 1.166rem;
     background: linear-gradient(-90deg, #9343c4, #614ae6);
-    border-radius: 22px;
+    border-radius: .611rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: 17px;
+    font-size: .472rem;
     font-weight: bold;
   }
 }
@@ -298,24 +314,24 @@ onMounted(() => {
 .deposit {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 15px
-    calc(env(safe-area-inset-bottom) + 10px + 42px) 15px;
+  padding: calc(55px + env(safe-area-inset-top)) .416rem
+    calc(env(safe-area-inset-bottom) + .277rem + 1.166rem) .416rem;
   .des {
-    margin: 10px 0;
+    margin: .416rem 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 20px;
-    color: #fff;
+    padding: 0 .555rem;
+    color: #D9D9D9;
     font-weight: bold;
-    font-size: 11px;
+    font-size: .333rem;
     text-align: center;
   }
   .tip-row {
-    color: #ccc3e2;
-    font-size: 11px;
+    color: #999999;
+    font-size: .333rem;
     width: 100%;
     text-align: left;
-    margin-top: 10px;
+    margin-top: .277rem;
   }
   .line-box {
     width: 100%;
@@ -323,80 +339,68 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 .555rem;
     .line {
       flex: 1;
-      height: 0.5px;
-      background: #ccc3e2;
+      height: .0138rem;
+      background: #999999;
     }
     span {
       font-weight: 600;
-      font-size: 12px;
+      font-size: .333rem;
+      color: #999999;
+      padding: 0 .138rem;
+    }
+  }
+  .chanel-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .277rem;
+    .chanel {
+      width: calc((100% - .555rem) / 3);
+      height: 1.444rem;
+      border-radius: .444rem;
+      border: .041rem solid #382b63;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 .277rem;
       color: #ccc3e2;
-      padding: 0 5px;
+      img {
+        height: .416rem;
+        margin-bottom: .222rem;
+      }
+      .chanel-name {
+        font-weight: bold;
+        font-size: .361rem;
+      }
+    }
+    .in-checked {
+      color: #fff;
+      border: .041rem solid #ff4bf4;
+      background: #9d18b9;
     }
   }
 
-  .chanel {
-    width: 100%;
-    margin-bottom: 8px;
-    border-radius: 16px;
-    border: 1.5px solid #382b63;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 10px;
-    .left {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 10px;
-      img {
-        width: 30px;
-      }
-    }
-    .right {
-      flex: 1;
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-direction: column;
-      .chanel-name {
-        font-weight: bold;
-        font-size: 13px;
-        color: #ccc3e2;
-        margin-bottom: 8px;
-      }
-      .status-des {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        span {
-          font-size: 11px;
-          font-weight: 600;
-          padding-left: 8px;
-        }
-      }
-    }
-  }
   .ipt-box {
-    margin-top: 5px;
+    margin-top: .138rem;
     width: 100%;
-    height: 40px;
-    border-radius: 13px;
-    border: 1.5px solid #692ddb;
+    height: 1.111rem;
+    border-radius: .361rem;
+    border: .041rem solid #692ddb;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 15px;
+    padding: 0 .416rem;
     span {
       color: #e556ff;
       font-weight: bold;
-      font-size: 15px;
+      font-size: .416rem;
     }
   }
   .quick-box {
@@ -407,58 +411,58 @@ onMounted(() => {
     align-items: center;
     .item {
       position: relative;
-      width: calc((100% - 20px) / 3);
-      border-radius: 16px;
+      width: calc((100% - .555rem) / 3);
+      border-radius: .444rem;
       color: #8068c8;
-      border: 1.5px solid #4b3f7a;
+      border: .041rem solid #4b3f7a;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding: 5px 0;
-      margin-bottom: 10px;
+      padding: .138rem 0;
+      margin-bottom: .277rem;
       .hot {
         position: absolute;
-        top: -5px;
-        right: -2px;
-        width: 27.3px;
-        height: 12.3px;
+        top: -.138rem;
+        right: -.055rem;
+        width: .758rem;
+        height: .341rem;
         background: linear-gradient(-90deg, #be42fd, #7802fd);
-        border-radius: 1.3px 8px 1.3px 8px;
+        border-radius: .036rem .222rem .036rem .036rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 9px;
+        font-size: .25rem;
         font-weight: 600;
         color: #fff;
       }
       .r-amount {
-        font-size: 15px;
+        font-size: .416rem;
         font-weight: 600;
       }
       .p-amount {
-        margin-top: 5px;
-        font-size: 11px;
+        margin-top: .138rem;
+        font-size: .333rem;
         font-weight: 600;
       }
     }
     .in-checked {
       color: #fff;
-      border: 1.5px solid #ff4bf4;
+      border: .041rem solid #ff4bf4;
       background: #9d18b9;
     }
   }
   .label {
-    margin: 12px 0;
+    margin: .277rem 0;
     font-weight: bold;
     color: #fff;
-    font-size: 14px;
+    font-size: .416rem;
   }
 }
 .deposit-header {
   z-index: 9;
-  background: #161326;
+  background: #18171e;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -467,17 +471,17 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 0.5px solid #29213d;
+  border-bottom: .0138rem solid #29213d;
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
+    font-size: .472rem;
   }
   .sub-title {
     position: fixed;
-    right: 15px;
-    top: calc(env(safe-area-inset-top) + 21.25px);
-    font-size: 12.5px;
+    right: .416rem;
+    top: calc(env(safe-area-inset-top) + .555rem);
+    font-size: .416rem;
     font-weight: 600;
     color: #fff;
   }
