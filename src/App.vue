@@ -18,7 +18,6 @@ const uuid = require("uuid");
 const setFont = () => {
   document.documentElement.style.fontSize =
     document.documentElement.offsetWidth / 10 + "px";
-    console.log(document.documentElement.offsetWidth / 10 + "px")
 };
 setFont();
 window.onresize = () => {
@@ -33,11 +32,7 @@ export default {
   setup() {
     const router = useRouter();
     let { commit, dispatch } = useStore();
-    // const isMobile = () => {
-    //   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    //     navigator.userAgent
-    //   );
-    // };
+
     const modalFunc = (obj) => {
       switch (obj) {
         case 1:
@@ -74,7 +69,11 @@ export default {
     onMounted(() => {
       dispatch("GET_CONFIG");
       dispatch("GET_GAME_LIST");
-      if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
+      if (localStorage.getItem("token")) {
+        dispatch("GET_USER_INFO");
+      } else {
+        commit("set_reg_visible", true);
+      }
       localStorage.setItem("d_id", uuid.v1());
     });
     return {
@@ -83,22 +82,3 @@ export default {
   },
 };
 </script>
-<style>
-::-webkit-scrollbar {
-  width: 0;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #717171;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-</style>

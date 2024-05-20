@@ -1,6 +1,6 @@
 <template>
   <div class="main-header" id="mainHeader">
-    <img src="@/assets/images/logo.png" style="width:3.9rem;" />
+    <img src="@/assets/images/logo.png" style="width: 3.9rem" />
     <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
       <div class="log-btn" @click="goPermission('/login')">LOGIN</div>
       <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
@@ -34,7 +34,7 @@
       pagination-visible
       pagination-color="#fff"
       pagination-unselected-color="#808080"
-      style="margin-left: .555rem"
+      style="margin-left: 0.555rem"
     >
       <nut-swiper-item
         v-for="(item, index) in promotion_list"
@@ -51,12 +51,15 @@
     </nut-swiper>
 
     <div
-      style="width: 100%; box-sizing: border-box; padding: .277rem .277rem .138rem 0"
+      style="width: 100%; box-sizing: border-box; padding: 0.277rem 0.277rem 0.138rem 0"
       :style="{ marginBottom: page_num >= 165 ? '70px' : '0' }"
     >
       <nut-noticebar background="#18171E" color="#CCCCCC" :text="msg_list">
         <template #left-icon>
-          <img src="../assets/images/trumpet.png" style="width: .333rem; height: .333rem" />
+          <img
+            src="../assets/images/trumpet.png"
+            style="width: 0.333rem; height: 0.333rem"
+          />
         </template>
       </nut-noticebar>
     </div>
@@ -114,6 +117,8 @@
 
     <pageFooter />
 
+    <regModal />
+
     <div
       class="fd-box"
       @click="showFisrtDeposit()"
@@ -169,10 +174,12 @@
 <script>
 import imgCard from "@/components/imgCard.vue";
 import pageFooter from "@/components/pageFooter.vue";
+import regModal from "@/components/regModal.vue";
 export default {
   components: {
     imgCard,
     pageFooter,
+    regModal,
   },
 };
 </script>
@@ -356,7 +363,7 @@ const active_fd = ref(true);
 .down-box {
   width: 100%;
   box-sizing: border-box;
-  padding: 1.277rem .972rem .555rem .972rem;
+  padding: 1.277rem 0.972rem 0.555rem 0.972rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -365,18 +372,18 @@ const active_fd = ref(true);
   background: #18171e;
   .close {
     position: absolute;
-    right: .555rem;
-    top: .416rem;
+    right: 0.555rem;
+    top: 0.416rem;
   }
   .title {
     width: 100%;
     text-align: left;
-    font-size: .361rem;
+    font-size: 0.361rem;
     color: #ffffff;
     font-weight: 600;
   }
   img {
-    margin: .416rem 0;
+    margin: 0.416rem 0;
     width: 100%;
   }
 }
@@ -393,7 +400,7 @@ const active_fd = ref(true);
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 .277rem;
+  padding: 0 0.277rem;
   background: #4c2388;
   .btn-box {
     flex: 1;
@@ -401,34 +408,34 @@ const active_fd = ref(true);
     justify-content: flex-end;
     align-items: center;
     .log-btn {
-      font-size: .324rem;
+      font-size: 0.324rem;
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: 400;
       width: 2.185rem;
-      height: .666rem;
+      height: 0.666rem;
       background: rgba(36, 31, 52, 0.3);
       border: 1px solid #5b2efa;
-      border-radius: .277rem;
+      border-radius: 0.277rem;
     }
     .re-btn {
       font-weight: 400;
-      margin-left: .277rem;
-      font-size: .324rem;
+      margin-left: 0.277rem;
+      font-size: 0.324rem;
       color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 2.185rem;
-      height: .666rem;
+      height: 0.666rem;
       background: linear-gradient(-90deg, #9343c4, #614ae6);
-      border-radius: .277rem;
+      border-radius: 0.277rem;
     }
     span {
       color: #ffffff;
-      font-size: .416rem;
+      font-size: 0.416rem;
       font-weight: bold;
     }
   }
@@ -436,7 +443,7 @@ const active_fd = ref(true);
 .home {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 0 .277rem 0;
+  padding: calc(55px + env(safe-area-inset-top)) 0 0.277rem 0;
   background: #18171e;
   position: relative;
   overflow-x: hidden;
@@ -455,32 +462,32 @@ const active_fd = ref(true);
       width: 130%;
       height: 3rem;
       position: absolute;
-      left: -15%;
+      left: -13%;
       top: 0;
       z-index: -1;
       content: "";
       border-radius: 0 0 50% 50%;
-      background: linear-gradient(0deg, #8e81fa, #4b2287);
+      background: linear-gradient(180deg, #4c2388 8%, #8e81fa);
     }
   }
   .game-content {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 .277rem;
+    padding: 0 0.277rem;
     .title {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       box-sizing: border-box;
-      padding: .277rem .138rem .416rem .138rem;
+      padding: 0.277rem 0.138rem 0.416rem 0.138rem;
 
       .more {
         display: flex;
         align-items: center;
         span {
           font-weight: 600;
-          font-size: .333rem;
+          font-size: 0.333rem;
           color: #b3b3b3;
           text-decoration-line: underline;
         }
@@ -490,16 +497,16 @@ const active_fd = ref(true);
         display: flex;
         align-items: center;
         .game-name {
-          font-size: .555rem;
+          font-size: 0.555rem;
           font-weight: bold;
           color: #fff;
         }
         .game-count {
-          font-size: .296rem;
+          font-size: 0.296rem;
           font-weight: 600;
           color: #b3b3b3;
-          padding-left: .138rem;
-          padding-top: .083rem;
+          padding-left: 0.138rem;
+          padding-top: 0.083rem;
         }
       }
     }
@@ -512,7 +519,7 @@ const active_fd = ref(true);
   }
   .custom-content {
     box-sizing: border-box;
-    padding: 0 .416rem;
+    padding: 0 0.416rem;
     width: 100%;
     height: 70px;
     display: flex;
@@ -527,38 +534,34 @@ const active_fd = ref(true);
     justify-content: flex-start;
     align-items: center;
     overflow-x: scroll;
+    scrollbar-width: none;
   }
-  .custom-tab::-webkit-scrollbar {
-    width: 0;
-  }
-  .custom-tab::-webkit-scrollbar {
-    height: 0;
-  }
+
   .custom-title {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-right: .768rem;
+    margin-right: 0.768rem;
     &:last-child {
       margin-right: 0;
     }
     .img-box {
       width: 1.203rem;
-      height: .935rem;
+      height: 0.935rem;
       background: #3a3745;
-      border-radius: .277rem;
-      margin-bottom: .138rem;
+      border-radius: 0.277rem;
+      margin-bottom: 0.138rem;
       display: flex;
       justify-content: center;
       align-items: center;
       img {
-        width: .66rem;
-        height:.66rem;
+        width: 0.66rem;
+        height: 0.66rem;
       }
     }
     span {
-      font-size: .37rem;
+      font-size: 0.37rem;
       color: #ebe3ff;
     }
   }
@@ -569,7 +572,7 @@ const active_fd = ref(true);
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: .222rem .277rem .416rem .277rem;
+    padding: 0.222rem 0.277rem 0.416rem 0.277rem;
     .active-item {
       z-index: 2;
       width: 25%;
@@ -577,7 +580,7 @@ const active_fd = ref(true);
       justify-content: center;
       span {
         font-weight: bold;
-        font-size: .37rem;
+        font-size: 0.37rem;
         color: #cbb6fe;
       }
     }

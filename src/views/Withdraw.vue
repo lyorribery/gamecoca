@@ -262,7 +262,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .channel-box {
   width: 100%;
-  background: #382b63;
+  background: #18171e;
   box-sizing: border-box;
   padding: 0 0.416rem;
   .channel-item {
@@ -271,7 +271,7 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 0.027rem solid #514380;
+    border-top: 0.027rem solid #999999;
     div {
       display: flex;
       align-items: center;

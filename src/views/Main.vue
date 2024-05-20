@@ -141,12 +141,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.router_animate-enter-active {
-  animation: slideInLeft 0.3s;
-}
-.router_animate-leave-active {
-  animation: slideOutRight 0.3s;
-}
 .tab-box {
   z-index: 3;
   position: fixed;

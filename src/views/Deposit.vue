@@ -481,7 +481,7 @@ onMounted(() => {
     position: fixed;
     right: .416rem;
     top: calc(env(safe-area-inset-top) + .555rem);
-    font-size: .416rem;
+    font-size: .347rem;
     font-weight: 600;
     color: #fff;
   }

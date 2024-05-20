@@ -33,6 +33,7 @@ const store = createStore({
     loading_visible: false,
     daily_visible: false,
     fisrt_deposit_visilbe: false,
+    reg_visible: false,
     user_info: {},
     game_list: [],
     tip_visible: false,
@@ -46,6 +47,9 @@ const store = createStore({
     spin_config: []
   }),
   mutations: {
+    set_reg_visible(state, val) {
+      state.reg_visible = val
+    },
     set_loading_modal(state, val) {
       state.loading_visible = val
     },
@@ -249,7 +253,7 @@ const store = createStore({
       res_fish.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
-      const fish_obj = {
+      const mini_obj = {
         ...res_fish.data,
         name: "Mini",
         param: {
@@ -274,18 +278,18 @@ const store = createStore({
           key: 'slot'
         },
         {
+          ...mini_obj,
+          key: 'mini'
+        },
+        {
           ...spin_obj,
           key: 'spin'
         },
-
         {
           ...poker_obj,
           key: 'poker'
-        },
-        {
-          ...fish_obj,
-          key: 'mini'
         }
+
       ]
       ctx.commit('set_game_list', result)
       ctx.commit("set_loading_modal", false);
