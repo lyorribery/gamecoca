@@ -449,11 +449,11 @@ const active_fd = ref(true);
     .back {
       position: relative;
       width: 100%;
-      height: 1.555rem;
+      height: 3rem;
     }
     .back:after {
       width: 130%;
-      height: 1.555rem;
+      height: 3rem;
       position: absolute;
       left: -15%;
       top: 0;

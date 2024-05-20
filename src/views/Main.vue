@@ -161,8 +161,7 @@ export default {
   padding-bottom: env(safe-area-inset-bottom);
   background: #181b2c;
   box-shadow: inset 0px 0px .055rem 0px #9F9F9F;
-
-  border-radius: .611rem .611rem 0px 0px;
+  border-radius: .462rem .462rem 0px 0px;
   overflow: hidden;
   .tab-item {
     width: calc((100% - 1.25rem) / 4);

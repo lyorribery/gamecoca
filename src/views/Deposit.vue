@@ -289,7 +289,7 @@ onMounted(() => {
 .btn-row {
   position: fixed;
   z-index: 9;
-  bottom: calc(env(safe-area-inset-bottom) + 55px);
+  bottom: calc(env(safe-area-inset-bottom) + 1.527rem);
   left: 0;
   width: 100%;
   display: flex;

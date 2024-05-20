@@ -72,8 +72,8 @@ export default {
       }
     };
     onMounted(() => {
-      dispatch("GET_GAME_LIST");
       dispatch("GET_CONFIG");
+      dispatch("GET_GAME_LIST");
       if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
       localStorage.setItem("d_id", uuid.v1());
     });
