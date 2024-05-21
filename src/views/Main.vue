@@ -153,8 +153,8 @@ export default {
   align-items: center;
   box-sizing: border-box;
   padding-bottom: env(safe-area-inset-bottom);
-  background: #181b2c;
-  box-shadow: inset 0px 0px .055rem 0px #9F9F9F;
+  background: #1b1c23;
+  box-shadow: inset 0px 0px .035rem 0px #393c52;
   border-radius: .462rem .462rem 0px 0px;
   overflow: hidden;
   .tab-item {

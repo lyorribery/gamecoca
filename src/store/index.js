@@ -335,65 +335,96 @@ const store = createStore({
         })
     },
     GET_CONFIG(ctx) {
-      getDepositConfig.get("", {})
-        .then(res => {
-          res.list.map((item, index) => {
-            item.amount = (item.amount / 100).toString()
-            item.gift = (item.gift / 100).toString()
-            item.checked = false
-          })
-          ctx.commit('set_deposit_config', res.list)
-        })
-      getGlobalConfig.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            ctx.commit("set_global_config", res.data)
-          }
-        })
-      getInviteConfig.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            for (let i in res.data) {
-              res.data[i] = res.data[i] / 100
-            }
-            ctx.commit('set_invite_config', res.data)
-          }
-        })
-      getFirstDepositConfig.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            res.data.list.map((item, index) => {
+      if (localStorage.getItem('d_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+        ctx.commit('set_deposit_config', JSON.parse(localStorage.getItem('d_config')))
+      } else {
+        getDepositConfig.get("", {})
+          .then(res => {
+            res.list.map((item, index) => {
               item.amount = (item.amount / 100).toString()
-              item.reward = (item.reward / 100).toString()
-              if (index == 1) {
-                item.active = true
-              } else {
-                item.active = false
-              }
+              item.gift = (item.gift / 100).toString()
+              item.checked = false
             })
-            ctx.commit('set_f_d_config', res.data.list)
-          }
-        })
-      getSpinConfig.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            const data = []
-            for (let i in res.data.list) {
-              res.data.list[i].reward = res.data.list[i].reward / 100
-              res.data.list[i].pic = res.data.list[i].reward == 0 ? apiconfig.fileURL + "spin/img_xiaolian.png" : res.data.list[i].reward == 1 ? apiconfig.fileURL + "spin/img_coins_1.png" : res.data.list[i].reward == 10 ? apiconfig.fileURL + "spin/img_coins_2.png" : res.data.list[i].reward == 100 ? apiconfig.fileURL + "spin/img_coins_3.png" : res.data.list[i].reward == 500 ? apiconfig.fileURL + "spin/img_coins_4.png" : res.data.list[i].reward == 1000 ? apiconfig.fileURL + "spin/img_coins_5.png" : ""
-              if (i < 12) {
-                data.unshift(res.data.list[i])
-              }
+            ctx.commit('set_deposit_config', res.list)
+            localStorage.setItem("d_config", JSON.stringify(res.list))
+          })
+      }
+      if (localStorage.getItem('g_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+        ctx.commit('set_global_config', JSON.parse(localStorage.getItem('g_config')))
+      } else {
+        getGlobalConfig.get("", {})
+          .then(res => {
+            if (res.code == 200) {
+              ctx.commit("set_global_config", res.data)
+              localStorage.setItem("g_config", JSON.stringify(res.data))
             }
-            ctx.commit("set_spin_config", data)
-          }
-        })
-      getMsgList.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            ctx.commit('set_msg_list', res.data.list)
-          }
-        })
+          })
+      }
+      if (localStorage.getItem('i_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+        ctx.commit('set_invite_config', JSON.parse(localStorage.getItem('i_config')))
+      } else {
+        getInviteConfig.get("", {})
+          .then(res => {
+            if (res.code == 200) {
+              for (let i in res.data) {
+                res.data[i] = res.data[i] / 100
+              }
+              ctx.commit('set_invite_config', res.data)
+              localStorage.setItem("i_config", JSON.stringify(res.data))
+            }
+          })
+      }
+      if (localStorage.getItem('f_d_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+        ctx.commit('set_f_d_config', JSON.parse(localStorage.getItem('f_d_config')))
+      } else {
+        getFirstDepositConfig.get("", {})
+          .then(res => {
+            if (res.code == 200) {
+              res.data.list.map((item, index) => {
+                item.amount = (item.amount / 100).toString()
+                item.reward = (item.reward / 100).toString()
+                if (index == 1) {
+                  item.active = true
+                } else {
+                  item.active = false
+                }
+              })
+              ctx.commit('set_f_d_config', res.data.list)
+              localStorage.setItem("f_d_config", JSON.stringify(res.data.list))
+            }
+          })
+      }
+      if (localStorage.getItem('spin_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+        ctx.commit('set_spin_config', JSON.parse(localStorage.getItem('spin_config')))
+      } else {
+        getSpinConfig.get("", {})
+          .then(res => {
+            if (res.code == 200) {
+              const data = []
+              for (let i in res.data.list) {
+                res.data.list[i].reward = res.data.list[i].reward / 100
+                res.data.list[i].pic = res.data.list[i].reward == 0 ? apiconfig.fileURL + "spin/img_xiaolian.png" : res.data.list[i].reward == 1 ? apiconfig.fileURL + "spin/img_coins_1.png" : res.data.list[i].reward == 10 ? apiconfig.fileURL + "spin/img_coins_2.png" : res.data.list[i].reward == 100 ? apiconfig.fileURL + "spin/img_coins_3.png" : res.data.list[i].reward == 500 ? apiconfig.fileURL + "spin/img_coins_4.png" : res.data.list[i].reward == 1000 ? apiconfig.fileURL + "spin/img_coins_5.png" : ""
+                if (i < 12) {
+                  data.unshift(res.data.list[i])
+                }
+              }
+              ctx.commit("set_spin_config", data)
+              localStorage.setItem("spin_config", JSON.stringify(data))
+            }
+          })
+      }
+      if (localStorage.getItem('msg_list') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+        ctx.commit('set_msg_list', JSON.parse(localStorage.getItem('msg_list')))
+      } else {
+        getMsgList.get("", {})
+          .then(res => {
+            if (res.code == 200) {
+              ctx.commit('set_msg_list', res.data.list)
+              localStorage.setItem("msg_list", JSON.stringify(res.data.list))
+            }
+          })
+      }
+
       // getSignConfig.get("",{})
       //   .then(res=>{
       //     if(res.code==200){
@@ -405,7 +436,7 @@ const store = createStore({
       // if (ctx.state.game_list.length != 0) return
       // ctx.commit("set_loading_modal", true);
 
-      if (localStorage.getItem('game_list')) {
+      if (localStorage.getItem('game_list') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
         ctx.commit('set_game_list', JSON.parse(localStorage.getItem('game_list')))
         return
       }
@@ -523,6 +554,7 @@ const store = createStore({
 
       ]
       ctx.commit('set_game_list', result)
+      localStorage.setItem("l_expire_time", new Date().getTime())
       localStorage.setItem("game_list", JSON.stringify(result))
       // ctx.commit("set_loading_modal", false);
     }

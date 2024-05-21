@@ -535,7 +535,7 @@ const active_fd = ref(true);
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: hidden;
     scrollbar-width: none;
   }
 
