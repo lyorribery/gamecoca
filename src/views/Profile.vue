@@ -236,7 +236,7 @@ onActivated(() => {
       box-sizing: border-box;
       padding: 0 0.633rem;
       .wallet-btn {
-        width: 3.769rem;
+        width: 3.569rem;
         height: 0.741rem;
         display: flex;
         justify-content: center;
@@ -267,7 +267,7 @@ onActivated(() => {
         text-align: left;
       }
       .coin-btn {
-        width: 3.769rem;
+        width: 3.569rem;
         height: 0.741rem;
         border-radius: 0.361rem;
         display: flex;

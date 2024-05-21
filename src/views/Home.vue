@@ -99,7 +99,9 @@
       <div class="title" :id="'game' + index">
         <div class="name">
           <span class="game-name">{{ item.name }}</span>
-          <span class="game-count">{{ "(" + item.total + ")" }}</span>
+          <span class="game-count" v-if="item.total > 0">{{
+            "(" + item.total + ")"
+          }}</span>
         </div>
         <div
           class="more"

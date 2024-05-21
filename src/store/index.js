@@ -35,7 +35,233 @@ const store = createStore({
     fisrt_deposit_visilbe: false,
     reg_visible: false,
     user_info: {},
-    game_list: [],
+    game_list: [
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Popular",
+        "param": {
+          "searchType": 2
+        },
+        "key": "hot"
+      },
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Live",
+        "param": {
+          "gameType": 2
+        },
+        "key": "live"
+      },
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Slot",
+        "param": {
+          "gameType": 1
+        },
+        "key": "slot"
+      },
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Mini",
+        "param": {
+          "gameType": 4
+        },
+        "key": "mini"
+      },
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Spin",
+        "param": {
+          "gameType": 5
+        },
+        "key": "spin"
+      },
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Poker",
+        "param": {
+          "gameType": 3
+        },
+        "key": "poker"
+      }
+    ],
     tip_visible: false,
     tip_type: 1,
     tip_info: 'You have not logged in yet,please login.',
@@ -109,18 +335,6 @@ const store = createStore({
         })
     },
     GET_CONFIG(ctx) {
-      getGlobalConfig.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            ctx.commit("set_global_config", res.data)
-          }
-        })
-      getMsgList.get("", {})
-        .then(res => {
-          if (res.code == 200) {
-            ctx.commit('set_msg_list', res.data.list)
-          }
-        })
       getDepositConfig.get("", {})
         .then(res => {
           res.list.map((item, index) => {
@@ -129,6 +343,12 @@ const store = createStore({
             item.checked = false
           })
           ctx.commit('set_deposit_config', res.list)
+        })
+      getGlobalConfig.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            ctx.commit("set_global_config", res.data)
+          }
         })
       getInviteConfig.get("", {})
         .then(res => {
@@ -168,6 +388,12 @@ const store = createStore({
             ctx.commit("set_spin_config", data)
           }
         })
+      getMsgList.get("", {})
+        .then(res => {
+          if (res.code == 200) {
+            ctx.commit('set_msg_list', res.data.list)
+          }
+        })
       // getSignConfig.get("",{})
       //   .then(res=>{
       //     if(res.code==200){
@@ -176,8 +402,13 @@ const store = createStore({
       //   })
     },
     async GET_GAME_LIST(ctx) {
-      if (ctx.state.game_list.length != 0) return
-      ctx.commit("set_loading_modal", true);
+      // if (ctx.state.game_list.length != 0) return
+      // ctx.commit("set_loading_modal", true);
+
+      if (localStorage.getItem('game_list')) {
+        ctx.commit('set_game_list', JSON.parse(localStorage.getItem('game_list')))
+        return
+      }
 
       const res_hot = await getGameList.get("", { page: 1, pageSize: 6, searchType: 2 })
       res_hot.data.list.map(item => {
@@ -292,7 +523,8 @@ const store = createStore({
 
       ]
       ctx.commit('set_game_list', result)
-      ctx.commit("set_loading_modal", false);
+      localStorage.setItem("game_list", JSON.stringify(result))
+      // ctx.commit("set_loading_modal", false);
     }
   }
 })

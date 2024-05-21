@@ -28,19 +28,15 @@
       </nut-image>
 
       <div class="img-mask"></div>
-      <div class="card-count">
+      <div class="card-count" v-if="cardInfo.count > 0">
         <img
           src="../assets/images/img_people.png"
           style="width: 0.188rem; height: 0.2416rem"
         />
         <span>{{ cardInfo.count }}</span>
       </div>
-      <!-- <div class="card-name line-text-overflow">{{ cardInfo.name }}</div> -->
     </div>
-    <!-- <div class="game-btn-box">
-      <div class="btn play" @click="goDetail(cardInfo, 'real')">PLAY NOW</div>
-      <div class="btn demo" @click="goDetail(cardInfo), 'demo'">DEMO</div>
-    </div> -->
+
   </div>
 </template>
 
@@ -49,7 +45,6 @@ import { ref } from "vue";
 import { useStore } from "vuex";
 import { startGame } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
-import { useRouter } from "vue-router";
 
 export default {
   name: "imgCard",
@@ -64,12 +59,12 @@ export default {
     },
   },
   setup(props, ctx) {
-    const router = useRouter();
     const img_url = apiconfig.fileURL;
     const { state, commit } = useStore();
     const is_req = ref(false);
 
     const goDetail = async (data) => {
+      if (!data.id) return;
       if (!localStorage.getItem("token")) {
         commit("set_tip_info", "You have not logged in yet,please login.");
         commit("set_tip_type", 1);
@@ -125,14 +120,14 @@ export default {
 .card-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: .277rem;
-  margin-right: .277rem;
+  margin-bottom: 0.277rem;
+  margin-right: 0.277rem;
   &:nth-child(3n) {
     margin-right: 0;
   }
 
   .card-image-box {
-    border-radius: .333rem;
+    border-radius: 0.333rem;
     position: relative;
     overflow: hidden;
     .img-mask {
@@ -145,18 +140,18 @@ export default {
     }
     .card-count {
       position: absolute;
-      top: .138rem;
-      left: .138rem;
+      top: 0.138rem;
+      left: 0.138rem;
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      padding: .041rem .138rem;
+      padding: 0.041rem 0.138rem;
       background: rgba(0, 0, 0, 0.6);
       box-shadow: 0px 0px 1px 0px #000000;
-      border-radius: .277rem;
+      border-radius: 0.277rem;
       span {
-        padding-left: .083rem;
-        font-size: .222rem;
+        padding-left: 0.083rem;
+        font-size: 0.222rem;
         color: #fff;
         font-weight: 600;
       }

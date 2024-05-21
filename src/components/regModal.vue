@@ -49,7 +49,7 @@ const close = (name) => {
   .btn {
     position: fixed;
     left: calc((100% - 4.907rem) / 2);
-    bottom: calc((100vh - 9.5rem) / 2);
+    top: calc(100vh / 2 + 3.6rem);
     width: 4.907rem;
     height: 1.157rem;
     background: rgba(250, 215, 35, 0.99);
