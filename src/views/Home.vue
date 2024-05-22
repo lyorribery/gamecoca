@@ -277,17 +277,30 @@ const divice = ref(false);
 const msg_list = ref([]);
 const randomMsg = () => {
   const arr = ["024", "054", "055", "059", "020", "050", "027", "057", "026", "056"];
-  const arr_num = ["1000.00", "500.00", "100.00"];
-  const arr_game = ["Coins Spin", "Jackpot Spin", "Lucky Wheel"];
+  const arr_game = [
+    "Jackpot Spin",
+    "Lucky Wheel",
+    "Crash",
+    "Galaxy Roulette",
+    "Ancient Egypt",
+    "Eye Storm",
+    "Fortune Dragon",
+    "Fortune Tiger",
+    "Ganesha Gold",
+    "Santa’s Gift Rush",
+    "Cheshire Dice",
+    "Jogo Do Bicho",
+    
+  ];
   let msg = [];
   for (let i in arr) {
     if (i < 5) {
       const randomIndex = Math.floor(Math.random() * arr.length);
-      const randomIndexNum = Math.floor(Math.random() * arr_num.length);
       const randomIndexGame = Math.floor(Math.random() * arr_game.length);
       msg.push({
         tel: arr[randomIndex] + "*****" + Math.floor(1000 + Math.random() * 9000),
-        num: arr_num[randomIndexNum],
+        num:
+          100 + Math.round(Math.random() * 4900) + Math.floor(Math.random() * 100) / 100,
         game: arr_game[randomIndexGame],
       });
     }
@@ -485,7 +498,7 @@ const active_fd = ref(true);
         display: inline-block;
         animation: scrollLeft 35s linear infinite;
         color: #cccccc;
-        font-size: 0.333rem;
+        font-size: 0.198rem;
       }
 
       @keyframes scrollLeft {
