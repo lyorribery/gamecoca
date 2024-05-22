@@ -13,8 +13,8 @@ module.exports = {
     filenameHashing: false,
     configureWebpack: {
         output: {
-            filename: `js/[name].prod-${packageInfo.version}.${Timestamp}.js`,
-            chunkFilename: `js/[name].prod-${packageInfo.version}.${Timestamp}.js`
+            filename: `js/[name].test-${packageInfo.version}.${Timestamp}.js`,
+            chunkFilename: `js/[name].test-${packageInfo.version}.${Timestamp}.js`
         }
     },
     chainWebpack: (config) => {

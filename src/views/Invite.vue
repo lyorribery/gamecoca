@@ -14,15 +14,15 @@
       <div class="title-box">Invite Friends <span>Bonus</span></div>
       <div class="invite-step">
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_yqhy.png'" style="width:.925rem" />
+          <img :src="img_url + 'invite/icon_yqhy.png'" style="width: 0.925rem" />
         </div>
-        <img :src="img_url + 'invite/img_dijin.png'" style="width:.655rem" />
+        <img :src="img_url + 'invite/img_dijin.png'" style="width: 0.655rem" />
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_100.png'" style="width:.925rem" />
+          <img :src="img_url + 'invite/icon_100.png'" style="width: 0.925rem" />
         </div>
-        <img :src="img_url + 'invite/img_dijin.png'" style="width:.655rem" />
+        <img :src="img_url + 'invite/img_dijin.png'" style="width: 0.655rem" />
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_bankcard.png'" style="width:.925rem" />
+          <img :src="img_url + 'invite/icon_bankcard.png'" style="width: 0.925rem" />
         </div>
       </div>
       <div class="invite-des">
@@ -37,15 +37,15 @@
       <div class="cur-title">Current Yield</div>
       <div class="invite-data-box">
         <div class="item">
-          <div class="value" style="color: #f8e0fd">{{ infos.promoteCount }}</div>
+          <div class="value" style="color: #F8E0FD">{{ infos.promoteCount }}</div>
           <div class="item-label">Invited Friends</div>
         </div>
         <div class="item item-b">
-          <div class="value" style="color: #f45e84">{{ infos.betCount / 100 }}</div>
+          <div class="value" style="color: #F45E84">{{ infos.betCount / 100 }}</div>
           <div class="item-label">Bets</div>
         </div>
         <div class="item">
-          <div class="value" style="color: #fff76a">{{ infos.rewardCount / 100 }}</div>
+          <div class="value" style="color: #FFF76A">{{ infos.rewardCount / 100 }}</div>
           <div class="item-label">Cash</div>
         </div>
       </div>
@@ -146,18 +146,18 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #360c7e;
+  background: linear-gradient(0deg,#2c2645, #382365 );
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) .416rem
-    calc(env(safe-area-inset-bottom) + .416rem) .416rem;
+  padding: calc(55px + env(safe-area-inset-top)) 0.416rem
+    calc(env(safe-area-inset-bottom) + 0.416rem) 0.416rem;
   .invite-box {
-    margin-top: .416rem;
+    margin-top: 0.416rem;
     width: 100%;
-    background: linear-gradient(-31deg, #af1de4, #4f19cc);
-    border-radius: .463rem;
-    border: 1.3px solid #de47f9;
+    background: linear-gradient(-31deg, #803eda, #4d3092);
+    border-radius: 0.463rem;
+    border: 0.012rem solid #b187f0;
     box-sizing: border-box;
-    padding: .416rem .277rem;
+    padding: 0.416rem 0.277rem;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -166,7 +166,7 @@ onMounted(() => {
     .no-data-label {
       width: 100%;
       color: #fff;
-      font-size: .361rem;
+      font-size: 0.361rem;
       span {
         color: #fff76a;
         text-decoration-line: underline;
@@ -174,29 +174,29 @@ onMounted(() => {
     }
     .cur-title {
       width: 2.416rem;
-      height: .647rem;
-      background: #f8e0fd;
-      box-shadow: 0px .036rem 0px 0px #df4afd;
-      border-radius: .072rem .333rem .072rem .333rem;
+      height: 0.647rem;
+      background: #8B5FF2;
+      box-shadow: 0px 0.036rem 0px 0px #DFB9FF;
+      border-radius: 0.072rem 0.333rem 0.072rem 0.333rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #c14ded;
-      font-size: .361rem;
+      color: #ffffff;
+      font-size: 0.361rem;
     }
     .invite-data-box {
-      margin: .416rem 0;
+      margin: 0.416rem 0;
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: .369rem;
+      border-radius: 0.369rem;
       box-sizing: border-box;
-      padding: .416rem 0;
+      padding: 0.416rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       .item-b {
-        border-left: .013rem solid rgba(255, 255, 255, 0.2);
-        border-right: .013rem solid rgba(255, 255, 255, 0.2);
+        border-left: 0.013rem solid rgba(255, 255, 255, 0.2);
+        border-right: 0.013rem solid rgba(255, 255, 255, 0.2);
       }
       .item {
         width: calc(100% / 3);
@@ -206,24 +206,24 @@ onMounted(() => {
         align-items: center;
         box-sizing: border-box;
         .item-label {
-          font-size: .361rem;
-          color: #f8e0fd;
-          margin-top: .138rem;
+          font-size: 0.361rem;
+          color: #F8E0FD;
+          margin-top: 0.138rem;
         }
         .value {
-          font-size: .555rem;
+          font-size: 0.555rem;
         }
       }
     }
     .invite-label {
-      margin: .416rem 0;
+      margin: 0.416rem 0;
       width: 100%;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: .369rem;
+      border-radius: 0.369rem;
       box-sizing: border-box;
-      padding: .277rem .416rem;
+      padding: 0.277rem 0.416rem;
       color: #fff;
-      font-size: .388rem;
+      font-size: 0.388rem;
       span {
         color: #fff76a;
       }
@@ -234,15 +234,15 @@ onMounted(() => {
       justify-content: space-around;
       align-items: center;
       color: #fff;
-      font-size: .361rem;
-      margin-top: .138rem;
+      font-size: 0.361rem;
+      margin-top: 0.138rem;
     }
     .invite-step {
       width: 100%;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      margin-top: .416rem;
+      margin-top: 0.416rem;
       .step-item {
         width: 1.388rem;
         height: 1.388rem;
@@ -255,19 +255,19 @@ onMounted(() => {
     }
     .title-box {
       position: absolute;
-      top: -.509rem;
+      top: -0.509rem;
       left: calc((100% - 4.722rem) / 2);
       width: 4.722rem;
       height: 1.019rem;
-      background: linear-gradient(-90deg, #600afd, #7b42fd);
-      border-radius: .091rem .463rem .091rem .463rem;
-      border: .019rem solid #de47f9;
-      box-shadow: 0px .075rem .13rem 0px #de47f9;
+      background: linear-gradient(-90deg, #593098, #7052c6);
+      border-radius: 0.091rem 0.463rem 0.091rem 0.463rem;
+      border: 0.019rem solid #DFB9FF;
+      box-shadow: 0px 0.075rem 0.13rem 0px #9659E9;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: bold;
-      font-size: .416rem;
+      font-size: 0.416rem;
       color: #ffffff;
       span {
         color: #fff76a;
@@ -275,46 +275,46 @@ onMounted(() => {
     }
   }
   .tip-label {
-    margin: .416rem 0 .277rem 0;
+    margin: 0.416rem 0 0.277rem 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 .416rem;
-    font-size: .388rem;
+    padding: 0 0.416rem;
+    font-size: 0.388rem;
     color: #fff;
   }
   .tip {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 .416rem .138rem .416rem;
-    font-size: .361rem;
+    padding: 0 0.416rem 0.138rem 0.416rem;
+    font-size: 0.361rem;
     color: #ccc3e2;
   }
   .label {
-    margin: .416rem 0;
+    margin: 0.416rem 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 .416rem;
-    font-size: .361rem;
-    color: #ccc3e2;
+    padding: 0 0.416rem;
+    font-size: 0.361rem;
+    color: #9a87c8;
   }
   .invite-btn {
-    margin-top: -.416rem;
-    width: calc(100% - .833rem);
+    margin-top: -0.416rem;
+    width: calc(100% - 0.833rem);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 1.269rem;
     background: linear-gradient(-90deg, #fd823c, #e520fc);
-    box-shadow: 0px .075rem .13rem 0px #770dcf;
-    border-radius: .63rem;
+    box-shadow: 0px 0.075rem 0.13rem 0px #770dcf;
+    border-radius: 0.63rem;
     font-weight: bold;
-    font-size: .48rem;
+    font-size: 0.48rem;
     color: #ffffff;
   }
 }
 .invite-header {
   z-index: 9;
-  background: #360c7e;
+  background: #382365;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -324,16 +324,16 @@ onMounted(() => {
   justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
-  padding-left: .416rem;
+  padding-left: 0.416rem;
   .arrow {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     span {
       font-weight: bold;
-      font-size: .361rem;
+      font-size: 0.361rem;
       color: #ffffff;
-      padding-left: .138rem;
+      padding-left: 0.138rem;
     }
   }
 }

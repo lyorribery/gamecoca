@@ -44,6 +44,8 @@ export const withdrawRecord = new baseApiServer("/account/v1/withdraw/record")
 
 export const getInviteInfo = new baseApiServer("/account/v1/promoter_info")
 
+export const test = new baseApiServer("/sign/demo")
+
 
 
 

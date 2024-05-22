@@ -39,29 +39,28 @@
       <nut-swiper-item
         v-for="(item, index) in promotion_list"
         :key="index"
-        style="height: 113.33px"
+        style="height: 3.148rem"
       >
         <img
           :src="item.img"
           alt=""
-          style="height: 100%; width: calc(100% - 40px)"
+          style="height: 100%; width: calc(100% - 1.111rem)"
           draggable="false"
         />
       </nut-swiper-item>
     </nut-swiper>
 
-    <div
-      style="width: 100%; box-sizing: border-box; padding: 0.277rem 0.277rem 0.138rem 0"
-      :style="{ marginBottom: page_num >= 165 ? '70px' : '0' }"
-    >
-      <nut-noticebar background="#18171E" color="#CCCCCC" :text="msg_list">
-        <template #left-icon>
-          <img
-            src="../assets/images/trumpet.png"
-            style="width: 0.333rem; height: 0.333rem"
-          />
-        </template>
-      </nut-noticebar>
+    <div class="notice-bar-box" :style="{ marginBottom: page_num >= 165 ? '70px' : '0' }">
+      <img src="../assets/images/trumpet.png" style="width: 0.333rem; height: 0.333rem" />
+      <div class="notice-bar">
+        <div class="notice-bar-content">
+          <template v-for="(item, index) in msg_list" :key="index">
+            Congratulations to <span style="color: #9cc86a">{{ item.tel }}</span> for
+            winning <span style="color: #d3bf50">₵{{ item.num }}</span> cash in
+            {{ item.game }}&nbsp;&nbsp;&nbsp;
+          </template>
+        </div>
+      </div>
     </div>
 
     <div
@@ -193,6 +192,8 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { getGameList } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
+import { test } from "@/apis/apis";
+
 const img_url = apiconfig.fileURL;
 let { state, commit, dispatch } = useStore();
 
@@ -273,14 +274,31 @@ const changeDown = (type) => {
   type == 1 ? (down_visible.value = true) : (down_visible.value = false);
 };
 const divice = ref(false);
-const msg_list = computed(() => {
-  let text = "";
-  state.msg_list.map((item) => {
-    text += `${item.content}.`;
-  });
-  return text;
-});
+const msg_list = ref([]);
+const randomMsg = () => {
+  const arr = ["024", "054", "055", "059", "020", "050", "027", "057", "026", "056"];
+  const arr_num = ["1000.00", "500.00", "100.00"];
+  const arr_game = ["Coins Spin", "Jackpot Spin", "Lucky Wheel"];
+  let msg = [];
+  for (let i in arr) {
+    if (i < 5) {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+      const randomIndexNum = Math.floor(Math.random() * arr_num.length);
+      const randomIndexGame = Math.floor(Math.random() * arr_game.length);
+      msg.push({
+        tel: arr[randomIndex] + "*****" + Math.floor(1000 + Math.random() * 9000),
+        num: arr_num[randomIndexNum],
+        game: arr_game[randomIndexGame],
+      });
+    }
+  }
+  msg_list.value = msg;
+};
 onMounted(() => {
+  // test.post("", { msg: "111" }).then((res) => {
+  //   console.log(res);
+  // });
+  randomMsg();
   if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   const userAgent = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
@@ -449,6 +467,37 @@ const active_fd = ref(true);
   background: #18171e;
   position: relative;
   overflow-x: hidden;
+  .notice-bar-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.277rem 0.3rem 0.138rem 0.3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    img {
+      margin-right: 0.222rem;
+    }
+    .notice-bar {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      .notice-bar-content {
+        display: inline-block;
+        animation: scrollLeft 35s linear infinite;
+        color: #cccccc;
+        font-size: 0.333rem;
+      }
+
+      @keyframes scrollLeft {
+        from {
+          transform: translateX(0%);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+    }
+  }
   .home-top-back {
     z-index: 1;
     position: absolute;

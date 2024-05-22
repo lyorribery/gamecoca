@@ -79,7 +79,7 @@
     </div>
     <div class="cell-row" @click="goPath('/records')">
       <div class="left">
-        <img src="@/assets/images/bnt_history.svg" style="width: 1.194rem" />
+        <img src="@/assets/images/bnt_history.png" style="width: 1.194rem" />
         <span>Transaction Records</span>
       </div>
       <div class="right">
@@ -88,7 +88,7 @@
     </div>
     <div class="cell-row" @click="goPath('/invite')">
       <div class="left">
-        <img src="@/assets/images/bnt_invite.svg" style="width: 1.194rem" />
+        <img src="@/assets/images/bnt_invite.png" style="width: 1.194rem" />
         <span>Invite Friends</span>
       </div>
       <div class="right">
@@ -98,7 +98,7 @@
     </div>
     <div class="cell-row" @click="goPath('/contact')">
       <div class="left">
-        <img src="@/assets/images/bnt_contact.svg" style="width: 1.194rem" />
+        <img src="@/assets/images/bnt_contact.png" style="width: 1.194rem" />
         <span>Contact Us</span>
       </div>
       <div class="right">
@@ -107,7 +107,7 @@
     </div>
     <div class="cell-row" @click="goDescription()">
       <div class="left">
-        <img src="@/assets/images/bnt_terms.svg" style="width: 1.194rem" />
+        <img src="@/assets/images/bnt_terms.png" style="width: 1.194rem" />
         <span>Terms and Conditions</span>
       </div>
       <div class="right">

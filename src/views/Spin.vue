@@ -212,7 +212,7 @@ const stopRun = (e) => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(-31deg, #5c41c0, #370f70);
+  background: linear-gradient(0deg, #221a46, #3c2670);
   box-sizing: border-box;
   padding: calc(1.666rem + env(safe-area-inset-top)) 0.416rem 0.416rem 0.416rem;
 
@@ -362,7 +362,7 @@ const stopRun = (e) => {
 }
 .spin-header {
   z-index: 9;
-  background: #391c7c;
+  background: #3c2670;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -389,7 +389,7 @@ const stopRun = (e) => {
   }
   span {
     font-weight: bold;
-    font-size: .472rem;
+    font-size: 0.472rem;
     color: #ffffff;
   }
 }
