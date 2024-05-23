@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { getUserInfo, getGameList, getMsgList, getDepositConfig, getInviteConfig, getFirstDepositConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
+import { getUserInfo, getGameList, getDepositConfig, getInviteConfig, getFirstDepositConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
 import apiconfig from '@/utils/apiConfig'
 const store = createStore({
   state: () => ({
@@ -266,7 +266,7 @@ const store = createStore({
     tip_type: 1,
     tip_info: 'You have not logged in yet,please login.',
     global_config: [],
-    msg_list: [],
+    // msg_list: [],
     deposit_config: [],
     invite_config: {},
     f_d_config: [],
@@ -300,9 +300,9 @@ const store = createStore({
     set_game_list(state, val) {
       state.game_list = val
     },
-    set_msg_list(state, val) {
-      state.msg_list = val
-    },
+    // set_msg_list(state, val) {
+    //   state.msg_list = val
+    // },
     set_deposit_config(state, val) {
       state.deposit_config = val
     },
@@ -413,17 +413,17 @@ const store = createStore({
             }
           })
       }
-      if (localStorage.getItem('msg_list') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
-        ctx.commit('set_msg_list', JSON.parse(localStorage.getItem('msg_list')))
-      } else {
-        getMsgList.get("", {})
-          .then(res => {
-            if (res.code == 200) {
-              ctx.commit('set_msg_list', res.data.list)
-              localStorage.setItem("msg_list", JSON.stringify(res.data.list))
-            }
-          })
-      }
+      // if (localStorage.getItem('msg_list') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+      //   ctx.commit('set_msg_list', JSON.parse(localStorage.getItem('msg_list')))
+      // } else {
+      //   getMsgList.get("", {})
+      //     .then(res => {
+      //       if (res.code == 200) {
+      //         ctx.commit('set_msg_list', res.data.list)
+      //         localStorage.setItem("msg_list", JSON.stringify(res.data.list))
+      //       }
+      //     })
+      // }
 
       // getSignConfig.get("",{})
       //   .then(res=>{
@@ -441,7 +441,7 @@ const store = createStore({
         return
       }
 
-      const res_hot = await getGameList.get("", { page: 1, pageSize: 6, searchType: 2 })
+      const res_hot = await getGameList.post("", { page: 1, pageSize: 6, searchType: 2 })
       res_hot.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
@@ -453,7 +453,7 @@ const store = createStore({
         }
       }
 
-      // const res_recommend = await getGameList.get("", { page: 1, pageSize: 6, searchType: 1 })
+      // const res_recommend = await getGameList.post("", { page: 1, pageSize: 6, searchType: 1 })
       // res_recommend.data.list.map(item => {
       //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       // })
@@ -465,7 +465,7 @@ const store = createStore({
       //   }
       // }
 
-      const res_slot = await getGameList.get("", { page: 1, pageSize: 6, gameType: 1 })
+      const res_slot = await getGameList.post("", { page: 1, pageSize: 6, gameType: 1 })
       res_slot.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
@@ -477,7 +477,7 @@ const store = createStore({
         }
       }
 
-      const res_spin = await getGameList.get("", { page: 1, pageSize: 6, gameType: 5 })
+      const res_spin = await getGameList.post("", { page: 1, pageSize: 6, gameType: 5 })
       res_spin.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
@@ -489,7 +489,7 @@ const store = createStore({
         }
       }
 
-      const res_live = await getGameList.get("", { page: 1, pageSize: 6, gameType: 2 })
+      const res_live = await getGameList.post("", { page: 1, pageSize: 6, gameType: 2 })
       res_live.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
@@ -500,7 +500,7 @@ const store = createStore({
           gameType: 2
         }
       }
-      const res_poker = await getGameList.get("", { page: 1, pageSize: 6, gameType: 3 })
+      const res_poker = await getGameList.post("", { page: 1, pageSize: 6, gameType: 3 })
       res_poker.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })
@@ -511,7 +511,7 @@ const store = createStore({
           gameType: 3
         }
       }
-      const res_fish = await getGameList.get("", { page: 1, pageSize: 6, gameType: 4 })
+      const res_fish = await getGameList.post("", { page: 1, pageSize: 6, gameType: 4 })
       res_fish.data.list.map(item => {
         item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
       })

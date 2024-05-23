@@ -10,7 +10,8 @@ export const exit = new baseApiServer('/account/v1/logout')
 
 export const changePass = new baseApiServer('/account/v1/reset_password')
 
-export const getUserInfo = new baseApiServer(`/account/v1/detail?t=${new Date().getTime()}`)
+// export const getUserInfo = new baseApiServer(`/account/v1/detail?t=${new Date().getTime()}`)
+export const getUserInfo = new baseApiServer(`/account/v1/detail`)
 
 export const getGameList = new baseApiServer('/account/v1/game_list')
 

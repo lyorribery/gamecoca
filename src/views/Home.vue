@@ -228,7 +228,7 @@ const game_loading = ref(false);
 const getMore = async (index, param, total) => {
   if (game_loading.value) return;
   game_loading.value = true;
-  const res = await getGameList.get("", { ...param, page: 1, pageSize: total });
+  const res = await getGameList.post("", { ...param, page: 1, pageSize: total });
   if (res.code == 200) {
     const arr = [];
     res.data.list.map((items, indexs) => {

@@ -28,24 +28,20 @@ request.interceptors.request.use(
   (config) => {
     config.headers['Content-Type'] = 'application/json'
     config.headers['Authorization'] = `${localStorage.getItem('token')}` || '' //code 2002 token过期
-    // const time_stamp = Date.parse(new Date(new Date().getTime() + 8 * 60 * 60 * 1000)) / 1000
-    //  const c_secret = RSAencrypt(`type=0;key=${Base64.encode("aabb")};time=${time_stamp}`)
-    // const c_secret = RSAencrypt('type=0;key=YWFiYg==;time=1702283986')
-    // let sign_str = ''
-    // if (config.data) {
-    //   sign_str = `${time_stamp}\n${config.method.toUpperCase()}\n${config.url.split('?')[0]}\n\n${CryptoJS.SHA256(JSON.stringify(config.data)).toString()}`
-    // } else {
-    //   sign_str = `${time_stamp}\n${config.method.toUpperCase()}\n${config.url.split('?')[0]}\n\n`
-    // }
+    const time_stamp = Date.parse(new Date(new Date().getTime())) / 1000
+    const c_secret = RSAencrypt(`type=0;key=${JSBase64.encode("aabb")};time=${time_stamp}`)
 
-    //sign_str = `${time_stamp}\n${config.method.toUpperCase()}\n${config.url.split('?')[0]}\n\n${CryptoJS.SHA256(JSON.stringify({ msg: '111' })).toString()}`
-    // sign_str = '1702283986\nPOST\n/sign/demo\n\n2fa4e16a8581b6042567516d23d9df8274082712f05c56fff2f736e3e17d514f'
-
-
-    // const mac_str = CryptoJS.HmacSHA256(sign_str, 'aabb')
-    // const c_sign = Base64.stringify(mac_str)
-
-    // config.headers['X-Content-Security'] = `key=aabb;secret=${c_secret};signature=${c_sign}`
+    let sign_str = ''
+    if (config.data) {
+      sign_str = `${time_stamp}\n${config.method.toUpperCase()}\n${config.url}\n\n${CryptoJS.SHA256(JSON.stringify(config.data)).toString()}`
+    } else {
+      sign_str = `${time_stamp}\n${config.method.toUpperCase()}\n${config.url}\n\n${CryptoJS.SHA256('').toString()}`
+    }
+  
+    const mac_str = CryptoJS.HmacSHA256(sign_str, 'aabb')
+    const c_sign = Base64.stringify(mac_str)
+    
+    config.headers['X-Content-Security'] = `key=aabb;secret=${c_secret};signature=${c_sign}`
     return config
   },
   (error) => {
@@ -62,12 +58,20 @@ request.interceptors.response.use(
     }
   },
   (err) => {
+    console.log(err)
     if (err.response.status == 401) {
       store.commit("set_loading_modal", false);
       store.commit("set_user_info", {});
       localStorage.removeItem("token");
       store.commit("set_tip_info", "You have not logged in yet,please login.");
       store.commit("set_tip_type", 1);
+      store.commit("set_tip_modal", true);
+    } else if (err.response.status == 403) {
+      store.commit("set_loading_modal", false);
+      store.commit("set_user_info", {});
+      localStorage.removeItem("token");
+      store.commit("set_tip_info", "Signature error.");
+      store.commit("set_tip_type", 3);
       store.commit("set_tip_modal", true);
     }
     return Promise.reject(err)
