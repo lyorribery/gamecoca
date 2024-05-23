@@ -19,7 +19,7 @@
     </div>
     <div class="channel-row" @click="goThrid(1)">
       <img src="@/assets/images/whatsapp.png" style="width:.611rem" />
-      <span>017858145</span>
+      <span>447960076392</span>
     </div>
     <div class="channel-row" @click="goThrid(2)">
       <img src="@/assets/images/email.png" style="width:.611rem" />
@@ -61,7 +61,7 @@ const goBack = () => {
 };
 const goThrid = (type) => {
   if (type == 1) {
-    location.href = "https://wa.me/+233203131028";
+    location.href = "https://wa.me/447960076392";
   } else if (type == 2) {
     location.href = "mailto:gamecoca88@gmail.com";
   } else if (type == 3) {

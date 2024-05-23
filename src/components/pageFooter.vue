@@ -87,7 +87,7 @@ const goDescription = (type) => {
 };
 const goThrid = (type) => {
   if (type == 1) {
-    location.href = "https://wa.me/+233203131028";
+    location.href = "https://wa.me/447960076392";
   } else if (type == 2) {
     location.href = "mailto:gamecoca88@gmail.com";
   } else if (type == 3) {

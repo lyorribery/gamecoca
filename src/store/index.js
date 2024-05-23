@@ -76,46 +76,7 @@ const store = createStore({
         },
         "key": "hot"
       },
-      {
-        "list": [
-          {
-            "id": "",
-            "icon": "",
-            "count": 0
-          },
-          {
-            "id": "",
-            "icon": "",
-            "count": 0
-          },
-          {
-            "id": "",
-            "icon": "",
-            "count": 0
-          },
-          {
-            "id": "",
-            "icon": "",
-            "count": 0
-          },
-          {
-            "id": "",
-            "icon": "",
-            "count": 0
-          },
-          {
-            "id": "",
-            "icon": "",
-            "count": 0
-          }
-        ],
-        "total": 0,
-        "name": "Live",
-        "param": {
-          "gameType": 2
-        },
-        "key": "live"
-      },
+
       {
         "list": [
           {
@@ -155,6 +116,46 @@ const store = createStore({
           "gameType": 1
         },
         "key": "slot"
+      },
+      {
+        "list": [
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          },
+          {
+            "id": "",
+            "icon": "",
+            "count": 0
+          }
+        ],
+        "total": 0,
+        "name": "Live",
+        "param": {
+          "gameType": 2
+        },
+        "key": "live"
       },
       {
         "list": [
@@ -532,12 +533,12 @@ const store = createStore({
         //   key: 'recommend'
         // },
         {
-          ...live_obj,
-          key: 'live'
-        },
-        {
           ...slot_obj,
           key: 'slot'
+        },
+        {
+          ...live_obj,
+          key: 'live'
         },
         {
           ...mini_obj,
