@@ -6,9 +6,7 @@
       <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
     </div>
     <div class="btn-box" v-else>
-      <span
-        >₵{{ (user_info.bindGold / 100).toFixed(2) }}</span
-      >
+      <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
       <!-- <div :class="refresh_loading ? 'rotate-animation' : ''" @click="refreshDetail()">
         <svg
           t="1716517710452"
@@ -313,16 +311,13 @@ const randomMsg = () => {
   ];
   let msg = [];
   for (let i in arr) {
-    if (i < 5) {
-      const randomIndex = Math.floor(Math.random() * arr.length);
-      const randomIndexGame = Math.floor(Math.random() * arr_game.length);
-      msg.push({
-        tel: arr[randomIndex] + "*****" + Math.floor(1000 + Math.random() * 9000),
-        num:
-          100 + Math.round(Math.random() * 4900) + Math.floor(Math.random() * 100) / 100,
-        game: arr_game[randomIndexGame],
-      });
-    }
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    const randomIndexGame = Math.floor(Math.random() * arr_game.length);
+    msg.push({
+      tel: arr[randomIndex] + "*****" + Math.floor(1000 + Math.random() * 9000),
+      num: 100 + Math.round(Math.random() * 2900) + Math.floor(Math.random() * 100) / 100,
+      game: arr_game[randomIndexGame],
+    });
   }
   msg_list.value = msg;
 };
@@ -352,7 +347,7 @@ window.addEventListener("scroll", () => {
 window.addEventListener("pageshow", function (event) {
   if (event.persisted) {
     commit("set_loading_modal", false);
-     if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
+    if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
   }
 });
 const active_fd = ref(true);
@@ -545,7 +540,7 @@ const active_fd = ref(true);
       white-space: nowrap;
       .notice-bar-content {
         display: inline-block;
-        animation: scrollLeft 35s linear infinite;
+        animation: scrollLeft 40s linear infinite;
         color: #cccccc;
         font-size: 0.198rem;
       }
