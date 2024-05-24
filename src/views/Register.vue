@@ -4,7 +4,7 @@
       <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="back" />
     </div>
     <div class="title">Sign up</div>
-    <div class="title" style="margin-top: .138rem">To GameCoca</div>
+    <div class="title" style="margin-top: 0.138rem">To GameCoca</div>
 
     <div class="form-container">
       <nut-form ref="registerRef" :model-value="registerForm">
@@ -24,7 +24,12 @@
             "
           >
             <span
-              style="color: #fff; font-size: .416rem; font-weight: bold; padding-right: .277rem"
+              style="
+                color: #fff;
+                font-size: 0.416rem;
+                font-weight: bold;
+                padding-right: 0.277rem;
+              "
               >+233</span
             >
             <nut-input
@@ -112,7 +117,7 @@
             <nut-checkbox
               v-model="is_check"
               icon-size="11"
-              style="display: inline-block; width: 0; height: 0; margin-right: .416rem"
+              style="display: inline-block; width: 0; height: 0; margin-right: 0.416rem"
             ></nut-checkbox>
             By signing up,I agree to GameCoca’s
             <span @click="goDescription('3')"> Terms and Conditions</span> &
@@ -218,18 +223,26 @@ const submit = () => {
               invateCode: Number(localStorage.getItem("i_code")),
             }
           : { ...registerForm.value, identifier: "233" + registerForm.value.identifier };
-        register.post("", param).then((res) => {
-          if (res.code == 200) {
-            commit("set_tip_info", "Registration successful, please log in.");
-            commit("set_tip_type", 11);
-            commit("set_tip_modal", true);
-          } else {
-            commit("set_tip_info", res.msg);
+        register
+          .post("", param)
+          .then((res) => {
+            if (res.code == 200) {
+              commit("set_tip_info", "Registration successful, please log in.");
+              commit("set_tip_type", 11);
+              commit("set_tip_modal", true);
+            } else {
+              commit("set_tip_info", res.msg);
+              commit("set_tip_type", 3);
+              commit("set_tip_modal", true);
+            }
+            is_loading.value = false;
+          })
+          .catch((err) => {
+            is_loading.value = false;
+            commit("set_tip_info", "sever error");
             commit("set_tip_type", 3);
             commit("set_tip_modal", true);
-          }
-          is_loading.value = false;
-        });
+          });
       }
     } else {
       console.warn("error:", errors);
@@ -290,27 +303,27 @@ const goDescription = (type) => {
     align-items: center;
     flex-direction: column;
     .code-btn {
-      font-size: .297rem;
+      font-size: 0.297rem;
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid #ccc3e2;
-      border-radius: .444rem;
+      border-radius: 0.444rem;
       width: 2.405rem;
-      height: .741rem;
+      height: 0.741rem;
     }
     .submit-btn {
-      margin: .833rem 0;
+      margin: 0.833rem 0;
       width: 100%;
       height: 1.166rem;
       background: linear-gradient(-90deg, #351f5f, #2a2059);
-      border-radius: .611rem;
+      border-radius: 0.611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size:.472rem;
+      font-size: 0.472rem;
       font-weight: bold;
     }
     .active-btn {
@@ -320,8 +333,8 @@ const goDescription = (type) => {
       position: relative;
       width: 100%;
       box-sizing: border-box;
-      padding: 0 .555rem;
-      font-size: .361rem;
+      padding: 0 0.555rem;
+      font-size: 0.361rem;
       color: #ccc3e2;
       span {
         color: #e556ff;
@@ -331,20 +344,20 @@ const goDescription = (type) => {
   }
   .title {
     box-sizing: border-box;
-    padding: 0 .416rem;
+    padding: 0 0.416rem;
     font-weight: bold;
-    font-size: .555rem;
+    font-size: 0.555rem;
     color: #ffffff;
   }
   .close {
     position: fixed;
-    top: calc(env(safe-area-inset-top) + .694rem);
+    top: calc(env(safe-area-inset-top) + 0.694rem);
     left: 0;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box;
-    padding: 0 .694rem;
+    padding: 0 0.694rem;
   }
 }
 </style>

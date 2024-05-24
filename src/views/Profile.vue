@@ -12,7 +12,11 @@
         style="width: 0.527rem"
         @click="goPath('/setting')"
       />
-      <!-- <img :src="img_url + 'other/icon_kefu.png'" width="19" style="margin-left: .277rem" /> -->
+      <img
+        @click="goLivechat()"
+        :src="img_url + 'other/icon_kefu.png'"
+        style="margin-left: 0.277rem; width: 0.527rem"
+      />
     </div>
   </div>
   <div class="profile">
@@ -146,6 +150,9 @@ const goPath = (path) => {
       path,
     });
   }
+};
+const goLivechat = () => {
+  location.href = "https://tawk.to/chat/6641bda89a809f19fb303295/1htocpnf9";
 };
 const user_info = computed(() => {
   return state.user_info;

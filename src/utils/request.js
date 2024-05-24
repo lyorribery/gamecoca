@@ -58,7 +58,6 @@ request.interceptors.response.use(
     }
   },
   (err) => {
-    console.log(err)
     if (err.response.status == 401) {
       store.commit("set_loading_modal", false);
       store.commit("set_user_info", {});

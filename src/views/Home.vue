@@ -6,7 +6,27 @@
       <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
     </div>
     <div class="btn-box" v-else>
-      <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
+      <span
+        >₵{{ (user_info.bindGold / 100).toFixed(2) }}</span
+      >
+      <!-- <div :class="refresh_loading ? 'rotate-animation' : ''" @click="refreshDetail()">
+        <svg
+          t="1716517710452"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="2912"
+          width=".41rem"
+          height=".41rem"
+        >
+          <path
+            d="M455.850667 796.785778h-46.762667a284.785778 284.785778 0 0 1-238.193778-280.689778c0-47.274667 12.117333-91.534222 32.654222-130.787556l34.872889 48.355556a51.768889 51.768889 0 0 0 91.818667-16.440889l66.104889-237.738667a51.768889 51.768889 0 0 0-49.891556-65.649777l-237.454222 0.341333A51.768889 51.768889 0 0 0 67.128889 196.266667l64.170667 88.974222a396.117333 396.117333 0 0 0-74.069334 230.912 398.222222 398.222222 0 0 0 336.668445 393.500444c5.176889 0.796444 10.24 0.568889 15.189333-0.056889v0.682667h46.762667A56.149333 56.149333 0 0 0 512 854.129778v-1.137778a56.149333 56.149333 0 0 0-56.149333-56.149333zM956.871111 827.790222l-64.227555-88.974222a395.719111 395.719111 0 0 0 74.069333-230.912 398.279111 398.279111 0 0 0-336.668445-393.557333 54.328889 54.328889 0 0 0-15.189333 0.056889v-0.739556h-46.762667A56.092444 56.092444 0 0 0 512 169.813333v1.137778c0 31.061333 25.144889 56.206222 56.092444 56.206222h46.762667a284.785778 284.785778 0 0 1 238.193778 280.689778c0 47.274667-12.117333 91.534222-32.597333 130.787556l-34.929778-48.355556a51.712 51.712 0 0 0-91.761778 16.440889l-66.161778 237.738667a51.768889 51.768889 0 0 0 49.948445 65.649777l237.454222-0.341333a51.768889 51.768889 0 0 0 41.870222-82.090667z"
+            fill="#ffffff"
+            p-id="2913"
+          ></path>
+        </svg>
+      </div> -->
       <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
     </div>
   </div>
@@ -192,7 +212,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { getGameList } from "@/apis/apis";
 import apiconfig from "@/utils/apiConfig";
-import { test } from "@/apis/apis";
+// import { getUserInfo } from "@/apis/apis";
 
 const img_url = apiconfig.fileURL;
 let { state, commit, dispatch } = useStore();
@@ -290,7 +310,6 @@ const randomMsg = () => {
     "Santa’s Gift Rush",
     "Cheshire Dice",
     "Jogo Do Bicho",
-    
   ];
   let msg = [];
   for (let i in arr) {
@@ -308,9 +327,6 @@ const randomMsg = () => {
   msg_list.value = msg;
 };
 onMounted(() => {
-  // test.post("", { msg: "111" }).then((res) => {
-  //   console.log(res);
-  // });
   randomMsg();
   if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   const userAgent = navigator.userAgent;
@@ -336,13 +352,46 @@ window.addEventListener("scroll", () => {
 window.addEventListener("pageshow", function (event) {
   if (event.persisted) {
     commit("set_loading_modal", false);
-    if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
+     if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
   }
 });
 const active_fd = ref(true);
+
+// const refresh_loading = ref(false);
+
+// const refreshDetail = async () => {
+//   if (refresh_loading.value) return;
+//   refresh_loading.value = true;
+//   const res = await getUserInfo.get("", {});
+//   if (res.code == 200) {
+//     commit("set_user_info", res.data);
+//   } else if (res.code == 2002) {
+//     commit("set_user_info", {});
+//     localStorage.removeItem("token");
+//     commit("set_tip_info", "You have not logged in yet,please login.");
+//     commit("set_tip_type", 1);
+//     commit("set_tip_modal", true);
+//   }
+//   setTimeout(() => {
+//     refresh_loading.value = false;
+//   }, 1500);
+// };
 </script>
 
 <style lang="scss" scoped>
+// .rotate-animation {
+//   animation: rotate 1.5s infinite linear;
+// }
+
+// @keyframes rotate {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
+
 .fd-box {
   position: fixed;
   bottom: calc(50% - 200px);

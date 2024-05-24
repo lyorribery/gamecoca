@@ -4,7 +4,7 @@
       <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="back" />
     </div>
     <div class="title">Hello,</div>
-    <div class="title" style="margin-top: .138rem">Welcome to GameCoca</div>
+    <div class="title" style="margin-top: 0.138rem">Welcome to GameCoca</div>
 
     <div class="form-container">
       <nut-form ref="loginRef" :model-value="loginForm">
@@ -24,7 +24,12 @@
             "
           >
             <span
-              style="color: #fff; font-size: .416rem; font-weight: bold; padding-right: .277rem"
+              style="
+                color: #fff;
+                font-size: 0.416rem;
+                font-weight: bold;
+                padding-right: 0.277rem;
+              "
               >+233</span
             >
             <nut-input
@@ -139,6 +144,12 @@ const submit = () => {
             commit("set_tip_modal", true);
           }
           is_loading.value = false;
+        })
+        .catch((err) => {
+          is_loading.value = false;
+          commit("set_tip_info", "sever error");
+          commit("set_tip_type", 3);
+          commit("set_tip_modal", true);
         });
     } else {
       console.warn("error:", errors);
@@ -189,16 +200,16 @@ const goPath = (path) => {
     align-items: center;
     flex-direction: column;
     .submit-btn {
-      margin: .833rem 0;
+      margin: 0.833rem 0;
       width: 100%;
       height: 1.166rem;
       background: linear-gradient(-90deg, #351f5f, #2a2059);
-      border-radius: .611rem;
+      border-radius: 0.611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size: .472rem;
+      font-size: 0.472rem;
       font-weight: bold;
     }
     .active-btn {
@@ -207,7 +218,7 @@ const goPath = (path) => {
     .des {
       width: 100%;
       text-align: center;
-      font-size: .388rem;
+      font-size: 0.388rem;
       color: #e556ff;
       text-decoration-line: underline;
     }
@@ -217,25 +228,25 @@ const goPath = (path) => {
       justify-content: flex-end;
       align-items: center;
       color: #e556ff;
-      font-size: .388rem;
+      font-size: 0.388rem;
     }
   }
   .title {
     box-sizing: border-box;
-    padding: 0 .416rem;
+    padding: 0 0.416rem;
     font-weight: bold;
-    font-size: .555rem;
+    font-size: 0.555rem;
     color: #ffffff;
   }
   .close {
     position: fixed;
-    top: calc(env(safe-area-inset-top) + .694rem);
+    top: calc(env(safe-area-inset-top) + 0.694rem);
     left: 0;
     width: 100%;
     display: flex;
     justify-content: flex-end;
     box-sizing: border-box;
-    padding: 0 .694rem;
+    padding: 0 0.694rem;
   }
 }
 </style>
