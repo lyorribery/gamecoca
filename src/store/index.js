@@ -450,7 +450,7 @@ const store = createStore({
         ...res_hot.data,
         name: "Popular",
         param: {
-          searchType: 2
+          searchType: 2,
         }
       }
 
@@ -474,7 +474,7 @@ const store = createStore({
         ...res_slot.data,
         name: "Slot",
         param: {
-          gameType: 1
+          gameType: 1,
         }
       }
 
@@ -486,7 +486,7 @@ const store = createStore({
         ...res_spin.data,
         name: "Spin",
         param: {
-          gameType: 5
+          gameType: 5,
         }
       }
 
@@ -498,7 +498,7 @@ const store = createStore({
         ...res_live.data,
         name: "Live",
         param: {
-          gameType: 2
+          gameType: 2,
         }
       }
       const res_poker = await getGameList.post("", { page: 1, pageSize: 6, gameType: 3 })
@@ -509,7 +509,7 @@ const store = createStore({
         ...res_poker.data,
         name: "Poker",
         param: {
-          gameType: 3
+          gameType: 3,
         }
       }
       const res_fish = await getGameList.post("", { page: 1, pageSize: 6, gameType: 4 })
@@ -520,7 +520,7 @@ const store = createStore({
         ...res_fish.data,
         name: "Mini",
         param: {
-          gameType: 4
+          gameType: 4,
         }
       }
       const result = [

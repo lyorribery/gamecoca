@@ -160,7 +160,7 @@ const customBlurValidate = (prop) => {
   loginRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val) && val.length == 9) {
+  if (/^\d+$/.test(val) && val.length <= 10) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");

@@ -24,7 +24,12 @@
             "
           >
             <span
-              style="color: #fff; font-size: .416rem; font-weight: bold; padding-right: .277rem"
+              style="
+                color: #fff;
+                font-size: 0.416rem;
+                font-weight: bold;
+                padding-right: 0.277rem;
+              "
               >+233</span
             >
             <nut-input
@@ -220,7 +225,7 @@ const customBlurValidate = (prop) => {
   changepassRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val) && val.length == 9) {
+  if (/^\d+$/.test(val) && val.length <= 10) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");
@@ -253,7 +258,7 @@ const goBack = () => {
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  padding: calc(1.944rem + env(safe-area-inset-top)) .416rem 0 .416rem;
+  padding: calc(1.944rem + env(safe-area-inset-top)) 0.416rem 0 0.416rem;
   .form-container {
     width: 100%;
     display: flex;
@@ -261,27 +266,27 @@ const goBack = () => {
     align-items: center;
     flex-direction: column;
     .code-btn {
-      font-size: .297rem;
+      font-size: 0.297rem;
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid #ccc3e2;
-      border-radius: .444rem;
+      border-radius: 0.444rem;
       width: 2.405rem;
-      height: .741rem;
+      height: 0.741rem;
     }
     .submit-btn {
-      margin: .833rem 0;
+      margin: 0.833rem 0;
       width: 100%;
       height: 1.166rem;
       background: linear-gradient(-90deg, #351f5f, #2a2059);
-      border-radius: .611rem;
+      border-radius: 0.611rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #fff;
-      font-size: .472rem;
+      font-size: 0.472rem;
       font-weight: bold;
     }
     .active-btn {
@@ -291,8 +296,8 @@ const goBack = () => {
       position: relative;
       width: 100%;
       box-sizing: border-box;
-      padding: 0 .555rem;
-      font-size: .361rem;
+      padding: 0 0.555rem;
+      font-size: 0.361rem;
       color: #ccc3e2;
       span {
         color: #e556ff;
@@ -303,7 +308,7 @@ const goBack = () => {
 }
 .change-pass-header {
   z-index: 9;
-  background:#18171E;
+  background: #18171e;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -312,25 +317,25 @@ const goBack = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: .013rem solid #29213d;
+  border-bottom: 0.013rem solid #29213d;
   .arrow {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: fixed;
-    left: .416rem;
-    top: .555rem;
+    left: 0.416rem;
+    top: 0.555rem;
     span {
       font-weight: bold;
-      font-size: .361rem;
+      font-size: 0.361rem;
       color: #ffffff;
-      padding-left: .138rem;
+      padding-left: 0.138rem;
     }
   }
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: .472rem;
+    font-size: 0.472rem;
   }
 }
 </style>

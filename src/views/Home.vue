@@ -125,7 +125,7 @@
           v-if="item.list.length < item.total"
           @click="getMore(index, item.param, item.total)"
         >
-          <span>View More</span>
+          <span>View All</span>
           <img style="margin-left: 8px" width="5" src="../assets/images/jiantou.png" />
         </div>
       </div>
@@ -314,7 +314,7 @@ const randomMsg = () => {
     const randomIndex = Math.floor(Math.random() * arr.length);
     const randomIndexGame = Math.floor(Math.random() * arr_game.length);
     msg.push({
-      tel: arr[randomIndex] + "*****" + Math.floor(1000 + Math.random() * 9000),
+      tel: arr[randomIndex] + "***" + Math.floor(1000 + Math.random() * 9000),
       num: 100 + Math.round(Math.random() * 2900) + Math.floor(Math.random() * 100) / 100,
       game: arr_game[randomIndexGame],
     });
