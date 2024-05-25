@@ -68,7 +68,7 @@
       </nut-swiper-item>
     </nut-swiper>
 
-    <div class="notice-bar-box" :style="{ marginBottom: page_num >= 165 ? '70px' : '0' }">
+    <div class="notice-bar-box" :style="{ marginBottom: page_num >= 205 ? '70px' : '0' }">
       <img src="../assets/images/trumpet.png" style="width: 0.333rem; height: 0.333rem" />
       <div class="notice-bar">
         <div class="notice-bar-content">
@@ -83,7 +83,7 @@
 
     <div
       class="custom-content"
-      :class="page_num >= 165 ? 'sticky-type' : ''"
+      :class="page_num >= 205 ? 'sticky-type' : ''"
       id="customContent"
     >
       <div class="custom-tab" id="gameName">
@@ -275,7 +275,7 @@ const changeTab = (index) => {
   let top_num = 0;
   if (index != 0) {
     let selector = "game" + index;
-    if (page_num.value >= 165) {
+    if (page_num.value >= 205) {
       top_num = document.getElementById(selector).offsetTop - 125;
     } else {
       top_num = document.getElementById(selector).offsetTop - 125;

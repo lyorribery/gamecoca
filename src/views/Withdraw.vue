@@ -229,7 +229,7 @@ const goRecords = () => {
 };
 onMounted(() => {
   if (JSON.stringify(state.user_info) != "{}") {
-    const channel_num = state.user_info.mobile.slice(3).slice(0, 3);
+    const channel_num = "0" + state.user_info.mobile.slice(3).slice(0, 2);
     switch (channel_num) {
       case "024":
       case "054":

@@ -246,7 +246,7 @@ const submit = () => {
 onMounted(() => {
   quickList.value = state.deposit_config;
   if (JSON.stringify(state.user_info) != "{}") {
-    const channel_num = state.user_info.mobile.slice(3).slice(0, 3);
+    const channel_num = "0" + state.user_info.mobile.slice(3).slice(0, 2);
     switch (channel_num) {
       case "024":
       case "054":
@@ -296,17 +296,17 @@ onMounted(() => {
   justify-content: center;
   background: #18171e;
   box-sizing: border-box;
-  padding-bottom: .277rem;
+  padding-bottom: 0.277rem;
   .btn {
     width: calc(100% - 1.666rem);
     height: 1.166rem;
     background: linear-gradient(-90deg, #9343c4, #614ae6);
-    border-radius: .611rem;
+    border-radius: 0.611rem;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: .472rem;
+    font-size: 0.472rem;
     font-weight: bold;
   }
 }
@@ -314,24 +314,24 @@ onMounted(() => {
 .deposit {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) .416rem
-    calc(env(safe-area-inset-bottom) + .277rem + 1.166rem) .416rem;
+  padding: calc(55px + env(safe-area-inset-top)) 0.416rem
+    calc(env(safe-area-inset-bottom) + 0.277rem + 1.166rem) 0.416rem;
   .des {
-    margin: .416rem 0;
+    margin: 0.416rem 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 .555rem;
-    color: #D9D9D9;
+    padding: 0 0.555rem;
+    color: #d9d9d9;
     font-weight: bold;
-    font-size: .333rem;
+    font-size: 0.333rem;
     text-align: center;
   }
   .tip-row {
     color: #999999;
-    font-size: .333rem;
+    font-size: 0.333rem;
     width: 100%;
     text-align: left;
-    margin-top: .277rem;
+    margin-top: 0.277rem;
   }
   .line-box {
     width: 100%;
@@ -339,17 +339,17 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 .555rem;
+    padding: 0 0.555rem;
     .line {
       flex: 1;
-      height: .0138rem;
+      height: 0.0138rem;
       background: #999999;
     }
     span {
       font-weight: 600;
-      font-size: .333rem;
+      font-size: 0.333rem;
       color: #999999;
-      padding: 0 .138rem;
+      padding: 0 0.138rem;
     }
   }
   .chanel-box {
@@ -357,50 +357,50 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: .277rem;
+    margin-bottom: 0.277rem;
     .chanel {
-      width: calc((100% - .555rem) / 3);
+      width: calc((100% - 0.555rem) / 3);
       height: 1.444rem;
-      border-radius: .444rem;
-      border: .041rem solid #382b63;
+      border-radius: 0.444rem;
+      border: 0.041rem solid #382b63;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding: 0 .277rem;
+      padding: 0 0.277rem;
       color: #ccc3e2;
       img {
-        height: .416rem;
-        margin-bottom: .222rem;
+        height: 0.416rem;
+        margin-bottom: 0.222rem;
       }
       .chanel-name {
         font-weight: bold;
-        font-size: .361rem;
+        font-size: 0.361rem;
       }
     }
     .in-checked {
       color: #fff;
-      border: .041rem solid #ff4bf4;
+      border: 0.041rem solid #ff4bf4;
       background: #9d18b9;
     }
   }
 
   .ipt-box {
-    margin-top: .138rem;
+    margin-top: 0.138rem;
     width: 100%;
     height: 1.111rem;
-    border-radius: .361rem;
-    border: .041rem solid #692ddb;
+    border-radius: 0.361rem;
+    border: 0.041rem solid #692ddb;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 .416rem;
+    padding: 0 0.416rem;
     span {
       color: #e556ff;
       font-weight: bold;
-      font-size: .416rem;
+      font-size: 0.416rem;
     }
   }
   .quick-box {
@@ -411,53 +411,53 @@ onMounted(() => {
     align-items: center;
     .item {
       position: relative;
-      width: calc((100% - .555rem) / 3);
-      border-radius: .444rem;
+      width: calc((100% - 0.555rem) / 3);
+      border-radius: 0.444rem;
       color: #8068c8;
-      border: .041rem solid #4b3f7a;
+      border: 0.041rem solid #4b3f7a;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      padding: .138rem 0;
-      margin-bottom: .277rem;
+      padding: 0.138rem 0;
+      margin-bottom: 0.277rem;
       .hot {
         position: absolute;
-        top: -.138rem;
-        right: -.055rem;
-        width: .758rem;
-        height: .341rem;
+        top: -0.138rem;
+        right: -0.055rem;
+        width: 0.758rem;
+        height: 0.341rem;
         background: linear-gradient(-90deg, #be42fd, #7802fd);
-        border-radius: .036rem .222rem .036rem .036rem;
+        border-radius: 0.036rem 0.222rem 0.036rem 0.036rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: .25rem;
+        font-size: 0.25rem;
         font-weight: 600;
         color: #fff;
       }
       .r-amount {
-        font-size: .416rem;
+        font-size: 0.416rem;
         font-weight: 600;
       }
       .p-amount {
-        margin-top: .138rem;
-        font-size: .333rem;
+        margin-top: 0.138rem;
+        font-size: 0.333rem;
         font-weight: 600;
       }
     }
     .in-checked {
       color: #fff;
-      border: .041rem solid #ff4bf4;
+      border: 0.041rem solid #ff4bf4;
       background: #9d18b9;
     }
   }
   .label {
-    margin: .277rem 0;
+    margin: 0.277rem 0;
     font-weight: bold;
     color: #fff;
-    font-size: .416rem;
+    font-size: 0.416rem;
   }
 }
 .deposit-header {
@@ -471,17 +471,17 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: .0138rem solid #29213d;
+  border-bottom: 0.0138rem solid #29213d;
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: .472rem;
+    font-size: 0.472rem;
   }
   .sub-title {
     position: fixed;
-    right: .416rem;
-    top: calc(env(safe-area-inset-top) + .555rem);
-    font-size: .347rem;
+    right: 0.416rem;
+    top: calc(env(safe-area-inset-top) + 0.555rem);
+    font-size: 0.347rem;
     font-weight: 600;
     color: #fff;
   }

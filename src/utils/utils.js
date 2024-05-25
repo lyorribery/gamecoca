@@ -40,16 +40,37 @@ export const _validpassword = (pass) => {
 }
 
 export const formatDate = (date, cut) => {
-    var date = new Date(date);
-    var YY = date.getFullYear() + cut;
-    var MM =
-        (date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + cut;
-    var DD = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    var hh = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
-    var mm = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":";
-    var ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    return YY + MM + DD + " " + hh + mm + ss;
+	var date = new Date(date);
+	var YY = date.getFullYear() + cut;
+	var MM =
+		(date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + cut;
+	var DD = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+	var hh = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
+	var mm = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":";
+	var ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+	return YY + MM + DD + " " + hh + mm + ss;
 };
+
+export const preloadImage = (url) => {
+	return new Promise((resolve, reject) => {
+		const image = new Image();
+		image.onload = () => {
+			resolve(getBase64Image(image));
+		}
+		image.onerror = () => reject(new Error('Could not load image at ' + url));
+		image.src = url;
+	});
+}
+
+const getBase64Image = (img, width, height) => {
+	const canvas = document.createElement('canvas')
+	canvas.width = width || img.width
+	canvas.height = height || img.height
+	const ctx = canvas.getContext('2d')
+	ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+	const dataURL = canvas.toDataURL()
+	return dataURL
+}
 
 
 

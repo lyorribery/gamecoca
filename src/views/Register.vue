@@ -26,7 +26,7 @@
             <span
               style="
                 color: #fff;
-                font-size: 0.416rem;
+                font-size: .388rem;
                 font-weight: bold;
                 padding-right: 0.277rem;
               "
@@ -34,9 +34,9 @@
             >
             <nut-input
               v-model="registerForm.identifier"
-              placeholder="Enter phone number"
+              placeholder="Phone number (XXXXXXXXX)"
               type="number"
-              maxLength="10"
+              maxLength="9"
               @blur="customBlurValidate('identifier')"
             />
           </div>
@@ -59,7 +59,7 @@
             <nut-input
               style="flex: 1"
               v-model="registerForm.authCode"
-              placeholder="Enter Captcha Code"
+              placeholder="Captcha Code"
               type="number"
               @blur="customBlurValidate('authCode')"
             />
@@ -77,7 +77,7 @@
         >
           <nut-input
             v-model="registerForm.certificate"
-            placeholder="Enter password"
+            placeholder="Password (Must be 6-16 characters long)"
             type="password"
             maxLength="16"
             @blur="customBlurValidate('certificate')"
@@ -253,7 +253,7 @@ const customBlurValidate = (prop) => {
   registerRef.value.validate(prop);
 };
 const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val) && val.length <= 10) {
+  if (/^\d+$/.test(val) && val.length == 9) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter the correct phone number");
