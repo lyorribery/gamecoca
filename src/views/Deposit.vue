@@ -226,7 +226,10 @@ const submit = () => {
             },
           });
         } else if (res.data.result === 1) {
-          commit("set_tip_info", "You have a recharge order that is being processed");
+          commit(
+            "set_tip_info",
+            "You have a recharge order being processed. If it still does not arrive after 10 minutes, please contact customer service."
+          );
           commit("set_tip_type", 3);
           commit("set_tip_modal", true);
         }
