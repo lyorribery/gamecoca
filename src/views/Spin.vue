@@ -139,8 +139,8 @@ const start = async () => {
     commit("set_tip_modal", true);
     return;
   }
-  if (state.user_info.point < 20) {
-    commit("set_tip_info", "Current coins are less than 20.");
+  if (state.user_info.point < 100) {
+    commit("set_tip_info", "Current coins are less than 100.");
     commit("set_tip_type", 7);
     commit("set_tip_modal", true);
     return;
