@@ -13,7 +13,7 @@
       <div class="daily-container">
         <div class="daily-line-box">
           <div class="item">
-            <div class="coin">+20</div>
+            <div class="coin">+50</div>
             <div class="step">
               <div class="step-line" style="background: transparent"></div>
               <div class="step-container check-step">1</div>
@@ -22,7 +22,7 @@
             <div class="day">Day 1</div>
           </div>
           <div class="item">
-            <div class="coin">+20</div>
+            <div class="coin">+50</div>
             <div class="step">
               <div class="step-line" :class="check_times > 1 ? 'check-line' : ''"></div>
               <div class="step-container" :class="check_times > 1 ? 'check-step' : ''">
@@ -33,7 +33,7 @@
             <div class="day">Day 2</div>
           </div>
           <div class="item">
-            <div class="coin">+40</div>
+            <div class="coin">+80</div>
             <div class="step">
               <div class="step-line" :class="check_times > 2 ? 'check-line' : ''"></div>
               <div class="step-container" :class="check_times > 2 ? 'check-step' : ''">
@@ -44,7 +44,7 @@
             <div class="day">Day 3</div>
           </div>
           <div class="item">
-            <div class="coin">+40</div>
+            <div class="coin">+80</div>
             <div class="step">
               <div class="step-line" :class="check_times > 3 ? 'check-line' : ''"></div>
               <div class="step-container" :class="check_times > 3 ? 'check-step' : ''">
@@ -57,7 +57,7 @@
         </div>
         <div class="daily-line-box" style="margin-top: 0.277rem">
           <div class="item">
-            <div class="coin" style="color: #ffc23e">+60</div>
+            <div class="coin" style="color: #ffc23e">+120</div>
             <div class="step">
               <div class="step-line" style="background: transparent"></div>
               <div class="step-container" :class="check_times > 4 ? 'check-step' : ''">
@@ -68,7 +68,7 @@
             <div class="day">Day 5</div>
           </div>
           <div class="item">
-            <div class="coin" style="color: #ffc23e">+60</div>
+            <div class="coin" style="color: #ffc23e">+120</div>
             <div class="step">
               <div class="step-line" :class="check_times > 5 ? 'check-line' : ''"></div>
               <div class="step-container" :class="check_times > 5 ? 'check-step' : ''">
@@ -79,7 +79,7 @@
             <div class="day">Day 6</div>
           </div>
           <div class="item">
-            <div class="coin" style="color: #ffc23e">+100</div>
+            <div class="coin" style="color: #ffc23e">+200</div>
             <div class="step">
               <div class="step-line" :class="check_times > 6 ? 'check-line' : ''"></div>
               <div class="step-container" :class="check_times > 6 ? 'check-step' : ''">
@@ -97,8 +97,8 @@
           <div class="line"></div>
         </div>
         <ul>
-          <li>Check-in daily to claim up to 100 coins</li>
-          <li>Check-in 7 days continuously to claim 340 coins</li>
+          <li>Check-in daily to claim up to 200 coins</li>
+          <li>Check-in 7 days continuously to claim 700 coins</li>
           <li>Coins can only be used to win Cash Gift by playing Coins Spin</li>
         </ul>
       </div>

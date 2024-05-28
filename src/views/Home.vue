@@ -138,7 +138,7 @@
 
     <regModal />
 
-    <div
+    <!-- <div
       class="fd-box"
       @click="showFisrtDeposit()"
       v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
@@ -163,7 +163,7 @@
           <div class="fd-label" style="font-size: 11.6px">GHS 550</div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <nut-popup v-model:visible="down_visible" position="bottom" round>
@@ -333,9 +333,9 @@ onMounted(() => {
     divice.value = "android";
   }
 
-  setInterval(() => {
-    active_fd.value = !active_fd.value;
-  }, 2500);
+  // setInterval(() => {
+  //   active_fd.value = !active_fd.value;
+  // }, 2500);
 });
 
 const page_num = ref(0);
@@ -350,7 +350,7 @@ window.addEventListener("pageshow", function (event) {
     if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
   }
 });
-const active_fd = ref(true);
+// const active_fd = ref(true);
 
 // const refresh_loading = ref(false);
 
@@ -387,49 +387,49 @@ const active_fd = ref(true);
 //   }
 // }
 
-.fd-box {
-  position: fixed;
-  bottom: calc(50% - 200px);
-  right: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .fd-img {
-    z-index: 5;
-    position: fixed;
-    bottom: calc(50% - 166.3px);
-    right: 8.3px;
-  }
-  .fd-text {
-    z-index: 3;
-    width: 59.3px;
-    height: 33.6px;
-    overflow: hidden;
-    background-image: url("../assets/images/fd1.png");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    position: relative;
+// .fd-box {
+//   position: fixed;
+//   bottom: calc(50% - 200px);
+//   right: 5px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   .fd-img {
+//     z-index: 5;
+//     position: fixed;
+//     bottom: calc(50% - 166.3px);
+//     right: 8.3px;
+//   }
+//   .fd-text {
+//     z-index: 3;
+//     width: 59.3px;
+//     height: 33.6px;
+//     overflow: hidden;
+//     background-image: url("../assets/images/fd1.png");
+//     background-size: 100% 100%;
+//     background-repeat: no-repeat;
+//     position: relative;
 
-    .rowup {
-      width: 100%;
-      height: 100%;
-      .fd-label {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        font-size: 8px;
-        color: #ffffff;
-        box-sizing: border-box;
-        padding: 0 3px;
-      }
-    }
-  }
-}
+//     .rowup {
+//       width: 100%;
+//       height: 100%;
+//       .fd-label {
+//         width: 100%;
+//         height: 100%;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         font-weight: bold;
+//         font-size: 8px;
+//         color: #ffffff;
+//         box-sizing: border-box;
+//         padding: 0 3px;
+//       }
+//     }
+//   }
+// }
 .sticky-type {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 55px);

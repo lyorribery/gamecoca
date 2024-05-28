@@ -40,8 +40,8 @@
         >Remaining draws
       </div>
     </div>
-    <div class="btn" @click="start">PLAY<span class="tip">(20COINS)</span></div>
-    <div class="des">It takes 20 coins per spin;</div>
+    <div class="btn" @click="start">PLAY<span class="tip">(100COINS)</span></div>
+    <div class="des">It takes 100 coins per spin;</div>
     <div class="des">
       If you hit cash,the amount will be credited to your game account immediately;
     </div>
@@ -79,7 +79,7 @@ const goBack = () => {
 const s_w = ref(0);
 
 const spin_count = computed(() => {
-  return state.user_info.point ? Math.floor(state.user_info.point / 20) : "0";
+  return state.user_info.point ? Math.floor(state.user_info.point / 100) : "0";
 });
 
 const user_info = computed(() => {

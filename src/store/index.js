@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { getUserInfo, getGameList, getDepositConfig, getInviteConfig, getFirstDepositConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
+import { getUserInfo, getGameList, getDepositConfig, getInviteConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
 import apiconfig from '@/utils/apiConfig'
 const store = createStore({
   state: () => ({
@@ -32,7 +32,7 @@ const store = createStore({
     ],
     loading_visible: false,
     daily_visible: false,
-    fisrt_deposit_visilbe: false,
+    // fisrt_deposit_visilbe: false,
     reg_visible: false,
     user_info: {},
     game_list: [
@@ -270,7 +270,7 @@ const store = createStore({
     // msg_list: [],
     deposit_config: [],
     invite_config: {},
-    f_d_config: [],
+    // f_d_config: [],
     spin_config: []
   }),
   mutations: {
@@ -283,9 +283,9 @@ const store = createStore({
     set_daily_visible(state, val) {
       state.daily_visible = val
     },
-    set_fisrt_deposit_visilbe(state, val) {
-      state.fisrt_deposit_visilbe = val
-    },
+    // set_fisrt_deposit_visilbe(state, val) {
+    //   state.fisrt_deposit_visilbe = val
+    // },
     set_tip_modal(state, val) {
       state.tip_visible = val
     },
@@ -310,9 +310,9 @@ const store = createStore({
     set_invite_config(state, val) {
       state.invite_config = val
     },
-    set_f_d_config(state, val) {
-      state.f_d_config = val
-    },
+    // set_f_d_config(state, val) {
+    //   state.f_d_config = val
+    // },
     set_spin_config(state, val) {
       state.spin_config = val
     },
@@ -375,26 +375,26 @@ const store = createStore({
             }
           })
       }
-      if (localStorage.getItem('f_d_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
-        ctx.commit('set_f_d_config', JSON.parse(localStorage.getItem('f_d_config')))
-      } else {
-        getFirstDepositConfig.get("", {})
-          .then(res => {
-            if (res.code == 200) {
-              res.data.list.map((item, index) => {
-                item.amount = (item.amount / 100).toString()
-                item.reward = (item.reward / 100).toString()
-                if (index == 1) {
-                  item.active = true
-                } else {
-                  item.active = false
-                }
-              })
-              ctx.commit('set_f_d_config', res.data.list)
-              localStorage.setItem("f_d_config", JSON.stringify(res.data.list))
-            }
-          })
-      }
+      // if (localStorage.getItem('f_d_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
+      //   ctx.commit('set_f_d_config', JSON.parse(localStorage.getItem('f_d_config')))
+      // } else {
+      //   getFirstDepositConfig.get("", {})
+      //     .then(res => {
+      //       if (res.code == 200) {
+      //         res.data.list.map((item, index) => {
+      //           item.amount = (item.amount / 100).toString()
+      //           item.reward = (item.reward / 100).toString()
+      //           if (index == 1) {
+      //             item.active = true
+      //           } else {
+      //             item.active = false
+      //           }
+      //         })
+      //         ctx.commit('set_f_d_config', res.data.list)
+      //         localStorage.setItem("f_d_config", JSON.stringify(res.data.list))
+      //       }
+      //     })
+      // }
       if (localStorage.getItem('spin_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
         ctx.commit('set_spin_config', JSON.parse(localStorage.getItem('spin_config')))
       } else {

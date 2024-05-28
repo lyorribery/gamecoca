@@ -51,7 +51,7 @@
     </div>
   </div>
   <dailyCheck />
-  <firstDeposit />
+  <!-- <firstDeposit /> -->
 </template>
 
 <script>
@@ -59,13 +59,13 @@ import { watch } from "vue";
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import dailyCheck from "@/components/dailyCheck.vue";
-import firstDeposit from "@/components/firstDeposit.vue";
+// import firstDeposit from "@/components/firstDeposit.vue";
 import { preloadImage } from "@/utils/utils";
 
 export default {
   components: {
     dailyCheck,
-    firstDeposit,
+    // firstDeposit,
   },
   setup() {
     const route = useRoute();

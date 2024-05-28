@@ -52,7 +52,9 @@ const goPath = (data) => {
         commit("set_tip_type", 9);
         commit("set_tip_modal", true);
       } else {
-        commit("set_fisrt_deposit_visilbe", true);
+        router.push({
+          path: "/deposit",
+        });
       }
       break;
   }
@@ -62,7 +64,7 @@ const goPath = (data) => {
 <style lang="scss" scoped>
 .promotion-header {
   z-index: 9;
-  background:#18171E;
+  background: #18171e;
   position: fixed;
   width: 100%;
   top: env(safe-area-inset-top);
@@ -71,22 +73,22 @@ const goPath = (data) => {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: .0138rem solid #29213d;
+  border-bottom: 0.0138rem solid #29213d;
   .title {
     color: #fff;
     font-weight: bold;
-    font-size: .472rem;
+    font-size: 0.472rem;
   }
 }
 .promotion {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) .416rem .277rem .416rem;
+  padding: calc(55px + env(safe-area-inset-top)) 0.416rem 0.277rem 0.416rem;
   .item {
     width: 100%;
-    border-radius: .222rem;
+    border-radius: 0.222rem;
     overflow: hidden;
-    margin-top: .416rem;
+    margin-top: 0.416rem;
     position: relative;
     .item-content {
       position: absolute;
@@ -98,19 +100,19 @@ const goPath = (data) => {
       justify-content: flex-end;
       align-items: center;
       box-sizing: border-box;
-      padding: .138rem .277rem;
+      padding: 0.138rem 0.277rem;
 
       .btn {
         color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: .361rem;
+        font-size: 0.361rem;
         font-weight: 600;
         box-sizing: border-box;
-        padding: .138rem .416rem;
+        padding: 0.138rem 0.416rem;
         background: linear-gradient(-90deg, #9343c4, #614ae6);
-        border-radius: .444rem;
+        border-radius: 0.444rem;
       }
     }
   }
