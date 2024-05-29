@@ -32,7 +32,6 @@ const store = createStore({
     ],
     loading_visible: false,
     daily_visible: false,
-    // fisrt_deposit_visilbe: false,
     reg_visible: false,
     user_info: {},
     game_list: [
@@ -267,10 +266,8 @@ const store = createStore({
     tip_type: 1,
     tip_info: 'You have not logged in yet,please login.',
     global_config: [],
-    // msg_list: [],
     deposit_config: [],
     invite_config: {},
-    // f_d_config: [],
     spin_config: []
   }),
   mutations: {
@@ -283,9 +280,6 @@ const store = createStore({
     set_daily_visible(state, val) {
       state.daily_visible = val
     },
-    // set_fisrt_deposit_visilbe(state, val) {
-    //   state.fisrt_deposit_visilbe = val
-    // },
     set_tip_modal(state, val) {
       state.tip_visible = val
     },
@@ -301,18 +295,12 @@ const store = createStore({
     set_game_list(state, val) {
       state.game_list = val
     },
-    // set_msg_list(state, val) {
-    //   state.msg_list = val
-    // },
     set_deposit_config(state, val) {
       state.deposit_config = val
     },
     set_invite_config(state, val) {
       state.invite_config = val
     },
-    // set_f_d_config(state, val) {
-    //   state.f_d_config = val
-    // },
     set_spin_config(state, val) {
       state.spin_config = val
     },
@@ -375,26 +363,7 @@ const store = createStore({
             }
           })
       }
-      // if (localStorage.getItem('f_d_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
-      //   ctx.commit('set_f_d_config', JSON.parse(localStorage.getItem('f_d_config')))
-      // } else {
-      //   getFirstDepositConfig.get("", {})
-      //     .then(res => {
-      //       if (res.code == 200) {
-      //         res.data.list.map((item, index) => {
-      //           item.amount = (item.amount / 100).toString()
-      //           item.reward = (item.reward / 100).toString()
-      //           if (index == 1) {
-      //             item.active = true
-      //           } else {
-      //             item.active = false
-      //           }
-      //         })
-      //         ctx.commit('set_f_d_config', res.data.list)
-      //         localStorage.setItem("f_d_config", JSON.stringify(res.data.list))
-      //       }
-      //     })
-      // }
+
       if (localStorage.getItem('spin_config') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
         ctx.commit('set_spin_config', JSON.parse(localStorage.getItem('spin_config')))
       } else {
@@ -414,28 +383,9 @@ const store = createStore({
             }
           })
       }
-      // if (localStorage.getItem('msg_list') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
-      //   ctx.commit('set_msg_list', JSON.parse(localStorage.getItem('msg_list')))
-      // } else {
-      //   getMsgList.get("", {})
-      //     .then(res => {
-      //       if (res.code == 200) {
-      //         ctx.commit('set_msg_list', res.data.list)
-      //         localStorage.setItem("msg_list", JSON.stringify(res.data.list))
-      //       }
-      //     })
-      // }
 
-      // getSignConfig.get("",{})
-      //   .then(res=>{
-      //     if(res.code==200){
-      //       console.log(res.data)
-      //     }
-      //   })
     },
     async GET_GAME_LIST(ctx) {
-      // if (ctx.state.game_list.length != 0) return
-      // ctx.commit("set_loading_modal", true);
 
       if (localStorage.getItem('game_list') && (new Date().getTime() - Number(localStorage.getItem('l_expire_time'))) < 24 * 60 * 60 * 1000) {
         ctx.commit('set_game_list', JSON.parse(localStorage.getItem('game_list')))
@@ -453,18 +403,6 @@ const store = createStore({
           searchType: 2,
         }
       }
-
-      // const res_recommend = await getGameList.post("", { page: 1, pageSize: 6, searchType: 1 })
-      // res_recommend.data.list.map(item => {
-      //   item.count = Math.floor(Math.random() * (300 - 100 + 1)) + 100;
-      // })
-      // const recommend_obj = {
-      //   ...res_recommend.data,
-      //   name: "Top",
-      //   param: {
-      //     searchType: 1
-      //   }
-      // }
 
       const res_slot = await getGameList.post("", { page: 1, pageSize: 6, gameType: 1 })
       res_slot.data.list.map(item => {
@@ -528,10 +466,6 @@ const store = createStore({
           ...hot_obj,
           key: 'hot'
         },
-        // {
-        //   ...recommend_obj,
-        //   key: 'recommend'
-        // },
         {
           ...slot_obj,
           key: 'slot'
@@ -557,7 +491,6 @@ const store = createStore({
       ctx.commit('set_game_list', result)
       localStorage.setItem("l_expire_time", new Date().getTime())
       localStorage.setItem("game_list", JSON.stringify(result))
-      // ctx.commit("set_loading_modal", false);
     }
   }
 })
