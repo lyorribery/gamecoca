@@ -633,7 +633,7 @@ window.addEventListener("pageshow", function (event) {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    overflow-x: hidden;
+    overflow-x: auto;
     background: transparent;
   }
   .custom-tab {
@@ -641,7 +641,7 @@ window.addEventListener("pageshow", function (event) {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    overflow-x: hidden;
+    overflow-x: auto;
     scrollbar-width: none;
   }
 

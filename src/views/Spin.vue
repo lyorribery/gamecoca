@@ -6,7 +6,10 @@
     <span>Coins Spin</span>
   </div>
   <div class="spin">
-    <div class="spin-container" :style="{ width: s_w + 'px', height: s_w + 'px' }">
+    <div
+      class="spin-container"
+      :style="{ width: s_w / 36 + 'rem', height: s_w / 36 + 'rem' }"
+    >
       <img :src="img_url + 'spin/zp_zhizhen.png'" style="z-index: 2; width: 1.944rem" />
       <div class="spin-box" ref="prizeBack">
         <img :src="img_url + 'spin/zp_di.png'" style="width: 100%" />
@@ -114,8 +117,8 @@ const prizeStyle = computed(() => {
   const _degree = rotateAngle.value;
   return (i) => {
     return `
-              width: ${s_w.value * Math.sin(((_degree / 2) * Math.PI) / 180)}px;
-              height: ${s_w.value / 2}px;
+              width: ${(s_w.value * Math.sin(((_degree / 2) * Math.PI) / 180)) / 36}rem;
+              height: ${s_w.value / 2 / 36}rem;
               transform: rotate(${_degree * i + _degree / 2 - 15}deg);
               transform-origin: 50% 100%;
               margin-top:.277rem;

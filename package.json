@@ -1,6 +1,6 @@
 {
   "name": "gamecoca",
-  "version": "1.0.13",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service serve",
