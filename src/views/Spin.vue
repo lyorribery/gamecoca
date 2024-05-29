@@ -43,8 +43,15 @@
         >Remaining draws
       </div>
     </div>
-    <div class="btn" @click="start">PLAY<span class="tip">(100COINS)</span></div>
-    <div class="des">It takes 100 coins per spin;</div>
+    <div class="btn" @click="start">
+      PLAY<span class="tip"
+        >({{ global_config.spinCost ? global_config.spinCost : "100" }}COINS)</span
+      >
+    </div>
+    <div class="des">
+      It takes {{ global_config.spinCost ? global_config.spinCost : "100" }} coins per
+      spin;
+    </div>
     <div class="des">
       If you hit cash,the amount will be credited to your game account immediately;
     </div>
@@ -87,6 +94,10 @@ const spin_count = computed(() => {
 
 const user_info = computed(() => {
   return state.user_info;
+});
+
+const global_config = computed(() => {
+  return state.global_config;
 });
 
 const prizeObj = reactive({
@@ -143,7 +154,12 @@ const start = async () => {
     return;
   }
   if (state.user_info.point < 100) {
-    commit("set_tip_info", "Current coins are less than 100.");
+    commit(
+      "set_tip_info",
+      `Current coins are less than ${
+        global_config.spinCost ? global_config.spinCost : "100"
+      }.`
+    );
     commit("set_tip_type", 7);
     commit("set_tip_modal", true);
     return;
