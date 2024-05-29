@@ -49,6 +49,8 @@
 
     <nut-swiper
       :auto-play="2500"
+      :is-prevent-default="false"
+      :is-stop-propagation="false"
       pagination-visible
       pagination-color="#fff"
       pagination-unselected-color="#808080"
@@ -59,12 +61,14 @@
         :key="index"
         style="height: 3.148rem"
       >
-        <img
-          :src="item.img"
-          alt=""
-          style="height: 100%; width: calc(100% - 1.111rem)"
-          draggable="false"
-        />
+        <div @click="goActive(index)">
+          <img
+            :src="item.img"
+            style="height: 100%; width: calc(100% - 1.111rem)"
+            alt=""
+            draggable="false"
+          />
+        </div>
       </nut-swiper-item>
     </nut-swiper>
 
@@ -223,9 +227,9 @@ const user_info = computed(() => {
 });
 const route = useRoute();
 const router = useRouter();
-const showFisrtDeposit = () => {
-  commit("set_fisrt_deposit_visilbe", true);
-};
+// const showFisrtDeposit = () => {
+//   commit("set_fisrt_deposit_visilbe", true);
+// };
 const showDailyCheck = () => {
   commit("set_daily_visible", true);
 };
@@ -320,6 +324,33 @@ const randomMsg = () => {
     });
   }
   msg_list.value = msg;
+};
+const goActive = (index) => {
+  switch (index) {
+    case 0:
+      showDailyCheck();
+      break;
+    case 1:
+      router.push({
+        path: "/spin",
+      });
+      break;
+    case 2:
+      router.push({
+        path: "/deposit",
+      });
+      break;
+    case 3:
+      router.push({
+        path: "/deposit",
+      });
+      break;
+    case 4:
+      router.push({
+        path: "/invite",
+      });
+      break;
+  }
 };
 onMounted(() => {
   randomMsg();
