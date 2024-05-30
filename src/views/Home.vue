@@ -560,7 +560,7 @@ window.addEventListener("pageshow", function (event) {
 
       @keyframes scrollLeft {
         from {
-          transform: translateX(100%);
+          transform: translateX(0%);
         }
         to {
           transform: translateX(-100%);
