@@ -285,6 +285,8 @@ const submit = () => {
               commit("set_tip_info", "Registration successful, please log in.");
               commit("set_tip_type", 11);
               commit("set_tip_modal", true);
+              //fb注册完成事件
+              fbq("track", "CompleteRegistration");
             } else {
               commit("set_tip_info", res.msg);
               commit("set_tip_type", 3);

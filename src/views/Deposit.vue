@@ -219,6 +219,13 @@ const submit = () => {
       is_loading.value = false;
       if (res.code == 200) {
         if (res.data.result === 0) {
+          //fb自定义事件，首次充值
+          if (state.user_info.rechargeTimes == 0) {
+            fbq("trackCustom", "FirstRecharge", {
+              currency: "GHS",
+              value: Number((Number(amount_val.value) * 100).toFixed(2)),
+            });
+          }
           router.push({
             path: "/pay",
             query: {

@@ -268,7 +268,8 @@ const store = createStore({
     global_config: [],
     deposit_config: [],
     invite_config: {},
-    spin_config: []
+    spin_config: [],
+    detail_loading: false
   }),
   mutations: {
     set_reg_visible(state, val) {
@@ -306,10 +307,15 @@ const store = createStore({
     },
     set_global_config(state, val) {
       state.global_config = val
+    },
+    set_detail_loading(state, val) {
+      state.detail_loading = val
     }
   },
   actions: {
     GET_USER_INFO(ctx) {
+      if (ctx.state.detail_loading) return
+      ctx.commit('set_detail_loading', true)
       getUserInfo.get("", {})
         .then(res => {
           if (res.code == 200) {
@@ -321,6 +327,7 @@ const store = createStore({
             ctx.commit("set_tip_type", 1);
             ctx.commit('set_tip_modal', true)
           }
+          ctx.commit('set_detail_loading', false)
         })
     },
     GET_CONFIG(ctx) {
