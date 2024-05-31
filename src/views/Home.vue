@@ -123,7 +123,7 @@
     <pageFooter />
 
     <regModal />
-
+    <fdModal />
     <!-- <div
       class="fd-box"
       @click="showFisrtDeposit()"
@@ -180,11 +180,13 @@
 import imgCard from "@/components/imgCard.vue";
 import pageFooter from "@/components/pageFooter.vue";
 import regModal from "@/components/regModal.vue";
+import fdModal from "@/components/fdModal.vue";
 export default {
   components: {
     imgCard,
     pageFooter,
     regModal,
+    fdModal,
   },
 };
 </script>

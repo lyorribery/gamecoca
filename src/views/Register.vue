@@ -191,11 +191,11 @@ import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
-import { register, getVerifyCode } from "@/apis/apis";
+import { register, getVerifyCode, login } from "@/apis/apis";
 import { useStore } from "vuex";
 
 let timer = null;
-const { commit } = useStore();
+const { commit, dispatch } = useStore();
 const is_loading = ref(false);
 const router = useRouter();
 const registerRef = ref(null);
@@ -282,17 +282,45 @@ const submit = () => {
           .post("", param)
           .then((res) => {
             if (res.code == 200) {
-              commit("set_tip_info", "Registration successful, please log in.");
-              commit("set_tip_type", 11);
-              commit("set_tip_modal", true);
+              // commit("set_tip_info", "Registration successful, please log in.");
+              // commit("set_tip_type", 11);
+              // commit("set_tip_modal", true);
               //fb注册完成事件
               fbq("track", "CompleteRegistration");
+              login
+                .post("", {
+                  loginType: "phone",
+                  identifier: "233" + registerForm.value.identifier,
+                  certificate: registerForm.value.certificate,
+                  deviceId: localStorage.getItem("d_id"),
+                })
+                .then((res) => {
+                  if (res.code == 200) {
+                    localStorage.setItem("token", res.data.accessToken);
+                    dispatch("GET_USER_INFO");
+                    commit("set_fd_visible", true);
+                    router.push({
+                      path: "/home",
+                    });
+                  } else {
+                    commit("set_tip_info", res.msg);
+                    commit("set_tip_type", 3);
+                    commit("set_tip_modal", true);
+                  }
+                  is_loading.value = false;
+                })
+                .catch((err) => {
+                  is_loading.value = false;
+                  commit("set_tip_info", "sever error");
+                  commit("set_tip_type", 3);
+                  commit("set_tip_modal", true);
+                });
             } else {
+              is_loading.value = false;
               commit("set_tip_info", res.msg);
               commit("set_tip_type", 3);
               commit("set_tip_modal", true);
             }
-            is_loading.value = false;
           })
           .catch((err) => {
             is_loading.value = false;
@@ -379,7 +407,7 @@ const goDescription = (type) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #9A87C8;
+      color: #9a87c8;
       font-size: 0.472rem;
       font-weight: bold;
     }

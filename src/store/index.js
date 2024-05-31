@@ -33,6 +33,7 @@ const store = createStore({
     loading_visible: false,
     daily_visible: false,
     reg_visible: false,
+    fd_visible: false,
     user_info: {},
     game_list: [
       {
@@ -272,6 +273,9 @@ const store = createStore({
     detail_loading: false
   }),
   mutations: {
+    set_fd_visible(state, val) {
+      state.fd_visible = val
+    },
     set_reg_visible(state, val) {
       state.reg_visible = val
     },

@@ -1,15 +1,15 @@
 <template>
   <nut-overlay
-    v-model:visible="reg_visible"
+    v-model:visible="fd_visible"
     :lock-scroll="true"
     :close-on-click-overlay="false"
     :duration="0.8"
   >
-    <div class="reg-modal" :style="{ backgroundImage: 'url(' + img_url + ')' }">
-      <div class="reg-close">
+    <div class="fd-modal" :style="{ backgroundImage: 'url(' + img_url + ')' }">
+      <div class="fd-close">
         <Close color="#fff" width=".444rem" height=".444rem" @click="close('')" />
       </div>
-      <div class="btn" @click="close('register')">Register Now</div>
+      <div class="btn" @click="close('deposit')">Deposit ₵5.00</div>
     </div>
   </nut-overlay>
 </template>
@@ -24,11 +24,11 @@ import apiconfig from "@/utils/apiConfig";
 const router = useRouter();
 const { state, commit } = useStore();
 const img_url = apiconfig.fileURL + "new_reg.png";
-const reg_visible = computed(() => {
-  return state.reg_visible;
+const fd_visible = computed(() => {
+  return state.fd_visible;
 });
 const close = (name) => {
-  commit("set_reg_visible", false);
+  commit("set_fd_visible", false);
   if (name) {
     router.push({
       name,
@@ -38,7 +38,7 @@ const close = (name) => {
 </script>
 
 <style lang="scss" scoped>
-.reg-modal {
+.fd-modal {
   position: fixed;
   left: 1.074rem;
   top: calc((100vh - 10.55rem) / 2);
@@ -62,7 +62,7 @@ const close = (name) => {
     font-size: 0.481rem;
     color: #5a3919;
   }
-  .reg-close {
+  .fd-close {
     position: fixed;
     right: 1.525rem;
     top: calc((100vh - 9.895rem) / 2);
