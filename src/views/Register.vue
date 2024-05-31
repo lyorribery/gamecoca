@@ -379,11 +379,12 @@ const goDescription = (type) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
+      color: #9A87C8;
       font-size: 0.472rem;
       font-weight: bold;
     }
     .active-btn {
+      color: #ffffff;
       background: linear-gradient(-90deg, #9343c4, #614ae6);
     }
     .text-box {
