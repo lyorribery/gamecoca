@@ -137,7 +137,7 @@ const prizeStyle = computed(() => {
   };
 });
 onMounted(() => {
-  s_w.value = window.innerWidth - 30;
+  s_w.value = window.innerWidth - 100;
   prizeObj.prizeList = state.spin_config;
 });
 
