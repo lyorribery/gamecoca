@@ -5,7 +5,7 @@
     :close-on-click-overlay="false"
     :duration="0.8"
   >
-    <div class="fd-modal" :style="{ backgroundImage: 'url(' + img_url + ')' }">
+    <div class="fd-modal">
       <div class="fd-close">
         <Close color="#fff" width=".444rem" height=".444rem" @click="close('')" />
       </div>
@@ -19,11 +19,9 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
-import apiconfig from "@/utils/apiConfig";
 
 const router = useRouter();
 const { state, commit } = useStore();
-const img_url = apiconfig.fileURL + "new_reg.png";
 const fd_visible = computed(() => {
   return state.fd_visible;
 });
@@ -46,6 +44,7 @@ const close = (name) => {
   height: 10.55rem;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  background-image: url('../assets/images/client/new_reg.png');
   .btn {
     position: fixed;
     left: calc((100% - 4.907rem) / 2);

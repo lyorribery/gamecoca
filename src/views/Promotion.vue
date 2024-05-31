@@ -20,9 +20,33 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 let { state, commit } = useStore();
 const router = useRouter();
-const list = computed(() => {
-  return state.promotion_list;
-});
+const list = [
+  {
+    type: 1,
+    btn: "Get Coins",
+    img: require("../assets/images/client/promotion/check.png"),
+  },
+  {
+    type: 2,
+    btn: "Go Spin",
+    img: require("../assets/images/client/promotion/spin.png"),
+  },
+  {
+    type: 4,
+    btn: "Get Bonus",
+    img: require("../assets/images/client/promotion/deposit.png"),
+  },
+  {
+    type: 5,
+    btn: "Get Bonus",
+    img: require("../assets/images/client/promotion/f_d.png"),
+  },
+  {
+    type: 3,
+    btn: "Get Cash",
+    img: require("../assets/images/client/promotion/invite.png"),
+  },
+];
 const goPath = (data) => {
   switch (data.type) {
     case 1:

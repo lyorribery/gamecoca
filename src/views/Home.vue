@@ -158,20 +158,20 @@
         <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
       </div>
       <div class="title">1. Click the "More" icon, then click Install application</div>
-      <img :src="img_url + 'down/down/and_1.png'" />
+      <img src="../assets/images/client/down/down/and_1.png" />
       <div class="title">2. Click Add and select "Add"</div>
-      <img :src="img_url + 'down/down/and_2.png'" />
+      <img src="../assets/images/client/down/down/and_2.png" />
     </div>
     <div class="down-box" v-if="divice == 'ios'">
       <div class="close">
         <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
       </div>
       <div class="title">1.Click the share button at the bottom</div>
-      <img :src="img_url + 'down/down/ios_1.png'" />
+      <img src="../assets/images/client/down/down/ios_1.png" />
       <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
-      <img :src="img_url + 'down/down/ios_2.png'" />
+      <img src="../assets/images/client/down/down/ios_2.png" />
       <div class="title">3. Click Add and select "Add"</div>
-      <img :src="img_url + 'down/down/ios_3.png'" />
+      <img src="../assets/images/client/down/down/ios_3.png" />
     </div>
   </nut-popup>
 </template>
@@ -197,15 +197,37 @@ import { Close, RectRight } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { getGameList } from "@/apis/apis";
-import apiconfig from "@/utils/apiConfig";
 // import { getUserInfo } from "@/apis/apis";
 
-const img_url = apiconfig.fileURL;
 let { state, commit, dispatch } = useStore();
 
-const promotion_list = computed(() => {
-  return state.promotion_list;
-});
+const promotion_list = [
+  {
+    type: 1,
+    btn: "Get Coins",
+    img: require("../assets/images/client/promotion/check.png"),
+  },
+  {
+    type: 2,
+    btn: "Go Spin",
+    img: require("../assets/images/client/promotion/spin.png"),
+  },
+  {
+    type: 4,
+    btn: "Get Bonus",
+    img: require("../assets/images/client/promotion/deposit.png"),
+  },
+  {
+    type: 5,
+    btn: "Get Bonus",
+    img: require("../assets/images/client/promotion/f_d.png"),
+  },
+  {
+    type: 3,
+    btn: "Get Cash",
+    img: require("../assets/images/client/promotion/invite.png"),
+  },
+];
 const user_info = computed(() => {
   return state.user_info;
 });

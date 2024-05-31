@@ -1,35 +1,8 @@
 import { createStore } from 'vuex'
 import { getUserInfo, getGameList, getDepositConfig, getInviteConfig, getSpinConfig, getGlobalConfig } from '@/apis/apis'
-import apiconfig from '@/utils/apiConfig'
+
 const store = createStore({
   state: () => ({
-    promotion_list: [
-      {
-        type: 1,
-        btn: "Get Coins",
-        img: apiconfig.fileURL + 'promotion/check.png'
-      },
-      {
-        type: 2,
-        btn: "Go Spin",
-        img: apiconfig.fileURL + 'promotion/spin.png'
-      },
-      {
-        type: 4,
-        btn: "Get Bonus",
-        img: apiconfig.fileURL + 'promotion/deposit.png'
-      },
-      {
-        type: 5,
-        btn: "Get Bonus",
-        img: apiconfig.fileURL + 'promotion/f_d.png'
-      },
-      {
-        type: 3,
-        btn: "Get Cash",
-        img: apiconfig.fileURL + 'promotion/invite.png'
-      },
-    ],
     loading_visible: false,
     daily_visible: false,
     reg_visible: false,
@@ -384,7 +357,7 @@ const store = createStore({
               const data = []
               for (let i in res.data.list) {
                 res.data.list[i].reward = res.data.list[i].reward / 100
-                res.data.list[i].pic = res.data.list[i].reward == 0 ? apiconfig.fileURL + "spin/img_xiaolian.png" : res.data.list[i].reward == 1 ? apiconfig.fileURL + "spin/img_coins_1.png" : res.data.list[i].reward == 10 ? apiconfig.fileURL + "spin/img_coins_2.png" : res.data.list[i].reward == 100 ? apiconfig.fileURL + "spin/img_coins_3.png" : res.data.list[i].reward == 500 ? apiconfig.fileURL + "spin/img_coins_4.png" : res.data.list[i].reward == 1000 ? apiconfig.fileURL + "spin/img_coins_5.png" : ""
+                res.data.list[i].pic = res.data.list[i].reward == 0 ? require("@/assets/images/client/spin/img_xiaolian.png") : res.data.list[i].reward == 1 ? require("../assets/images/client/spin/img_coins_1.png") : res.data.list[i].reward == 10 ? require("../assets/images/client/spin/img_coins_2.png") : res.data.list[i].reward == 100 ? require("../assets/images/client/spin/img_coins_3.png") : res.data.list[i].reward == 500 ? require("../assets/images/client/spin/img_coins_4.png") : res.data.list[i].reward == 1000 ? require("../assets/images/client/spin/img_coins_5.png") : ""
                 if (i < 12) {
                   data.unshift(res.data.list[i])
                 }

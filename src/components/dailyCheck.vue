@@ -9,7 +9,7 @@
       <Close color="#fff" width=".444rem" height=".444rem" @click="close()" />
     </div>
     <div class="daily-box">
-      <img :src="img_url + 'other/daily_top.png'" style="width: 100%" />
+      <img src="../assets/images/client/other/daily_top.png" style="width: 100%" />
       <div class="daily-container">
         <div class="daily-line-box">
           <div class="item">
@@ -110,9 +110,8 @@
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { Close } from "@nutui/icons-vue";
-import apiconfig from "@/utils/apiConfig";
 import { signCheck } from "@/apis/apis";
-const img_url = apiconfig.fileURL;
+
 const { state, commit, dispatch } = useStore();
 const check_times = computed(() => {
   return state.user_info.signTimes ? state.user_info.signTimes : 0;

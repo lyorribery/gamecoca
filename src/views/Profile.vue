@@ -2,19 +2,19 @@
   <div class="profile-header">
     <div class="user-avtar">
       <div class="avatar">
-        <img :src="img_url + 'other/img_tx.png'" style="width: 0.563rem" />
+        <img src="../assets/images/client/other/img_tx.png"  style="width: 0.563rem" />
       </div>
       <span>{{ user_info.id ? "ID " + user_info.id : "" }}</span>
     </div>
     <div class="header-btn">
       <img
-        :src="img_url + 'other/icon-sett.png'"
+        src="../assets/images/client/other/icon_sett.png"
         style="width: 0.527rem"
         @click="goPath('/setting')"
       />
       <img
         @click="goLivechat()"
-        :src="img_url + 'other/icon_kefu.png'"
+        src="../assets/images/client/other/icon_kefu.png"
         style="margin-left: 0.277rem; width: 0.527rem"
       />
     </div>
@@ -127,8 +127,7 @@ import { onActivated, computed } from "vue";
 import { RectRight } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import apiconfig from "@/utils/apiConfig";
-const img_url = apiconfig.fileURL;
+
 const router = useRouter();
 let { state, dispatch, commit } = useStore();
 const goPath = (path) => {

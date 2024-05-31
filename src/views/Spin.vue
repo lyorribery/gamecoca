@@ -10,9 +10,9 @@
       class="spin-container"
       :style="{ width: s_w / 36 + 'rem', height: s_w / 36 + 'rem' }"
     >
-      <img :src="img_url + 'spin/zp_zhizhen.png'" style="z-index: 2; width: 1.944rem" />
+      <img src="../assets/images/client/spin/zp_zhizhen.png" style="z-index: 2; width: 1.944rem" />
       <div class="spin-box" ref="prizeBack">
-        <img :src="img_url + 'spin/zp_di.png'" style="width: 100%" />
+        <img  src="../assets/images/client/spin/zp_di.png" style="width: 100%" />
       </div>
       <div class="spin-back"></div>
 
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <img :src="img_url + 'spin/zp_dizuo.png'" width="253.7" style="margin-top: -30px" />
+    <img  src="../assets/images/client/spin/zp_dizuo.png" width="253.7" style="margin-top: -30px" />
 
     <div class="data-box">
       <div class="item b-r">
@@ -76,10 +76,7 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import { useStore } from "vuex";
-import apiConfig from "@/utils/apiConfig";
 import { spinAct } from "@/apis/apis";
-
-const img_url = apiConfig.fileURL;
 
 let { state, commit, dispatch } = useStore();
 const router = useRouter();

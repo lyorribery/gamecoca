@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="invite">
-    <img :src="img_url + 'invite/top_img.png'" style="width: 100%" />
+    <img src="../assets/images/client/invite/top_img.png" style="width: 100%" />
     <div class="invite-btn" @click="shareLink">Invite Friends Now</div>
     <div class="label">
       Click this button to generate a link containing your invitation code
@@ -14,15 +14,15 @@
       <div class="title-box">Invite Friends <span>Bonus</span></div>
       <div class="invite-step">
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_yqhy.png'" style="width: 0.925rem" />
+          <img  src="../assets/images/client/invite/icon_yqhy.png" style="width: 0.925rem" />
         </div>
-        <img :src="img_url + 'invite/img_dijin.png'" style="width: 0.655rem" />
+        <img src="../assets/images/client/invite/img_dijin.png"  style="width: 0.655rem" />
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_100.png'" style="width: 0.925rem" />
+          <img src="../assets/images/client/invite/icon_100.png" style="width: 0.925rem" />
         </div>
-        <img :src="img_url + 'invite/img_dijin.png'" style="width: 0.655rem" />
+        <img src="../assets/images/client/invite/img_dijin.png" style="width: 0.655rem" />
         <div class="step-item">
-          <img :src="img_url + 'invite/icon_bankcard.png'" style="width: 0.925rem" />
+          <img src="../assets/images/client/invite/icon_bankcard.png" style="width: 0.925rem" />
         </div>
       </div>
       <div class="invite-des">
@@ -37,15 +37,15 @@
       <div class="cur-title">Current Yield</div>
       <div class="invite-data-box">
         <div class="item">
-          <div class="value" style="color: #F8E0FD">{{ infos.promoteCount }}</div>
+          <div class="value" style="color: #f8e0fd">{{ infos.promoteCount }}</div>
           <div class="item-label">Invited Friends</div>
         </div>
         <div class="item item-b">
-          <div class="value" style="color: #F45E84">{{ infos.betCount / 100 }}</div>
+          <div class="value" style="color: #f45e84">{{ infos.betCount / 100 }}</div>
           <div class="item-label">Bets</div>
         </div>
         <div class="item">
-          <div class="value" style="color: #FFF76A">{{ infos.rewardCount / 100 }}</div>
+          <div class="value" style="color: #fff76a">{{ infos.rewardCount / 100 }}</div>
           <div class="item-label">Cash</div>
         </div>
       </div>
@@ -79,10 +79,9 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
-import apiconfig from "@/utils/apiConfig";
 import { useStore } from "vuex";
 import { getInviteInfo } from "@/apis/apis";
-const img_url = apiconfig.fileURL;
+
 const { state, commit } = useStore();
 const router = useRouter();
 const shareLink = () => {
@@ -146,7 +145,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(0deg,#2c2645, #382365 );
+  background: linear-gradient(0deg, #2c2645, #382365);
   box-sizing: border-box;
   padding: calc(55px + env(safe-area-inset-top)) 0.416rem
     calc(env(safe-area-inset-bottom) + 0.416rem) 0.416rem;
@@ -175,8 +174,8 @@ onMounted(() => {
     .cur-title {
       width: 2.416rem;
       height: 0.647rem;
-      background: #8B5FF2;
-      box-shadow: 0px 0.036rem 0px 0px #DFB9FF;
+      background: #8b5ff2;
+      box-shadow: 0px 0.036rem 0px 0px #dfb9ff;
       border-radius: 0.072rem 0.333rem 0.072rem 0.333rem;
       display: flex;
       justify-content: center;
@@ -207,7 +206,7 @@ onMounted(() => {
         box-sizing: border-box;
         .item-label {
           font-size: 0.361rem;
-          color: #F8E0FD;
+          color: #f8e0fd;
           margin-top: 0.138rem;
         }
         .value {
@@ -261,8 +260,8 @@ onMounted(() => {
       height: 1.019rem;
       background: linear-gradient(-90deg, #593098, #7052c6);
       border-radius: 0.091rem 0.463rem 0.091rem 0.463rem;
-      border: 0.019rem solid #DFB9FF;
-      box-shadow: 0px 0.075rem 0.13rem 0px #9659E9;
+      border: 0.019rem solid #dfb9ff;
+      box-shadow: 0px 0.075rem 0.13rem 0px #9659e9;
       display: flex;
       justify-content: center;
       align-items: center;
