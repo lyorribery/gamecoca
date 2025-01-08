@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div class="description-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
@@ -353,6 +354,7 @@
       GameCoca is an entertainment product and all users are enjoined to play responsibly.
     </p>
   </div>
+ </div>
 </template>
 
 <script setup>

@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div class="spin-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
@@ -44,14 +45,15 @@
       </div>
     </div>
     <div class="btn" @click="start">
-      PLAY<span class="tip"
+      PLAY
+      <!-- <span class="tip"
         >({{ global_config.spinCost ? global_config.spinCost : "100" }}COINS)</span
-      >
+      > -->
     </div>
-    <div class="des">
+    <!-- <div class="des">
       It takes {{ global_config.spinCost ? global_config.spinCost : "100" }} coins per
       spin;
-    </div>
+    </div> -->
     <div class="des">
       If you hit cash,the amount will be credited to your game account immediately;
     </div>
@@ -69,6 +71,7 @@
       </div>
     </div> -->
   </div>
+ </div>
 </template>
 
 <script setup>
@@ -76,7 +79,6 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import { useStore } from "vuex";
-import { spinAct } from "@/apis/apis";
 
 let { state, commit, dispatch } = useStore();
 const router = useRouter();
@@ -151,42 +153,42 @@ const start = async () => {
     return;
   }
   if (state.user_info.point < 100) {
-    commit(
-      "set_tip_info",
-      `Current coins are less than ${
-        global_config.spinCost ? global_config.spinCost : "100"
-      }.`
-    );
+    // commit(
+    //   "set_tip_info",
+    //   `Current coins are less than ${
+    //     global_config.spinCost ? global_config.spinCost : "100"
+    //   }.`
+    // );
     commit("set_tip_type", 7);
     commit("set_tip_modal", true);
     return;
   }
   if (!prizeObj.isRunning) {
-    prizeObj.isRunning = true;
-    // 请求返回的奖品编号
-    let prizeId = "";
-    const res = await spinAct.post("", {});
-    if (res.code == 200) {
-      for (let i in state.spin_config) {
-        if (state.spin_config[i].id == res.data.rewardId) {
-          prizeId = i;
-          break;
-        }
-      }
-      prizeObj.prizeId = prizeId;
-      startRun();
-      dispatch("GET_USER_INFO");
-    } else if (res.code == 2002) {
-      ctx.commit("set_user_info", {});
-      localStorage.removeItem("token");
-      commit("set_tip_info", "You have not logged in yet,please login.");
-      commit("set_tip_type", 1);
-      commit("set_tip_modal", true);
-    } else {
-      commit("set_tip_info", res.msg);
-      commit("set_tip_type", 8);
-      commit("set_tip_modal", true);
-    }
+    // prizeObj.isRunning = true;
+    // // 请求返回的奖品编号
+    // let prizeId = "";
+    // const res = await spinAct.post("", {});
+    // if (res.code == 200) {
+    //   for (let i in state.spin_config) {
+    //     if (state.spin_config[i].id == res.data.rewardId) {
+    //       prizeId = i;
+    //       break;
+    //     }
+    //   }
+    //   prizeObj.prizeId = prizeId;
+    //   startRun();
+    //   dispatch("GET_USER_INFO");
+    // } else if (res.code == 2002) {
+    //   ctx.commit("set_user_info", {});
+    //   localStorage.removeItem("token");
+    //   commit("set_tip_info", "You have not logged in yet,please login.");
+    //   commit("set_tip_type", 1);
+    //   commit("set_tip_modal", true);
+    // } else {
+    //   commit("set_tip_info", res.msg);
+    //   commit("set_tip_type", 8);
+    //   commit("set_tip_modal", true);
+    // }
   }
 };
 const startRun = () => {

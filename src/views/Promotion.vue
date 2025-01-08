@@ -1,13 +1,18 @@
 <template>
-  <div class="promotion-header">
-    <span class="title">Promotion</span>
-  </div>
-  <div class="promotion">
-    <div class="item" v-for="(item, index) in list" :key="index" @click="goPath(item)">
-      <img :src="item.img" style="width: 100%" />
-      <div class="item-content">
-        <div class="btn">
-          {{ item.btn }}
+  <div>
+    <div class="promotion-header">
+      <span class="title">Promotion</span>
+    </div>
+    <div class="promotion">
+      <div class="item" v-for="(item, index) in list" :key="index" @click="goPath(item)">
+        <img :src="item.fullNoticeImg" />
+        <div class="item-content">
+          <div class="item-top">
+            <div class="title">{{ item.noticeTitle }}</div>
+            <div class="des">{{ item.noticeIntroduction }}</div>
+          </div>
+
+          <div class="btn">Clique para mais</div>
         </div>
       </div>
     </div>
@@ -20,34 +25,11 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 let { state, commit } = useStore();
 const router = useRouter();
-const list = [
-  {
-    type: 1,
-    btn: "Get Coins",
-    img: require("../assets/images/client/promotion/check.png"),
-  },
-  {
-    type: 2,
-    btn: "Go Spin",
-    img: require("../assets/images/client/promotion/spin.png"),
-  },
-  {
-    type: 4,
-    btn: "Get Bonus",
-    img: require("../assets/images/client/promotion/deposit.png"),
-  },
-  {
-    type: 5,
-    btn: "Get Bonus",
-    img: require("../assets/images/client/promotion/f_d.png"),
-  },
-  {
-    type: 3,
-    btn: "Get Cash",
-    img: require("../assets/images/client/promotion/invite.png"),
-  },
-];
+const list = computed(() => {
+  return state.activity_notice.records;
+});
 const goPath = (data) => {
+  return;
   switch (data.type) {
     case 1:
       commit("set_daily_visible", true);
@@ -111,32 +93,52 @@ const goPath = (data) => {
   .item {
     width: 100%;
     border-radius: 0.222rem;
-    overflow: hidden;
     margin-top: 0.416rem;
-    position: relative;
+    background: #222222;
+    box-sizing: border-box;
+    padding: 0.277rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 50%;
+    }
     .item-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
+      width: calc(50% - 0.277rem);
+      // height: 3.086rem;
+      height: 111.13px;
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 0.138rem 0.277rem;
-
-      .btn {
-        color: #fff;
+      flex-direction: column;
+      justify-content: space-between;
+      .item-top {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 0.361rem;
+        flex-direction: column;
+     
+        .title {
+          color:#e556ff;
+          font-size: 0.361rem;
+          font-weight: 600;
+          box-sizing: border-box;
+          padding-bottom: 0.136rem;
+        }
+        .des {
+          color: #fff;
+          font-size: 0.277rem;
+        }
+      }
+      .btn {
+        color: #cbb6fe;
+        font-size: 0.277rem;
         font-weight: 600;
-        box-sizing: border-box;
-        padding: 0.138rem 0.416rem;
-        background: linear-gradient(-90deg, #9343c4, #614ae6);
-        border-radius: 0.444rem;
+        width:100%;
+        text-align: right;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // box-sizing: border-box;
+        // padding: 0.138rem;
+        // background: linear-gradient(-90deg, #9343c4, #614ae6);
+        // border-radius: 0.444rem;
       }
     }
   }

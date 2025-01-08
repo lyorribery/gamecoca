@@ -1,5 +1,6 @@
 <template>
-  <div class="records-header">
+  <div>
+    <div class="records-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
@@ -215,13 +216,13 @@
       </nut-tab-pane>
     </nut-tabs>
   </div>
+  </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
-import { depositRecord, withdrawRecord } from "@/apis/apis";
 import { formatDate } from "@/utils/utils";
 import { useStore } from "vuex";
 const { commit } = useStore();
@@ -233,22 +234,7 @@ onMounted(() => {
   getList();
 });
 const getList = () => {
-  depositRecord.post("", { page: 1, pageSize: 100 }).then((res) => {
-    if (res.list) {
-      res.list.map((item) => {
-        item.updatedAt = formatDate(item.updatedAt * 1000, "-");
-      });
-      r_list.value[0].content = res.list;
-    }
-  });
-  withdrawRecord.post("", { page: 1, pageSize: 100 }).then((res) => {
-    if (res.list) {
-      res.list.map((item) => {
-        item.updatedAt = formatDate(item.updatedAt * 1000, "-");
-      });
-      r_list.value[1].content = res.list;
-    }
-  });
+
 };
 const r_list = ref([
   {

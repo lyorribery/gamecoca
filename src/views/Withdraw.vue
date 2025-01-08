@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div class="withdraw">
     <div class="withdraw-header">
       <div @click="goBack" class="arrow">
@@ -94,6 +95,7 @@
       </div>
     </div>
   </nut-popup>
+ </div>
 </template>
 
 <script setup>
@@ -101,7 +103,6 @@ import { ref, computed, onMounted } from "vue";
 import { RectLeft, RectRight, Close, Check } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { withdraw } from "@/apis/apis";
 const router = useRouter();
 let { state, commit } = useStore();
 const max_amount = computed(() => {
@@ -140,38 +141,7 @@ const submit = () => {
   }
   if (is_loading.value) return;
   is_loading.value = true;
-  withdraw
-    .post("", {
-      channel: chanel_name,
-      amount: Number((Number(amount_val.value) * 100).toFixed(0)),
-    })
-    .then((res) => {
-      is_loading.value = false;
-      if (res.code == 200) {
-        if (res.data.result === 0) {
-          router.push({
-            path: "/pay",
-            query: {
-              type: 2,
-            },
-          });
-        } else if (res.data.result === 1) {
-          commit("set_tip_info", "You have a withdrawal order being processed");
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        }
-      } else if (res.code == 2002) {
-        commit("set_user_info", {});
-        localStorage.removeItem("token");
-        commit("set_tip_info", "You have not logged in yet,please login.");
-        commit("set_tip_type", 1);
-        commit("set_tip_modal", true);
-      } else {
-        commit("set_tip_info", res.msg);
-        commit("set_tip_type", 3);
-        commit("set_tip_modal", true);
-      }
-    });
+
 };
 const amount_val = ref("");
 const channel_visible = ref(false);

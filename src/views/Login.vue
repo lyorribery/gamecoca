@@ -8,8 +8,35 @@
 
     <div class="form-container">
       <nut-form ref="loginRef" :model-value="loginForm">
+        <nut-form-item>
+          <div class="tab-box">
+            <div
+              class="tab-item"
+              :class="tabVal == 1 ? 'tab-active' : ''"
+              @click="changeTab(1)"
+            >
+              {{ $t("tel") }}
+            </div>
+            <div
+              class="tab-item"
+              :class="tabVal == 2 ? 'tab-active' : ''"
+              @click="changeTab(2)"
+            >
+              {{ $t("email") }}
+            </div>
+            <div
+              class="tab-item"
+              :class="tabVal == 3 ? 'tab-active' : ''"
+              @click="changeTab(3)"
+            >
+              {{ $t("user") }}
+            </div>
+          </div>
+        </nut-form-item>
+
         <nut-form-item
-          prop="identifier"
+          v-if="tabVal == 1"
+          prop="phone"
           :rules="[
             { required: true, message: 'Enter phone number' },
             { validator: customValidatorPhone },
@@ -30,31 +57,62 @@
                 font-weight: bold;
                 padding-right: 0.277rem;
               "
-              >+233</span
+              >+55</span
             >
             <nut-input
               style="flex: 1"
-              v-model="loginForm.identifier"
-              placeholder="Phone number (XXXXXXXXX)"
+              v-model="loginForm.phone"
+              placeholder="Phone number"
               type="number"
               maxLength="9"
-              @blur="customBlurValidate('identifier')"
+              @blur="customBlurValidate('phone')"
             />
           </div>
         </nut-form-item>
+
         <nut-form-item
-          prop="certificate"
+          v-if="tabVal == 2"
+          prop="email"
+          :rules="[
+            { required: true, message: 'Enter E-mail' },
+            { validator: customValidatorEmail },
+          ]"
+        >
+          <nut-input
+            v-model="loginForm.email"
+            placeholder="E-mail"
+            @blur="customBlurValidate('email')"
+          />
+        </nut-form-item>
+
+        <nut-form-item
+          v-if="tabVal == 3"
+          prop="username"
+          :rules="[
+            { required: true, message: 'Enter User Name' },
+            { validator: customValidatorUserName },
+          ]"
+        >
+          <nut-input
+            v-model="loginForm.username"
+            placeholder="User Name"
+            @blur="customBlurValidate('username')"
+          />
+        </nut-form-item>
+
+        <nut-form-item
+          prop="password"
           :rules="[
             { required: true, message: 'Enter password' },
             { validator: customValidatorPass },
           ]"
         >
           <nut-input
-            v-model="loginForm.certificate"
+            v-model="loginForm.password"
             placeholder="Password (Must be 6-16 characters long)"
             type="password"
             maxLength="16"
-            @blur="customBlurValidate('certificate')"
+            @blur="customBlurValidate('password')"
           />
         </nut-form-item>
         <nut-form-item prop="btn">
@@ -100,23 +158,28 @@ import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
-import { login } from "@/apis/apis";
 import { useStore } from "vuex";
 let { commit, dispatch } = useStore();
 const router = useRouter();
 const loginRef = ref(null);
 const loginForm = ref({
-  loginType: "phone",
-  identifier: "",
-  certificate: "",
-  deviceId: localStorage.getItem("d_id"),
+  loginType: "front",
+  username: "",
+  phone: "",
+  email: "",
+  password: "",
 });
 const is_loading = ref(false);
 const is_enter = ref(false);
+const tabVal = ref("1");
 watch(
   () => loginForm,
   (newValue, oldValue) => {
-    if (newValue.value.identifier && newValue.value.certificate) {
+    if (tabVal.value == 1 && newValue.value.phone && newValue.value.password) {
+      is_enter.value = true;
+    } else if (tabVal.value == 2 && newValue.value.email && newValue.value.password) {
+      is_enter.value = true;
+    } else if (tabVal.value == 3 && newValue.value.username && newValue.value.password) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -129,28 +192,6 @@ const submit = () => {
     if (valid) {
       if (is_loading.value) return;
       is_loading.value = true;
-      login
-        .post("", { ...loginForm.value, identifier: "233" + loginForm.value.identifier })
-        .then((res) => {
-          if (res.code == 200) {
-            localStorage.setItem("token", res.data.accessToken);
-            dispatch("GET_USER_INFO");
-            router.push({
-              path: "/home",
-            });
-          } else {
-            commit("set_tip_info", res.msg);
-            commit("set_tip_type", 3);
-            commit("set_tip_modal", true);
-          }
-          is_loading.value = false;
-        })
-        .catch((err) => {
-          is_loading.value = false;
-          commit("set_tip_info", "sever error");
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        });
     } else {
       console.warn("error:", errors);
     }
@@ -166,6 +207,12 @@ const customValidatorPhone = (val) => {
     return Promise.reject("Please enter the correct phone number");
   }
 };
+const customValidatorEmail = (val) => {
+  return Promise.resolve();
+};
+const customValidatorUserName = (val) => {
+  return Promise.resolve();
+};
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();
@@ -180,6 +227,9 @@ const goPath = (path) => {
   router.push({
     path: path,
   });
+};
+const changeTab = (val) => {
+  tabVal.value = val;
 };
 </script>
 
@@ -199,6 +249,32 @@ const goPath = (path) => {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    .tab-box {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 0.866rem;
+      border-radius: 0.611rem;
+      background: linear-gradient(-90deg, #351f5f, #2a2059);
+      overflow: hidden;
+      box-sizing: border-box;
+      .tab-item {
+        width: calc(100% / 3);
+        height: 0.866rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.388rem;
+        font-weight: bold;
+        color: #fff;
+      }
+      .tab-active {
+        background: #e556ff;
+        border-radius: 0.611rem;
+      }
+    }
     .submit-btn {
       margin: 0.833rem 0;
       width: 100%;
@@ -208,7 +284,7 @@ const goPath = (path) => {
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #9A87C8;
+      color: #9a87c8;
       font-size: 0.472rem;
       font-weight: bold;
     }

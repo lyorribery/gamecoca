@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div class="contact-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
@@ -46,6 +47,7 @@
       </div>
     </div>
   </div>
+ </div>
 </template>
 
 <script setup>

@@ -1,5 +1,6 @@
 <template>
-  <div class="change-pass-header">
+  <div>
+    <div class="change-pass-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
@@ -117,6 +118,7 @@
       </nut-form>
     </div>
   </div>
+  </div>
 </template>
 
 <script setup>
@@ -124,7 +126,6 @@ import { ref, watch } from "vue";
 import { RectLeft } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { _validpassword } from "@/utils/utils";
-import { changePass, getVerifyCode } from "@/apis/apis";
 import { useStore } from "vuex";
 
 let timer = null;
@@ -162,34 +163,7 @@ const getVerify = () => {
     commit("set_tip_type", 3);
     commit("set_tip_modal", true);
   } else {
-    getVerifyCode
-      .post("", {
-        loginType: "phone",
-        identifier: "233" + changepassForm.value.identifier,
-      })
-      .then((res) => {
-        if (res.code == 200) {
-          commit(
-            "set_tip_info",
-            "The SMS verification code has been sent, please check it carefully."
-          );
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-          timer = setInterval(() => {
-            if (code_second.value > 0) {
-              code_second.value -= 1;
-            } else {
-              clearInterval(timer);
-              code_second.value = 60;
-              timer = null;
-            }
-          }, 1000);
-        } else {
-          commit("set_tip_info", res.msg);
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        }
-      });
+
   }
 };
 const submit = () => {
@@ -197,25 +171,7 @@ const submit = () => {
     if (valid) {
       if (is_loading.value) return;
       is_loading.value = true;
-      changePass
-        .post("", {
-          ...changepassForm.value,
-          identifier: "233" + changepassForm.value.identifier,
-        })
-        .then((res) => {
-          if (res.code == 200) {
-            localStorage.removeItem("token");
-            commit("set_user_info", {});
-            commit("set_tip_info", "Password has been changed.");
-            commit("set_tip_type", 1);
-            commit("set_tip_modal", true);
-          } else {
-            commit("set_tip_info", res.msg);
-            commit("set_tip_type", 3);
-            commit("set_tip_modal", true);
-          }
-          is_loading.value = false;
-        });
+    
     } else {
       console.warn("error:", errors);
     }

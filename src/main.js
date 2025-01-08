@@ -3,6 +3,7 @@ import './utils/noscale.js'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import i18n from './locales/i18n';
 // import Vconsole from 'vconsole'
 
 import { Locale, Tabs, TabPane, Swiper, SwiperItem, Input, Image, Form, FormItem, Overlay, Popup, Textarea } from "@nutui/nutui"
@@ -29,4 +30,4 @@ app.use(Popup)
 app.use(Textarea)
 // app.use(vConsole)
 
-app.use(router).use(store).mount('#app')
+app.use(router).use(store).use(i18n).mount('#app')

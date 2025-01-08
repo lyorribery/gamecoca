@@ -1,5 +1,6 @@
 <template>
-  <div class="invite-header">
+  <div>
+    <div class="invite-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
     </div>
@@ -73,6 +74,7 @@
       Account or any associated accounts.
     </div>
   </div>
+  </div>
 </template>
 
 <script setup>
@@ -80,7 +82,6 @@ import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import { useStore } from "vuex";
-import { getInviteInfo } from "@/apis/apis";
 
 const { state, commit } = useStore();
 const router = useRouter();
@@ -124,17 +125,7 @@ const infos = ref({
 });
 onMounted(() => {
   if (!localStorage.getItem("token")) return;
-  getInviteInfo.get("", {}).then((res) => {
-    if (res.code == 2002) {
-      commit("set_user_info", {});
-      localStorage.removeItem("token");
-      commit("set_tip_info", "You have not logged in yet,please login.");
-      commit("set_tip_type", 1);
-      commit("set_tip_modal", true);
-      return;
-    }
-    if (res) infos.value = { ...res };
-  });
+
 });
 </script>
 

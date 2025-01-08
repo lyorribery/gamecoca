@@ -2,41 +2,35 @@
   <div class="card-item" style="width: 2.964rem" @click="goDetail(cardInfo)">
     <div class="card-image-box">
       <nut-image
-        :src="cardInfo.icon"
+        :src="cardInfo.fullGameImg"
         width="2.964rem"
-        height="2.964rem"
+        height="4.0755rem"
         show-loading
         show-error
         round
-        :radius="12"
+        :radius="15"
         lazy-load
       >
         <template #loading>
-          <img
+          <!-- <img
             class="img-loading"
             src="../assets/images/img_load.svg"
-            style="width: 2.964rem; height: 2.964rem"
-          />
+            style="width: 2.964rem; height: 4.0755rem"
+          /> -->
+          <div class="img-loading"></div>
         </template>
         <template #error>
-          <img
+          <!-- <img
             class="img-loading"
             src="../assets/images/img_load.svg"
-            style="width: 2.964rem; height: 2.964rem"
-          />
+            style="width: 2.964rem; height: 4.0755rem"
+          /> -->
+          <div class="img-loading"></div>
         </template>
       </nut-image>
 
       <div class="img-mask"></div>
-      <div class="card-count" v-if="cardInfo.count > 0">
-        <img
-          src="../assets/images/img_people.png"
-          style="width: 0.188rem; height: 0.2416rem"
-        />
-        <span>{{ cardInfo.count }}</span>
-      </div>
     </div>
-
   </div>
 </template>
 
@@ -51,11 +45,7 @@ export default {
   props: {
     cardInfo: {
       type: Object,
-      default: {
-        name: "",
-        img: "",
-        count: 0,
-      },
+      default: {},
     },
   },
   setup(props, ctx) {
@@ -64,6 +54,7 @@ export default {
     const is_req = ref(false);
 
     const goDetail = async (data) => {
+      return;
       if (!data.id) return;
       if (!localStorage.getItem("token")) {
         commit("set_tip_info", "You have not logged in yet,please login.");
@@ -138,69 +129,55 @@ export default {
       height: 100%;
       background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
     }
-    .card-count {
-      position: absolute;
-      top: 0.138rem;
-      left: 0.138rem;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 0.041rem 0.138rem;
-      background: rgba(0, 0, 0, 0.6);
-      box-shadow: 0px 0px 1px 0px #000000;
-      border-radius: 0.277rem;
-      span {
-        padding-left: 0.083rem;
-        font-size: 0.222rem;
-        color: #fff;
-        font-weight: 600;
-      }
-    }
 
     .img-loading {
-      @keyframes lighter {
-        0% {
-          opacity: 1;
-        }
+      width: 2.964rem;
+      height: 4.0755rem;
+      // background: #222222;
+      background: linear-gradient(-90deg, #9856c1, #6650e3);
+      // @keyframes lighter {
+      //   0% {
+      //     opacity: 1;
+      //   }
 
-        25% {
-          opacity: 0.9;
-        }
+      //   25% {
+      //     opacity: 0.9;
+      //   }
 
-        50% {
-          opacity: 0.8;
-        }
+      //   50% {
+      //     opacity: 0.8;
+      //   }
 
-        75% {
-          opacity: 0.9;
-        }
+      //   75% {
+      //     opacity: 0.9;
+      //   }
 
-        100% {
-          opacity: 1;
-        }
-      }
+      //   100% {
+      //     opacity: 1;
+      //   }
+      // }
 
-      @-webkit-keyframes lighter {
-        0% {
-          opacity: 1;
-        }
+      // @-webkit-keyframes lighter {
+      //   0% {
+      //     opacity: 1;
+      //   }
 
-        25% {
-          opacity: 0.9;
-        }
+      //   25% {
+      //     opacity: 0.9;
+      //   }
 
-        50% {
-          opacity: 0.8;
-        }
+      //   50% {
+      //     opacity: 0.8;
+      //   }
 
-        75% {
-          opacity: 0.9;
-        }
+      //   75% {
+      //     opacity: 0.9;
+      //   }
 
-        100% {
-          opacity: 1;
-        }
-      }
+      //   100% {
+      //     opacity: 1;
+      //   }
+      // }
     }
   }
 }

@@ -8,8 +8,35 @@
 
     <div class="form-container">
       <nut-form ref="registerRef" :model-value="registerForm">
+        <nut-form-item>
+          <div class="tab-box">
+            <div
+              class="tab-item"
+              :class="tabVal == 1 ? 'tab-active' : ''"
+              @click="changeTab(1)"
+            >
+              {{ $t("tel") }}
+            </div>
+            <div
+              class="tab-item"
+              :class="tabVal == 2 ? 'tab-active' : ''"
+              @click="changeTab(2)"
+            >
+              {{ $t("email") }}
+            </div>
+            <div
+              class="tab-item"
+              :class="tabVal == 3 ? 'tab-active' : ''"
+              @click="changeTab(3)"
+            >
+              {{ $t("user") }}
+            </div>
+          </div>
+        </nut-form-item>
+
         <nut-form-item
-          prop="identifier"
+          v-if="tabVal == 1"
+          prop="phone"
           :rules="[
             { required: true, message: 'Enter phone number' },
             { validator: customValidatorPhone },
@@ -30,60 +57,82 @@
                 font-weight: bold;
                 padding-right: 0.277rem;
               "
-              >+233</span
+              >+55</span
             >
             <nut-input
-              v-model="registerForm.identifier"
-              placeholder="Phone number (XXXXXXXXX)"
+              style="flex: 1"
+              v-model="registerForm.phone"
+              placeholder="Phone number"
               type="number"
               maxLength="9"
-              @blur="customBlurValidate('identifier')"
+              @blur="customBlurValidate('phone')"
             />
           </div>
         </nut-form-item>
+
         <nut-form-item
-          prop="authCode"
+          v-if="tabVal == 2"
+          prop="email"
           :rules="[
-            { required: true, message: 'Enter Captcha Code' },
-            { validator: customValidatorCode },
+            { required: true, message: 'Enter E-mail' },
+            { validator: customValidatorEmail },
           ]"
         >
-          <div
-            style="
-              width: 100%;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-            "
-          >
-            <nut-input
-              style="flex: 1"
-              v-model="registerForm.authCode"
-              placeholder="Captcha Code"
-              type="number"
-              @blur="customBlurValidate('authCode')"
-            />
-            <div class="code-btn" @click="getVerify">
-              {{ code_second == 60 ? "GET CAPTCHA" : code_second + "s" }}
-            </div>
-          </div>
+          <nut-input
+            v-model="registerForm.email"
+            placeholder="E-mail"
+            @blur="customBlurValidate('email')"
+          />
         </nut-form-item>
+
         <nut-form-item
-          prop="certificate"
+          v-if="tabVal == 3"
+          prop="username"
+          :rules="[
+            { required: true, message: 'Enter User Name' },
+            { validator: customValidatorUserName },
+          ]"
+        >
+          <nut-input
+            v-model="registerForm.username"
+            placeholder="User Name"
+            @blur="customBlurValidate('username')"
+          />
+        </nut-form-item>
+
+        <nut-form-item
+          prop="password"
           :rules="[
             { required: true, message: 'Enter password' },
             { validator: customValidatorPass },
           ]"
         >
           <nut-input
-            v-model="registerForm.certificate"
+            v-model="registerForm.password"
             placeholder="Password (Must be 6-16 characters long)"
             type="password"
             maxLength="16"
-            @blur="customBlurValidate('certificate')"
+            @blur="customBlurValidate('password')"
           />
         </nut-form-item>
-        <nut-form-item>
+
+        <nut-form-item
+          prop="repassword"
+          :rules="[
+            { required: true, message: 'Enter password' },
+            { validator: customValidatorRePass },
+          ]"
+        >
+          <nut-input
+            v-model="registerForm.repassword"
+            placeholder="Confirm Password"
+            type="password"
+            maxLength="16"
+            @blur="customBlurValidate('repassword')"
+          />
+        </nut-form-item>
+
+        <nut-form-item prop="btn">
           <div class="submit-btn" :class="is_enter ? 'active-btn' : ''" @click="submit">
             <svg
               v-if="is_loading"
@@ -111,7 +160,7 @@
                 ></animateTransform>
               </path>
             </svg>
-            <span v-else>Create Account</span>
+            <span v-else>{{ $t("button.register") }}</span>
           </div>
           <div class="text-box">
             <svg
@@ -191,7 +240,6 @@ import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
-import { register, getVerifyCode, login } from "@/apis/apis";
 import { useStore } from "vuex";
 
 let timer = null;
@@ -201,22 +249,23 @@ const router = useRouter();
 const registerRef = ref(null);
 const is_check = ref(true);
 const registerForm = ref({
-  loginType: "phone",
-  identifier: "",
-  certificate: "",
-  authCode: "",
-  deviceId: localStorage.getItem("d_id"),
+  loginType: "front",
+  username: "",
+  phone: "",
+  email: "",
+  password: "",
+  repassword: "",
 });
 const is_enter = ref(false);
-const code_second = ref(60);
+const tabVal = ref("1");
 watch(
   () => registerForm,
   (newValue, oldValue) => {
-    if (
-      newValue.value.identifier &&
-      newValue.value.authCode &&
-      newValue.value.certificate
-    ) {
+    if (tabVal.value == 1 && newValue.value.phone && newValue.value.password) {
+      is_enter.value = true;
+    } else if (tabVal.value == 2 && newValue.value.email && newValue.value.password) {
+      is_enter.value = true;
+    } else if (tabVal.value == 3 && newValue.value.username && newValue.value.password) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -224,40 +273,7 @@ watch(
   },
   { deep: true }
 );
-const getVerify = () => {
-  if (code_second.value != 60) return;
-  if (!registerForm.value.identifier || registerForm.value.identifier.length != 9) {
-    commit("set_tip_info", "Please Enter your phone number.");
-    commit("set_tip_type", 3);
-    commit("set_tip_modal", true);
-  } else {
-    getVerifyCode
-      .post("", { loginType: "phone", identifier: "233" + registerForm.value.identifier })
-      .then((res) => {
-        if (res.code == 200) {
-          commit(
-            "set_tip_info",
-            "The SMS verification code has been sent, please check it carefully."
-          );
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-          timer = setInterval(() => {
-            if (code_second.value > 0) {
-              code_second.value -= 1;
-            } else {
-              clearInterval(timer);
-              code_second.value = 60;
-              timer = null;
-            }
-          }, 1000);
-        } else {
-          commit("set_tip_info", res.msg);
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        }
-      });
-  }
-};
+
 const submit = () => {
   registerRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
@@ -278,56 +294,6 @@ const submit = () => {
               invateCode: Number(localStorage.getItem("i_code")),
             }
           : { ...registerForm.value, identifier: "233" + registerForm.value.identifier };
-        register
-          .post("", param)
-          .then((res) => {
-            if (res.code == 200) {
-              // commit("set_tip_info", "Registration successful, please log in.");
-              // commit("set_tip_type", 11);
-              // commit("set_tip_modal", true);
-              //fb注册完成事件
-              fbq("track", "CompleteRegistration");
-              login
-                .post("", {
-                  loginType: "phone",
-                  identifier: "233" + registerForm.value.identifier,
-                  certificate: registerForm.value.certificate,
-                  deviceId: localStorage.getItem("d_id"),
-                })
-                .then((res) => {
-                  if (res.code == 200) {
-                    localStorage.setItem("token", res.data.accessToken);
-                    dispatch("GET_USER_INFO");
-                    commit("set_fd_visible", true);
-                    router.push({
-                      path: "/home",
-                    });
-                  } else {
-                    commit("set_tip_info", res.msg);
-                    commit("set_tip_type", 3);
-                    commit("set_tip_modal", true);
-                  }
-                  is_loading.value = false;
-                })
-                .catch((err) => {
-                  is_loading.value = false;
-                  commit("set_tip_info", "sever error");
-                  commit("set_tip_type", 3);
-                  commit("set_tip_modal", true);
-                });
-            } else {
-              is_loading.value = false;
-              commit("set_tip_info", res.msg);
-              commit("set_tip_type", 3);
-              commit("set_tip_modal", true);
-            }
-          })
-          .catch((err) => {
-            is_loading.value = false;
-            commit("set_tip_info", "sever error");
-            commit("set_tip_type", 3);
-            commit("set_tip_modal", true);
-          });
       }
     } else {
       console.warn("error:", errors);
@@ -344,15 +310,21 @@ const customValidatorPhone = (val) => {
     return Promise.reject("Please enter the correct phone number");
   }
 };
-const customValidatorCode = (val) => {
-  if (val.length < 4) {
-    return Promise.reject("Please enter correct verify code");
-  } else {
-    return Promise.resolve();
-  }
+const customValidatorEmail = (val) => {
+  return Promise.resolve();
+};
+const customValidatorUserName = (val) => {
+  return Promise.resolve();
 };
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("Please enter a 6-16 digit password.");
+  }
+};
+const customValidatorRePass = (val) => {
+  if (_validpassword(val) && val === registerForm.password) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter a 6-16 digit password.");
@@ -369,6 +341,9 @@ const goDescription = (type) => {
     },
   });
 };
+const changeTab = (val) => {
+  tabVal.value = val;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -381,23 +356,38 @@ const goDescription = (type) => {
   box-sizing: border-box;
   padding: 2.5rem 0 0 0;
   .form-container {
-    margin-top: 2.222rem;
+    margin-top: 1.822rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    .code-btn {
-      font-size: 0.297rem;
-      color: #fff;
+    .tab-box {
+      width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      border: 1px solid #ccc3e2;
-      border-radius: 0.444rem;
-      width: 2.405rem;
-      height: 0.741rem;
+      height: 0.866rem;
+      border-radius: 0.611rem;
+      background: linear-gradient(-90deg, #351f5f, #2a2059);
+      overflow: hidden;
+      box-sizing: border-box;
+      .tab-item {
+        width: calc(100% / 3);
+        height: 0.866rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.388rem;
+        font-weight: bold;
+        color: #fff;
+      }
+      .tab-active {
+        background: #e556ff;
+        border-radius: 0.611rem;
+      }
     }
+
     .submit-btn {
       margin: 0.833rem 0;
       width: 100%;

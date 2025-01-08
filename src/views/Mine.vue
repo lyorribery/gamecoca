@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div class="profile-header">
     <div class="user-avtar">
       <div class="avatar">
@@ -120,6 +121,7 @@
     </div>
     <div class="quit-btn" @click="exit">Log out</div>
   </div>
+ </div>
 </template>
 
 <script setup>

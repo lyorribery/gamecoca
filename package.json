@@ -1,12 +1,11 @@
 {
   "name": "gamecoca",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
     "serve": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service serve",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider & vue-cli-service build",
-    "build:2": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -15,10 +14,12 @@
     "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.13",
     "js-base64": "^3.7.7",
     "jsencrypt": "^3.3.2",
     "uuid": "^9.0.0",
     "vue": "^3.0.0",
+    "vue-i18n": "^11.0.1",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },

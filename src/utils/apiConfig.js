@@ -1,8 +1,7 @@
 
-
 const apiconfig = {
-    baseURL: "https://cdn.gamecoca.com",
-    fileURL: 'https://chuangmd.oss-cn-hongkong.aliyuncs.com/client/'
+    baseURL: "https://brbr.games/api/",
+    fileURL: 'https://file.ckgame.vip'
 }
 
 export default apiconfig

@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import tipModal from "@/components/tipModal.vue";
 import loading from "@/components/loading.vue";
 import { exit } from "@/apis/apis";
@@ -32,7 +32,6 @@ export default {
   setup() {
     const router = useRouter();
     let { commit, dispatch } = useStore();
-
     const modalFunc = (obj) => {
       switch (obj) {
         case 1:
@@ -53,9 +52,7 @@ export default {
               router.push({
                 path: "/",
               });
-              commit("set_tip_info", "You have not logged in yet,please login.");
-              commit("set_tip_type", 1);
-              commit("set_tip_modal", true);
+             
             }
           });
           break;
@@ -68,12 +65,8 @@ export default {
     };
     onMounted(() => {
       dispatch("GET_CONFIG");
-      dispatch("GET_GAME_LIST");
-      if (localStorage.getItem("token")) {
-        dispatch("GET_USER_INFO");
-      } else {
-        commit("set_reg_visible", true);
-      }
+      // dispatch("GET_GAME_LIST");
+     
       localStorage.setItem("d_id", uuid.v1());
     });
     return {
@@ -82,3 +75,4 @@ export default {
   },
 };
 </script>
+

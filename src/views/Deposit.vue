@@ -1,101 +1,103 @@
 <template>
-  <div class="deposit-header">
-    <span class="title">Deposit</span>
-    <span class="sub-title" @click="goRecords">Records</span>
-  </div>
-  <div class="deposit">
-    <div class="label">Select amount below</div>
-    <div class="quick-box">
-      <div
-        class="item"
-        v-for="(item, index) in quickList"
-        :key="index"
-        :class="item.checked ? 'in-checked' : ''"
-        @click="chooseQuick(index)"
-      >
-        <div class="hot" v-if="item.isRecommend == 2">Hot</div>
-        <div class="r-amount">₵ {{ item.amount }}</div>
-        <div class="p-amount">Get ₵{{ Number(item.amount) + Number(item.gift) }}</div>
-      </div>
+  <div>
+    <div class="deposit-header">
+      <span class="title">Deposit</span>
+      <span class="sub-title" @click="goRecords">Records</span>
     </div>
-    <div class="label" style="margin-top: 0">The minimum amount is ₵5.00</div>
-    <div class="ipt-box">
-      <span>₵</span>
-      <nut-input
-        style="background: transparent"
-        v-model="amount_val"
-        placeholder="Enter amount"
-        type="number"
-      />
-      <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="clearVal" />
-    </div>
-    <div class="label">Select pay channel below</div>
-    <div class="chanel-box">
-      <div
-        class="chanel"
-        v-for="(item, index) in chanelList"
-        :key="index"
-        :class="item.checked ? 'in-checked' : ''"
-        @click="chooseChanel(index)"
-      >
-        <img :src="item.icon" />
-        <div class="chanel-name" :style="{ color: item.checked ? '#fff' : '' }">
-          {{ item.showname }}
+    <div class="deposit">
+      <div class="label">Select amount below</div>
+      <div class="quick-box">
+        <div
+          class="item"
+          v-for="(item, index) in quickList"
+          :key="index"
+          :class="item.checked ? 'in-checked' : ''"
+          @click="chooseQuick(index)"
+        >
+          <div class="hot" v-if="item.isRecommend == 2">Hot</div>
+          <div class="r-amount">₵ {{ item.amount }}</div>
+          <div class="p-amount">Get ₵{{ Number(item.amount) + Number(item.gift) }}</div>
         </div>
       </div>
-    </div>
-
-    <div class="des">
-      You can only use your register number to top up your wallet,if not correct please
-      register with your mobile money number again.
-    </div>
-    <div class="line-box">
-      <div class="line"></div>
-      <span>Deposit Tips</span>
-      <div class="line"></div>
-    </div>
-    <div class="tip-row">
-      1.Select or enter the amount to deposit your GameCoca wallet.
-    </div>
-    <div class="tip-row">2.The minimum amount is ₵5.00.</div>
-    <div class="tip-row">
-      3.Please ensure that you choose right network/operator and your mobile wallet has
-      enough money.
-    </div>
-    <div class="tip-row">
-      4.If failed to deposit due to network issue, please try again later or contact our
-      customer service.
-    </div>
-  </div>
-  <div class="btn-row">
-    <div class="btn" @click="submit">
-      <svg
-        v-if="is_loading"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width=".694rem"
-        height=".694rem"
-        viewBox="0 0 50 50"
-        style="enable-background: new 0 0 50 50"
-        xml:space="preserve"
-      >
-        <path
-          fill="#FFFFFF"
-          d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
-          transform="rotate(275.098 25 25)"
+      <div class="label" style="margin-top: 0">The minimum amount is ₵5.00</div>
+      <div class="ipt-box">
+        <span>₵</span>
+        <nut-input
+          style="background: transparent"
+          v-model="amount_val"
+          placeholder="Enter amount"
+          type="number"
+        />
+        <Close color="#CCC3E2" width=".361rem" height=".361rem" @click="clearVal" />
+      </div>
+      <div class="label">Select pay channel below</div>
+      <div class="chanel-box">
+        <div
+          class="chanel"
+          v-for="(item, index) in chanelList"
+          :key="index"
+          :class="item.checked ? 'in-checked' : ''"
+          @click="chooseChanel(index)"
         >
-          <animateTransform
-            attributeType="xml"
-            attributeName="transform"
-            type="rotate"
-            from="0 25 25"
-            to="360 25 25"
-            dur="0.6s"
-            repeatCount="indefinite"
-          ></animateTransform>
-        </path>
-      </svg>
-      <span v-else> Pay ₵{{ amount_val ? amount_val : "--" }} </span>
+          <img :src="item.icon" />
+          <div class="chanel-name" :style="{ color: item.checked ? '#fff' : '' }">
+            {{ item.showname }}
+          </div>
+        </div>
+      </div>
+
+      <div class="des">
+        You can only use your register number to top up your wallet,if not correct please
+        register with your mobile money number again.
+      </div>
+      <div class="line-box">
+        <div class="line"></div>
+        <span>Deposit Tips</span>
+        <div class="line"></div>
+      </div>
+      <div class="tip-row">
+        1.Select or enter the amount to deposit your GameCoca wallet.
+      </div>
+      <div class="tip-row">2.The minimum amount is ₵5.00.</div>
+      <div class="tip-row">
+        3.Please ensure that you choose right network/operator and your mobile wallet has
+        enough money.
+      </div>
+      <div class="tip-row">
+        4.If failed to deposit due to network issue, please try again later or contact our
+        customer service.
+      </div>
+    </div>
+    <div class="btn-row">
+      <div class="btn" @click="submit">
+        <svg
+          v-if="is_loading"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width=".694rem"
+          height=".694rem"
+          viewBox="0 0 50 50"
+          style="enable-background: new 0 0 50 50"
+          xml:space="preserve"
+        >
+          <path
+            fill="#FFFFFF"
+            d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+            transform="rotate(275.098 25 25)"
+          >
+            <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+              type="rotate"
+              from="0 25 25"
+              to="360 25 25"
+              dur="0.6s"
+              repeatCount="indefinite"
+            ></animateTransform>
+          </path>
+        </svg>
+        <span v-else> Pay ₵{{ amount_val ? amount_val : "--" }} </span>
+      </div>
     </div>
   </div>
 </template>
@@ -105,20 +107,13 @@ import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { Close, Issue } from "@nutui/icons-vue";
-import { deposit } from "@/apis/apis";
+
 const { state, commit } = useStore();
 const amount_val = ref("19.6");
 const amount_id = ref(0);
 const route = useRoute();
 const router = useRouter();
-// watch(
-//   () => state.deposit_config,
-//   (newValue) => {
-//     quickList.value = newValue;
-//     amount_val.value = newValue[2].amount;
-//     amount_id.value = newValue[2].id;
-//   }
-// );
+
 const quickList = ref(state.deposit_config);
 const goRecords = () => {
   router.push({
@@ -208,50 +203,7 @@ const submit = () => {
   }
   if (is_loading.value) return;
   is_loading.value = true;
-  deposit
-    .post("", {
-      channel: chanel_name,
-      amount: Number((Number(amount_val.value) * 100).toFixed(0)),
-      phone: state.user_info.mobile,
-      id: flag ? amount_id.value : 0,
-    })
-    .then((res) => {
-      is_loading.value = false;
-      if (res.code == 200) {
-        if (res.data.result === 0) {
-          //fb自定义事件，首次充值
-          if (state.user_info.rechargeTimes == 0) {
-            fbq("trackCustom", "FirstRecharge", {
-              currency: "GHS",
-              value: Number((Number(amount_val.value) * 100).toFixed(2)),
-            });
-          }
-          router.push({
-            path: "/pay",
-            query: {
-              type: 1,
-            },
-          });
-        } else if (res.data.result === 1) {
-          commit(
-            "set_tip_info",
-            "You have a recharge order being processed. If it still does not arrive after 10 minutes, please contact customer service."
-          );
-          commit("set_tip_type", 3);
-          commit("set_tip_modal", true);
-        }
-      } else if (res.code == 2002) {
-        commit("set_user_info", {});
-        localStorage.removeItem("token");
-        commit("set_tip_info", "You have not logged in yet,please login.");
-        commit("set_tip_type", 1);
-        commit("set_tip_modal", true);
-      } else {
-        commit("set_tip_info", res.msg);
-        commit("set_tip_type", 3);
-        commit("set_tip_modal", true);
-      }
-    });
+
 };
 onMounted(() => {
   quickList.value = state.deposit_config;

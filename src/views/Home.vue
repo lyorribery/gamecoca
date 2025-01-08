@@ -1,179 +1,137 @@
 <template>
-  <div class="main-header" id="mainHeader">
-    <img src="@/assets/images/logo.png" style="width: 3.9rem" />
-    <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
-      <div class="log-btn" @click="goPermission('/login')">LOGIN</div>
-      <div class="re-btn" @click="goPermission('/register')">REGISTER</div>
-    </div>
-    <div class="btn-box" v-else>
-      <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
-      <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
-    </div>
-  </div>
-  <div class="home">
-    <div class="home-top-back">
-      <div class="back"></div>
-    </div>
-    <div class="active-box">
-      <div class="active-item" @click="showDailyCheck()">
-        <span>Get Coins</span>
+  <div>
+    <div class="main-header" id="mainHeader">
+      <img src="@/assets/images/logo.png" style="width: 3.9rem" />
+      <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
+        <div class="log-btn" @click="goPermission('/login')">
+          {{ $t("button.login") }}
+        </div>
+        <div class="re-btn" @click="goPermission('/register')">
+          {{ $t("button.register") }}
+        </div>
       </div>
-      <div class="active-item" @click="goPath('/spin')">
-        <span>Coins Spin</span>
-      </div>
-      <div class="active-item" @click="goPath('/invite')">
-        <span>Get Cash</span>
-      </div>
-      <div class="active-item" @click="changeDown(1)">
-        <span>Download</span>
+      <div class="btn-box" v-else>
+        <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
+        <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
       </div>
     </div>
+    <div class="home">
+      <div class="home-top-back">
+        <div class="back"></div>
+      </div>
+      <div class="active-box">
+        <div class="active-item" @click="goPath('vip')">
+          <span>Clube VIP</span>
+        </div>
+        <div class="active-item" @click="goPath('/spin')">
+          <span>Sorte</span>
+        </div>
+        <div class="active-item" @click="goPath('/invite')">
+          <span>Bônus</span>
+        </div>
+        <div class="active-item" @click="changeDown(1)">
+          <span>Download</span>
+        </div>
+      </div>
 
-    <nut-swiper
-      :auto-play="2500"
-      :is-prevent-default="false"
-      :is-stop-propagation="false"
-      pagination-visible
-      pagination-color="#fff"
-      pagination-unselected-color="#808080"
-      style="margin-left: 0.555rem"
-    >
-      <nut-swiper-item
-        v-for="(item, index) in promotion_list"
-        :key="index"
-        style="height: 3.148rem"
+      <nut-swiper
+        :auto-play="2500"
+        :is-prevent-default="false"
+        :is-stop-propagation="false"
+        pagination-visible
+        pagination-color="#fff"
+        pagination-unselected-color="#808080"
+        style="margin-left: 0.555rem; margin-bottom: 0.277rem"
       >
-        <div @click="goActive(index)">
-          <img
-            :src="item.img"
-            style="height: 100%; width: calc(100% - 1.111rem)"
-            alt=""
-            draggable="false"
-          />
-        </div>
-      </nut-swiper-item>
-    </nut-swiper>
-
-    <div class="notice-bar-box" :style="{ marginBottom: page_num >= 205 ? '70px' : '0' }">
-      <img src="../assets/images/trumpet.png" style="width: 0.333rem; height: 0.333rem" />
-      <div class="notice-bar">
-        <div class="notice-bar-content">
-          <template v-for="(item, index) in msg_list" :key="index">
-            Congratulations to <span style="color: #9cc86a">{{ item.tel }}</span> for
-            winning <span style="color: #d3bf50">₵{{ item.num }}</span> cash in
-            {{ item.game }}&nbsp;&nbsp;&nbsp;
-          </template>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="custom-content"
-      :class="page_num >= 205 ? 'sticky-type' : ''"
-      id="customContent"
-    >
-      <div class="custom-tab" id="gameName">
-        <div
-          @click="changeTab(index)"
-          v-for="(item, index) in game_list"
+        <nut-swiper-item
+          v-for="(item, index) in promotion_list"
           :key="index"
-          class="custom-title"
+          style="height: 5.161rem"
         >
-          <div
-            class="img-box"
-            :style="{ background: active_type === index ? '#a890ff' : '' }"
-          >
+          <div @click="goActive(index)">
             <img
-              :src="
-                active_type === index
-                  ? require('../assets/images/' + item.name + '.png')
-                  : require('../assets/images/' + item.name + '_wxz.png')
-              "
+              :src="item.fullNoticeImg"
+              style="height: 100%; width: calc(100% - 1.111rem)"
+              alt=""
+              draggable="false"
             />
           </div>
-          <span :style="{ color: active_type === index ? '#fff' : '#EBE3FF' }">{{
-            item.name
-          }}</span>
-        </div>
-      </div>
-    </div>
+        </nut-swiper-item>
+      </nut-swiper>
 
-    <div class="game-content" v-for="(item, index) in game_list" :key="index">
-      <div class="title" :id="'game' + index">
-        <div class="name">
-          <span class="game-name">{{ item.name }}</span>
-          <span class="game-count" v-if="item.total > 0">{{
-            "(" + item.total + ")"
-          }}</span>
-        </div>
-        <div
-          class="more"
-          v-if="item.list.length < item.total"
-          @click="getMore(index, item.param, item.total)"
-        >
-          <span>View All</span>
-          <img style="margin-left: 8px" width="5" src="../assets/images/jiantou.png" />
-        </div>
-      </div>
-      <div class="game-container">
-        <imgCard v-for="(items, indexs) in item.list" :key="indexs" :cardInfo="items" />
-      </div>
-    </div>
-
-    <pageFooter />
-
-    <regModal />
-    <fdModal />
-    <!-- <div
-      class="fd-box"
-      @click="showFisrtDeposit()"
-      v-if="JSON.stringify(user_info) == '{}' || !user_info.rechargeTimes"
-    >
-      <img class="fd-img" src="../assets/images/fd2.png" v-if="active_fd" height="22.6" />
-      <img
-        src="../assets/images/fd3.png"
-        style="transition: transform 0.5s ease 0s"
-        :style="{ transform: active_fd ? 'translateY(100%)' : 'translateY(.333rem)' }"
-        height="33.6"
-      />
-      <div class="fd-text">
-        <div
-          class="rowup"
-          style="transition: transform 0.5s ease 0s"
-          :style="{ transform: active_fd ? 'translateY(0px)' : 'translateY(-100%)' }"
-        >
-          <div class="fd-label">
-            <div>First Deposit</div>
-            <div>Gifts</div>
+      <div
+        class="custom-content"
+        :class="page_num >= 275 ? 'sticky-type' : ''"
+        id="customContent"
+      >
+        <div class="custom-tab" id="gameName">
+          <div
+            @click="changeTab(index)"
+            v-for="(item, index) in category_list"
+            :key="index"
+            class="custom-title"
+          >
+            <div
+              class="img-box"
+              :style="{ background: active_type === index ? '#a890ff' : '' }"
+            >
+              <img :src="item.fullCategoryImg" />
+            </div>
+            <span :style="{ color: active_type === index ? '#fff' : '#EBE3FF' }">{{
+              item.categoryName
+            }}</span>
           </div>
-          <div class="fd-label" style="font-size: 11.6px">GHS 550</div>
         </div>
       </div>
-    </div> -->
-  </div>
 
-  <nut-popup v-model:visible="down_visible" position="bottom" round>
-    <div class="down-box" v-if="divice == 'android'">
-      <div class="close">
-        <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
+      <div class="game-content" v-for="(item, index) in game_list" :key="index">
+        <div class="title" :id="'game' + index">
+          <div class="name">
+            <img :src="item.fullCategoryImg" style="width:0.55rem" />
+            <span class="game-name">{{ item.categoryName }}</span>
+          </div>
+          <div
+            class="more"
+            @click="getMore(index, item.param, item.total)"
+          >
+            <span>Ver Tudo</span>
+            <img style="margin-left: 8px" width="5" src="../assets/images/jiantou.png" />
+          </div>
+        </div>
+        <div class="game-container">
+          <imgCard v-for="(items, indexs) in item.games" :key="indexs" :cardInfo="items" />
+        </div>
       </div>
-      <div class="title">1. Click the "More" icon, then click Install application</div>
-      <img src="../assets/images/client/down/down/and_1.png" />
-      <div class="title">2. Click Add and select "Add"</div>
-      <img src="../assets/images/client/down/down/and_2.png" />
+
+      <pageFooter />
+
+      <regModal />
+      <fdModal />
     </div>
-    <div class="down-box" v-if="divice == 'ios'">
-      <div class="close">
-        <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
+
+    <nut-popup v-model:visible="down_visible" position="bottom" round>
+      <div class="down-box" v-if="divice == 'android'">
+        <div class="close">
+          <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
+        </div>
+        <div class="title">1. Click the "More" icon, then click Install application</div>
+        <img src="../assets/images/client/down/down/and_1.png" />
+        <div class="title">2. Click Add and select "Add"</div>
+        <img src="../assets/images/client/down/down/and_2.png" />
       </div>
-      <div class="title">1.Click the share button at the bottom</div>
-      <img src="../assets/images/client/down/down/ios_1.png" />
-      <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
-      <img src="../assets/images/client/down/down/ios_2.png" />
-      <div class="title">3. Click Add and select "Add"</div>
-      <img src="../assets/images/client/down/down/ios_3.png" />
-    </div>
-  </nut-popup>
+      <div class="down-box" v-if="divice == 'ios'">
+        <div class="close">
+          <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
+        </div>
+        <div class="title">1.Click the share button at the bottom</div>
+        <img src="../assets/images/client/down/down/ios_1.png" />
+        <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
+        <img src="../assets/images/client/down/down/ios_2.png" />
+        <div class="title">3. Click Add and select "Add"</div>
+        <img src="../assets/images/client/down/down/ios_3.png" />
+      </div>
+    </nut-popup>
+  </div>
 </template>
 
 <script>
@@ -196,49 +154,23 @@ import { computed, ref, onMounted } from "vue";
 import { Close, RectRight } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { getGameList } from "@/apis/apis";
-// import { getUserInfo } from "@/apis/apis";
 
 let { state, commit, dispatch } = useStore();
 
-const promotion_list = [
-  {
-    type: 1,
-    btn: "Get Coins",
-    img: require("../assets/images/client/promotion/check.png"),
-  },
-  {
-    type: 2,
-    btn: "Go Spin",
-    img: require("../assets/images/client/promotion/spin.png"),
-  },
-  {
-    type: 4,
-    btn: "Get Bonus",
-    img: require("../assets/images/client/promotion/deposit.png"),
-  },
-  {
-    type: 5,
-    btn: "Get Bonus",
-    img: require("../assets/images/client/promotion/f_d.png"),
-  },
-  {
-    type: 3,
-    btn: "Get Cash",
-    img: require("../assets/images/client/promotion/invite.png"),
-  },
-];
+const promotion_list = computed(() => {
+  return state.activity_notice.records;
+});
+const category_list = computed(() => {
+  return state.game_list.category;
+});
+const game_list = computed(() => {
+  return state.current_game_list;
+});
 const user_info = computed(() => {
   return state.user_info;
 });
 const route = useRoute();
 const router = useRouter();
-// const showFisrtDeposit = () => {
-//   commit("set_fisrt_deposit_visilbe", true);
-// };
-const showDailyCheck = () => {
-  commit("set_daily_visible", true);
-};
 const goPath = (path) => {
   router.push({
     path,
@@ -249,31 +181,10 @@ const goPermission = (type) => {
     path: type,
   });
 };
-const game_list = computed(() => {
-  return state.game_list;
+const getMore = async (index, param, total) => {};
+const active_type = computed(() => {
+  return state.home_active_type;
 });
-const game_loading = ref(false);
-const getMore = async (index, param, total) => {
-  if (game_loading.value) return;
-  game_loading.value = true;
-  const res = await getGameList.post("", { ...param, page: 1, pageSize: total });
-  if (res.code == 200) {
-    const arr = [];
-    res.data.list.map((items, indexs) => {
-      if (indexs > 5) {
-        arr.push({
-          ...items,
-          count: Math.floor(Math.random() * (150 - 80 + 1)) + 80,
-        });
-      }
-    });
-    const cur_game_list = state.game_list;
-    cur_game_list[index].list = [...cur_game_list[index].list, ...arr];
-    commit("set_game_list", cur_game_list);
-  }
-  game_loading.value = false;
-};
-const active_type = ref(0);
 
 const changeTab = (index) => {
   if (index > 2) {
@@ -281,20 +192,20 @@ const changeTab = (index) => {
   } else {
     document.getElementById("gameName").scrollLeft = 0;
   }
-  active_type.value = index;
-  let top_num = 0;
-  if (index != 0) {
-    let selector = "game" + index;
-    if (page_num.value >= 205) {
-      top_num = document.getElementById(selector).offsetTop - 125;
-    } else {
-      top_num = document.getElementById(selector).offsetTop - 125;
-    }
-  }
-  window.scrollTo({
-    top: top_num,
-    behavior: "smooth",
-  });
+  commit("set_home_active_type", index);
+  // let top_num = 0;
+  // if (index != 0) {
+  //   let selector = "game" + index;
+  //   if (page_num.value >= 205) {
+  //     top_num = document.getElementById(selector).offsetTop - 125;
+  //   } else {
+  //     top_num = document.getElementById(selector).offsetTop - 125;
+  //   }
+  // }
+  // window.scrollTo({
+  //   top: top_num,
+  //   behavior: "smooth",
+  // });
 };
 
 const down_visible = ref(false);
@@ -302,36 +213,9 @@ const changeDown = (type) => {
   type == 1 ? (down_visible.value = true) : (down_visible.value = false);
 };
 const divice = ref(false);
-const msg_list = ref([]);
-const randomMsg = () => {
-  const arr = ["024", "054", "055", "059", "020", "050", "027", "057", "026", "056"];
-  const arr_game = [
-    "Jackpot Spin",
-    "Lucky Wheel",
-    "Crash",
-    "Galaxy Roulette",
-    "Ancient Egypt",
-    "Eye Storm",
-    "Fortune Dragon",
-    "Fortune Tiger",
-    "Ganesha Gold",
-    "Santa’s Gift Rush",
-    "Cheshire Dice",
-    "Jogo Do Bicho",
-  ];
-  let msg = [];
-  for (let i in arr) {
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    const randomIndexGame = Math.floor(Math.random() * arr_game.length);
-    msg.push({
-      tel: arr[randomIndex] + "***" + Math.floor(1000 + Math.random() * 9000),
-      num: 100 + Math.round(Math.random() * 2900) + Math.floor(Math.random() * 100) / 100,
-      game: arr_game[randomIndexGame],
-    });
-  }
-  msg_list.value = msg;
-};
+
 const goActive = (index) => {
+  return;
   switch (index) {
     case 0:
       showDailyCheck();
@@ -359,7 +243,7 @@ const goActive = (index) => {
   }
 };
 onMounted(() => {
-  randomMsg();
+  commit('set_home_active_type',0)
   if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   const userAgent = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
@@ -370,9 +254,7 @@ onMounted(() => {
     divice.value = "android";
   }
 
-  // setInterval(() => {
-  //   active_fd.value = !active_fd.value;
-  // }, 2500);
+
 });
 
 const page_num = ref(0);
@@ -387,86 +269,10 @@ window.addEventListener("pageshow", function (event) {
     if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
   }
 });
-// const active_fd = ref(true);
-
-// const refresh_loading = ref(false);
-
-// const refreshDetail = async () => {
-//   if (refresh_loading.value) return;
-//   refresh_loading.value = true;
-//   const res = await getUserInfo.get("", {});
-//   if (res.code == 200) {
-//     commit("set_user_info", res.data);
-//   } else if (res.code == 2002) {
-//     commit("set_user_info", {});
-//     localStorage.removeItem("token");
-//     commit("set_tip_info", "You have not logged in yet,please login.");
-//     commit("set_tip_type", 1);
-//     commit("set_tip_modal", true);
-//   }
-//   setTimeout(() => {
-//     refresh_loading.value = false;
-//   }, 1500);
-// };
 </script>
 
 <style lang="scss" scoped>
-// .rotate-animation {
-//   animation: rotate 1.5s infinite linear;
-// }
-
-// @keyframes rotate {
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// }
-
-// .fd-box {
-//   position: fixed;
-//   bottom: calc(50% - 200px);
-//   right: 5px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   .fd-img {
-//     z-index: 5;
-//     position: fixed;
-//     bottom: calc(50% - 166.3px);
-//     right: 8.3px;
-//   }
-//   .fd-text {
-//     z-index: 3;
-//     width: 59.3px;
-//     height: 33.6px;
-//     overflow: hidden;
-//     background-image: url("../assets/images/fd1.png");
-//     background-size: 100% 100%;
-//     background-repeat: no-repeat;
-//     position: relative;
-
-//     .rowup {
-//       width: 100%;
-//       height: 100%;
-//       .fd-label {
-//         width: 100%;
-//         height: 100%;
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: center;
-//         align-items: center;
-//         font-weight: bold;
-//         font-size: 8px;
-//         color: #ffffff;
-//         box-sizing: border-box;
-//         padding: 0 3px;
-//       }
-//     }
-//   }
-// }
+@import "../assets/styles/variables.scss";
 .sticky-type {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 55px);
@@ -523,7 +329,7 @@ window.addEventListener("pageshow", function (event) {
     align-items: center;
     .log-btn {
       font-size: 0.324rem;
-      color: #fff;
+      color: $c-fff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -642,16 +448,10 @@ window.addEventListener("pageshow", function (event) {
         display: flex;
         align-items: center;
         .game-name {
-          font-size: 0.555rem;
+          font-size: 0.416rem;
           font-weight: bold;
           color: #fff;
-        }
-        .game-count {
-          font-size: 0.296rem;
-          font-weight: 600;
-          color: #b3b3b3;
-          padding-left: 0.138rem;
-          padding-top: 0.083rem;
+          margin-left: 0.222rem;
         }
       }
     }

@@ -2,129 +2,99 @@
   <div class="content">
     <router-view v-slot="{ Component }">
       <keep-alive>
+        <transition :name="transitionName" mode="out-in">
+          <component
+            :is="Component"
+            v-if="route.meta.keepAlive"
+            :key="route.name"
+          ></component>
+        </transition>
+      </keep-alive>
+      <transition :name="transitionName" mode="out-in">
         <component
           :is="Component"
-          v-if="route.meta.keepAlive"
+          v-if="!route.meta.keepAlive"
           :key="route.name"
         ></component>
-      </keep-alive>
-      <component
-        :is="Component"
-        v-if="!route.meta.keepAlive"
-        :key="route.name"
-      ></component>
+      </transition>
     </router-view>
   </div>
 
-  <div class="tab-box">
-    <div class="tab-item" @click="tabSwitch(0)">
-      <img v-if="active_tab === 0" :src="img1" />
-      <img v-else :src="img1_un" />
-      <span :style="{ color: active_tab === 0 ? '#C98FFF' : '' }">Home</span>
-      <div class="back" v-if="active_tab === 0">
-        <img src="@/assets/images/tab_act.svg" />
-      </div>
-    </div>
-    <div class="tab-item" @click="tabSwitch(1)">
-      <img v-if="active_tab === 1" :src="img2" />
-      <img v-else :src="img2_un" />
-      <span :style="{ color: active_tab === 1 ? '#C98FFF' : '' }">Deposit</span>
-      <div class="back" v-if="active_tab === 1">
-        <img src="@/assets/images/tab_act.svg" />
-      </div>
-    </div>
-    <div class="tab-item" @click="tabSwitch(2)">
-      <img v-if="active_tab === 2" :src="img3" />
-      <img v-else :src="img3_un" />
-      <span :style="{ color: active_tab === 2 ? '#C98FFF' : '' }">Promotion</span>
-      <div class="back" v-if="active_tab === 2">
-        <img src="@/assets/images/tab_act.svg" />
-      </div>
-    </div>
-    <div class="tab-item" @click="tabSwitch(3)">
-      <img v-if="active_tab === 3" :src="img4" />
-      <img v-else :src="img4_un" />
-      <span :style="{ color: active_tab === 3 ? '#C98FFF' : '' }">Profile</span>
-      <div class="back" v-if="active_tab === 3">
-        <img src="@/assets/images/tab_act.svg" />
-      </div>
+  <div class="tab-box" v-if="route.meta.tab">
+
+    <div
+      class="tab-item"
+      v-for="(item, index) in tabs"
+      :key="index"
+      @click="tabSwitch(item.path)"
+    >
+      <div class="tab-icon" v-html="item.icon"></div>
+      <span :style="{ color: active_tab === 0 ? '#C98FFF' : '' }">{{ item.name }}</span>
     </div>
   </div>
-  <dailyCheck />
-  <!-- <firstDeposit /> -->
+  <!-- <dailyCheck /> -->
 </template>
 
 <script>
-import { watch } from "vue";
+import { computed, watch } from "vue";
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import dailyCheck from "@/components/dailyCheck.vue";
-// import firstDeposit from "@/components/firstDeposit.vue";
+// import dailyCheck from "@/components/dailyCheck.vue";
 import { preloadImage } from "@/utils/utils";
+import { useStore } from "vuex";
 
 export default {
-  components: {
-    dailyCheck,
-    // firstDeposit,
-  },
+  // components: {
+  //   dailyCheck,
+  // },
   setup() {
+    let { state } = useStore();
+    const tabs = computed(() => {
+      const bottom=state.station_base.bottomTabBar
+      bottom.map(item=>{
+        item.icon=item.icon.replace("width=\"200\"", "width=\"0.666rem\"")
+        item.icon=item.icon.replace("height=\"200\"", "height=\"0.666rem\"")
+      })
+      return bottom;
+    });
+    const transitionName = ref("slide-right");
     const route = useRoute();
     const router = useRouter();
     const active_tab = ref(0);
+    // watch(
+    //   () => router.currentRoute.value,
+    //   (newValue) => {
+    //     switch (newValue.name) {
+    //       case "home":
+    //         active_tab.value = 0;
+    //         break;
+    //       case "deposit":
+    //         active_tab.value = 1;
+    //         break;
+    //       case "promotion":
+    //         active_tab.value = 2;
+    //         break;
+    //       case "profile":
+    //         active_tab.value = 3;
+    //         break;
+    //     }
+    //   },
+    //   { immediate: true }
+    // );
+
     watch(
-      () => router.currentRoute.value,
-      (newValue) => {
-        switch (newValue.name) {
-          case "home":
-            active_tab.value = 0;
-            break;
-          case "deposit":
-            active_tab.value = 1;
-            break;
-          case "promotion":
-            active_tab.value = 2;
-            break;
-          case "profile":
-            active_tab.value = 3;
-            break;
-        }
-      },
-      { immediate: true }
+      () => route.meta,
+      (newVal, oldVal) => {
+        transitionName.value = newVal.transition;
+      }
     );
 
-    const tabSwitch = (index) => {
-      switch (index) {
-        case 0:
-          router.push({
-            path: "/home",
-          });
-          break;
-        case 1:
-          router.push({
-            path: "/deposit",
-          });
-          break;
-        case 2:
-          router.push({
-            path: "/promotion",
-          });
-          break;
-        case 3:
-          router.push({
-            path: "/profile",
-          });
-          break;
-      }
+    const tabSwitch = (path) => {
+      router.push({
+        path:path
+      });
     };
 
-    const img1 = ref("");
-    const img2 = ref("");
-    const img3 = ref("");
-    const img4 = ref("");
-    const img1_un = ref("");
-    const img2_un = ref("");
-    const img3_un = ref("");
-    const img4_un = ref("");
     onMounted(() => {
       switch (route.name) {
         case "home":
@@ -140,78 +110,13 @@ export default {
           active_tab.value = 3;
           break;
       }
-      preloadImage(require("../assets/images/tab_home_act.png"))
-        .then((image) => {
-          img1.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-
-      preloadImage(require("../assets/images/tab_dep.png"))
-        .then((image) => {
-          img2_un.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-      preloadImage(require("../assets/images/tab_promotion.png"))
-        .then((image) => {
-          img3_un.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-      preloadImage(require("../assets/images/tab_profile.png"))
-        .then((image) => {
-          img4_un.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-
-      preloadImage(require("../assets/images/tab_home.png"))
-        .then((image) => {
-          img1_un.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-
-      preloadImage(require("../assets/images/tab_dep_act.png"))
-        .then((image) => {
-          img2.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-      preloadImage(require("../assets/images/tab_promotion_act.png"))
-        .then((image) => {
-          img3.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
-      preloadImage(require("../assets/images/tab_profile_act.png"))
-        .then((image) => {
-          img4.value = image;
-        })
-        .catch((error) => {
-          console.error("Image loading error:", error);
-        });
     });
     return {
+      tabs,
       route,
       active_tab,
       tabSwitch,
-      img1,
-      img2,
-      img3,
-      img4,
-      img1_un,
-      img2_un,
-      img3_un,
-      img4_un,
+      transitionName,
     };
   },
 };
@@ -242,9 +147,7 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
-    img {
-      width: 0.777rem;
-    }
+
     span {
       font-size: 0.361rem;
       color: #77777d;
@@ -266,5 +169,28 @@ export default {
   padding-top: env(safe-area-inset-top);
   padding-bottom: calc(env(safe-area-inset-bottom) + 1.944rem);
   overflow-y: auto;
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.4s;
+}
+.slide-right-enter {
+  opacity: 0.3;
+  transform: translate(-100%);
+}
+.slide-right-leave-active {
+  opacity: 0.3;
+  transform: translateX(100%);
+}
+.slide-left-enter {
+  opacity: 0.3;
+  transform: translateX(100%);
+}
+.slide-left-leave-active {
+  opacity: 0.3;
+  transform: translateX(-100%);
 }
 </style>

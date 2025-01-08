@@ -1,4 +1,5 @@
 <template>
+ <div>
   <div class="setting-header">
     <div @click="goBack" class="arrow">
       <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
@@ -54,6 +55,7 @@
       </div>
     </div>
   </nut-overlay>
+ </div>
 </template>
 
 <script setup>
