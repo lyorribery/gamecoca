@@ -1,4 +1,4 @@
-import axios from '@/utils/request.js'
+import axios from '@/http/index.js'
 import {
     encryptBase64,
     encryptWithAes,

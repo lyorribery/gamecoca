@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-header" id="mainHeader">
-      <img src="@/assets/images/logo.png" style="width: 3.9rem" />
+      <img :src="fullStationLogo" style="height: 1.1rem" />
       <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
         <div class="log-btn" @click="goPermission('/login')">
           {{ $t("button.login") }}
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="btn-box" v-else>
-        <span>₵{{ (user_info.bindGold / 100).toFixed(2) }}</span>
+        <span>R${{ state.user_balance.balance }}</span>
         <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
       </div>
     </div>
@@ -48,7 +48,7 @@
           :key="index"
           style="height: 5.161rem"
         >
-          <div @click="goActive(index)">
+          <div @click="goActive(item)">
             <img
               :src="item.fullNoticeImg"
               style="height: 100%; width: calc(100% - 1.111rem)"
@@ -61,7 +61,7 @@
 
       <div
         class="custom-content"
-        :class="page_num >= 275 ? 'sticky-type' : ''"
+        :class="page_num >= 255 ? 'sticky-type' : ''"
         id="customContent"
       >
         <div class="custom-tab" id="gameName">
@@ -87,19 +87,20 @@
       <div class="game-content" v-for="(item, index) in game_list" :key="index">
         <div class="title" :id="'game' + index">
           <div class="name">
-            <img :src="item.fullCategoryImg" style="width:0.55rem" />
+            <img :src="item.fullCategoryImg" style="width: 0.55rem" />
             <span class="game-name">{{ item.categoryName }}</span>
           </div>
-          <div
-            class="more"
-            @click="getMore(index, item.param, item.total)"
-          >
+          <div class="more" @click="getMore(index, item.param, item.total)">
             <span>Ver Tudo</span>
             <img style="margin-left: 8px" width="5" src="../assets/images/jiantou.png" />
           </div>
         </div>
         <div class="game-container">
-          <imgCard v-for="(items, indexs) in item.games" :key="indexs" :cardInfo="items" />
+          <imgCard
+            v-for="(items, indexs) in item.games"
+            :key="indexs"
+            :cardInfo="items"
+          />
         </div>
       </div>
 
@@ -154,8 +155,13 @@ import { computed, ref, onMounted } from "vue";
 import { Close, RectRight } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
+import { Lucky } from "@/apis/cashwheel";
 
 let { state, commit, dispatch } = useStore();
+
+const fullStationLogo = computed(() => {
+  return state.station_base.fullStationLogo;
+});
 
 const promotion_list = computed(() => {
   return state.activity_notice.records;
@@ -214,36 +220,13 @@ const changeDown = (type) => {
 };
 const divice = ref(false);
 
-const goActive = (index) => {
-  return;
-  switch (index) {
-    case 0:
-      showDailyCheck();
-      break;
-    case 1:
-      router.push({
-        path: "/spin",
-      });
-      break;
-    case 2:
-      router.push({
-        path: "/deposit",
-      });
-      break;
-    case 3:
-      router.push({
-        path: "/deposit",
-      });
-      break;
-    case 4:
-      router.push({
-        path: "/invite",
-      });
-      break;
-  }
+const goActive = (data) => {
+  commit("set_activity_detail", data);
+  router.push({
+    path: "/activity",
+  });
 };
 onMounted(() => {
-  commit('set_home_active_type',0)
   if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   const userAgent = navigator.userAgent;
   const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
@@ -253,8 +236,9 @@ onMounted(() => {
   } else if (isAndroid) {
     divice.value = "android";
   }
-
-
+  Lucky().then((res) => {
+    if (res.code == 200) commit("set_lucky", res.data);
+  });
 });
 
 const page_num = ref(0);

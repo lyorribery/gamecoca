@@ -34,8 +34,8 @@ class HttpRequest {
       const isToken = (config.headers || {}).isToken === false
       // 是否需要防止数据重复提交
       const isRepeatSubmit = (config.headers || {}).repeatSubmit === false
-      if (localStorage.getItem('token') && !isToken) {
-        config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('token') // 让每个请求携带自定义token 请根据实际情况自行修改
+      if (localStorage.getItem('accessToken') && !isToken) {
+        config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('accessToken') // 让每个请求携带自定义token 请根据实际情况自行修改
       }
       // 添加全局的loading...
       if (!Object.keys(this.queue).length) {
@@ -48,9 +48,7 @@ class HttpRequest {
     // 响应拦截
     instance.interceptors.response.use(res => {
       if (res.data.code === 401 || res.data.code === 1002) {
-        store.dispatch('LogOut').then(() => {
-          router.push("login");
-        })
+        store.dispatch('LogOut')
       }
       this.destroy(url)
       const { data, status, headers } = res

@@ -49,6 +49,16 @@ const mobileRoute = [
         }
       },
       {
+        path:'/inbox',
+        name: 'inbox',
+        component: () => import('@/views/Inbox.vue'),
+        meta: {
+          tab: true,
+          auth: false,
+          transition: 'slide-right',
+        }
+      },
+      {
         path: '/mine',
         name: 'mine',
         component: () => import('@/views/Mine.vue'),
@@ -84,6 +94,15 @@ const mobileRoute = [
           transition: 'slide-left',
           auth: false
         },
+      },
+      {
+        path: '/activity',
+        name: 'activity',
+        component: () => import('@/views/Activity.vue'),
+        meta: {
+          auth: false,
+          transition: 'slide-right',
+        }
       },
       {
         path: '/records',
@@ -140,15 +159,6 @@ const mobileRoute = [
         }
       },
       {
-        path: '/description',
-        name: 'description',
-        component: () => import('@/views/Description.vue'),
-        meta: {
-          transition: 'slide-left',
-          auth: false
-        }
-      },
-      {
         path: '/pay',
         name: 'pay',
         component: () => import('@/views/Pay.vue'),
@@ -175,7 +185,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token')
+  const token = localStorage.getItem('accessToken')
   if (!token) {
     if (to.meta.auth) {
       next({ path: '/login' })

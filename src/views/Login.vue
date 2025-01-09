@@ -8,26 +8,26 @@
 
     <div class="form-container">
       <nut-form ref="loginRef" :model-value="loginForm">
-        <nut-form-item>
+        <nut-form-item prop="tab">
           <div class="tab-box">
             <div
               class="tab-item"
-              :class="tabVal == 1 ? 'tab-active' : ''"
+              :class="type == 1 ? 'tab-active' : ''"
               @click="changeTab(1)"
             >
               {{ $t("tel") }}
             </div>
             <div
               class="tab-item"
-              :class="tabVal == 2 ? 'tab-active' : ''"
+              :class="type == 2 ? 'tab-active' : ''"
               @click="changeTab(2)"
             >
               {{ $t("email") }}
             </div>
             <div
               class="tab-item"
-              :class="tabVal == 3 ? 'tab-active' : ''"
-              @click="changeTab(3)"
+              :class="type == 0 ? 'tab-active' : ''"
+              @click="changeTab(0)"
             >
               {{ $t("user") }}
             </div>
@@ -35,11 +35,10 @@
         </nut-form-item>
 
         <nut-form-item
-          v-if="tabVal == 1"
-          prop="phone"
+          prop="account"
           :rules="[
-            { required: true, message: 'Enter phone number' },
-            { validator: customValidatorPhone },
+            { required: true, message: 'account' },
+            { validator: customValidatorAccount },
           ]"
         >
           <div
@@ -51,6 +50,7 @@
             "
           >
             <span
+              v-if="type == 1"
               style="
                 color: #fff;
                 font-size: 0.388rem;
@@ -61,43 +61,11 @@
             >
             <nut-input
               style="flex: 1"
-              v-model="loginForm.phone"
-              placeholder="Phone number"
-              type="number"
-              maxLength="9"
-              @blur="customBlurValidate('phone')"
+              v-model="loginForm.account"
+              placeholder="account"
+              @blur="customBlurValidate('account')"
             />
           </div>
-        </nut-form-item>
-
-        <nut-form-item
-          v-if="tabVal == 2"
-          prop="email"
-          :rules="[
-            { required: true, message: 'Enter E-mail' },
-            { validator: customValidatorEmail },
-          ]"
-        >
-          <nut-input
-            v-model="loginForm.email"
-            placeholder="E-mail"
-            @blur="customBlurValidate('email')"
-          />
-        </nut-form-item>
-
-        <nut-form-item
-          v-if="tabVal == 3"
-          prop="username"
-          :rules="[
-            { required: true, message: 'Enter User Name' },
-            { validator: customValidatorUserName },
-          ]"
-        >
-          <nut-input
-            v-model="loginForm.username"
-            placeholder="User Name"
-            @blur="customBlurValidate('username')"
-          />
         </nut-form-item>
 
         <nut-form-item
@@ -159,27 +127,21 @@ import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import { _validpassword } from "@/utils/utils";
 import { useStore } from "vuex";
-let { commit, dispatch } = useStore();
+import { login } from "@/apis/user.js";
+let { dispatch } = useStore();
 const router = useRouter();
 const loginRef = ref(null);
 const loginForm = ref({
-  loginType: "front",
-  username: "",
-  phone: "",
-  email: "",
+  account: "",
   password: "",
 });
 const is_loading = ref(false);
 const is_enter = ref(false);
-const tabVal = ref("1");
+const type = ref("1");
 watch(
   () => loginForm,
   (newValue, oldValue) => {
-    if (tabVal.value == 1 && newValue.value.phone && newValue.value.password) {
-      is_enter.value = true;
-    } else if (tabVal.value == 2 && newValue.value.email && newValue.value.password) {
-      is_enter.value = true;
-    } else if (tabVal.value == 3 && newValue.value.username && newValue.value.password) {
+    if (newValue.value.account && newValue.value.password) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -188,10 +150,24 @@ watch(
   { deep: true }
 );
 const submit = () => {
+  if (is_loading.value) return;
   loginRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
-      if (is_loading.value) return;
       is_loading.value = true;
+      login(loginForm.value.account, loginForm.value.password, type.value).then((res) => {
+        if (res.code == 200) {
+          localStorage.setItem("loginInfo", res.data);
+          localStorage.setItem("accessToken", res.data.accessToken);
+          dispatch("GET_USER_INFO");
+          dispatch("GET_USER_BALANCE");
+          dispatch("GET_MSG_LIST");
+          dispatch("GET_UNREAD_COUNT");
+          router.push({
+            path: "/home",
+          });
+        }
+        is_loading.value = false;
+      });
     } else {
       console.warn("error:", errors);
     }
@@ -199,6 +175,9 @@ const submit = () => {
 };
 const customBlurValidate = (prop) => {
   loginRef.value.validate(prop);
+};
+const customValidatorAccount = (val) => {
+  return Promise.resolve();
 };
 const customValidatorPhone = (val) => {
   if (/^\d+$/.test(val) && val.length == 9) {
@@ -229,7 +208,7 @@ const goPath = (path) => {
   });
 };
 const changeTab = (val) => {
-  tabVal.value = val;
+  type.value = val;
 };
 </script>
 

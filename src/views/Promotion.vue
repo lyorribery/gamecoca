@@ -29,41 +29,10 @@ const list = computed(() => {
   return state.activity_notice.records;
 });
 const goPath = (data) => {
-  return;
-  switch (data.type) {
-    case 1:
-      commit("set_daily_visible", true);
-      break;
-    case 2:
-      router.push({
-        path: "/spin",
-      });
-      break;
-    case 3:
-      router.push({
-        path: "/invite",
-      });
-      break;
-    case 4:
-      router.push({
-        path: "/deposit",
-      });
-      break;
-    case 5:
-      if (state.user_info && state.user_info.rechargeTimes > 0) {
-        commit(
-          "set_tip_info",
-          `The current account does not meet the conditions for participating in the first recharge activity.`
-        );
-        commit("set_tip_type", 9);
-        commit("set_tip_modal", true);
-      } else {
-        router.push({
-          path: "/deposit",
-        });
-      }
-      break;
-  }
+  commit("set_activity_detail", data);
+  router.push({
+    path: "/activity",
+  });
 };
 </script>
 
@@ -113,9 +82,9 @@ const goPath = (data) => {
       .item-top {
         display: flex;
         flex-direction: column;
-     
+
         .title {
-          color:#e556ff;
+          color: #e556ff;
           font-size: 0.361rem;
           font-weight: 600;
           box-sizing: border-box;
@@ -130,7 +99,7 @@ const goPath = (data) => {
         color: #cbb6fe;
         font-size: 0.277rem;
         font-weight: 600;
-        width:100%;
+        width: 100%;
         text-align: right;
         // display: flex;
         // justify-content: center;

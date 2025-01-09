@@ -52,7 +52,6 @@ export default {
               router.push({
                 path: "/",
               });
-             
             }
           });
           break;
@@ -65,8 +64,13 @@ export default {
     };
     onMounted(() => {
       dispatch("GET_CONFIG");
-      // dispatch("GET_GAME_LIST");
-     
+      if (localStorage.getItem("accessToken")) {
+        dispatch("GET_USER_INFO");
+        dispatch("GET_USER_BALANCE");
+        dispatch("GET_MSG_LIST");
+        dispatch("GET_UNREAD_COUNT");
+      }
+
       localStorage.setItem("d_id", uuid.v1());
     });
     return {
@@ -75,4 +79,3 @@ export default {
   },
 };
 </script>
-
