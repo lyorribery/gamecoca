@@ -52,6 +52,7 @@ const store = createStore({
         temp.push({
           fullCategoryImg: item.fullCategoryImg,
           categoryName: item.categoryName,
+          categoryId: item.categoryId,
           games: games.slice(0, 6)
         })
       })

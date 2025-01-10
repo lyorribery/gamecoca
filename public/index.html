@@ -27,6 +27,19 @@
   <link rel="apple-touch-icon" sizes="192x192" href="<%= BASE_URL %>icon.png">
   <link rel="apple-touch-icon" sizes="512x512" href="<%= BASE_URL %>icon.png">
 
+  <script type="text/javascript">
+    // 如果判断下来是pc 那么跳转嵌入 iframe h5
+    ~function () {
+      // 是不是移动端
+      var isMobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+      // 在iframe内
+      var inIframe = window.frames.length != parent.frames.length;
+      if (!isMobile && !inIframe) {
+        window.location.href = "web.html"
+      }
+    }()
+  </script>
+
   <!-- <script>
     document.onkeydown = document.onkeyup = document.onkeypress = function (event) {
       var e = event || window.event || arguments.callee.caller.arguments[0];

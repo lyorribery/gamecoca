@@ -1,77 +1,53 @@
 <template>
- <div>
-  <div class="spin-header">
-    <div @click="goBack" class="arrow">
-      <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
-    </div>
-    <span>Coins Spin</span>
-  </div>
-  <div class="spin">
-    <div
-      class="spin-container"
-      :style="{ width: s_w / 36 + 'rem', height: s_w / 36 + 'rem' }"
-    >
-      <img src="../assets/images/client/spin/zp_zhizhen.png" style="z-index: 2; width: 1.944rem" />
-      <div class="spin-box" ref="prizeBack">
-        <img  src="../assets/images/client/spin/zp_di.png" style="width: 100%" />
+  <div>
+    <div class="spin-header">
+      <div @click="goBack" class="arrow">
+        <RectLeft color="#fff" width=".361rem" height=".361rem" /><span>Back</span>
       </div>
-      <div class="spin-back"></div>
+      <span>Coins Spin</span>
+    </div>
+    <div class="spin">
+      <div
+        class="spin-container"
+        :style="{ width: s_w / 36 + 'rem', height: s_w / 36 + 'rem' }"
+      >
+        <img
+          src="../assets/images/client/spin/zp_zhizhen.png"
+          style="z-index: 2; width: 1.944rem"
+        />
+        <div class="spin-box" ref="prizeBack">
+          <img src="../assets/images/client/spin/zp_di.png" style="width: 100%" />
+        </div>
+        <div class="spin-back"></div>
 
-      <div class="prize-list" ref="prizeWrap">
-        <div
-          class="prize-item"
-          v-for="(item, index) in prizeObj.prizeList"
-          :key="index"
-          :style="prizeStyle(index)"
-        >
-          <img :src="item.pic" />
-          <div class="prize-txt">
-            <div class="amount">{{ item.reward != 0 ? item.reward : "Try" }}</div>
-            <div class="unit">{{ item.reward != 0 ? "GHS" : "Again" }}</div>
+        <div class="prize-list" ref="prizeWrap">
+          <div
+            class="prize-item"
+            v-for="(item, index) in prizeObj.prizeList"
+            :key="index"
+            :style="prizeStyle(index)"
+          >
+            <img :src="item.fullPrizeImage" />
+            <div class="prize-txt">
+              <div class="unit">{{ item.title }}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <img  src="../assets/images/client/spin/zp_dizuo.png" width="253.7" style="margin-top: -30px" />
+      <img
+        src="../assets/images/client/spin/zp_dizuo.png"
+        width="253.7"
+        style="margin-top: -30px"
+      />
 
-    <div class="data-box">
-      <div class="item b-r">
-        My coins：<span>{{ user_info.point ? user_info.point : "0" }}</span>
+      <div class="btn" @click="start">PLAY</div>
+      <div class="des">
+        If you hit cash,the amount will be credited to your game account immediately;
       </div>
-      <div class="item">
-        <span>{{ spin_count }}</span
-        >Remaining draws
-      </div>
+      <div class="des">The final interpretation belongs to GameCoca Casino.</div>
     </div>
-    <div class="btn" @click="start">
-      PLAY
-      <!-- <span class="tip"
-        >({{ global_config.spinCost ? global_config.spinCost : "100" }}COINS)</span
-      > -->
-    </div>
-    <!-- <div class="des">
-      It takes {{ global_config.spinCost ? global_config.spinCost : "100" }} coins per
-      spin;
-    </div> -->
-    <div class="des">
-      If you hit cash,the amount will be credited to your game account immediately;
-    </div>
-    <div class="des">The final interpretation belongs to GameCoca Casino.</div>
-    <!-- <div class="divide">
-      <div class="line"></div>
-      <span>Grand Prize Winners</span>
-      <div class="line"></div>
-    </div>
-    <div class="winner-container">
-      <div class="winner-box">
-        <div class="item" v-for="(item, index) in winner_list" :key="index">
-          {{ item.name }} win <span>₵{{ item.amount }}</span>
-        </div>
-      </div>
-    </div> -->
   </div>
- </div>
 </template>
 
 <script setup>
@@ -79,6 +55,7 @@ import { ref, reactive, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { RectLeft } from "@nutui/icons-vue";
 import { useStore } from "vuex";
+import { Participation } from "@/apis/cashwheel.js";
 
 let { state, commit, dispatch } = useStore();
 const router = useRouter();
@@ -129,7 +106,7 @@ const prizeStyle = computed(() => {
     return `
               width: ${(s_w.value * Math.sin(((_degree / 2) * Math.PI) / 180)) / 36}rem;
               height: ${s_w.value / 2 / 36}rem;
-              transform: rotate(${_degree * i + _degree / 2 - 15}deg);
+              transform: rotate(${_degree * i + _degree / 2 - 45}deg);
               transform-origin: 50% 100%;
               margin-top:.277rem;
             `;
@@ -137,7 +114,7 @@ const prizeStyle = computed(() => {
 });
 onMounted(() => {
   s_w.value = window.innerWidth - 100;
-  prizeObj.prizeList = state.spin_config;
+  prizeObj.prizeList = state.wheel_list;
 });
 
 // 获取随机数
@@ -146,49 +123,26 @@ const getRandomNum = () => {
   return num;
 };
 const start = async () => {
-  if (!localStorage.getItem("token")) {
-    commit("set_tip_info", "You have not logged in yet,please login.");
-    commit("set_tip_type", 1);
-    commit("set_tip_modal", true);
+  if (!localStorage.getItem("accessToken")) {
     return;
   }
-  if (state.user_info.point < 100) {
-    // commit(
-    //   "set_tip_info",
-    //   `Current coins are less than ${
-    //     global_config.spinCost ? global_config.spinCost : "100"
-    //   }.`
-    // );
-    commit("set_tip_type", 7);
-    commit("set_tip_modal", true);
-    return;
-  }
+
   if (!prizeObj.isRunning) {
-    // prizeObj.isRunning = true;
-    // // 请求返回的奖品编号
-    // let prizeId = "";
-    // const res = await spinAct.post("", {});
-    // if (res.code == 200) {
-    //   for (let i in state.spin_config) {
-    //     if (state.spin_config[i].id == res.data.rewardId) {
-    //       prizeId = i;
-    //       break;
-    //     }
-    //   }
-    //   prizeObj.prizeId = prizeId;
-    //   startRun();
-    //   dispatch("GET_USER_INFO");
-    // } else if (res.code == 2002) {
-    //   ctx.commit("set_user_info", {});
-    //   localStorage.removeItem("token");
-    //   commit("set_tip_info", "You have not logged in yet,please login.");
-    //   commit("set_tip_type", 1);
-    //   commit("set_tip_modal", true);
-    // } else {
-    //   commit("set_tip_info", res.msg);
-    //   commit("set_tip_type", 8);
-    //   commit("set_tip_modal", true);
-    // }
+    prizeObj.isRunning = true;
+    // 请求返回的奖品编号
+    let prizeId = "";
+    const res = await Participation({ activityId: 2 });
+    if (res.code == 200) {
+      console.log(res.data);
+      for (let i in state.wheel_list) {
+        if (state.wheel_list[i].id == res.data.id) {
+          prizeId = i;
+          break;
+        }
+      }
+      prizeObj.prizeId = prizeId;
+      startRun();
+    }
   }
 };
 const startRun = () => {
@@ -213,12 +167,6 @@ const stopRun = (e) => {
   prizeBack.value.style = `
             transform: rotate(${totalRunAngle.value - prizeObj.baseRunAngle - 15}deg);
           `;
-  commit(
-    "set_tip_info",
-    `You hit ₵ ${prizeObj.prizeList[prizeObj.prizeId].reward} cash rewards.`
-  );
-  commit("set_tip_type", 9);
-  commit("set_tip_modal", true);
 };
 </script>
 
@@ -250,29 +198,31 @@ const stopRun = (e) => {
       overflow: hidden;
     }
     .prize-item {
-      /*border: 2px solid red;*/
       position: absolute;
       left: 0;
       right: 0;
       top: -0.277rem;
       margin: auto;
       &:nth-child(even) {
-        color: #ffe48f;
+        color: #af6f00;
       }
       &:nth-child(odd) {
-        color: #af6f00;
+        color: #ffe48f;
       }
     }
     .prize-item img {
-      width: 40%;
-      margin: 1.111rem auto 0.277rem;
+      width: 38%;
+      margin: 0.911rem auto 0.277rem;
       display: block;
     }
     .prize-item .prize-txt {
-      font-size: 0.259rem;
+      font-size: 0.277rem;
       font-weight: bold;
       text-align: center;
       line-height: 0.333rem;
+      img {
+        width: 0.694rem;
+      }
     }
 
     .spin-back {
@@ -303,58 +253,13 @@ const stopRun = (e) => {
     }
   }
 
-  .divide {
-    margin: 0.555rem 0;
-    width: calc(100% - 0.833rem);
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    span {
-      font-weight: bold;
-      font-size: 0.305rem;
-      color: #49bf6a;
-      padding: 0 0.222rem;
-    }
-    .line {
-      flex: 1;
-      height: 0.019rem;
-      background: #ccc3e2;
-    }
-  }
   .des {
     line-height: 0.444rem;
     width: 100%;
     font-size: 0.333rem;
     color: #ffffff;
   }
-  .data-box {
-    margin: 0.555rem;
-    width: 100%;
-    height: 1.297rem;
-    border-radius: 0.647rem;
-    border: 0.027rem solid #bd35fc;
-    display: flex;
-    box-sizing: border-box;
-    align-items: center;
-    .b-r {
-      border-right: 0.016rem solid #ccc3e2;
-    }
-    .item {
-      width: 50%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 0 0.277rem;
-      font-size: 0.402rem;
-      color: #ffffff;
-      span {
-        font-weight: bold;
-        font-size: 0.555rem;
-        color: #e556ff;
-      }
-    }
-  }
+
   .btn {
     margin-bottom: 0.555rem;
     width: calc(100% - 0.833rem);

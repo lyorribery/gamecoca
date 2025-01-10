@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="promotion-header">
-      <span class="title">Promotion</span>
-    </div>
     <div class="promotion">
       <div class="item" v-for="(item, index) in list" :key="index" @click="goPath(item)">
         <img :src="item.fullNoticeImg" />
@@ -16,8 +13,19 @@
         </div>
       </div>
     </div>
+    <pageFooter />
   </div>
 </template>
+
+<script>
+import pageFooter from "@/components/pageFooter.vue";
+
+export default {
+  components: {
+    pageFooter,
+  },
+};
+</script>
 
 <script setup>
 import { computed } from "vue";
@@ -37,28 +45,10 @@ const goPath = (data) => {
 </script>
 
 <style lang="scss" scoped>
-.promotion-header {
-  z-index: 9;
-  background: #18171e;
-  position: fixed;
-  width: 100%;
-  top: env(safe-area-inset-top);
-  left: 0;
-  height: 55px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 0.0138rem solid #29213d;
-  .title {
-    color: #fff;
-    font-weight: bold;
-    font-size: 0.472rem;
-  }
-}
 .promotion {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 0.416rem 0.277rem 0.416rem;
+  padding: 0 0.416rem 0.277rem 0.416rem;
   .item {
     width: 100%;
     border-radius: 0.222rem;

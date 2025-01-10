@@ -1,25 +1,4 @@
 <template>
- <div>
-  <div class="profile-header">
-    <div class="user-avtar">
-      <div class="avatar">
-        <img src="../assets/images/client/other/img_tx.png"  style="width: 0.563rem" />
-      </div>
-      <span>{{ user_info.id ? "ID " + user_info.id : "" }}</span>
-    </div>
-    <div class="header-btn">
-      <img
-        src="../assets/images/client/other/icon_sett.png"
-        style="width: 0.527rem"
-        @click="goPath('/setting')"
-      />
-      <img
-        @click="goLivechat()"
-        src="../assets/images/client/other/icon_kefu.png"
-        style="margin-left: 0.277rem; width: 0.527rem"
-      />
-    </div>
-  </div>
   <div class="profile">
     <div class="wallet-box">
       <div class="info-box">
@@ -121,11 +100,10 @@
     </div>
     <div class="quit-btn" @click="exit">Log out</div>
   </div>
- </div>
 </template>
 
 <script setup>
-import { onActivated, computed } from "vue";
+import { computed } from "vue";
 import { RectRight } from "@nutui/icons-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -152,9 +130,7 @@ const goPath = (path) => {
     });
   }
 };
-const goLivechat = () => {
-  location.href = "https://tawk.to/chat/6641bda89a809f19fb303295/1htocpnf9";
-};
+
 const user_info = computed(() => {
   return state.user_info;
 });
@@ -167,20 +143,15 @@ const goDescription = () => {
   });
 };
 const exit = () => {
-  commit("set_tip_info", "Do you confirm to log out of the current account?");
-  commit("set_tip_type", 2);
-  commit("set_tip_modal", true);
+  dispatch("LogOut");
 };
-onActivated(() => {
-  dispatch("GET_USER_INFO");
-});
 </script>
 
 <style lang="scss" scoped>
 .profile {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(1.944rem + env(safe-area-inset-top)) 0.416rem 0.277rem 0.416rem;
+  padding:  0.277rem 0.416rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -305,39 +276,6 @@ onActivated(() => {
       box-sizing: border-box;
       padding-top: 0.416rem;
       text-align: center;
-    }
-  }
-}
-.profile-header {
-  z-index: 9;
-  background: #18171e;
-  position: fixed;
-  width: 100%;
-  top: env(safe-area-inset-top);
-  left: 0;
-  height: 55px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0 0.416rem;
-  .user-avtar {
-    display: flex;
-    align-items: center;
-    .avatar {
-      width: 1.111rem;
-      height: 1.111rem;
-      border-radius: 100%;
-      background: #583188;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 0.277rem;
-    }
-    span {
-      font-weight: bold;
-      font-size: 0.388rem;
-      color: #ffffff;
     }
   }
 }

@@ -125,7 +125,7 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
-import { _validpassword } from "@/utils/utils";
+import { _validpassword, _validname, _validemail, _validphone } from "@/utils/utils";
 import { useStore } from "vuex";
 import { login } from "@/apis/user.js";
 let { dispatch } = useStore();
@@ -177,21 +177,17 @@ const customBlurValidate = (prop) => {
   loginRef.value.validate(prop);
 };
 const customValidatorAccount = (val) => {
-  return Promise.resolve();
-};
-const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val) && val.length == 9) {
+  if (type.value == 1 && _validphone(val)) {
+    return Promise.resolve();
+  } else if (type.value == 2 && _validemail(val)) {
+    return Promise.resolve();
+  } else if (type.value == 0 && _validname(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject("Please enter the correct phone number");
+    return Promise.reject("account error");
   }
 };
-const customValidatorEmail = (val) => {
-  return Promise.resolve();
-};
-const customValidatorUserName = (val) => {
-  return Promise.resolve();
-};
+
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();

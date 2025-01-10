@@ -17,7 +17,7 @@ export const loopNotice = (flag) => {
 
 export const _validname = (val) => {
 	if (!val) return false
-	return /^[a-zA-Z0-9]{6,12}$/.test(val)
+	return /^[a-zA-Z0-9]{5,12}$/.test(val)
 }
 
 export const _validemail = (val) => {

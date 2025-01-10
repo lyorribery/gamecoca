@@ -1,20 +1,5 @@
 <template>
   <div>
-    <div class="main-header" id="mainHeader">
-      <img :src="fullStationLogo" style="height: 1.1rem" />
-      <div class="btn-box" v-if="JSON.stringify(user_info) == '{}'">
-        <div class="log-btn" @click="goPermission('/login')">
-          {{ $t("button.login") }}
-        </div>
-        <div class="re-btn" @click="goPermission('/register')">
-          {{ $t("button.register") }}
-        </div>
-      </div>
-      <div class="btn-box" v-else>
-        <span>R${{ state.user_balance.balance }}</span>
-        <div class="re-btn" @click="goPath('/deposit')">DEPOSIT</div>
-      </div>
-    </div>
     <div class="home">
       <div class="home-top-back">
         <div class="back"></div>
@@ -90,7 +75,7 @@
             <img :src="item.fullCategoryImg" style="width: 0.55rem" />
             <span class="game-name">{{ item.categoryName }}</span>
           </div>
-          <div class="more" @click="getMore(index, item.param, item.total)">
+          <div class="more" @click="getMore(item.categoryId,item.categoryName)">
             <span>Ver Tudo</span>
             <img style="margin-left: 8px" width="5" src="../assets/images/jiantou.png" />
           </div>
@@ -159,10 +144,6 @@ import { Lucky } from "@/apis/cashwheel";
 
 let { state, commit, dispatch } = useStore();
 
-const fullStationLogo = computed(() => {
-  return state.station_base.fullStationLogo;
-});
-
 const promotion_list = computed(() => {
   return state.activity_notice.records;
 });
@@ -172,9 +153,6 @@ const category_list = computed(() => {
 const game_list = computed(() => {
   return state.current_game_list;
 });
-const user_info = computed(() => {
-  return state.user_info;
-});
 const route = useRoute();
 const router = useRouter();
 const goPath = (path) => {
@@ -182,12 +160,16 @@ const goPath = (path) => {
     path,
   });
 };
-const goPermission = (type) => {
+
+const getMore = (id,name) => {
   router.push({
-    path: type,
+    path: "/classification",
+    query: {
+      id,
+      name
+    },
   });
 };
-const getMore = async (index, param, total) => {};
 const active_type = computed(() => {
   return state.home_active_type;
 });
@@ -292,62 +274,10 @@ window.addEventListener("pageshow", function (event) {
   }
 }
 
-.main-header {
-  width: 100%;
-  position: fixed;
-  top: env(safe-area-inset-top);
-  left: 0;
-  z-index: 9;
-  background: transparent;
-  height: 55px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 0 0.277rem;
-  background: #4c2388;
-  .btn-box {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    .log-btn {
-      font-size: 0.324rem;
-      color: $c-fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: 400;
-      width: 2.185rem;
-      height: 0.666rem;
-      background: rgba(36, 31, 52, 0.3);
-      border: 1px solid #5b2efa;
-      border-radius: 0.277rem;
-    }
-    .re-btn {
-      font-weight: 400;
-      margin-left: 0.277rem;
-      font-size: 0.324rem;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 2.185rem;
-      height: 0.666rem;
-      background: linear-gradient(-90deg, #9343c4, #614ae6);
-      border-radius: 0.277rem;
-    }
-    span {
-      color: #ffffff;
-      font-size: 0.416rem;
-      font-weight: bold;
-    }
-  }
-}
 .home {
   width: 100%;
   box-sizing: border-box;
-  padding: calc(55px + env(safe-area-inset-top)) 0 0.277rem 0;
+  padding: 0 0 0.277rem 0;
   background: #18171e;
   position: relative;
   overflow-x: hidden;
@@ -387,7 +317,7 @@ window.addEventListener("pageshow", function (event) {
     position: absolute;
     width: 100%;
     left: 0;
-    top: 55px;
+    top: 0;
     .back {
       position: relative;
       width: 100%;

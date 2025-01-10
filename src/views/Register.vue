@@ -8,25 +8,25 @@
 
     <div class="form-container">
       <nut-form ref="registerRef" :model-value="registerForm">
-        <nut-form-item>
+        <nut-form-item prop="tab">
           <div class="tab-box">
             <div
               class="tab-item"
-              :class="tabVal == 1 ? 'tab-active' : ''"
+              :class="type == 1 ? 'tab-active' : ''"
               @click="changeTab(1)"
             >
               {{ $t("tel") }}
             </div>
             <div
               class="tab-item"
-              :class="tabVal == 2 ? 'tab-active' : ''"
+              :class="type == 2 ? 'tab-active' : ''"
               @click="changeTab(2)"
             >
               {{ $t("email") }}
             </div>
             <div
               class="tab-item"
-              :class="tabVal == 3 ? 'tab-active' : ''"
+              :class="type == 3 ? 'tab-active' : ''"
               @click="changeTab(3)"
             >
               {{ $t("user") }}
@@ -35,11 +35,10 @@
         </nut-form-item>
 
         <nut-form-item
-          v-if="tabVal == 1"
-          prop="phone"
+          prop="account"
           :rules="[
-            { required: true, message: 'Enter phone number' },
-            { validator: customValidatorPhone },
+            { required: true, message: 'account' },
+            { validator: customValidatorAccount },
           ]"
         >
           <div
@@ -51,6 +50,7 @@
             "
           >
             <span
+              v-if="type == 1"
               style="
                 color: #fff;
                 font-size: 0.388rem;
@@ -61,43 +61,11 @@
             >
             <nut-input
               style="flex: 1"
-              v-model="registerForm.phone"
-              placeholder="Phone number"
-              type="number"
-              maxLength="9"
-              @blur="customBlurValidate('phone')"
+              v-model="registerForm.account"
+              placeholder="account"
+              @blur="customBlurValidate('account')"
             />
           </div>
-        </nut-form-item>
-
-        <nut-form-item
-          v-if="tabVal == 2"
-          prop="email"
-          :rules="[
-            { required: true, message: 'Enter E-mail' },
-            { validator: customValidatorEmail },
-          ]"
-        >
-          <nut-input
-            v-model="registerForm.email"
-            placeholder="E-mail"
-            @blur="customBlurValidate('email')"
-          />
-        </nut-form-item>
-
-        <nut-form-item
-          v-if="tabVal == 3"
-          prop="username"
-          :rules="[
-            { required: true, message: 'Enter User Name' },
-            { validator: customValidatorUserName },
-          ]"
-        >
-          <nut-input
-            v-model="registerForm.username"
-            placeholder="User Name"
-            @blur="customBlurValidate('username')"
-          />
         </nut-form-item>
 
         <nut-form-item
@@ -239,33 +207,25 @@
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { Close } from "@nutui/icons-vue";
-import { _validpassword } from "@/utils/utils";
+import { _validpassword, _validname, _validemail, _validphone } from "@/utils/utils";
 import { useStore } from "vuex";
+import { register } from "@/apis/user.js";
 
-let timer = null;
 const { commit, dispatch } = useStore();
 const is_loading = ref(false);
 const router = useRouter();
 const registerRef = ref(null);
 const is_check = ref(true);
 const registerForm = ref({
-  loginType: "front",
-  username: "",
-  phone: "",
-  email: "",
+  account: "",
   password: "",
-  repassword: "",
 });
 const is_enter = ref(false);
-const tabVal = ref("1");
+const type = ref("1");
 watch(
   () => registerForm,
   (newValue, oldValue) => {
-    if (tabVal.value == 1 && newValue.value.phone && newValue.value.password) {
-      is_enter.value = true;
-    } else if (tabVal.value == 2 && newValue.value.email && newValue.value.password) {
-      is_enter.value = true;
-    } else if (tabVal.value == 3 && newValue.value.username && newValue.value.password) {
+    if (newValue.value.account && newValue.value.password) {
       is_enter.value = true;
     } else {
       is_enter.value = false;
@@ -275,25 +235,22 @@ watch(
 );
 
 const submit = () => {
+  if (is_loading.value) return;
   registerRef.value.validate().then(({ valid, errors }) => {
     if (valid) {
       if (!is_check.value) {
-        commit(
-          "set_tip_info",
-          "Please check GameCoca’s Service Agreement,Terms and Conditions & Privacy Policy."
-        );
-        commit("set_tip_type", 3);
-        commit("set_tip_modal", true);
+        return;
       } else {
-        if (is_loading.value) return;
         is_loading.value = true;
-        const param = localStorage.getItem("i_code")
-          ? {
-              ...registerForm.value,
-              identifier: "233" + registerForm.value.identifier,
-              invateCode: Number(localStorage.getItem("i_code")),
-            }
-          : { ...registerForm.value, identifier: "233" + registerForm.value.identifier };
+        console.log(registerForm.value)
+        return
+        register().then((res) => {
+          if (res.code == 200) {
+            router.push({
+              path: "/login",
+            });
+          }
+        });
       }
     } else {
       console.warn("error:", errors);
@@ -303,18 +260,16 @@ const submit = () => {
 const customBlurValidate = (prop) => {
   registerRef.value.validate(prop);
 };
-const customValidatorPhone = (val) => {
-  if (/^\d+$/.test(val) && val.length == 9) {
+const customValidatorAccount = (val) => {
+  if (type.value == 1 && _validphone(val)) {
+    return Promise.resolve();
+  } else if (type.value == 2 && _validemail(val)) {
+    return Promise.resolve();
+  } else if (type.value == 0 && _validname(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject("Please enter the correct phone number");
+    return Promise.reject("account error");
   }
-};
-const customValidatorEmail = (val) => {
-  return Promise.resolve();
-};
-const customValidatorUserName = (val) => {
-  return Promise.resolve();
 };
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
@@ -324,7 +279,7 @@ const customValidatorPass = (val) => {
   }
 };
 const customValidatorRePass = (val) => {
-  if (_validpassword(val) && val === registerForm.password) {
+  if (_validpassword(val) && val === registerForm.value.password) {
     return Promise.resolve();
   } else {
     return Promise.reject("Please enter a 6-16 digit password.");
@@ -342,7 +297,7 @@ const goDescription = (type) => {
   });
 };
 const changeTab = (val) => {
-  tabVal.value = val;
+  type.value = val;
 };
 </script>
 
