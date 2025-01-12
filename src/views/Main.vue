@@ -17,7 +17,24 @@
           @click="refreshBalance"
           :class="{ 'refresh-loading': isRefresh }"
         ></i>
-        <div class="deposit-btn" @click="goPath('/deposit')">+</div>
+        <div class="deposit-btn" @click="goPath('/deposit')">
+          <svg
+            t="1736711047466"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="1479"
+            width="18"
+            height="18"
+          >
+            <path
+              d="M867.7 423.8H599.8V155.9c0-49.3-40-89.3-89.3-89.3s-89.3 40-89.3 89.3v267.9H153.3c-49.3 0-89.3 40-89.3 89.3s40 89.3 89.3 89.3h267.9v267.9c0 49.3 40 89.3 89.3 89.3s89.3-40 89.3-89.3V602.4h267.9c49.3 0 89.3-40 89.3-89.3s-40-89.3-89.3-89.3z"
+              fill="#151515"
+              p-id="1480"
+            ></path>
+          </svg>
+        </div>
       </div>
       <div class="avatar-box" @click="changeShow">
         <div class="img-box">
@@ -81,7 +98,7 @@
       </nut-animate>
 
       <div class="middle-tab" v-if="index == 2">
-        <nut-animate type="breath" duration="1000" loop>
+        <nut-animate type="breath" duration="800" loop>
           <div class="circle-box">
             <i class="iconfont icon-rocket" v-if="item.path == '/home'"></i>
             <i class="iconfont icon-share" v-if="item.path == '/refer/invite'"></i>
@@ -408,11 +425,11 @@ export default {
     };
 
     const refreshBalance = () => {
-      if(isRefresh.value) return
-      isRefresh.value=true
-      setTimeout(()=>{
-        isRefresh.value=false
-      },3000)
+      if (isRefresh.value) return;
+      isRefresh.value = true;
+      setTimeout(() => {
+        isRefresh.value = false;
+      }, 3000);
       dispatch("GET_USER_BALANCE");
     };
 
@@ -698,9 +715,9 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 0.5rem;
-        font-weight: bold;
-        color: $bg-color;
+        // font-size: 0.5rem;
+        // font-weight: bold;
+        // color: $bg-color;
       }
     }
   }

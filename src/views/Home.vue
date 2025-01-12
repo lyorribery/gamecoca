@@ -3,7 +3,7 @@
     <div class="home" ref="container">
       <div class="swiper-box">
         <nut-swiper
-          :auto-play="2500"
+          :auto-play="2000"
           :is-prevent-default="false"
           :is-stop-propagation="false"
           :width="330"
@@ -98,20 +98,20 @@
           <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
         </div>
         <div class="title">1. Click the "More" icon, then click Install application</div>
-        <img src="../assets/images/client/down/down/and_1.png" />
+
         <div class="title">2. Click Add and select "Add"</div>
-        <img src="../assets/images/client/down/down/and_2.png" />
+
       </div>
       <div class="down-box" v-if="divice == 'ios'">
         <div class="close">
           <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
         </div>
         <div class="title">1.Click the share button at the bottom</div>
-        <img src="../assets/images/client/down/down/ios_1.png" />
+  
         <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
-        <img src="../assets/images/client/down/down/ios_2.png" />
+
         <div class="title">3. Click Add and select "Add"</div>
-        <img src="../assets/images/client/down/down/ios_3.png" />
+ 
       </div>
     </nut-popup>
   </div>
@@ -349,10 +349,12 @@ window.addEventListener("pageshow", function (event) {
     background-repeat: no-repeat;
     display: inline-block;
     font-size: 0.388rem;
-    font-weight: bold;
+    font-weight: 600;
     color: $color-white;
     line-height: 1.277rem;
     text-align: center;
+    box-sizing: border-box;
+    padding-left:0.277rem;
   }
 }
 

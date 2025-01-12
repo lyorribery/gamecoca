@@ -44,7 +44,7 @@ const close = (name) => {
   height: 10.55rem;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  background-image: url("../assets/images/client/new_reg.png");
+
   .btn {
     position: fixed;
     left: calc((100% - 4.907rem) / 2);

@@ -11,12 +11,12 @@
         class="spin-container"
         :style="{ width: s_w / 36 + 'rem', height: s_w / 36 + 'rem' }"
       >
-        <img
+        <!-- <img
           src="../assets/images/client/spin/zp_zhizhen.png"
           style="z-index: 2; width: 1.944rem"
-        />
+        /> -->
         <div class="spin-box" ref="prizeBack">
-          <img src="../assets/images/client/spin/zp_di.png" style="width: 100%" />
+          <!-- <img src="../assets/images/client/spin/zp_di.png" style="width: 100%" /> -->
         </div>
         <div class="spin-back"></div>
 
@@ -35,11 +35,11 @@
         </div>
       </div>
 
-      <img
+      <!-- <img
         src="../assets/images/client/spin/zp_dizuo.png"
         width="253.7"
         style="margin-top: -30px"
-      />
+      /> -->
 
       <div class="btn" @click="start">PLAY</div>
       <div class="des">
