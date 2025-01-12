@@ -144,5 +144,32 @@ ul{
     padding-left: .555rem;
 }
 
+.nut-noticebar__page{
+    font-size:0.333rem;
+    font-weight: bold;
+    padding:0;
+}
+
+.nut-collapse-item .nut-collapse-item__title{
+    background-color: #212121;
+    border-radius: 0.194rem;
+    font-size: 0.316rem;
+    font-weight: bold;
+    color:#CCCCCC;
+    padding:0.277rem 0.416rem;
+}
+
+.nut-collapse-item .nut-collapse__item-wrapper .nut-collapse__item-wrapper__content, .nut-collapse-item .nut-collapse__item-wrapper .nut-collapse__item-extraWrapper__extraRender, .nut-collapse-item .nut-collapse__item-extraWrapper .nut-collapse__item-wrapper__content, .nut-collapse-item .nut-collapse__item-extraWrapper .nut-collapse__item-extraWrapper__extraRender{
+    background-color: #212121;
+    border-radius: 0.194rem;
+    font-size: 0.316rem;
+    font-weight: bold;
+    color:#CCCCCC;
+    padding:0.416rem;
+}
+
+.nut-collapse-item .nut-collapse-item__title .nut-collapse-item__title-icon{
+    color:#CCCCCC;
+}
 
 

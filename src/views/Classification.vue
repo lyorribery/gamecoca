@@ -28,7 +28,12 @@
       </div>
     </div>
     <div class="classfication-container">
-      <imgCard v-for="(items, indexs) in data" :key="indexs" :cardInfo="items" />
+      <imgCard
+        v-for="(items, indexs) in data"
+        :key="indexs"
+        :cardInfo="items"
+        :imgType="img_type"
+      />
     </div>
     <pageFooter />
   </div>
@@ -55,6 +60,7 @@ import { useStore } from "vuex";
 const route = useRoute();
 const router = useRouter();
 const { state } = useStore();
+const img_type = ref("big");
 const list = ref([]);
 const data = ref([]);
 const name = ref("");

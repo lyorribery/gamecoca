@@ -3,13 +3,9 @@
     <div class="promotion">
       <div class="item" v-for="(item, index) in list" :key="index" @click="goPath(item)">
         <img :src="item.fullNoticeImg" />
-        <div class="item-content">
-          <div class="item-top">
-            <div class="title">{{ item.noticeTitle }}</div>
-            <div class="des">{{ item.noticeIntroduction }}</div>
-          </div>
-
-          <div class="btn">Clique para mais</div>
+        <div class="promotion-content">
+          <div class="title">{{ item.noticeTitle }}</div>
+          <div class="des">{{ item.noticeIntroduction }}</div>
         </div>
       </div>
     </div>
@@ -45,59 +41,44 @@ const goPath = (data) => {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/variables.scss";
 .promotion {
   width: 100%;
   box-sizing: border-box;
-  padding: 0 0.416rem 0.277rem 0.416rem;
+  padding: 0 0.277rem;
   .item {
     width: 100%;
     border-radius: 0.222rem;
     margin-top: 0.416rem;
-    background: #222222;
     box-sizing: border-box;
-    padding: 0.277rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative;
     img {
-      width: 50%;
+      width: 100%;
     }
-    .item-content {
-      width: calc(50% - 0.277rem);
-      // height: 3.086rem;
-      height: 111.13px;
+    .promotion-content {
+      border-bottom-right-radius: 0.222rem;
+      border-bottom-left-radius: 0.222rem;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.4);
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      .item-top {
-        display: flex;
-        flex-direction: column;
-
-        .title {
-          color: #e556ff;
-          font-size: 0.361rem;
-          font-weight: 600;
-          box-sizing: border-box;
-          padding-bottom: 0.136rem;
-        }
-        .des {
-          color: #fff;
-          font-size: 0.277rem;
-        }
+      align-items: flex-start;
+      box-sizing: border-box;
+      padding: 0.277rem;
+      .title {
+        font-size: 0.361rem;
+        font-weight: bold;
+        color: $primary-color;
       }
-      .btn {
-        color: #cbb6fe;
+      .des {
+        flex: 1;
+        box-sizing: border-box;
+        padding-left: 0.555rem;
+        color: $color-sub-text;
         font-size: 0.277rem;
-        font-weight: 600;
-        width: 100%;
-        text-align: right;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // box-sizing: border-box;
-        // padding: 0.138rem;
-        // background: linear-gradient(-90deg, #9343c4, #614ae6);
-        // border-radius: 0.444rem;
       }
     }
   }

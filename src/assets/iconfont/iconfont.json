@@ -1,0 +1,93 @@
+{
+  "id": "4809385",
+  "name": "brgames",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "630092",
+      "name": "向下箭头",
+      "font_class": "xiangxiajiantou",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "1247401",
+      "name": "向上箭头",
+      "font_class": "xiangshangjiantou",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "1304893",
+      "name": "邮件",
+      "font_class": "youjian",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "2207176",
+      "name": "火箭",
+      "font_class": "rocket",
+      "unicode": "e760",
+      "unicode_decimal": 59232
+    },
+    {
+      "icon_id": "4360991",
+      "name": "刷新",
+      "font_class": "shuaxin",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "5295400",
+      "name": "礼盒",
+      "font_class": "lihe",
+      "unicode": "e8f4",
+      "unicode_decimal": 59636
+    },
+    {
+      "icon_id": "7933285",
+      "name": "喇叭",
+      "font_class": "laba",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "9713056",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "10241457",
+      "name": "share",
+      "font_class": "share",
+      "unicode": "e780",
+      "unicode_decimal": 59264
+    },
+    {
+      "icon_id": "27253649",
+      "name": "个人中心",
+      "font_class": "gerenzhongxin",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "39932303",
+      "name": "菜单向左",
+      "font_class": "caidanxiangzuo",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    },
+    {
+      "icon_id": "39932304",
+      "name": "菜单向右",
+      "font_class": "caidanxiangyou",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    }
+  ]
+}

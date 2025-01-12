@@ -12,7 +12,6 @@ import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import tipModal from "@/components/tipModal.vue";
 import loading from "@/components/loading.vue";
-import { exit } from "@/apis/apis";
 const uuid = require("uuid");
 
 const setFont = () => {
@@ -33,34 +32,7 @@ export default {
     const router = useRouter();
     let { commit, dispatch } = useStore();
     const modalFunc = (obj) => {
-      switch (obj) {
-        case 1:
-          router.push({
-            path: "/login",
-          });
-          break;
-        case 11:
-          router.push({
-            path: "/login",
-          });
-          break;
-        case 2:
-          exit.post("", {}).then((res) => {
-            if (res.code == 200) {
-              localStorage.removeItem("token");
-              commit("set_user_info", {});
-              router.push({
-                path: "/",
-              });
-            }
-          });
-          break;
-        case 6:
-          router.push({
-            path: "/spin",
-          });
-          break;
-      }
+      console.log(obj)
     };
     onMounted(() => {
       dispatch("GET_CONFIG");

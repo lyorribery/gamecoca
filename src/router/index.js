@@ -1,14 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-let routes = []
-
-
-// if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
-//   routes = mobileRoute
-// } else {
-//   routes = webRoute
-// }
-
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
@@ -36,15 +27,7 @@ const router = createRouter({
             transition: 'slide-right',
           }
         },
-        {
-          path: '/deposit',
-          name: 'deposit',
-          component: () => import('@/views/Deposit.vue'),
-          meta: {
-            auth: false,
-            transition: 'slide-right',
-          }
-        },
+
         {
           path: '/promotion',
           name: 'promotion',
@@ -110,24 +93,8 @@ const router = createRouter({
             transition: 'slide-left',
           }
         },
-        {
-          path: '/records',
-          name: 'records',
-          component: () => import('@/views/Records.vue'),
-          meta: {
-            transition: 'slide-left',
-            auth: true
-          },
-        },
-        {
-          path: '/withdraw',
-          name: 'withdraw',
-          component: () => import('@/views/Withdraw.vue'),
-          meta: {
-            transition: 'slide-left',
-            auth: true
-          },
-        },
+
+
         {
           path: '/spin',
           name: 'spin',
@@ -137,15 +104,7 @@ const router = createRouter({
             auth: false
           }
         },
-        {
-          path: '/contact',
-          name: 'contact',
-          component: () => import('@/views/Contact.vue'),
-          meta: {
-            transition: 'slide-left',
-            auth: false
-          }
-        },
+
         {
           path: '/pay',
           name: 'pay',
@@ -179,6 +138,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo(0, 0); 
   const token = localStorage.getItem('accessToken')
   if (!token) {
     if (to.meta.auth) {

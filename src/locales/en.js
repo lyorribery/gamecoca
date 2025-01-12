@@ -1,7 +1,10 @@
 export default {
-    button: {
-      confirm: 'Confirm',
-      login: 'Login'
-    }
-  }
-  
+  button: {
+    login: 'Login',
+    register: 'Register',
+    more: 'More'
+  },
+  tel: 'Mobile',
+  email: 'E-mail',
+  user: 'User',
+}

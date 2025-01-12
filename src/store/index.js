@@ -14,7 +14,9 @@ const store = createStore({
     user_balance: {
       balance: 0
     },
-    station_base: {},
+    station_base: {
+      marquee:""
+    },
     activity_notice: {
       "orders": [],
       "records": []

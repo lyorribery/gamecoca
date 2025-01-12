@@ -1,10 +1,10 @@
 <template>
-  <div class="card-item" style="width: 2.964rem" @click="goDetail(cardInfo)">
+  <div class="card-item" :style="{ width: img_width }" @click="goDetail(cardInfo)">
     <div class="card-image-box">
       <nut-image
         :src="cardInfo.fullGameImg"
-        width="2.964rem"
-        height="4.0755rem"
+        :width="img_width"
+        :height="img_height"
         show-loading
         show-error
         round
@@ -12,20 +12,20 @@
         lazy-load
       >
         <template #loading>
-          <!-- <img
-            class="img-loading"
-            src="../assets/images/img_load.svg"
-            style="width: 2.964rem; height: 4.0755rem"
-          /> -->
-          <div class="img-loading"></div>
+          <nut-animate type="flicker" loop>
+            <div
+              class="img-loading"
+              :style="{ width: img_width, height: img_height }"
+            ></div>
+          </nut-animate>
         </template>
         <template #error>
-          <!-- <img
-            class="img-loading"
-            src="../assets/images/img_load.svg"
-            style="width: 2.964rem; height: 4.0755rem"
-          /> -->
-          <div class="img-loading"></div>
+          <nut-animate type="flicker" loop>
+            <div
+              class="img-loading"
+              :style="{ width: img_width, height: img_height }"
+            ></div>
+          </nut-animate>
         </template>
       </nut-image>
 
@@ -37,8 +37,7 @@
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
-import { startGame } from "@/apis/apis";
-import apiconfig from "@/utils/apiConfig";
+// import apiconfig from "@/utils/apiConfig";
 
 export default {
   name: "imgCard",
@@ -47,9 +46,23 @@ export default {
       type: Object,
       default: {},
     },
+    imgType: {
+      type: String,
+      default: "small",
+    },
   },
   setup(props, ctx) {
-    const img_url = apiconfig.fileURL;
+    const img_width = ref("2.964rem");
+    const img_height = ref("4.0755rem");
+
+    if (props.imgType == "small") {
+      img_width.value = "2.437rem";
+      img_height.value = "3.3231rem";
+    } else {
+      img_width.value = "2.964rem";
+      img_height.value = "4.0755rem";
+    }
+
     const { state, commit } = useStore();
     const is_req = ref(false);
 
@@ -76,38 +89,18 @@ export default {
         location.href = `${data.clientUrl}?t_code=${localStorage.getItem("token")}`;
         return;
       }
-      const res = await startGame.post("", {
-        gameId: data.id,
-        platform: "H5",
-      });
-      is_req.value = false;
-      if (res.code == 2002) {
-        commit("set_loading_modal", false);
-        commit("set_user_info", {});
-        localStorage.removeItem("token");
-        commit("set_tip_info", "You have not logged in yet,please login.");
-        commit("set_tip_type", 1);
-        commit("set_tip_modal", true);
-        return;
-      }
-      if (res.code == 200) {
-        location.href = res.data.url;
-      } else {
-        commit("set_loading_modal", false);
-        commit("set_tip_info", res.msg);
-        commit("set_tip_type", 10);
-        commit("set_tip_modal", true);
-      }
     };
     return {
-      img_url,
       goDetail,
+      img_width,
+      img_height,
     };
   },
 };
 </script>
 
 <style scoped lang="scss">
+@import "../assets/styles/variables.scss";
 .card-item {
   display: flex;
   flex-direction: column;
@@ -131,53 +124,10 @@ export default {
     }
 
     .img-loading {
-      width: 2.964rem;
-      height: 4.0755rem;
-      // background: #222222;
-      background: linear-gradient(-90deg, #9856c1, #6650e3);
-      // @keyframes lighter {
-      //   0% {
-      //     opacity: 1;
-      //   }
-
-      //   25% {
-      //     opacity: 0.9;
-      //   }
-
-      //   50% {
-      //     opacity: 0.8;
-      //   }
-
-      //   75% {
-      //     opacity: 0.9;
-      //   }
-
-      //   100% {
-      //     opacity: 1;
-      //   }
-      // }
-
-      // @-webkit-keyframes lighter {
-      //   0% {
-      //     opacity: 1;
-      //   }
-
-      //   25% {
-      //     opacity: 0.9;
-      //   }
-
-      //   50% {
-      //     opacity: 0.8;
-      //   }
-
-      //   75% {
-      //     opacity: 0.9;
-      //   }
-
-      //   100% {
-      //     opacity: 1;
-      //   }
-      // }
+      // width: 2.964rem;
+      // height: 4.0755rem;
+      // background: linear-gradient(-90deg, $primary-color, $primary-color2);
+      background: $primary-color;
     }
   }
 }

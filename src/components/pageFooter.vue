@@ -16,16 +16,16 @@
 
     <div class="contact-box" style="margin: 0.555rem 0 0.416rem 0">
       <div class="contact-item" @click="goThrid(1)">
-        <img src="../assets/images/whatsapp.png" />
+
         <span>WhatsApp</span>
       </div>
 
       <div class="contact-item" @click="goThrid(2)">
-        <img src="../assets/images/email.png" />
+
         <span>Email</span>
       </div>
       <div class="contact-item" @click="goThrid(3)">
-        <img src="../assets/images/kefu.png" />
+    
         <span>Live Chat</span>
       </div>
     </div>
@@ -33,9 +33,7 @@
     <div class="contact-box" style="margin-bottom: 0.555rem">
       <div class="contact-item-bank">
         <span>Make deposit via</span>
-        <img src="../assets/images/vodafone.png" style="width: 0.518rem" />
-        <img src="../assets/images/tigo.png" style="width: 0.518rem" />
-        <img src="../assets/images/mtn.png" style="width: 0.518rem" />
+  
       </div>
     </div>
 
@@ -52,11 +50,8 @@
     </div>
 
     <div class="img-box">
-      <img
-        src="@/assets/images/img_18+.svg"
-        style="margin-right: 0.277rem; width: 0.648rem"
-      />
-      <img src="@/assets/images/img_biaozhi.svg" style="width: 0.787rem" />
+
+    
     </div>
 
     <div class="des">
