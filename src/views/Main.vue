@@ -590,7 +590,7 @@ export default {
   background: $bg-color;
   position: fixed;
   top: calc(env(safe-area-inset-top) + 1.361rem);
-  right: 0;
+  right: 0.277rem;
   z-index: 3;
   .pop-action-box {
     background: #262626;
@@ -606,9 +606,9 @@ export default {
     .item {
       width: calc((100% - 0.277rem) / 2);
       box-sizing: border-box;
-      padding: 0.277rem;
+      padding:0.222rem 0.277rem;
       background: $bg-color;
-      margin-bottom: 0.361rem;
+      margin-bottom: 0.277rem;
       border-radius: 0.361rem;
       display: flex;
       justify-content: flex-start;
@@ -625,7 +625,7 @@ export default {
     }
   }
   .avatar-pop {
-    margin-bottom: 0.416rem;
+    margin-bottom: 0.277rem;
     width: 100%;
     background: #262626;
     border-top-left-radius: 0.555rem;
