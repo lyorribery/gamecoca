@@ -38,7 +38,9 @@
       </div>
       <div class="avatar-box" @click="changeShow">
         <div class="img-box">
-          <img :src="user_info.agentLevelIco" />
+          <div class="red"></div>
+          <div class="level">{{ user_info.levelName }}</div>
+          <img src="../assets/images/avatar/3.png" />
         </div>
         <i
           class="iconfont"
@@ -112,7 +114,75 @@
     </div>
   </div>
 
-  <nut-popup v-model:visible="isOpen" position="left" :style="{ height: '100%' }">
+  <transition
+    name="fade"
+    enter-active-class="animate__animated animate__slideInDown"
+    leave-active-class="animate__animated animate__slideOutUp"
+  >
+    <div v-if="isShow" class="info-pop-box">
+      <div class="avatar-pop">
+        <div class="avatar">
+          <img src="../assets/images/avatar/3.png" />
+          <div class="level">{{ user_info.levelName }}</div>
+        </div>
+        <div class="info-user">
+          <div class="val" style="margin-bottom: 0.138rem">
+            Account:{{ user_info.userName }}
+          </div>
+          <div class="val">
+            ID:{{ user_info.userId }}
+            <div class="copy-btn" @click="copyId">
+              <svg
+                t="1736770609856"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="4316"
+                width="24"
+                height="24"
+              >
+                <path
+                  d="M394.666667 106.666667h448a74.666667 74.666667 0 0 1 74.666666 74.666666v448a74.666667 74.666667 0 0 1-74.666666 74.666667H394.666667a74.666667 74.666667 0 0 1-74.666667-74.666667V181.333333a74.666667 74.666667 0 0 1 74.666667-74.666666z m0 64a10.666667 10.666667 0 0 0-10.666667 10.666666v448a10.666667 10.666667 0 0 0 10.666667 10.666667h448a10.666667 10.666667 0 0 0 10.666666-10.666667V181.333333a10.666667 10.666667 0 0 0-10.666666-10.666666H394.666667z m245.333333 597.333333a32 32 0 0 1 64 0v74.666667a74.666667 74.666667 0 0 1-74.666667 74.666666H181.333333a74.666667 74.666667 0 0 1-74.666666-74.666666V394.666667a74.666667 74.666667 0 0 1 74.666666-74.666667h74.666667a32 32 0 0 1 0 64h-74.666667a10.666667 10.666667 0 0 0-10.666666 10.666667v448a10.666667 10.666667 0 0 0 10.666666 10.666666h448a10.666667 10.666667 0 0 0 10.666667-10.666666v-74.666667z"
+                  fill="#FFC536"
+                  p-id="4317"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pop-action-box">
+        <div class="item" @click="popActionBtn('/account')">
+          <img src="../assets/images/mine/tuichu_icon.png" />
+          <span>Conta</span>
+        </div>
+        <div class="item" @click="popActionBtn('/inbox')">
+          <img src="../assets/images/mine/tuichu_icon.png" />
+          <span>Message</span>
+        </div>
+        <div class="item" @click="popActionBtn('/surpport')">
+          <img src="../assets/images/mine/tuichu_icon.png" />
+          <span>Surpport</span>
+        </div>
+        <div class="item" @click="popActionBtn('/records')">
+          <img src="../assets/images/mine/tuichu_icon.png" />
+          <span>Records</span>
+        </div>
+        <div class="item" @click="exit()">
+          <img src="../assets/images/mine/tuichu_icon.png" />
+          <span>Exit</span>
+        </div>
+      </div>
+    </div>
+  </transition>
+
+  <nut-popup
+    v-model:visible="isOpen"
+    position="left"
+    :closeable="true"
+    :style="{ height: '100%' }"
+  >
     <div class="pop-up-box">
       <div class="promotion-container">
         <div class="name">
@@ -458,7 +528,28 @@ export default {
     //       break;
     //   }
     // });
+
+    const copyId = async () => {
+      try {
+        await navigator.clipboard.writeText(state.user_info.userId);
+        console.log("文本已复制到剪贴板");
+      } catch (err) {
+        console.error("复制到剪贴板失败", err);
+      }
+    };
+    const popActionBtn = (path) => {
+      isShow.value = false;
+      router.push({
+        path,
+      });
+    };
+    const exit = () => {
+      isShow.value = false;
+      dispatch("LogOut");
+    };
     return {
+      popActionBtn,
+      exit,
       tabs,
       route,
       promotion_list,
@@ -480,6 +571,7 @@ export default {
       user_balance,
       refreshBalance,
       isRefresh,
+      copyId,
     };
   },
 };
@@ -487,6 +579,109 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+
+.animate__animated.animate__slideInDown,
+.animate__animated.animate__slideOutUp {
+  --animate-duration: 0.5s;
+}
+
+.info-pop-box {
+  width: 6.5rem;
+  background: $bg-color;
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 1.361rem);
+  right: 0;
+  z-index: 3;
+  .pop-action-box {
+    background: #262626;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.277rem 0.277rem 0 0.277rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom-left-radius: 0.555rem;
+    border-bottom-right-radius: 0.555rem;
+    .item {
+      width: calc((100% - 0.277rem) / 2);
+      box-sizing: border-box;
+      padding: 0.277rem;
+      background: $bg-color;
+      margin-bottom: 0.361rem;
+      border-radius: 0.361rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      img {
+        width: 0.666rem;
+        margin-right: 0.222rem;
+      }
+      span {
+        color: $color-white;
+        font-size: 0.305rem;
+        font-weight: bold;
+      }
+    }
+  }
+  .avatar-pop {
+    margin-bottom: 0.416rem;
+    width: 100%;
+    background: #262626;
+    border-top-left-radius: 0.555rem;
+    border-top-right-radius: 0.555rem;
+    box-sizing: border-box;
+    padding: 0.277rem 0.416rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .avatar {
+      width: 1.583rem;
+      height: 1.583rem;
+      border: 0.055rem solid $primary-color;
+      border-radius: 50%;
+      position: relative;
+      img {
+        width: 1.583rem;
+      }
+      .level {
+        position: absolute;
+        bottom: -0.1rem;
+        left: 0.3rem;
+        background-image: url("../assets/images/vip_di.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 1.1rem;
+        height: 0.35rem;
+        display: flex;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding-right: 0.277rem;
+        align-items: center;
+        font-size: 0.222rem;
+        font-weight: bold;
+        color: #1c1f24;
+        font-style: italic;
+      }
+    }
+    .info-user {
+      margin-left: 0.277rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .val {
+        font-weight: bold;
+        font-size: 0.388rem;
+        color: $color-sub-text;
+        display: flex;
+        align-items: center;
+        .copy-btn {
+          margin-left: 0.277rem;
+        }
+      }
+    }
+  }
+}
 
 .refresh-loading {
   animation: rotates 1s linear infinite;
@@ -515,7 +710,7 @@ export default {
   overflow-y: auto;
   background: $bg-color;
   box-sizing: border-box;
-  padding: 0.833rem 0.416rem;
+  padding: 1.533rem 0.416rem;
   .language-box {
     margin-top: 1.388rem;
     .language-option {
@@ -667,16 +862,45 @@ export default {
       .img-box {
         width: 0.833rem;
         height: 0.833rem;
-        overflow: hidden;
         border-radius: 50%;
         margin-right: 0.138rem;
         border: 1px solid $primary-color;
+        position: relative;
         img {
           width: 0.833rem;
         }
+        .level {
+          position: absolute;
+          bottom: -0.05rem;
+          left: 0;
+          background-image: url("../assets/images/vip_di.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          width: 0.8rem;
+          height: 0.25rem;
+          display: flex;
+          justify-content: flex-end;
+          box-sizing: border-box;
+          padding-right: 0.177rem;
+          align-items: center;
+          font-size: 0.155rem;
+          font-weight: bold;
+          color: #1c1f24;
+          font-style: italic;
+        }
+        .red {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 0.111rem;
+          height: 0.111rem;
+          background: #e01d1d;
+          border-radius: 50%;
+          border: 0.027rem solid $color-white;
+        }
       }
       i {
-        font-size: 0.316rem;
+        font-size: 0.222rem;
         font-weight: bold;
         color: $icon-color;
       }
@@ -708,16 +932,15 @@ export default {
         color: $icon-color;
       }
       .deposit-btn {
-        width: 0.638rem;
-        height: 0.638rem;
+        // width: 0.638rem;
+        // height: 0.638rem;
         background: $primary-color;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        // font-size: 0.5rem;
-        // font-weight: bold;
-        // color: $bg-color;
+        box-sizing: border-box;
+        padding: 0.138rem;
       }
     }
   }

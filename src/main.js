@@ -6,7 +6,7 @@ import store from './store'
 import i18n from './locales/i18n';
 // import Vconsole from 'vconsole'
 
-import { Locale, Tabs, TabPane, Swiper, SwiperItem, Input, Image, Form, FormItem, Overlay, Popup, Textarea, Noticebar,Animate,Collapse, CollapseItem } from "@nutui/nutui"
+import { Locale, Tabs, TabPane, Swiper, SwiperItem, Input, Image, Form, FormItem, Overlay, Popup, Textarea, Noticebar,Animate,Collapse, CollapseItem,Progress } from "@nutui/nutui"
 import "@nutui/nutui/dist/style.css"
 
 import './assets/styles/common.scss'
@@ -34,6 +34,7 @@ app.use(Noticebar)
 app.use(Animate)
 app.use(Collapse)
 app.use(CollapseItem)
+app.use(Progress)
 // app.use(vConsole)
 
 app.use(router).use(store).use(i18n).mount('#app')

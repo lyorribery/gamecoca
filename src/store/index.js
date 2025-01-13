@@ -15,7 +15,7 @@ const store = createStore({
       balance: 0
     },
     station_base: {
-      marquee:""
+      marquee: ""
     },
     activity_notice: {
       "orders": [],
@@ -152,8 +152,10 @@ const store = createStore({
     },
     GET_USER_INFO(ctx) {
       getUserInfo().then(res => {
-        if (res.code == 200)
+        if (res.code == 200) {
+          res.data.avatar = '@/assets/images/avatar/' + Math.floor(Math.random() * 3+1) + '.png'
           ctx.commit("set_user_info", res.data)
+        }
       })
     },
     GET_USER_BALANCE(ctx) {

@@ -132,7 +132,7 @@ export default {
 
 <script setup>
 import { computed, ref, onMounted } from "vue";
-import { Close, RectRight } from "@nutui/icons-vue";
+import { Close } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { Lucky } from "@/apis/cashwheel";
