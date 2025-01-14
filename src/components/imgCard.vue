@@ -12,20 +12,16 @@
         lazy-load
       >
         <template #loading>
-          <nut-animate type="flicker" loop>
-            <div
-              class="img-loading"
-              :style="{ width: img_width, height: img_height }"
-            ></div>
-          </nut-animate>
+          <div
+            class="img-loading"
+            :style="{ width: img_width, height: img_height }"
+          ></div>
         </template>
         <template #error>
-          <nut-animate type="flicker" loop>
-            <div
-              class="img-loading"
-              :style="{ width: img_width, height: img_height }"
-            ></div>
-          </nut-animate>
+          <div
+            class="img-loading"
+            :style="{ width: img_width, height: img_height }"
+          ></div>
         </template>
       </nut-image>
 
@@ -124,10 +120,26 @@ export default {
     }
 
     .img-loading {
-      // width: 2.964rem;
-      // height: 4.0755rem;
-      // background: linear-gradient(-90deg, $primary-color, $primary-color2);
-      background: $primary-color;
+      background-size: 200% 200%; /* 背景图大小 */
+      background-image: linear-gradient(
+        135deg,
+        rgba(255,197,54, 0.7),
+        rgba(255,197,54, 0.5),
+        rgba(6, 169, 80,0.7),
+        rgba(6, 169, 80,0.5),
+      );
+      animation: flow 2s ease infinite;
+    }
+    @keyframes flow {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
   }
 }
