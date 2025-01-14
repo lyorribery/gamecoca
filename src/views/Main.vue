@@ -52,12 +52,14 @@
       <div class="login-btn" @click="goPermission('/login')">
         {{ $t("button.login") }}
       </div>
-
-      <nut-animate type="flicker" loop>
+      <div class="register-btn" @click="goPermission('/register')">
+        {{ $t("button.register") }}
+      </div>
+      <!-- <nut-animate type="flicker" loop>
         <div class="register-btn" @click="goPermission('/register')">
           {{ $t("button.register") }}
         </div>
-      </nut-animate>
+      </nut-animate> -->
     </div>
   </div>
   <div class="content" id="content">
@@ -96,6 +98,9 @@
           <i class="iconfont icon-youjian" v-if="item.path == '/inbox'"></i>
           <i class="iconfont icon-gerenzhongxin" v-if="item.path == '/mine'"></i>
           <span>{{ item.name }}</span>
+          <div class="msg-circle" v-if="item.path == '/inbox' && unread_count != 0">
+            {{ unread_count }}
+          </div>
         </div>
       </nut-animate>
 
@@ -108,6 +113,7 @@
             <i class="iconfont icon-youjian" v-if="item.path == '/inbox'"></i>
             <i class="iconfont icon-gerenzhongxin" v-if="item.path == '/mine'"></i>
           </div>
+        
         </nut-animate>
         <span>{{ item.name }}</span>
       </div>
@@ -154,23 +160,23 @@
       </div>
       <div class="pop-action-box">
         <div class="item" @click="popActionBtn('/account')">
-          <img src="../assets/images/mine/tuichu_icon.png" />
+          <img src="../assets/images/main/gerenxinxi.png" />
           <span>Conta</span>
         </div>
         <div class="item" @click="popActionBtn('/inbox')">
-          <img src="../assets/images/mine/tuichu_icon.png" />
+          <img src="../assets/images/main/zoujian.png" />
           <span>Message</span>
         </div>
         <div class="item" @click="popActionBtn('/surpport')">
-          <img src="../assets/images/mine/tuichu_icon.png" />
+          <img src="../assets/images/main/kefu.png" />
           <span>Surpport</span>
         </div>
         <div class="item" @click="popActionBtn('/records')">
-          <img src="../assets/images/mine/tuichu_icon.png" />
+          <img src="../assets/images/main/baobiao.png" />
           <span>Records</span>
         </div>
         <div class="item" @click="exit()">
-          <img src="../assets/images/mine/tuichu_icon.png" />
+          <img src="../assets/images/main/tuichu.png" />
           <span>Exit</span>
         </div>
       </div>
@@ -547,6 +553,9 @@ export default {
       isShow.value = false;
       dispatch("LogOut");
     };
+    const unread_count = computed(() => {
+      return state.unread_count;
+    });
     return {
       popActionBtn,
       exit,
@@ -572,6 +581,7 @@ export default {
       refreshBalance,
       isRefresh,
       copyId,
+      unread_count,
     };
   },
 };
@@ -586,7 +596,7 @@ export default {
 }
 
 .info-pop-box {
-  width: 6.5rem;
+  width: 6.583rem;
   background: $bg-color;
   position: fixed;
   top: calc(env(safe-area-inset-top) + 1.361rem);
@@ -606,15 +616,15 @@ export default {
     .item {
       width: calc((100% - 0.277rem) / 2);
       box-sizing: border-box;
-      padding:0.222rem 0.277rem;
+      padding: 0.222rem 0.277rem;
       background: $bg-color;
       margin-bottom: 0.277rem;
-      border-radius: 0.361rem;
+      border-radius: 0.194rem;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       img {
-        width: 0.666rem;
+        width: 0.638rem;
         margin-right: 0.222rem;
       }
       span {
@@ -636,13 +646,13 @@ export default {
     justify-content: flex-start;
     align-items: center;
     .avatar {
-      width: 1.583rem;
-      height: 1.583rem;
+      width: 1.694rem;
+      height: 1.694rem;
       border: 0.055rem solid $primary-color;
       border-radius: 50%;
       position: relative;
       img {
-        width: 1.583rem;
+        width: 1.694rem;
       }
       .level {
         position: absolute;
@@ -651,8 +661,8 @@ export default {
         background-image: url("../assets/images/vip_di.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        width: 1.1rem;
-        height: 0.35rem;
+        width: 1.222rem;
+        height: 0.444rem;
         display: flex;
         justify-content: flex-end;
         box-sizing: border-box;
@@ -671,7 +681,7 @@ export default {
       align-items: flex-start;
       .val {
         font-weight: bold;
-        font-size: 0.388rem;
+        font-size: 0.361rem;
         color: $color-sub-text;
         display: flex;
         align-items: center;
@@ -863,7 +873,7 @@ export default {
         width: 0.833rem;
         height: 0.833rem;
         border-radius: 50%;
-        margin-right: 0.138rem;
+        margin-right: 0.222rem;
         border: 1px solid $primary-color;
         position: relative;
         img {
@@ -997,6 +1007,23 @@ export default {
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      position: relative;
+      .msg-circle {
+        position: absolute;
+        top: -0.188rem;
+        right: -0.138rem;
+        width:0.388rem;
+        height: 0.388rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 0.055rem solid $color-white;
+        background: #e01d1d;
+        color: $color-white;
+        font-size: 0.25rem;
+        font-weight: bold;
+      }
       i {
         font-size: 0.688rem;
         color: $primary-color;

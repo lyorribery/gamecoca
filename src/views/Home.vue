@@ -26,12 +26,6 @@
         </nut-swiper>
       </div>
       <div class="maquee">
-        <!-- <nut-noticebar :scrollable="true">
-          <template #left-icon>
-            <i class="iconfont icon-laba"></i>
-          </template>
-          <span>abssdfasdfasdfdadsfasdfasdfsadfasdfasdfasdfasdfasdfasdfasdfasdfasdf</span>
-        </nut-noticebar> -->
         <nut-noticebar :text="maquee_text" background="transparent" color="#E6E6E6">
           <template #left-icon>
             <i class="iconfont icon-laba" style="font-size: 20px"></i>

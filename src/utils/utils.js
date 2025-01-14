@@ -1,19 +1,3 @@
-import store from '../store'
-
-let loopTimer = null
-export const loopNotice = (flag) => {
-	if (flag) {
-		if (loopTimer != null) return
-		loopTimer = setInterval(() => {
-			store.dispatch('permission/GET_WALLET_INFO')
-		}, 5000)
-	} else {
-		if (loopTimer != null) {
-			clearInterval(loopTimer)
-			loopTimer = null
-		}
-	}
-}
 
 export const _validname = (val) => {
 	if (!val) return false
@@ -39,16 +23,15 @@ export const _validpassword = (pass) => {
 	return /^\w{6,16}$/.test(pass)
 }
 
-export const formatDate = (date, cut) => {
-	var date = new Date(date);
-	var YY = date.getFullYear() + cut;
-	var MM =
-		(date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1) + cut;
-	var DD = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-	var hh = (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
-	var mm = (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) + ":";
-	var ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-	return YY + MM + DD + " " + hh + mm + ss;
+export const formatDate = (timestamp ) => {
+	var date = new Date(timestamp); 
+    var year = date.getFullYear(); 
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2); 
+    var hours = ("0" + date.getHours()).slice(-2); 
+    var minutes = ("0" + date.getMinutes()).slice(-2); 
+    var seconds = ("0" + date.getSeconds()).slice(-2); 
+    return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`; 
 };
 
 export const preloadImage = (url) => {

@@ -1,177 +1,121 @@
 <template>
   <div class="page-footer">
-    <img :src="fullStationLogo" style="margin-bottom: 0.555rem; height: 1.1rem" />
-    <div class="content-box">
-      <div class="item" @click="goDescription('1')">PRIVACY POLICY</div>
-      <div class="item" @click="goDescription('2')">ABOUT US</div>
-      <div class="item" @click="goPath('/contact')" style="border-right: 0">
-        CONTACT US
-      </div>
+    <div class="help">
+      <span>Ajuda</span>
+      <i
+        @click="changeShow"
+        class="iconfont"
+        :class="!show ? 'icon-xiangxiajiantou' : 'icon-xiangshangjiantou'"
+      ></i>
     </div>
-
-    <div class="des">
-      GameCoca will respond to all of your requests.Contact us using amusement purposes
-      only.
+    <div class="help-des" v-if="show"></div>
+    <div class="contact-box">
+      <img src="../assets/images/footer/18.png" />
+      <img src="../assets/images/footer/youtube.png" />
+      <img src="../assets/images/footer/ins.png" />
+      <img src="../assets/images/footer/whatsapp.png" />
+      <img src="../assets/images/footer/x.png" />
+      <img src="../assets/images/footer/douyin.png" />
     </div>
-
-    <div class="contact-box" style="margin: 0.555rem 0 0.416rem 0">
-      <div class="contact-item" @click="goThrid(1)">
-
-        <span>WhatsApp</span>
-      </div>
-
-      <div class="contact-item" @click="goThrid(2)">
-
-        <span>Email</span>
-      </div>
-      <div class="contact-item" @click="goThrid(3)">
-    
-        <span>Live Chat</span>
-      </div>
+    <div class="game-box">
+      <img src="../assets/images/footer/cp.png" />
+      <img src="../assets/images/footer/evol.png" />
+      <img src="../assets/images/footer/pg.png" />
+      <img src="../assets/images/footer/pp.png" />
     </div>
-
-    <div class="contact-box" style="margin-bottom: 0.555rem">
-      <div class="contact-item-bank">
-        <span>Make deposit via</span>
-  
-      </div>
+    <div class="game-box">
+      <img src="../assets/images/footer/evop.png" />
+      <img src="../assets/images/footer/tada.png" />
+      <img src="../assets/images/footer/cqg.png" />
+      <img src="../assets/images/footer/jbd.png" />
     </div>
-
-    <div
-      class="des"
-      style="font-weight: bold; margin: 0.277rem; color: #d9d9d9; font-size: 0.328rem"
-    >
-      LICENCE
+    <div class="game-box">
+      <img src="../assets/images/footer/goo.png" />
+      <img src="../assets/images/footer/face.png" />
     </div>
-
-    <div class="des">
-      GAMECOCA ,the proprietor and operator of this website is licensed by Gaming Coming
-      Commission of Ghana with register No.GCRG23P1036T
-    </div>
-
-    <div class="img-box">
-
-    
-    </div>
-
-    <div class="des">
-      This game is only for people over the age of 18 years. Betting can be addictive,
-      please bet responsibly.
-    </div>
+    <div class="des" style="margin-top:0.555rem;">Copyright @ 2025</div>
+    <div class="des">@todos os direitos reservados</div>
+    <div class="des">2002-2025</div>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { computed } from "vue";
-import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-const fullStationLogo = computed(() => {
-  return useStore().state.station_base.fullStationLogo;
-});
-const router = useRouter();
-const goPath = (path) => {
-  router.push({
-    path,
-  });
+
+const show = ref(false);
+const changeShow = () => {
+  show.value = !show.value;
 };
-const goDescription = (type) => {
-  router.push({
-    path: "/description",
-    query: {
-      type,
-    },
-  });
-};
-const goThrid = (type) => {
-  if (type == 1) {
-    location.href = "https://wa.me/447960076392";
-  } else if (type == 2) {
-    location.href = "mailto:gamecoca88@gmail.com";
-  } else if (type == 3) {
-    location.href = "https://tawk.to/chat/6641bda89a809f19fb303295/1htocpnf9";
-  }
-};
+// const goThrid = (type) => {
+//   if (type == 1) {
+//     location.href = "https://wa.me/447960076392";
+//   } else if (type == 2) {
+//     location.href = "mailto:gamecoca88@gmail.com";
+//   } else if (type == 3) {
+//     location.href = "https://tawk.to/chat/6641bda89a809f19fb303295/1htocpnf9";
+//   }
+// };
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/variables.scss";
 .page-footer {
   width: 100%;
   box-sizing: border-box;
-  padding: 0.833rem 0.277rem 0 0.277rem;
+  padding: 0.666rem 0.416rem 0.416rem 0.416rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  .img-box {
-    margin: 0.416rem 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .contact-box {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 0 0.95rem;
-    .contact-item-bank {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      span {
-        color: #999999;
-        font-size: 0.333rem;
-        font-weight: bold;
-      }
-      img {
-        margin-left: 0.222rem;
-      }
-    }
-    .contact-item {
-      width: calc(100% / 3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      span {
-        color: #999999;
-        font-size: 0.37rem;
-        font-weight: bold;
-        text-decoration-line: underline;
-      }
-      img {
-        width: 0.555rem;
-        height: 0.555rem;
-        margin-right: 0.138rem;
-      }
-    }
-  }
+  box-sizing: border-box;
   .des {
     width: 100%;
     text-align: center;
-    color: #999999;
-    font-size: 0.333rem;
-    line-height: 0.416rem;
+    font-weight: bold;
+    font-size: 0.305rem;
+    color: #666666;
+    line-height: 0.461rem;
   }
-  .content-box {
+  .game-box {
     width: 100%;
     display: flex;
     justify-content: center;
-    align-content: center;
-    margin-bottom: 0.462rem;
-    flex-wrap: wrap;
+    align-items: center;
+    img {
+      height: 0.833rem;
+    }
+  }
 
-    .item {
+  .contact-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0.416rem 0.416rem 0.555rem 0.416rem;
+    img {
+      width: 0.888rem;
+    }
+  }
+  .help-des {
+    width: 100%;
+    min-height: 1rem;
+  }
+  .help {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-size: 0.416rem;
+      color: $color-sub-text;
+    }
+    i {
+      font-size: 0.361rem;
+      color: $color-sub-text;
       font-weight: bold;
-      color: #d9d9d9;
-      font-size: 0.328rem;
-      width: calc(100% / 3);
-      display: flex;
-      box-sizing: border-box;
-      justify-content: center;
-      border-right: 0.055rem solid #d9d9d9;
     }
   }
 }

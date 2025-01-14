@@ -19,6 +19,26 @@ const router = createRouter({
       },
       children: [
         {
+          path: '/refer',
+          name: 'refer',
+          component: () => import('@/views/Home.vue'),
+          meta: {
+            auth: true,
+            transition: 'slide-right',
+          },
+          component: () => import('@/views/Refer.vue'),
+          children: [
+            {
+              path: '/refer/invite',
+              name: 'invite',
+              component: () => import('@/views/Invite.vue'),
+              meta: {
+                auth: true,
+              }
+            },
+          ]
+        },
+        {
           path: '/home',
           name: 'home',
           component: () => import('@/views/Home.vue'),
@@ -51,7 +71,7 @@ const router = createRouter({
           name: 'mine',
           component: () => import('@/views/Mine.vue'),
           meta: {
-            
+
             auth: true,
             transition: 'slide-right',
           }
@@ -138,7 +158,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  window.scrollTo(0, 0); 
+  window.scrollTo(0, 0);
   const token = localStorage.getItem('accessToken')
   if (!token) {
     if (to.meta.auth) {

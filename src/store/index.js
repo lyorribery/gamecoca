@@ -6,6 +6,7 @@ import { GetLevel } from '@/apis/vip.js'
 import { LuckyDetails } from '@/apis/cashwheel.js'
 import { getUserBalance, getUserInfo, getUserMessageApi, logout } from '@/apis/user.js'
 import router from '@/router';
+import { formatDate } from "@/utils/utils";
 
 const store = createStore({
   state: () => ({
@@ -153,7 +154,7 @@ const store = createStore({
     GET_USER_INFO(ctx) {
       getUserInfo().then(res => {
         if (res.code == 200) {
-          res.data.avatar = '@/assets/images/avatar/' + Math.floor(Math.random() * 3+1) + '.png'
+          res.data.avatar = '@/assets/images/avatar/' + Math.floor(Math.random() * 3 + 1) + '.png'
           ctx.commit("set_user_info", res.data)
         }
       })
@@ -166,7 +167,13 @@ const store = createStore({
     },
     GET_MSG_LIST(ctx) {
       getUserMessageApi({ pageSize: 100, currentPage: 1 }).then(res => {
-        if (res.code == 200) ctx.commit('set_msg_list', res.data)
+        if (res.code == 200) {
+          res.data.records.map(item => {
+            item.isShow = false
+            item.createTime = formatDate(Number(item.createTime))
+          })
+          ctx.commit('set_msg_list', res.data)
+        }
       })
     },
     LogOut(ctx) {
