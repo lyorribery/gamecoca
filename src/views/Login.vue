@@ -364,7 +364,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { Close } from "@nutui/icons-vue";
 import {
@@ -451,10 +451,8 @@ const submitRegister2 = () => {
         sex: registerForm1.value.sex,
         realName: registerForm1.value.realName,
       };
-      if (localStorage.getItem("agentId")) obj.agentid = localStorage.getItem("agentId");
-      console.log(obj)
-      return
-      register(...obj)
+      //  if (localStorage.getItem("agentId")) obj.agentid = localStorage.getItem("agentId");
+      register({ ...obj })
         .then((res) => {
           if (res.code == 200) {
             router.push({
@@ -567,7 +565,8 @@ const changeSex = (sex) => {
   registerForm1.value.sex = sex;
 };
 onMounted(() => {
-  mode.value = route.query.mode;
+  mode.value = route.query.mode?route.query.mode:'login';
+  reg_step.value = state.is_cpf ? 1 : 2;
 });
 </script>
 

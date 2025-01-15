@@ -76,41 +76,45 @@ export const updatePassword = (data) => {
         data: data,
     })
 }
-export const register = (account,password,type,birthday,idcard,sex,realName,agentid = -1) => {
+export const register = (obj) => {
     let registerParams;
 
-    if(type == 0){ // 用户名
+    if(obj.type == 0){ // 用户名
         registerParams = {
-            username: account,
-            password: password,
-            birthday: birthday,
-            idcard: idcard,
-            sex: sex,
-            realName: realName
+            username: obj.account,
+            password: obj.password,
+            birthday: obj.birthday,
+            idcard: obj.idcard,
+            sex: obj.sex,
+            realName: obj.realName
         };
-    }else if(type == 1){ // 手机号
+    }else if(obj.type == 1){ // 手机号
         registerParams = {
-            phone: account,
-            password: password,
-            birthday: birthday,
-            idcard: idcard,
-            sex: sex,
-            realName: realName
+            phone: obj.account,
+            password: obj.password,
+            birthday: obj.birthday,
+            idcard: obj.idcard,
+            sex: obj.sex,
+            realName: obj.realName
         };
-    }else if(type == 2){ // 邮箱
+    }else if(obj.type == 2){ // 邮箱
         registerParams = {
-            email: account,
-            password: password,
-            birthday: birthday,
-            idcard: idcard,
-            sex: sex,
-            realName: realName
+            email: obj.account,
+            password: obj.password,
+            birthday: obj.birthday,
+            idcard: obj.idcard,
+            sex: obj.sex,
+            realName: obj.realName
         };
     }
 
-    if(agentid > 0){
-        registerParams.agentid = agentid
-    }
+    // if(agentid > 0){
+    //     registerParams.agentid = agentid
+    // }
+
+    if(localStorage.getItem('agentId'))
+        registerParams.agentid = localStorage.getItem('agentId')
+    
     
     const aesKey = generateAesKey();
     const data = encryptWithAes(JSON.stringify(registerParams), aesKey);

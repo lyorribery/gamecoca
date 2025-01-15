@@ -11,6 +11,7 @@ import { formatDate } from "@/utils/utils";
 const store = createStore({
   state: () => ({
     loading_visible: false,
+    is_cpf:false,
     user_info: {},
     user_balance: {
       balance: 0
@@ -45,6 +46,9 @@ const store = createStore({
     msg_list: { records: [] }
   }),
   mutations: {
+    set_is_cpf(state,val){
+      state.is_cpf=val
+    },
     set_home_active_type(state, val) {
       state.home_active_type = val
       let temp = []
@@ -116,7 +120,10 @@ const store = createStore({
     GET_CONFIG(ctx) {
       ctx.commit('set_loading_modal', true)
       getConfig().then(res => {
-        if (res.code == 200) ctx.commit('set_station_base', res.data)
+        if (res.code == 200) {
+          ctx.commit('set_station_base', res.data)
+          ctx.commit('set_is_cpf',res.data.cpf)
+        }
       })
       getClassList().then(res => {
         if (res.code == 200) {

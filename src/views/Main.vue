@@ -87,11 +87,31 @@
     >
       <nut-animate type="ripple" action="click">
         <div v-if="index != 2" class="common-tab">
-          <i class="iconfont icon-rocket" v-if="item.path == '/home'"></i>
-          <i class="iconfont icon-share" v-if="item.path == '/refer/invite'"></i>
-          <i class="iconfont icon-lihe" v-if="item.path == '/promotion'"></i>
-          <i class="iconfont icon-youjian" v-if="item.path == '/inbox'"></i>
-          <i class="iconfont icon-gerenzhongxin" v-if="item.path == '/mine'"></i>
+          <i
+            class="iconfont icon-rocket"
+            :class="active_tab == 0 ? 'active' : ''"
+            v-if="item.path == '/home'"
+          ></i>
+          <i
+            class="iconfont icon-share"
+            :class="active_tab == 1 ? 'active' : ''"
+            v-if="item.path == '/refer/invite'"
+          ></i>
+          <i
+            class="iconfont icon-lihe"
+            :class="active_tab == 2 ? 'active' : ''"
+            v-if="item.path == '/promotion'"
+          ></i>
+          <i
+            class="iconfont icon-youjian"
+            :class="active_tab == 3 ? 'active' : ''"
+            v-if="item.path == '/inbox'"
+          ></i>
+          <i
+            class="iconfont icon-gerenzhongxin"
+            :class="active_tab == 4 ? 'active' : ''"
+            v-if="item.path == '/mine'"
+          ></i>
           <span>{{ item.name }}</span>
           <div class="msg-circle" v-if="item.path == '/inbox' && unread_count != 0">
             {{ unread_count }}
@@ -428,29 +448,29 @@ export default {
     const active_tab = ref(0);
     const isOpen = ref(false);
     const isShow = ref(false);
-    // watch(
-    //   () => route,
-    //   (newRoute, oldRoute) => {
-    //     switch (newRoute.name) {
-    //       case "home":
-    //         active_tab.value = 0;
-    //         break;
-    //       case "invite":
-    //         active_tab.value = 1;
-    //         break;
-    //       case "promotion":
-    //         active_tab.value = 2;
-    //         break;
-    //       case "inbox":
-    //         active_tab.value = 3;
-    //         break;
-    //       case "mine":
-    //         active_tab.value = 4;
-    //         break;
-    //     }
-    //   },
-    //   { deep: true, immediate: true }
-    // );
+    watch(
+      () => route,
+      (newRoute, oldRoute) => {
+        switch (newRoute.name) {
+          case "home":
+            active_tab.value = 0;
+            break;
+          case "invite":
+            active_tab.value = 1;
+            break;
+          case "promotion":
+            active_tab.value = 2;
+            break;
+          case "inbox":
+            active_tab.value = 3;
+            break;
+          case "mine":
+            active_tab.value = 4;
+            break;
+        }
+      },
+      { deep: true, immediate: true }
+    );
 
     watch(
       () => route.meta,
@@ -512,25 +532,25 @@ export default {
 
     const isRefresh = ref(false);
 
-    // onMounted(() => {
-    //   switch (route.name) {
-    //     case "home":
-    //       active_tab.value = 0;
-    //       break;
-    //     case "invite":
-    //       active_tab.value = 1;
-    //       break;
-    //     case "promotion":
-    //       active_tab.value = 2;
-    //       break;
-    //     case "inbox":
-    //       active_tab.value = 3;
-    //       break;
-    //     case "mine":
-    //       active_tab.value = 4;
-    //       break;
-    //   }
-    // });
+    onMounted(() => {
+      switch (route.name) {
+        case "home":
+          active_tab.value = 0;
+          break;
+        case "invite":
+          active_tab.value = 1;
+          break;
+        case "promotion":
+          active_tab.value = 2;
+          break;
+        case "inbox":
+          active_tab.value = 3;
+          break;
+        case "mine":
+          active_tab.value = 4;
+          break;
+      }
+    });
 
     const copyId = async () => {
       try {
@@ -1024,6 +1044,9 @@ export default {
       }
       i {
         font-size: 0.688rem;
+        color: $color-tab-text;
+      }
+      .active {
         color: $primary-color;
       }
       span {
