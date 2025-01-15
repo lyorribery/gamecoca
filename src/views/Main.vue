@@ -49,17 +49,12 @@
       </div>
     </div>
     <div v-else class="info-box">
-      <div class="login-btn" @click="goPermission('/login')">
+      <div class="login-btn" @click="goPermission('login')">
         {{ $t("button.login") }}
       </div>
-      <div class="register-btn" @click="goPermission('/register')">
+      <div class="register-btn" @click="goPermission('register')">
         {{ $t("button.register") }}
       </div>
-      <!-- <nut-animate type="flicker" loop>
-        <div class="register-btn" @click="goPermission('/register')">
-          {{ $t("button.register") }}
-        </div>
-      </nut-animate> -->
     </div>
   </div>
   <div class="content" id="content">
@@ -113,7 +108,6 @@
             <i class="iconfont icon-youjian" v-if="item.path == '/inbox'"></i>
             <i class="iconfont icon-gerenzhongxin" v-if="item.path == '/mine'"></i>
           </div>
-        
         </nut-animate>
         <span>{{ item.name }}</span>
       </div>
@@ -473,7 +467,10 @@ export default {
 
     const goPermission = (type) => {
       router.push({
-        path: type,
+        path: "/login",
+        query: {
+          mode: type,
+        },
       });
     };
 
@@ -1013,7 +1010,7 @@ export default {
         position: absolute;
         top: -0.188rem;
         right: -0.138rem;
-        width:0.388rem;
+        width: 0.388rem;
         height: 0.388rem;
         display: flex;
         justify-content: center;

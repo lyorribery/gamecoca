@@ -1,7 +1,8 @@
 
 export const _validname = (val) => {
 	if (!val) return false
-	return /^[a-zA-Z0-9]{5,12}$/.test(val)
+	return true
+	// return /^[a-zA-Z0-9]{5,12}$/.test(val)
 }
 
 export const _validemail = (val) => {
@@ -21,6 +22,24 @@ export const _validphone = (val) => {
 export const _validpassword = (pass) => {
 	if (!pass) return false
 	return /^\w{6,16}$/.test(pass)
+}
+
+export const _validbirth=(val)=>{
+	if(!val) return false
+	var parts = val.split('-');
+    var year = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10) - 1; 
+    var day = parseInt(parts[2], 10);
+    var dateObject = new Date(year, month, day);
+    var timestamp = dateObject.getTime()/1000;
+	var currentTimestamp = Math.floor(Date.now() / 1000);
+	var timestamp18YearsAgo = currentTimestamp - (365 * 18 * 24 * 60 * 60);
+	if (timestamp <= timestamp18YearsAgo) {
+		return true
+	} else {
+		return false
+	}
+	return true
 }
 
 export const formatDate = (timestamp ) => {

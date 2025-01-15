@@ -169,15 +169,6 @@ const router = createRouter({
         auth: false
       },
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: () => import('@/views/Register.vue'),
-      meta: {
-        transition: 'slide-left',
-        auth: false
-      },
-    },
   ]
 })
 

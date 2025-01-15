@@ -16,6 +16,7 @@ const store = createStore({
       balance: 0
     },
     station_base: {
+      fullStationLogo:"",
       marquee: ""
     },
     activity_notice: {
