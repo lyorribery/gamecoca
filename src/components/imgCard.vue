@@ -1,32 +1,33 @@
 <template>
   <div class="card-item" :style="{ width: img_width }" @click="goDetail(cardInfo)">
-    <div class="card-image-box">
-      <nut-image
-        :src="cardInfo.fullGameImg"
-        :width="img_width"
-        :height="img_height"
-        show-loading
-        show-error
-        round
-        :radius="15"
-        lazy-load
-      >
-        <template #loading>
-          <div
-            class="img-loading"
-            :style="{ width: img_width, height: img_height }"
-          ></div>
-        </template>
-        <template #error>
-          <div
-            class="img-loading"
-            :style="{ width: img_width, height: img_height }"
-          ></div>
-        </template>
-      </nut-image>
-
-      <div class="img-mask"></div>
-    </div>
+    <nut-animate type="ripple" action="click">
+      <div class="card-image-box">
+        <nut-image
+          :src="cardInfo.fullGameImg"
+          :width="img_width"
+          :height="img_height"
+          show-loading
+          show-error
+          round
+          :radius="15"
+          lazy-load
+        >
+          <template #loading>
+            <div
+              class="img-loading"
+              :style="{ width: img_width, height: img_height }"
+            ></div>
+          </template>
+          <template #error>
+            <div
+              class="img-loading"
+              :style="{ width: img_width, height: img_height }"
+            ></div>
+          </template>
+        </nut-image>
+        <div class="img-mask"></div>
+      </div>
+    </nut-animate>
   </div>
 </template>
 
@@ -120,13 +121,13 @@ export default {
     }
 
     .img-loading {
-      background-size: 200% 200%; /* 背景图大小 */
+      background-size: 200% 200%; 
       background-image: linear-gradient(
         135deg,
-        rgba(255,197,54, 0.7),
-        rgba(255,197,54, 0.5),
-        rgba(6, 169, 80,0.7),
-        rgba(6, 169, 80,0.5),
+        rgba(188, 54, 204, 0.8),
+        rgba(188, 54, 204, 0.6),
+        rgba(56, 28, 164, 0.8),
+        rgba(56, 28, 164, 0.6)
       );
       animation: flow 2s ease infinite;
     }

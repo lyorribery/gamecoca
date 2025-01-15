@@ -56,6 +56,7 @@ const store = createStore({
           fullCategoryImg: item.fullCategoryImg,
           categoryName: item.categoryName,
           categoryId: item.categoryId,
+          verTudo: item.verTudo,
           games: games.slice(0, 6)
         })
       })

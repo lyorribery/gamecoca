@@ -36,6 +36,30 @@ const router = createRouter({
                 auth: true,
               }
             },
+            {
+              path:'/refer/referc',
+              name: 'referc',
+              component: () => import('@/views/Referc.vue'),
+              meta: {
+                auth: true,
+              }
+            },
+            {
+              path:'/refer/member',
+              name: 'member',
+              component: () => import('@/views/Member.vue'),
+              meta: {
+                auth: true,
+              }
+            },
+            {
+              path:'/refer/bonus',
+              name: 'bonus',
+              component: () => import('@/views/Bonus.vue'),
+              meta: {
+                auth: true,
+              }
+            },
           ]
         },
         {

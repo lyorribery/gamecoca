@@ -20,7 +20,7 @@
         >
           <path
             d="M951.941266 475.970633a475.970633 475.970633 0 1 0-475.970633 475.970633 475.970633 475.970633 0 0 0 475.970633-475.970633z m-832.434409 0a356.463776 356.463776 0 1 1 356.463776 356.463776 356.463776 356.463776 0 0 1-356.463776-356.463776z m609.945976 253.553124a57.732096 57.732096 0 0 0 0 81.491619L925.770328 1007.1201A57.590248 57.590248 0 0 0 1007.1201 925.62848l-196.175648-196.033799-42.55437 42.19975 196.104723 196.104724a2.127719 2.127719 0 0 1 0-3.04973 2.198642 2.198642 0 0 1 2.978806 0l-195.608256-196.0338a2.056795 2.056795 0 0 1 0 2.978806 2.198642 2.198642 0 0 1-2.978806 0l42.554371-42.19975a57.519324 57.519324 0 0 0-81.420696 0z"
-            fill="#707070"
+            fill="#C4C3C8"
             p-id="4325"
           ></path>
         </svg>
@@ -78,7 +78,7 @@ watch(
   { deep: true }
 );
 onMounted(() => {
-  name.value = route.query.name;
+  name.value = decodeURIComponent(route.query.name);
   list.value = state.game_list.game.filter((item) => {
     return item.categoryId == route.query.id;
   });
@@ -87,6 +87,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/variables.scss";
 .search-box {
   width: 100%;
   margin-bottom: 0.277rem;
@@ -120,8 +121,9 @@ onMounted(() => {
     margin-right: 0.277rem;
   }
   span {
-    color: #fff;
-    font-size: 0.5rem;
+    font-weight: bold;
+    font-size: 0.461rem;
+    color: $color-sub-text;
     font-weight: bold;
   }
 }

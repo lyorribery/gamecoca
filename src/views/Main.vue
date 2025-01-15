@@ -602,6 +602,7 @@ export default {
   top: calc(env(safe-area-inset-top) + 1.361rem);
   right: 0.277rem;
   z-index: 3;
+  border-radius: 0.555rem;
   .pop-action-box {
     background: #262626;
     width: 100%;

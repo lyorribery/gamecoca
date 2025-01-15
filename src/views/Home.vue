@@ -68,7 +68,7 @@
                 <img :src="item.fullCategoryImg" />
                 <span>{{ item.categoryName }}</span>
               </div>
-              <div class="more-btn" @click="getMore(item.categoryId, item.categoryName)">
+              <div class="more-btn" @click="getMore(item.verTudo)">
                 {{ $t("button.more") }}
               </div>
             </div>
@@ -83,9 +83,8 @@
           </div>
         </div>
       </div>
-      
     </div>
-    <pageFooter/>
+    <pageFooter />
     <nut-popup v-model:visible="down_visible" position="bottom" round>
       <div class="down-box" v-if="divice == 'android'">
         <div class="close">
@@ -94,18 +93,16 @@
         <div class="title">1. Click the "More" icon, then click Install application</div>
 
         <div class="title">2. Click Add and select "Add"</div>
-
       </div>
       <div class="down-box" v-if="divice == 'ios'">
         <div class="close">
           <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
         </div>
         <div class="title">1.Click the share button at the bottom</div>
-  
+
         <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
 
         <div class="title">3. Click Add and select "Add"</div>
- 
       </div>
     </nut-popup>
   </div>
@@ -175,13 +172,16 @@ const goPath = (path) => {
   }
 };
 
-const getMore = (id, name) => {
+const getMore = (verTudo) => {
+  const str = verTudo.split("?")[1];
+  const arr = str.split("&");
+  let obj = {};
+  arr.map((item) => {
+    obj[item.split("=")[0]] = item.split("=")[1];
+  });
   router.push({
     path: "/classification",
-    query: {
-      id,
-      name,
-    },
+    query: obj,
   });
 };
 const active_type = computed(() => {
@@ -348,7 +348,7 @@ window.addEventListener("pageshow", function (event) {
     line-height: 1.277rem;
     text-align: center;
     box-sizing: border-box;
-    padding-left:0.277rem;
+    padding-left: 0.277rem;
   }
 }
 

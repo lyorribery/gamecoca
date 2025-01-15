@@ -176,4 +176,32 @@ ul{
     background-color: #141414;
 }
 
+.nut-calendar,.nut-calendar .nut-calendar__header,.nut-calendar .nut-calendar__footer{
+    background: #222222;
+}
+
+.nut-calendar .nut-calendar__header .nut-calendar__weekdays .nut-calendar__weekday:first-of-type, .nut-calendar .nut-calendar__header .nut-calendar__weekdays .nut-calendar__weekday:last-of-type{
+    color:#06a950;
+}
+.nut-calendar{
+    color:#CCCCCC;
+}
+.nut-calendar .nut-calendar__footer .nut-calendar__confirm,.nut-calendar .nut-calendar__content .nut-calendar__panel .nut-calendar__days .nut-calendar__day--active{
+    background: #06a950;
+}
+
+.nut-calendar .nut-calendar__content .nut-calendar__panel .nut-calendar__days .nut-calendar__day--choose,.nut-calendar .nut-calendar__content .nut-calendar__panel .nut-calendar__days .nut-calendar__days-item .nut-calendar__day:nth-child(7n+0), .nut-calendar .nut-calendar__content .nut-calendar__panel .nut-calendar__days .nut-calendar__days-item .nut-calendar__day:nth-child(7n+1){
+    color:#06a950;
+}
+.nut-calendar .nut-calendar__content .nut-calendar__panel .nut-calendar__days .nut-calendar__day--choose:after{
+    background: #06a950;
+    opacity: 0.2;
+}
+
+.nut-table__main__head__tr--alignleft, .nut-table__main__head__tr--align, .nut-table__main__body__tr--alignleft, .nut-table__main__body__tr--align{
+    color:#999999;
+    font-size: 0.277rem;
+    font-weight: bold;
+    text-align: center;
+}
 

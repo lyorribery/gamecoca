@@ -156,7 +156,7 @@ onMounted(()=>{
     .channel {
       width: 100%;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       margin: 0.277rem 0;
       img {

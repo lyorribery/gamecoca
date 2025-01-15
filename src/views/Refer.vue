@@ -1,7 +1,12 @@
 <template>
   <div class="refer">
     <div class="refer-tab" :class="page_num >= 50 ? 'sticky-type' : ''">
-      <div class="item" v-for="(item, index) in tabs" :key="index">
+      <div
+        class="item"
+        v-for="(item, index) in tabs"
+        :key="index"
+        @click="changePath(item)"
+      >
         <img
           v-if="tab_name == item.name"
           src="../assets/images/refer/xz_di_jiaguang.png"
@@ -38,7 +43,7 @@
     <router-view v-slot="{ Component }">
       <component :is="Component" :key="route.name"></component>
     </router-view>
-    <pageFooter/>
+    <pageFooter />
   </div>
 </template>
 
@@ -52,22 +57,26 @@ export default {
 </script>
 
 <script setup>
-import { ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { computed, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
-watch(
-  () => route.name,
-  (newVal, oldVal) => {
-    tab_name.value = newVal;
-  }
-);
+const router = useRouter();
+const tab_name = computed(()=>{
+  return route.name
+});
+
 const tabs = [
   { name: "invite", title: "Convidar" },
   { name: "referc", title: "Referencia" },
   { name: "member", title: "Menbro" },
   { name: "bonus", title: "Bonus" },
 ];
-const tab_name = ref("invite");
+const changePath = (item) => {
+  router.push({
+    path: '/refer/'+item.name
+  });
+};
+
 
 const page_num = ref(0);
 
@@ -84,7 +93,6 @@ window.addEventListener("pageshow", function (event) {
 </script>
 
 <style lang="scss" scoped>
-
 .sticky-type {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 1.361rem);
