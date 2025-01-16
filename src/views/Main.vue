@@ -173,7 +173,7 @@
         </div>
       </div>
       <div class="pop-action-box">
-        <div class="item" @click="popActionBtn('/account')">
+        <div class="item" @click="popActionBtn('/mine')">
           <img src="../assets/images/main/gerenxinxi.png" />
           <span>Conta</span>
         </div>
@@ -181,13 +181,13 @@
           <img src="../assets/images/main/zoujian.png" />
           <span>Message</span>
         </div>
-        <div class="item" @click="popActionBtn('/surpport')">
+        <div class="item" @click="popActionBtn('/service')">
           <img src="../assets/images/main/kefu.png" />
           <span>Surpport</span>
         </div>
-        <div class="item" @click="popActionBtn('/records')">
+        <div class="item" @click="popActionBtn('/report')">
           <img src="../assets/images/main/baobiao.png" />
-          <span>Records</span>
+          <span>Report</span>
         </div>
         <div class="item" @click="exit()">
           <img src="../assets/images/main/tuichu.png" />
@@ -411,6 +411,12 @@ import { useI18n } from "vue-i18n";
 
 export default {
   setup() {
+    // const isMobile = () => {
+    //   let flag = navigator.userAgent.match(
+    //     /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+    //   );
+    //   return flag;
+    // };
     const { locale } = useI18n();
     let { state, commit, dispatch } = useStore();
     const promotion_list = computed(() => {
@@ -549,6 +555,44 @@ export default {
         case "mine":
           active_tab.value = 4;
           break;
+      }
+
+      let userAgentInfo = window.navigator.userAgent;
+      let Agents = new Array(
+        "Android",
+        "iPhone",
+        "SymbianOS",
+        "Windows Phone",
+        "iPad",
+        "iPod"
+      );
+      //pc
+      if (
+        !Agents.some((item) =>
+          userAgentInfo.toLowerCase().includes(item.toLowerCase())
+        ) &&
+        !(self.frameElement && self.frameElement.tagName == "IFRAME")
+      ) {
+        let ifrTag = document.getElementsByTagName("iframe")[0];
+        if (ifrTag) {
+          ifrTag.remove();
+        } else {
+          let ifrTag = document.createElement("iframe");
+          document.body.innerHTML = "";
+          ifrTag.setAttribute("src", window.location.href);
+          ifrTag.setAttribute("frameborder", 0);
+          let styleObj = {
+            width: "414px",
+            height: "100vh",
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+          };
+          Object.entries(styleObj).forEach(([key, value]) => {
+            ifrTag.style[key] = value;
+          });
+          document.body.append(ifrTag);
+        }
       }
     });
 

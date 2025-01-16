@@ -2,12 +2,6 @@ const packageInfo = require('./package.json')
 const Timestamp = new Date().getTime()
 
 module.exports = {
-    // devServer: {
-    //     port: 8080,
-    //     host: "0.0.0.0",
-    //     https: false,
-    //     open: true
-    // },
     devServer: {
         port: 8080,
         host: '0.0.0.0', // 允许局域网内访问
@@ -22,6 +16,7 @@ module.exports = {
             }
         }
     },
+    publicPath: process.env.NODE_ENV === 'production'? '/template02/': '/',
     outputDir: "dist",
     productionSourceMap: false,
     filenameHashing: false,

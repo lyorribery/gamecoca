@@ -36,7 +36,7 @@
       <div class="action">
         <img src="../assets/images/mine/email.png" />
         <img src="../assets/images/mine/shouji.png" />
-        <div class="action-btn">{{ $t("button.change") }}</div>
+        <div class="action-btn" @click="goPath('/setting')">{{ $t("button.change") }}</div>
       </div>
     </div>
     <div class="action-box">
@@ -132,35 +132,34 @@
       </div>
     </div>
     <div class="details-box">
-      <div class="item">
+      <div class="item" @click="goReport('Account')">
         <img src="../assets/images/mine/bnt_account.png" />
         <div>Account<br />Details</div>
       </div>
-      <div class="item">
+      <div class="item" @click="goReport('Deposit')">
         <img src="../assets/images/mine/bnt_deposit.png" />
         <div>Deposit<br />Details</div>
       </div>
-      <div class="item">
+      <div class="item" @click="goReport('Withdraw')">
         <img src="../assets/images/mine/bnt_tixian.png" />
         <div>Withdraw<br />Details</div>
       </div>
-      <div class="item">
+      <div class="item" @click="goReport('Bets')">
         <img src="../assets/images/mine/bnt_youxiji.png" />
         <div>Bet<br />Details</div>
       </div>
-      <div class="item">
+      <div class="item" @click="goReport('Bonus')">
         <img src="../assets/images/mine/bnt_liwu.png" />
         <div>Bonus<br />Details</div>
       </div>
     </div>
     <div class="service-box">
-      <div class="item">
+      <div class="item" @click="goPath('/refer/invite')">
         <div class="left">
           <img src="../assets/images/mine/fenxiang_icon.png" />
           <span>Agente</span>
         </div>
         <svg
-          @click="goPath()"
           t="1736777328996"
           class="icon"
           viewBox="0 0 1024 1024"
@@ -177,13 +176,12 @@
           ></path>
         </svg>
       </div>
-      <div class="item">
+      <div class="item" @click="goPath('/setting')">
         <div class="left">
           <img src="../assets/images/mine/xiugai_icon.png" />
           <span>Personal Infomation</span>
         </div>
         <svg
-          @click="goPath()"
           t="1736777328996"
           class="icon"
           viewBox="0 0 1024 1024"
@@ -200,13 +198,12 @@
           ></path>
         </svg>
       </div>
-      <div class="item">
+      <div class="item" @click="goPath('/service')">
         <div class="left">
           <img src="../assets/images/mine/kefu_icon.png" />
           <span>Surpport</span>
         </div>
         <svg
-          @click="goPath()"
           t="1736777328996"
           class="icon"
           viewBox="0 0 1024 1024"
@@ -229,7 +226,6 @@
           <span>Download Applincation</span>
         </div>
         <svg
-          @click="goPath()"
           t="1736777328996"
           class="icon"
           viewBox="0 0 1024 1024"
@@ -252,7 +248,6 @@
           <span>Logout</span>
         </div>
         <svg
-          @click="goPath()"
           t="1736777328996"
           class="icon"
           viewBox="0 0 1024 1024"
@@ -280,7 +275,11 @@ import { useStore } from "vuex";
 
 const router = useRouter();
 let { state, dispatch, commit } = useStore();
-const goPath = (path) => {};
+const goPath = (path) => {
+  router.push({
+    path,
+  });
+};
 const user_info = computed(() => {
   return state.user_info;
 });
@@ -361,6 +360,12 @@ const copyId = async () => {
 const avatar = computed(() => {
   return state.user_info.avatar ? require(state.user_info.avatar) : "";
 });
+const goReport = (type) => {
+  router.push({
+    path: "/report",
+    query: { type },
+  });
+};
 </script>
 
 <style lang="scss" scoped>

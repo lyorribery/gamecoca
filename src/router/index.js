@@ -1,11 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const router = createRouter({
+  base: '/template02/',
   history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      redirect: '/home',
+       redirect: '/home',
       meta: {
         transition: 'slide-right',
       }
@@ -123,6 +124,24 @@ const router = createRouter({
           path: '/vip',
           name: 'vip',
           component: () => import('@/views/Vip.vue'),
+          meta: {
+            auth: false,
+            transition: 'slide-right',
+          }
+        },
+        {
+          path: '/report',
+          name: 'report',
+          component: () => import('@/views/Report.vue'),
+          meta: {
+            auth: false,
+            transition: 'slide-right',
+          }
+        },
+        {
+          path: '/setting',
+          name: 'setting',
+          component: () => import('@/views/Setting.vue'),
           meta: {
             auth: false,
             transition: 'slide-right',

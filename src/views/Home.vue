@@ -298,7 +298,8 @@ window.addEventListener("pageshow", function (event) {
   }
   .game-tab {
     width: 1.305rem;
-    background: linear-gradient(0deg, #181717, #0d0d0d);
+    background: linear-gradient(0deg, #181717, #0D0D0D);
+    border-radius: 0.194rem;
     .category {
       width: 1.305rem;
       height: 1.305rem;
