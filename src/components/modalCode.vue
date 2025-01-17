@@ -1,6 +1,6 @@
 <template>
   <div class="input-box">
-    <div class="title">
+    <div class="title" v-if="showTitle">
       <span>{{ title }}</span>
       <img src="../assets/images/show.png" />
     </div>
@@ -46,6 +46,7 @@
         type="password"
       />
       <input
+       v-if="codeLen==6"
         max="9"
         min="0"
         maxlength="1"
@@ -54,6 +55,7 @@
         type="password"
       />
       <input
+       v-if="codeLen==6"
         max="9"
         min="0"
         maxlength="1"
@@ -73,6 +75,14 @@ export default {
     title: {
       type: String,
       default: "",
+    },
+    showTitle: {
+      type: Boolean,
+      default: true,
+    },
+    codeLen: {
+      type: Number,
+      default: 6,
     },
   },
   setup() {

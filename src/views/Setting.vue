@@ -63,7 +63,7 @@
     >
       <div class="overlay-body">
         <div class="overlay-content">
-          <div class="close" @click="confirmPass()">
+          <div class="close" @click="modal = false">
             <svg
               t="1737048406504"
               class="icon"
@@ -91,24 +91,130 @@
             {{ modal_type }}
             <div class="line"></div>
           </div>
-          <modalCode title="Old Password" @complete="onComplete" />
-          <modalCode title="New Password" @complete="onComplete2" />
-          <modalCode title="Confirm Password" @complete="onComplete3" />
-          <div class="tips">
-            <div class="circle"></div>
-            <span
-              >E a sua primeira retirada, você precisa definir a senha de retira da
-              primeiro.</span
-            >
+          <div v-if="modal_type == 'Change Password'">
+            <nut-form ref="passwordFormRef" :model-value="passwordForm">
+              <nut-form-item
+                prop="oldpassword"
+                :rules="[{ validator: customValidatorPass }]"
+              >
+                <div class="ipt-box">
+                  <div class="icon-box">
+                    <i class="iconfont icon-mima"></i>
+                  </div>
+                  <nut-input
+                    v-model="passwordForm.oldpassword"
+                    placeholder="Old Password"
+                    type="password"
+                  />
+                </div>
+              </nut-form-item>
+              <nut-form-item
+                prop="newpassword"
+                :rules="[{ validator: customValidatorPass }]"
+              >
+                <div class="ipt-box">
+                  <div class="icon-box">
+                    <i class="iconfont icon-mima"></i>
+                  </div>
+                  <nut-input
+                    v-model="passwordForm.newpassword"
+                    placeholder="New Password"
+                    type="password"
+                  />
+                </div>
+              </nut-form-item>
+
+              <nut-form-item
+                prop="repassword"
+                :rules="[{ validator: customValidatorPassAgain }]"
+              >
+                <div class="ipt-box">
+                  <div class="icon-box">
+                    <i class="iconfont icon-mima"></i>
+                  </div>
+                  <nut-input
+                    v-model="passwordForm.repassword"
+                    placeholder="Confirm New Password"
+                    type="password"
+                  />
+                </div>
+              </nut-form-item>
+            </nut-form>
           </div>
-          <div class="tips">
-            <div class="circle"></div>
-            <span>
-              Nota: A senha de saque é muito importante para proteger a seg uran çade seus
-              fundos. Você só pode conhecê-la para evitar a per dade fundos.</span
-            >
+          <div v-if="modal_type == 'Change transaction password'">
+            <modalCode title="Old Password" @complete="onComplete" />
+            <modalCode title="New Password" @complete="onComplete2" />
+            <modalCode title="Confirm Password" @complete="onComplete3" />
+            <div class="tips">
+              <div class="circle"></div>
+              <span
+                >E a sua primeira retirada, você precisa definir a senha de retira da
+                primeiro.</span
+              >
+            </div>
+            <div class="tips">
+              <div class="circle"></div>
+              <span>
+                Nota: A senha de saque é muito importante para proteger a seg uran çade
+                seus fundos. Você só pode conhecê-la para evitar a per dade fundos.</span
+              >
+            </div>
           </div>
-          <div class="confirm-btn" @click="confirmPass()">Confirmar</div>
+          <div v-if="modal_type == 'Inserir senha'">
+            <nut-form ref="emailRef" :model-value="emailForm">
+              <nut-form-item prop="email" :rules="[{ validator: customValidatorEmail }]">
+                <div class="ipt-box">
+                  <div class="icon-box">
+                    <i class="iconfont icon-youjian"></i>
+                  </div>
+                  <nut-input v-model="emailForm.email" placeholder="Email" type="text" />
+                </div>
+              </nut-form-item>
+              <nut-form-item
+                prop="password"
+                :rules="[{ validator: customValidatorPass }]"
+              >
+                <div class="ipt-box">
+                  <div class="icon-box">
+                    <i class="iconfont icon-mima"></i>
+                  </div>
+                  <nut-input
+                    v-model="emailForm.password"
+                    placeholder="Password"
+                    type="password"
+                  />
+                </div>
+              </nut-form-item>
+            </nut-form>
+          </div>
+          <div class="confirm-btn" @click="confirmPass()">
+            Confirmar<svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="22px"
+              height="22px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#181717"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+          </div>
         </div>
       </div>
     </nut-overlay>
@@ -125,11 +231,47 @@ export default {
 </script>
 
 <script setup>
+import { SetEmail } from "@/apis/setting";
+import { _validpassword, _validemail } from "@/utils/utils";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-const { state } = useStore();
+const { state, commit } = useStore();
 const router = useRouter();
+
+const emailRef = ref(null);
+const emailForm = ref({
+  email: "",
+  password: "",
+});
+const passwordFormRef = ref(null);
+const customValidatorEmail = (val) => {
+  if (_validemail(val)) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("Please enter correct emial.");
+  }
+};
+const customValidatorPass = (val) => {
+  if (_validpassword(val)) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("Please enter a 6-16 digit password.");
+  }
+};
+const customValidatorPassAgain = (val) => {
+  if (_validpassword(val) && val == passwordForm.value.newpassword) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("Please enter a 6-16 digit password.");
+  }
+};
+
+const passwordForm = ref({
+  oldpassword: "",
+  newpassword: "",
+  repassword: "",
+});
 
 const onComplete = (val) => {
   console.log("complete", val);
@@ -148,13 +290,48 @@ const openModal = (type) => {
   modal_type.value = type;
   modal.value = true;
 };
-const confirmPass=()=>{
-    console.log(123123)
-    modal.value=false
-}
+const is_loading = ref(false);
+const confirmPass = () => {
+  if (is_loading.value) return;
+  if (modal_type.value == "Change Password") {
+    passwordFormRef.value.validate().then(({ valid, errors }) => {
+      if (valid) {
+        is_loading.value = true;
+        modal.value = false;
+      } else {
+        console.warn("error:", errors);
+      }
+    });
+  } else if (modal_type.value == "Change transaction password") {
+  } else if (modal_type.value == "Inserir senha") {
+    emailRef.value.validate().then(({ valid, errors }) => {
+      if (valid) {
+        is_loading.value = true;
+        SetEmail(emailForm.value)
+          .then((res) => {
+            if (res.code == 200) {
+              commit("set_show_tip", {
+                type: 1,
+                msg: "success",
+              });
+            } else {
+              commit("set_show_tip", {
+                type: 0,
+                msg: res.msg,
+              });
+            }
+          })
+          .finally(() => {
+            is_loading.value = false;
+          });
+      } else {
+        console.warn("error:", errors);
+      }
+    });
+  }
+};
 const closeModal = () => {
   console.log(456456);
-  
 };
 const goBack = () => {
   router.go(-1);
@@ -171,9 +348,36 @@ const goBack = () => {
   .overlay-content {
     width: calc(100% - 0.833rem);
     background: #1f1e1e;
+    background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
     border-radius: 0.555rem;
     box-sizing: border-box;
     padding: 0 0.416rem 0.555rem 0.416rem;
+    .ipt-box {
+      width: 100%;
+      height: 1.111rem;
+      background: #0f0f0f;
+      border-radius: 0.555rem;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 0.416rem;
+      .icon-box {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding-right: 0.416rem;
+        span {
+          font-size: 0.305rem;
+          color: #808080;
+          padding-left: 0.138rem;
+        }
+        i {
+          font-size: 0.444rem;
+          font-weight: bold;
+          color: #808080;
+        }
+      }
+    }
     .confirm-btn {
       width: 100%;
       height: 1.111rem;
@@ -231,11 +435,11 @@ const goBack = () => {
       }
     }
     .close {
-        width:100%;
-        display: flex;
-        justify-content: flex-end;
-        box-sizing: border-box;
-        padding:0.416rem 0 0 0;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: 0.416rem 0 0 0;
     }
   }
 }

@@ -43,9 +43,21 @@ const store = createStore({
       noticeTitle: ""
     },
     unread_count: 0,
-    msg_list: { records: [] }
+    msg_list: { records: [] },
+    is_show_app:true,
+    show_tip:{
+      type:1,
+      msg:'',
+      show:false
+    }
   }),
   mutations: {
+    set_show_tip(state,val){
+      state.show_tip={...val,show:true}
+    },
+    set_is_show_app(state,val){
+      state.is_show_app=val
+    },
     set_is_cpf(state,val){
       state.is_cpf=val
     },
@@ -118,7 +130,7 @@ const store = createStore({
   },
   actions: {
     GET_CONFIG(ctx) {
-      ctx.commit('set_loading_modal', true)
+      // ctx.commit('set_loading_modal', true)
       getConfig().then(res => {
         if (res.code == 200) {
           ctx.commit('set_station_base', res.data)

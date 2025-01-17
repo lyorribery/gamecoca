@@ -108,7 +108,7 @@ export default {
   }
 
   .card-image-box {
-    border-radius: 0.333rem;
+    border-radius: 0.194rem;
     position: relative;
     overflow: hidden;
     .img-mask {

@@ -1,6 +1,13 @@
 <template>
   <div class="refer">
-    <div class="refer-tab" :class="page_num >= 50 ? 'sticky-type' : ''">
+    <div class="refer-tab"
+    :class="
+            page_num >= 50 && is_show_app
+              ? 'sticky-type-app'
+              : page_num >= 50 && !is_show_app
+              ? 'sticky-type'
+              : ''
+          ">
       <div
         class="item"
         v-for="(item, index) in tabs"
@@ -58,13 +65,17 @@ export default {
 
 <script setup>
 import { computed, ref } from "vue";
+import {useStore} from 'vuex'
 import { useRoute, useRouter } from "vue-router";
+const {state}=useStore()
 const route = useRoute();
 const router = useRouter();
 const tab_name = computed(()=>{
   return route.name
 });
-
+const is_show_app=computed(()=>{
+  return state.is_show_app
+})
 const tabs = [
   { name: "invite", title: "Convidar" },
   { name: "referc", title: "Referencia" },
@@ -93,6 +104,13 @@ window.addEventListener("pageshow", function (event) {
 </script>
 
 <style lang="scss" scoped>
+.sticky-type-app {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 2.638rem);
+  left: 0;
+  z-index: 2;
+  background: linear-gradient(0deg, #181717, #0d0d0d) !important;
+}
 .sticky-type {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 1.361rem);

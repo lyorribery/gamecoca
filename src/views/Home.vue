@@ -9,13 +9,20 @@
           :width="330"
           :loop="true"
           :pagination-visible="true"
+          @change="changeSwiper"
         >
           <nut-swiper-item
             v-for="(item, index) in promotion_list"
             :key="index"
             style="height: 198px; margin-right: 0.138rem"
           >
-            <div @click="goActive(item)">
+            <div @click="goActive(item)" class="banner-img">
+              <img
+                class="mask"
+                height="198"
+                v-if="swiper_index != index"
+                src="../assets/images/banne_mask.png"
+              />
               <img
                 :src="item.fullNoticeImg"
                 style="height: 100%; width: 100%"
@@ -44,7 +51,16 @@
         </div>
       </div>
       <div class="game-container">
-        <div class="game-tab" :class="page_num >= 293.5 ? 'sticky-type' : ''">
+        <div
+          class="game-tab"
+          :class="
+            page_num >= scroll_num && is_show_app
+              ? 'sticky-type-app'
+              : page_num >= scroll_num && !is_show_app
+              ? 'sticky-type'
+              : ''
+          "
+        >
           <div
             class="category"
             v-for="(item, index) in category_list"
@@ -52,7 +68,10 @@
             @click="changeTab(index)"
           >
             <div class="active-line" v-if="active_type == index"></div>
-            <img :src="item.fullCategoryImg" />
+            <img
+              :src="item.fullCategoryImg"
+              :style="{ filter: active_type == index ? '' : 'grayscale(100%)' }"
+            />
             <span :class="active_type == index ? 'active-tab' : ''">{{
               item.categoryName
             }}</span>
@@ -60,7 +79,7 @@
         </div>
         <div
           class="game-list-box"
-          :style="{ marginLeft: page_num >= 293.5 ? '1.305rem' : '' }"
+          :style="{ marginLeft: page_num >= scroll_num ? '1.305rem' : '' }"
         >
           <div class="game-list" v-for="(item, index) in game_list" :key="index">
             <div class="game-title">
@@ -129,6 +148,15 @@ import { useStore } from "vuex";
 import { Lucky } from "@/apis/cashwheel";
 
 let { state, commit, dispatch } = useStore();
+
+const is_show_app = computed(() => {
+  return state.is_show_app;
+});
+
+const swiper_index = ref(0);
+const changeSwiper = (index) => {
+  swiper_index.value = index;
+};
 
 const img_type = ref("small");
 const maquee_text = computed(() => {
@@ -220,7 +248,9 @@ onMounted(() => {
 });
 
 const page_num = ref(0);
-
+const scroll_num = computed(() => {
+  return state.is_show_app ? 339.5 : 293.5;
+});
 window.addEventListener("scroll", () => {
   page_num.value = document.documentElement.scrollTop || document.body.scrollTop || 0;
 });
@@ -235,7 +265,13 @@ window.addEventListener("pageshow", function (event) {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
-
+.sticky-type-app {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 2.638rem);
+  left: 0.277rem;
+  z-index: 2;
+  background: linear-gradient(0deg, #181717, #0d0d0d) !important;
+}
 .sticky-type {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 1.361rem);
@@ -298,7 +334,7 @@ window.addEventListener("pageshow", function (event) {
   }
   .game-tab {
     width: 1.305rem;
-    background: linear-gradient(0deg, #181717, #0D0D0D);
+    background: linear-gradient(0deg, #181717, #0d0d0d);
     border-radius: 0.194rem;
     .category {
       width: 1.305rem;
@@ -311,6 +347,11 @@ window.addEventListener("pageshow", function (event) {
       color: $color-unactive;
       font-size: 0.277rem;
       position: relative;
+      // .active-img {
+      //   -webkit-filter: drop-shadow(#ffc02e 0.694rem 0);
+      //   filter: drop-shadow(#ffc02e 0.694rem 0);
+      //   overflow: hidden;
+      // }
       .active-line {
         position: absolute;
         top: 0.236rem;
@@ -367,6 +408,14 @@ window.addEventListener("pageshow", function (event) {
   width: 100%;
   box-sizing: border-box;
   padding: 0 0 0 0.277rem;
+  .banner-img {
+    position: relative;
+    .mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
 }
 
 .down-box {

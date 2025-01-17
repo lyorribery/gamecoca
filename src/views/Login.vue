@@ -98,7 +98,7 @@
                 <i class="iconfont icon-duoxuanyixuan"></i>
                 <span>Lembrar</span>
               </div>
-              <div class="forget">Esqueceu?</div>
+              <div class="forget" @click="modal_visible = true">Esqueceu?</div>
             </div>
           </nut-form-item>
           <nut-form-item prop="submit">
@@ -351,6 +351,111 @@
         </nut-form>
       </div>
     </div>
+
+    <nut-overlay
+      v-model:visible="modal_visible"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div class="overlay-content">
+          <div class="modal-close" @click="modal_visible = false">
+            <svg
+              t="1737048406504"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2325"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M822.00345 776.822434l0.022513-0.022513L246.50423 201.317075c-5.78782-5.791913-13.785981-9.374508-22.621207-9.374508-17.662265 0-31.980365 14.3181-31.980365 31.980365 0 8.834202 3.582595 16.832364 9.373485 22.620184L776.11226 821.339324c5.838985 6.277984 14.166651 10.209526 23.416316 10.209526 17.662265 0 31.980365-14.3181 31.980365-31.980365C831.508941 790.667767 827.871087 782.620487 822.00345 776.822434z"
+                p-id="2326"
+                fill="#E6E6E6"
+              ></path>
+              <path
+                d="M776.783549 201.448058l-0.022513-0.022513L201.278189 776.947278c-5.791913 5.78782-9.374508 13.785981-9.374508 22.621207 0 17.662265 14.3181 31.980365 31.980365 31.980365 8.834202 0 16.832364-3.582595 22.620184-9.373485l574.797231-574.836117c6.277984-5.838985 10.209526-14.166651 10.209526-23.416316 0-17.662265-14.3181-31.980365-31.980365-31.980365C790.628882 191.942567 782.580578 195.58042 776.783549 201.448058z"
+                p-id="2327"
+                fill="#E6E6E6"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="title">
+            Forget Password
+            <div class="line"></div>
+          </div>
+          <nut-form ref="forgetRef" :model-value="forgetForm">
+            <nut-form-item prop="mobile" :rules="[{ validator: customValidatorMobile }]">
+              <div class="ipt-box">
+                <div class="icon-box">
+                  <i class="iconfont icon-shouji"></i>
+                  <span>+55</span>
+                </div>
+                <nut-input
+                  v-model="forgetForm.mobile"
+                  placeholder="Phone Number"
+                  type="number"
+                />
+              </div>
+            </nut-form-item>
+            <nut-form-item prop="password" :rules="[{ validator: customValidatorPass }]">
+              <div class="ipt-box">
+                <div class="icon-box">
+                  <i class="iconfont icon-mima"></i>
+                </div>
+                <nut-input
+                  v-model="forgetForm.password"
+                  placeholder="Password"
+                  type="password"
+                />
+              </div>
+            </nut-form-item>
+            <nut-form-item prop="code" :rules="[{ validator: customValidatorCode }]">
+              <div class="code-row">
+                <div class="code-col">
+                  <modalCode :showTitle="false" :codeLen="4" @complete="onComplete" />
+                </div>
+                <div class="code-btn">Code</div>
+              </div>
+            </nut-form-item>
+            <nut-form-item prop="submit">
+              <div class="login-btn" @click="confirmForget()">
+                Continuar<svg
+                  v-if="is_loading"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="22px"
+                  height="22px"
+                  viewBox="0 0 50 50"
+                  style="enable-background: new 0 0 50 50"
+                  xml:space="preserve"
+                >
+                  <path
+                    fill="#181717"
+                    d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                    transform="rotate(275.098 25 25)"
+                  >
+                    <animateTransform
+                      attributeType="xml"
+                      attributeName="transform"
+                      type="rotate"
+                      from="0 25 25"
+                      to="360 25 25"
+                      dur="0.6s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                  </path>
+                </svg>
+              </div>
+            </nut-form-item>
+          </nut-form>
+        </div>
+      </div>
+    </nut-overlay>
+
     <nut-popup v-model:visible="showBirthday" position="bottom">
       <nut-date-picker
         v-model="val"
@@ -362,6 +467,15 @@
     </nut-popup>
   </div>
 </template>
+
+<script>
+import modalCode from "@/components/modalCode.vue";
+export default {
+  components: {
+    modalCode,
+  },
+};
+</script>
 
 <script setup>
 import { ref, watch, onMounted, computed } from "vue";
@@ -378,6 +492,12 @@ import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
 let { dispatch, state } = useStore();
 
+const modal_visible = ref(false);
+
+const onComplete = (val) => {
+  console.log("complete", val);
+  forgetForm.value.code = val;
+};
 const showBirthday = ref(false);
 const min = new Date(1900, 0, 1);
 const val = ref(new Date(2022, 4, 10));
@@ -385,6 +505,16 @@ const confirm = ({ selectedValue }) => {
   registerForm1.value.birthday =
     selectedValue[0] + "-" + selectedValue[1] + "-" + selectedValue[2];
   showBirthday.value = false;
+};
+const confirmForget = () => {
+  if (is_loading.value) return;
+  forgetRef.value.validate().then(({ valid, errors }) => {
+    if (valid) {
+      is_loading.value = true;
+    } else {
+      console.warn("error:", errors);
+    }
+  });
 };
 const cancel = () => {
   showBirthday.value = false;
@@ -396,6 +526,12 @@ const mode = ref("login");
 const router = useRouter();
 const route = useRoute();
 const loginRef = ref(null);
+const forgetRef = ref(null);
+const forgetForm = ref({
+  mobile: "",
+  password: "",
+  code: "",
+});
 const loginForm = ref({
   account: "",
   password: "",
@@ -511,9 +647,17 @@ const customValidatorRealName = (val) => {
   if (val) {
     return Promise.resolve();
   } else {
-    return Promise.reject("lease Enter Real Name");
+    return Promise.reject("please Enter Real Name");
   }
 };
+const customValidatorCode=(val)=>{
+  let code = forgetForm.value.code.filter(item => item !== undefined && item !== null && item !== '');
+  if (code.length==4) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please Enter Code");
+  }
+}
 const customValidatorAccount = (val) => {
   if (login_type.value == 1 && _validphone(val)) {
     return Promise.resolve();
@@ -525,7 +669,13 @@ const customValidatorAccount = (val) => {
     return Promise.reject("account error");
   }
 };
-
+const customValidatorMobile = (val) => {
+  if (_validphone(val)) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("account error");
+  }
+};
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();
@@ -565,13 +715,123 @@ const changeSex = (sex) => {
   registerForm1.value.sex = sex;
 };
 onMounted(() => {
-  mode.value = route.query.mode?route.query.mode:'login';
+  mode.value = route.query.mode ? route.query.mode : "login";
   reg_step.value = state.is_cpf ? 1 : 2;
 });
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+.overlay-body {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  .overlay-content {
+    width: calc(100% - 0.833rem);
+    background: #1f1e1e;
+    background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
+    border-radius: 0.555rem;
+    box-sizing: border-box;
+    padding: 0 0.416rem 0.555rem 0.416rem;
+    .code-row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .code-col {
+        width: calc(100% - 2.832rem);
+      }
+      .code-btn {
+        width: 2rem;
+        height: 0.916rem;
+        border-radius: 0.472rem;
+        border: 0.027rem solid #ffc02e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 0.361rem;
+        color: #e6e6e6;
+      }
+    }
+
+    .modal-close {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: 0.416rem 0 0 0;
+    }
+    .login-btn {
+      margin-top: 1.2rem;
+      width: 100%;
+      height: 1.111rem;
+      background: $primary-color;
+      border-radius: 0.555rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 0.361rem;
+      color: #181717;
+    }
+    .ipt-box {
+      width: 100%;
+      height: 1.111rem;
+      background: #0f0f0f;
+      border-radius: 0.555rem;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 0.416rem;
+      .icon-box {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding-right: 0.416rem;
+        span {
+          font-size: 0.305rem;
+          color: #808080;
+          padding-left: 0.138rem;
+        }
+        i {
+          font-size: 0.444rem;
+          font-weight: bold;
+          color: #808080;
+        }
+      }
+    }
+    .title {
+      width: 100%;
+      height: 1.188rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 0.027rem solid #383838;
+      position: relative;
+      font-weight: bold;
+      font-size: 0.461rem;
+      color: #e6e6e6;
+      .line {
+        position: absolute;
+        bottom: 0;
+        left: calc((100% - 1.861rem) / 2);
+        width: 1.861rem;
+        height: 0.055rem;
+        background: #ffcb78;
+        border-radius: 0.027rem;
+      }
+    }
+    .close {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: 0.416rem 0 0 0;
+    }
+  }
+}
 .permission {
   width: 100%;
   display: flex;
