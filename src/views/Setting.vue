@@ -104,8 +104,20 @@
                   <nut-input
                     v-model="passwordForm.oldpassword"
                     placeholder="Old Password"
-                    type="password"
+                    :type="showpass.old_pass?'text':'password'"
                   />
+                  <img
+              @click="showpass.old_pass=false"
+                v-if="showpass.old_pass"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.old_pass=true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
+              />
                 </div>
               </nut-form-item>
               <nut-form-item
@@ -119,8 +131,20 @@
                   <nut-input
                     v-model="passwordForm.newpassword"
                     placeholder="New Password"
-                    type="password"
+                    :type="showpass.new_pass?'text':'password'"
                   />
+                  <img
+              @click="showpass.new_pass=false"
+                v-if="showpass.new_pass"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.new_pass=true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
+              />
                 </div>
               </nut-form-item>
 
@@ -135,16 +159,46 @@
                   <nut-input
                     v-model="passwordForm.repassword"
                     placeholder="Confirm New Password"
-                    type="password"
+                    :type="showpass.re_pass?'text':'password'"
                   />
+                  <img
+              @click="showpass.re_pass=false"
+                v-if="showpass.re_pass"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.re_pass=true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
+              />
                 </div>
               </nut-form-item>
             </nut-form>
           </div>
           <div v-if="modal_type == 'Change transaction password'">
-            <modalCode title="Old Password" @complete="onComplete" />
-            <modalCode title="New Password" @complete="onComplete2" />
-            <modalCode title="Confirm Password" @complete="onComplete3" />
+            <nut-form ref="tranRef" :model-value="tranForm">
+              <nut-form-item
+                prop="oldpassword"
+                :rules="[{ validator: customValidatorTransPass }]"
+              >
+                <modalCode title="Old Password" @complete="onComplete" />
+              </nut-form-item>
+              <nut-form-item
+                prop="newpassword"
+                :rules="[{ validator: customValidatorTransPass }]"
+              >
+                <modalCode title="New Password" @complete="onComplete2" />
+              </nut-form-item>
+              <nut-form-item
+                prop="repassword"
+                :rules="[{ validator: customValidatorTransPassAgain }]"
+              >
+                <modalCode title="Confirm Password" @complete="onComplete3" />
+              </nut-form-item>
+            </nut-form>
+
             <div class="tips">
               <div class="circle"></div>
               <span
@@ -167,7 +221,12 @@
                   <div class="icon-box">
                     <i class="iconfont icon-youjian"></i>
                   </div>
-                  <nut-input v-model="emailForm.email" placeholder="Email" type="text" />
+                  <nut-input
+                    :clearable="true"
+                    v-model="emailForm.email"
+                    placeholder="Email"
+                    type="text"
+                  />
                 </div>
               </nut-form-item>
               <nut-form-item
@@ -181,8 +240,20 @@
                   <nut-input
                     v-model="emailForm.password"
                     placeholder="Password"
-                    type="password"
+                    :type="showpass.email_pass?'text':'password'"
                   />
+                  <img
+              @click="showpass.email_pass=false"
+                v-if="showpass.email_pass"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.email_pass=true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
+              />
                 </div>
               </nut-form-item>
             </nut-form>
@@ -232,6 +303,7 @@ export default {
 
 <script setup>
 import { SetEmail } from "@/apis/setting";
+import { SetTranscationPassword } from "@/apis/deposit";
 import { _validpassword, _validemail } from "@/utils/utils";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
@@ -239,12 +311,46 @@ import { useRouter } from "vue-router";
 const { state, commit } = useStore();
 const router = useRouter();
 
+const showpass=ref({
+  email_pass:false,
+  re_pass:false,
+  old_pass:false,
+  new_pass:false
+})
+const tranRef = ref(null);
+const tranForm = ref({
+  oldpassword: "",
+  newpassword: "",
+  repassword: "",
+});
 const emailRef = ref(null);
 const emailForm = ref({
   email: "",
   password: "",
 });
 const passwordFormRef = ref(null);
+const customValidatorTransPass = (val) => {
+  let code = val.filter((item) => item !== undefined && item !== null && item !== "");
+  if (code.length == 6) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please Enter Correct Password");
+  }
+};
+const customValidatorTransPassAgain = (val) => {
+  let code = val.filter((item) => item !== undefined && item !== null && item !== "");
+  if (
+    code.length == 6 &&
+    code !=
+      tranForm.value.newpassword.filter(
+        (item) => item !== undefined && item !== null && item !== ""
+      )
+  ) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please Enter Correct Password");
+  }
+};
 const customValidatorEmail = (val) => {
   if (_validemail(val)) {
     return Promise.resolve();
@@ -275,11 +381,16 @@ const passwordForm = ref({
 
 const onComplete = (val) => {
   console.log("complete", val);
+  tranForm.value.oldpassword = val;
 };
 
-const onComplete2 = (val) => {};
+const onComplete2 = (val) => {
+  tranForm.value.newpassword = val;
+};
 
-const onComplete3 = (val) => {};
+const onComplete3 = (val) => {
+  tranForm.value.repassword = val;
+};
 
 const user_info = computed(() => {
   return state.user_info;
@@ -303,6 +414,30 @@ const confirmPass = () => {
       }
     });
   } else if (modal_type.value == "Change transaction password") {
+    tranRef.value.validate().then(({ valid, errors }) => {
+      if (valid) {
+        is_loading.value = true;
+        
+        const pram={
+          oldpassword:tranForm.value.oldpassword.join(''),
+          newpassword:tranForm.value.newpassword.join('')
+        }
+
+        SetTranscationPassword(pram)
+          .then((res) => {
+            if (res.code == 200) {
+              
+            } else {
+             
+            }
+          })
+          .finally(() => {
+            is_loading.value = false;
+          });
+      } else {
+        console.warn("error:", errors);
+      }
+    });
   } else if (modal_type.value == "Inserir senha") {
     emailRef.value.validate().then(({ valid, errors }) => {
       if (valid) {
@@ -340,6 +475,12 @@ const goBack = () => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+.pass-icon{
+  position: absolute;
+  right:0.416rem;
+  bottom:0.333rem;
+  width:0.444rem;
+}
 .overlay-body {
   display: flex;
   height: 100%;
@@ -361,6 +502,7 @@ const goBack = () => {
       align-items: center;
       box-sizing: border-box;
       padding: 0 0.416rem;
+      position: relative;
       .icon-box {
         display: flex;
         align-items: center;

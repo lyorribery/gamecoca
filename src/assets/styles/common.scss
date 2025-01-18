@@ -5,8 +5,8 @@ input {
 }
 
 .nut-input .input-text{
-    font-size: 0.305rem;
-    font-weight: 500;
+    font-size: 0.361rem;
+    font-weight: 600;
 }
 
 input::input-placeholder {
@@ -208,5 +208,9 @@ ul{
 
 .nut-picker__right{
     color:#06a950;
+}
+
+.nut-input-clear{
+    color:#898C8D;
 }
 

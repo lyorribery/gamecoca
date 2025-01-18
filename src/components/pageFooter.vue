@@ -18,12 +18,13 @@
       <img src="../assets/images/footer/douyin.png" />
     </div>
     <div class="game-box">
-      <img src="../assets/images/footer/cp.png" />
+      <!-- <img src="../assets/images/footer/cp.png" />
       <img src="../assets/images/footer/evol.png" />
       <img src="../assets/images/footer/pg.png" />
-      <img src="../assets/images/footer/pp.png" />
+      <img src="../assets/images/footer/pp.png" /> -->
+      <img v-for="(item, index) in img_list" :key="index" :src="item.fullImgUrl" />
     </div>
-    <div class="game-box">
+    <!-- <div class="game-box">
       <img src="../assets/images/footer/evop.png" />
       <img src="../assets/images/footer/tada.png" />
       <img src="../assets/images/footer/cqg.png" />
@@ -32,8 +33,8 @@
     <div class="game-box">
       <img src="../assets/images/footer/goo.png" />
       <img src="../assets/images/footer/face.png" />
-    </div>
-    <div class="des" style="margin-top:0.555rem;">Copyright @ 2025</div>
+    </div> -->
+    <div class="des" style="margin-top: 0.555rem">Copyright @ 2025</div>
     <div class="des">@todos os direitos reservados</div>
     <div class="des">2002-2025</div>
   </div>
@@ -44,10 +45,17 @@ import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
+const { state } = useStore();
 const show = ref(false);
 const changeShow = () => {
   show.value = !show.value;
 };
+const img_list = computed(() => {
+  const data = state.station_img.filter((item) => {
+    return item.imgType == 4;
+  });
+  return data;
+});
 // const goThrid = (type) => {
 //   if (type == 1) {
 //     location.href = "https://wa.me/447960076392";
@@ -80,11 +88,17 @@ const changeShow = () => {
   }
   .game-box {
     width: 100%;
+    box-sizing: border-box;
+    padding:0 calc((100% - 7.5rem) / 2);
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     img {
-      height: 0.833rem;
+      width: 1.8rem;
+      &:last-child{
+        margin-left: 0.138rem;
+      }
     }
   }
 

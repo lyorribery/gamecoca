@@ -2,7 +2,8 @@
   <div class="input-box">
     <div class="title" v-if="showTitle">
       <span>{{ title }}</span>
-      <img src="../assets/images/show.png" />
+      <img @click="show_pass=!show_pass" v-if="!show_pass" src="../assets/images/login/yanjingkai.png" />
+      <img v-else @click="show_pass=!show_pass" src="../assets/images/login/yanjingguan.png" />
     </div>
     <div
       class="input-content"
@@ -18,7 +19,7 @@
         maxlength="1"
         data-index="0"
         v-model.trim.number="input[0]"
-        type="password"
+        :type="codeLen == 4 || show_pass ? 'text' : 'password'"
         ref="firstinput"
       />
       <input
@@ -27,7 +28,7 @@
         maxlength="1"
         data-index="1"
         v-model.trim.number="input[1]"
-        type="password"
+        :type="codeLen == 4 || show_pass ? 'text' : 'password'"
       />
       <input
         max="9"
@@ -35,7 +36,7 @@
         maxlength="1"
         data-index="2"
         v-model.trim.number="input[2]"
-        type="password"
+        :type="codeLen == 4 || show_pass ? 'text' : 'password'"
       />
       <input
         max="9"
@@ -43,25 +44,25 @@
         maxlength="1"
         data-index="3"
         v-model.trim.number="input[3]"
-        type="password"
+        :type="codeLen == 4 || show_pass ? 'text' : 'password'"
       />
       <input
-       v-if="codeLen==6"
+        v-if="codeLen == 6"
         max="9"
         min="0"
         maxlength="1"
         data-index="4"
         v-model.trim.number="input[4]"
-        type="password"
+        :type="codeLen == 4 || show_pass ? 'text' : 'password'"
       />
       <input
-       v-if="codeLen==6"
+        v-if="codeLen == 6"
         max="9"
         min="0"
         maxlength="1"
         data-index="5"
         v-model.trim.number="input[5]"
-        type="password"
+        :type="codeLen == 4 || show_pass ? 'text' : 'password'"
       />
     </div>
   </div>
@@ -87,8 +88,10 @@ export default {
   },
   setup() {
     const input = ref(new Array(6).fill(""));
+    const show_pass = ref(false);
     return {
       input,
+      show_pass,
     };
   },
   methods: {

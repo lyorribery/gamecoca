@@ -4,7 +4,7 @@ const Timestamp = new Date().getTime()
 module.exports = {
     devServer: {
         port: 8080,
-        host: '0.0.0.0', // 允许局域网内访问
+        host: '0.0.0.0', 
         proxy: {
             '/api': {
                 target: 'https://brbr.games/', // 确保 target 是通过 VPN 访问的

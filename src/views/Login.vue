@@ -69,6 +69,7 @@
               </div>
               <nut-input
                 v-model="loginForm.account"
+                :clearable="true"
                 :placeholder="
                   login_type == 1
                     ? 'Phone Number'
@@ -88,14 +89,29 @@
               <nut-input
                 v-model="loginForm.password"
                 placeholder="Password"
-                type="password"
+                :type="showpass.login_pass ? 'text' : 'password'"
+              />
+              <img
+                @click="showpass.login_pass = false"
+                v-if="showpass.login_pass"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.login_pass = true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
               />
             </div>
           </nut-form-item>
           <nut-form-item prop="action">
             <div class="forget-row">
-              <div class="check">
-                <i class="iconfont icon-duoxuanyixuan"></i>
+              <div class="check" @click="is_check = !is_check">
+                <i
+                  :style="{ color: is_check ? '#06a950' : '#808080' }"
+                  class="iconfont icon-duoxuanyixuan"
+                ></i>
                 <span>Lembrar</span>
               </div>
               <div class="forget" @click="modal_visible = true">Esqueceu?</div>
@@ -273,6 +289,7 @@
               </div>
               <nut-input
                 v-model="registerForm2.account"
+                :clearable="true"
                 :placeholder="
                   login_type == 1
                     ? 'Phone Number'
@@ -292,7 +309,19 @@
               <nut-input
                 v-model="registerForm2.password"
                 placeholder="Password"
-                type="password"
+                :type="showpass.register_pass ? 'text' : 'password'"
+              />
+              <img
+                @click="showpass.register_pass = false"
+                v-if="showpass.register_pass"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.register_pass = true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
               />
             </div>
           </nut-form-item>
@@ -308,7 +337,19 @@
               <nut-input
                 v-model="registerForm2.repassword"
                 placeholder="Confirm Password"
-                type="password"
+                :type="showpass.register_pass_again ? 'text' : 'password'"
+              />
+              <img
+                @click="showpass.register_pass_again = false"
+                v-if="showpass.register_pass_again"
+                class="pass-icon"
+                src="../assets/images/login/yanjingguan.png"
+              />
+              <img
+                @click="showpass.register_pass_again = true"
+                v-else
+                class="pass-icon"
+                src="../assets/images/login/yanjingkai.png"
               />
             </div>
           </nut-form-item>
@@ -395,6 +436,7 @@
                   <span>+55</span>
                 </div>
                 <nut-input
+                  :clearable="true"
                   v-model="forgetForm.mobile"
                   placeholder="Phone Number"
                   type="number"
@@ -409,7 +451,19 @@
                 <nut-input
                   v-model="forgetForm.password"
                   placeholder="Password"
-                  type="password"
+                  :type="showpass.forget_pass ? 'text' : 'password'"
+                />
+                <img
+                  @click="showpass.forget_pass = false"
+                  v-if="showpass.forget_pass"
+                  class="pass-icon"
+                  src="../assets/images/login/yanjingguan.png"
+                />
+                <img
+                  @click="showpass.forget_pass = true"
+                  v-else
+                  class="pass-icon"
+                  src="../assets/images/login/yanjingkai.png"
                 />
               </div>
             </nut-form-item>
@@ -490,14 +544,20 @@ import {
 } from "@/utils/utils";
 import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
-let { dispatch, state } = useStore();
+let { dispatch, state, commit } = useStore();
 
 const modal_visible = ref(false);
-
+const showpass = ref({
+  login_pass: false,
+  register_pass: false,
+  register_pass_again: false,
+  forget_pass: false,
+});
 const onComplete = (val) => {
   console.log("complete", val);
   forgetForm.value.code = val;
 };
+const is_check = ref(true);
 const showBirthday = ref(false);
 const min = new Date(1900, 0, 1);
 const val = ref(new Date(2022, 4, 10));
@@ -594,6 +654,9 @@ const submitRegister2 = () => {
             router.push({
               path: "/home",
             });
+            commit("set_show_tip", { type: 1, msg: "register success" });
+          } else {
+            commit("set_show_tip", { type: 0, msg: res.msg });
           }
           is_loading.value = false;
         })
@@ -622,6 +685,9 @@ const submitLogin = () => {
             router.push({
               path: "/home",
             });
+            commit("set_show_tip", { type: 1, msg: "login success" });
+          } else {
+            commit("set_show_tip", { type: 1, msg: res.msg });
           }
           is_loading.value = false;
         })
@@ -650,14 +716,16 @@ const customValidatorRealName = (val) => {
     return Promise.reject("please Enter Real Name");
   }
 };
-const customValidatorCode=(val)=>{
-  let code = forgetForm.value.code.filter(item => item !== undefined && item !== null && item !== '');
-  if (code.length==4) {
+const customValidatorCode = (val) => {
+  let code = forgetForm.value.code.filter(
+    (item) => item !== undefined && item !== null && item !== ""
+  );
+  if (code.length == 4) {
     return Promise.resolve();
   } else {
     return Promise.reject("please Enter Code");
   }
-}
+};
 const customValidatorAccount = (val) => {
   if (login_type.value == 1 && _validphone(val)) {
     return Promise.resolve();
@@ -722,6 +790,14 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+
+.pass-icon {
+  position: absolute;
+  right: 0.416rem;
+  bottom: 0.333rem;
+  width: 0.444rem;
+}
+
 .overlay-body {
   display: flex;
   height: 100%;
@@ -785,6 +861,7 @@ onMounted(() => {
       align-items: center;
       box-sizing: border-box;
       padding: 0 0.416rem;
+      position: relative;
       .icon-box {
         display: flex;
         align-items: center;
@@ -975,6 +1052,7 @@ onMounted(() => {
         align-items: center;
         box-sizing: border-box;
         padding: 0 0.416rem;
+        position: relative;
         .icon-box {
           display: flex;
           align-items: center;

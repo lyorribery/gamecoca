@@ -130,12 +130,10 @@
 <script>
 import imgCard from "@/components/imgCard.vue";
 import pageFooter from "@/components/pageFooter.vue";
-import regModal from "@/components/regModal.vue";
 export default {
   components: {
     imgCard,
     pageFooter,
-    regModal,
   },
 };
 </script>

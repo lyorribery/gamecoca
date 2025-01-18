@@ -188,6 +188,15 @@ const router = createRouter({
         auth: false
       },
     },
+    {
+      path:'/deposit',
+      name:'deposit',
+      component: () => import('@/views/Deposit.vue'),
+      meta: {
+        transition: 'slide-right',
+        auth: false
+      },
+    }
   ]
 })
 

@@ -48,12 +48,25 @@ const store = createStore({
     show_tip:{
       type:1,
       msg:'',
-      show:false
-    }
+    },
+    tip_visible:false,
+    is_refresh_banlance:false
   }),
   mutations: {
+    set_is_refresh_banlance(state,val){
+      state.is_refresh_banlance=val
+    },
+    set_tip_visible(state,val){
+      state.tip_visible=val
+    },
     set_show_tip(state,val){
-      state.show_tip={...val,show:true}
+      state.show_tip=val
+      if(!state.tip_visible){
+        state.tip_visible=true
+        setTimeout(() => {
+          state.tip_visible=false
+        },2000);
+      }
     },
     set_is_show_app(state,val){
       state.is_show_app=val
@@ -181,7 +194,10 @@ const store = createStore({
       })
     },
     GET_USER_BALANCE(ctx) {
+      if(ctx.state.is_refresh_banlance) return
+      ctx.commit('set_is_refresh_banlance',true)
       getUserBalance().then(res => {
+        ctx.commit('set_is_refresh_banlance',false)
         if (res.code == 200)
           ctx.commit('set_user_balance', res.data)
       })
@@ -205,6 +221,7 @@ const store = createStore({
         router.push({
           path: '/home'
         })
+        ctx.commit('set_show_tip',{type:1,msg:'logout success'})
       })
     }
   }

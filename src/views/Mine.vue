@@ -36,7 +36,9 @@
       <div class="action">
         <img src="../assets/images/mine/email.png" />
         <img src="../assets/images/mine/shouji.png" />
-        <div class="action-btn" @click="goPath('/setting')">{{ $t("button.change") }}</div>
+        <div class="action-btn" @click="goPath('/setting')">
+          {{ $t("button.change") }}
+        </div>
       </div>
     </div>
     <div class="action-box">
@@ -48,11 +50,11 @@
             Wallet
           </div>
         </div>
-        <div class="action">
+        <div class="action" @click="goDeposit('withdraw')">
           <img src="../assets/images/mine/tixian.png" />
           <div>Withdraw <br />Details</div>
         </div>
-        <div class="action">
+        <div class="action" @click="goDeposit('deposit')">
           <img src="../assets/images/mine/chongzhi.png" />
           <div>
             Desposit<br />
@@ -357,13 +359,21 @@ const copyId = async () => {
     console.error("复制到剪贴板失败", err);
   }
 };
-const avatar = computed(() => {
-  return state.user_info.avatar ? require(state.user_info.avatar) : "";
-});
+// const avatar = computed(() => {
+//   return state.user_info.avatar ? require(state.user_info.avatar) : "";
+// });
 const goReport = (type) => {
   router.push({
     path: "/report",
     query: { type },
+  });
+};
+const goDeposit = (type) => {
+  router.push({
+    path: "/deposit",
+    query: {
+      mode: type,
+    },
   });
 };
 </script>

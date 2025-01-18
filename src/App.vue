@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <tipModal @callBack="modalFunc" />
+
     <loading />
   </div>
 </template>
@@ -10,7 +10,6 @@
 import { onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
-import tipModal from "@/components/tipModal.vue";
 import loading from "@/components/loading.vue";
 const uuid = require("uuid");
 
@@ -25,7 +24,6 @@ window.onresize = () => {
 export default {
   name: "App",
   components: {
-    tipModal,
     loading,
   },
   setup() {
@@ -35,6 +33,43 @@ export default {
       console.log(obj)
     };
     onMounted(() => {
+      let userAgentInfo = window.navigator.userAgent;
+      let Agents = new Array(
+        "Android",
+        "iPhone",
+        "SymbianOS",
+        "Windows Phone",
+        "iPad",
+        "iPod"
+      );
+      //pc
+      if (
+        !Agents.some((item) =>
+          userAgentInfo.toLowerCase().includes(item.toLowerCase())
+        ) &&
+        !(self.frameElement && self.frameElement.tagName == "IFRAME")
+      ) {
+        let ifrTag = document.getElementsByTagName("iframe")[0];
+        if (ifrTag) {
+          ifrTag.remove();
+        } else {
+          let ifrTag = document.createElement("iframe");
+          document.body.innerHTML = "";
+          ifrTag.setAttribute("src", window.location.href);
+          ifrTag.setAttribute("frameborder", 0);
+          let styleObj = {
+            width: "414px",
+            height: "100vh",
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+          };
+          Object.entries(styleObj).forEach(([key, value]) => {
+            ifrTag.style[key] = value;
+          });
+          document.body.append(ifrTag);
+        }
+      }
       dispatch("GET_CONFIG");
       if (localStorage.getItem("accessToken")) {
         dispatch("GET_USER_INFO");
