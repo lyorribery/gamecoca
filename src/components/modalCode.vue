@@ -1,9 +1,23 @@
 <template>
   <div class="input-box">
     <div class="title" v-if="showTitle">
-      <span>{{ title }}</span>
-      <img @click="show_pass=!show_pass" v-if="!show_pass" src="../assets/images/login/yanjingkai.png" />
-      <img v-else @click="show_pass=!show_pass" src="../assets/images/login/yanjingguan.png" />
+      <span
+        :style="{
+          color: titleTrans ? '#999999' : '#ffc02e',
+          fontSize: titleTrans ? '0.361rem' : '0.333rem',
+        }"
+        >{{ title }}</span
+      >
+      <img
+        @click="show_pass = !show_pass"
+        v-if="!show_pass"
+        src="../assets/images/login/yanjingkai.png"
+      />
+      <img
+        v-else
+        @click="show_pass = !show_pass"
+        src="../assets/images/login/yanjingguan.png"
+      />
     </div>
     <div
       class="input-content"
@@ -80,6 +94,10 @@ export default {
     showTitle: {
       type: Boolean,
       default: true,
+    },
+    titleTrans: {
+      type: Boolean,
+      default: false,
     },
     codeLen: {
       type: Number,
@@ -218,6 +236,7 @@ export default {
 
 <style lang="scss" scoped>
 .input-box {
+  width:100%;
   .title {
     width: 100%;
     margin: 0.416rem 0;

@@ -146,6 +146,153 @@
     </div>
     <div class="rule" v-if="mode == 'deposit'" v-html="deposit_rule"></div>
 
+    <div class="form-box" v-if="mode == 'withdraw'">
+      <div class="withdraw-able">
+        <div class="name">Withdrawable</div>
+        <div class="able-amount">
+          <span>
+            {{
+              withdraw_info.sumCompletedAmount
+                ? withdraw_info.sumCompletedAmount.toFixed(2)
+                : "0.00"
+            }}
+          </span>
+          <svg
+            t="1737227137216"
+            class="icon"
+            viewBox="0 0 1030 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="7183"
+            width="20"
+            height="20"
+          >
+            <path
+              d="M512 0C228.969 0 0 228.969 0 512s228.969 512 512 512 512-228.969 512-512C1022.41 228.969 793.441 0 512 0z m30.211 812.522h-90.633v-90.634h90.633v90.634z m106.534-357.764c-9.54 17.49-28.62 38.161-55.652 65.192-28.62 27.031-46.112 47.702-50.882 58.833-4.77 11.13-7.95 30.21-7.95 60.422l7.95 23.85h-90.633l-1.59-25.44c1.59-30.211 6.36-57.242 14.31-77.913 9.54-22.261 28.621-47.702 57.242-77.913 27.031-27.031 42.932-47.702 49.292-57.242 4.77-9.54 7.95-20.671 7.95-36.572 0-22.26-6.36-39.751-20.67-52.472-14.31-12.72-33.392-20.67-58.832-20.67-54.063 0-73.143 38.16-77.914 106.533h-90.633v-9.54c1.59-31.801 4.77-55.652 12.72-74.733 7.95-19.08 19.081-36.571 36.572-52.472 17.49-15.9 36.571-27.03 57.242-33.391 20.67-6.36 41.342-11.13 63.603-11.13 46.111 0 85.863 14.31 116.074 41.341s46.112 65.193 46.112 111.304c0 23.851-4.77 44.522-14.31 62.013z"
+              p-id="7184"
+              fill="#666666"
+            ></path>
+          </svg>
+        </div>
+        <div class="title-row">Enter your amount</div>
+        <div class="form-row">
+          <div class="ipt-box">
+            <div class="unit">
+              <span>R$</span>
+            </div>
+            <nut-input
+              v-model="withdraw_form.basicValue"
+              placeholder="Enter your amount"
+              type="number"
+            />
+          </div>
+        </div>
+        <div class="tax-row">
+          <div class="item">
+            Withdraw Fee:<span>R${{ withdraw_form.basicValue }}</span>
+          </div>
+          <div class="item">Handing Fee:<span>R$1.00</span></div>
+        </div>
+        <div class="title-row">Carteira / Banco / Cartao</div>
+        <div class="withdraw-box">
+          <div
+            class="item"
+            v-for="(item, index) in trans_info.withdrawalAccounts"
+            :key="index"
+          >
+            <img :src="pay_method[0].fullMethodIcon" />
+            <div class="item-info">
+              <div class="type">
+                PIX<span style="color: #666666">({{ item.accountType }})</span>
+              </div>
+              <div class="pix-account">{{ item.account }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="add-pix">
+          <div class="left">
+            <svg
+              t="1737228926918"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="16142"
+              width="21"
+              height="21"
+            >
+              <path
+                d="M1024 1024H0V234.666667h1024v789.333333zM85.333333 938.666667h853.333334V320H85.333333v618.666667z"
+                p-id="16143"
+                fill="#999999"
+              ></path>
+              <path
+                d="M768 320H0V0h768v320zM85.333333 234.666667h597.333334V85.333333H85.333333v149.333334z"
+                p-id="16144"
+                fill="#999999"
+              ></path>
+              <path
+                d="M778.666667 629.333333m-74.666667 0a74.666667 74.666667 0 1 0 149.333333 0 74.666667 74.666667 0 1 0-149.333333 0Z"
+                p-id="16145"
+                fill="#999999"
+              ></path>
+            </svg>
+            <span>Add PIX</span>
+          </div>
+          <svg
+            t="1737229102401"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="3136"
+            width="15"
+            height="15"
+          >
+            <path
+              d="M372.679931 191.690834c8.782014 0 17.565051 3.235694 24.26873 9.708106l297.484322 287.175535c13.408381 12.932544 13.408381 33.9226 0 46.855144l-297.485345 287.172465c-13.408381 12.9438-35.130102 12.9438-48.53746 0-13.408381-12.932544-13.408381-33.9226 0-46.855144l273.215592-263.744893L348.411201 248.25306c-13.408381-12.932544-13.408381-33.9226 0-46.855144C355.11488 194.926528 363.897917 191.68981 372.679931 191.690834z"
+              p-id="3137"
+              fill="#E6E6E6"
+            ></path>
+          </svg>
+        </div>
+        <div class="form-row">
+            <modalCode :titleTrans="true" title="Transfication Password" @complete="onComplete" />
+        </div>
+        <div class="confirm-btn" style="margin-top:1.111rem" @click="withdrawSubmit()">
+        Pay
+        <svg
+          v-if="is_loading"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="22px"
+          height="22px"
+          viewBox="0 0 50 50"
+          style="enable-background: new 0 0 50 50"
+          xml:space="preserve"
+        >
+          <path
+            fill="#181717"
+            d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+            transform="rotate(275.098 25 25)"
+          >
+            <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+              type="rotate"
+              from="0 25 25"
+              to="360 25 25"
+              dur="0.6s"
+              repeatCount="indefinite"
+            ></animateTransform>
+          </path>
+        </svg>
+      </div>
+      </div>
+    </div>
+
+    <div class="rule" v-if="mode == 'withdraw'" v-html="withdraw_rule"></div>
+
     <transition
       name="fade"
       enter-active-class="animate__animated animate__fadeIn"
@@ -205,6 +352,15 @@
   </div>
 </template>
 
+<script>
+import modalCode from "@/components/modalCode.vue";
+export default {
+  components: {
+    modalCode,
+  },
+};
+</script>
+
 <script setup>
 import QRCode from "qrcode";
 import { ref, onMounted, onBeforeUnmount, computed, watch } from "vue";
@@ -226,6 +382,15 @@ const { state, dispatch, commit } = useStore();
 const route = useRoute();
 const router = useRouter();
 
+const withdrawSubmit=()=>{}
+const onComplete = (val) => {
+  console.log("complete", val);
+  withdraw_form.value.transficaiton_password = val;
+};
+const withdraw_form = ref({
+  basicValue: "",
+  transficaiton_password:""
+});
 const copyPix = async () => {
   try {
     await navigator.clipboard.writeText(pix_no.value);
@@ -287,7 +452,7 @@ const depositSubmit = () => {
           show_deposit_page.value = true;
         } else {
           trade_no.value = res.data.outTradeNo;
-           nowtime.value = Date.now()
+          nowtime.value = Date.now();
           countdown.value = new Date().getTime() + res.data.timeExpire * 1000;
           pix_no.value = res.data.content;
           QRCode.toDataURL(res.data.content).then((url) => {
@@ -313,7 +478,7 @@ const depositSubmit = () => {
           show_deposit_page.value = true;
         } else {
           trade_no.value = res.data.outTradeNo;
-          nowtime.value = Date.now()
+          nowtime.value = Date.now();
           countdown.value = new Date().getTime() + res.data.timeExpire * 1000;
           pix_no.value = res.data.content;
           QRCode.toDataURL(res.data.content).then((url) => {
@@ -541,6 +706,118 @@ onMounted(() => {
     padding: 0 0.416rem;
     background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
     border-radius: 0.555rem;
+    .add-pix {
+      width: 100%;
+      height: 1.111rem;
+      background: rgba(15, 15, 15, 1);
+      border-radius: 0.555rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 0.416rem;
+      margin-top:0.277rem;
+      .left {
+        display: flex;
+        align-items: center;
+        span {
+            padding-left: 0.416rem;
+          font-weight: 400;
+          font-size: 0.361rem;
+          color: #e6e6e6;
+        }
+      }
+    }
+    .withdraw-box {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .active-item {
+        border: 0.027rem solid $primary-color;
+        color: #181717;
+        background: $primary-color;
+      }
+      .item {
+        width: 2.777rem;
+        height: 0.916rem;
+        border-radius: 0.472rem;
+        border: 0.027rem solid #808080;
+        font-weight: bold;
+        font-size: 0.361rem;
+        color: #808080;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.277rem;
+        img {
+          width: 0.472rem;
+          margin-right: 0.222rem;
+        }
+        .item-info {
+          .pix-account {
+            font-size: #666666;
+            font-size: 0.277rem;
+            margin-top: 0.027rem;
+          }
+          .type {
+            font-size: 0.305rem;
+            color: $color-white;
+            span {
+              font-size: #666666;
+              font-size: 0.25rem;
+            }
+          }
+        }
+      }
+    }
+    .tax-row {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 0.138rem;
+      .item {
+        font-weight: 400;
+        font-size: 0.277rem;
+        color: #e5e5e5;
+        margin-right: 0.277rem;
+        span {
+          color: $primary-color2;
+          font-size: 0.361rem;
+          font-weight: 600;
+        }
+      }
+    }
+    .withdraw-able {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0.555rem 0 0.277rem 0;
+      .name {
+        font-weight: 400;
+        font-size: 0.361rem;
+        color: #e5e5e5;
+        margin-bottom: 0.277rem;
+      }
+      .able-amount {
+        position: relative;
+        height: 0.916rem;
+        svg {
+          position: absolute;
+          right: -0.8rem;
+          bottom: 0.12rem;
+        }
+        span {
+          font-weight: 400;
+          font-size: 0.916rem;
+          color: $primary-color;
+        }
+      }
+    }
     .confirm-btn {
       margin: 0.416rem 0;
       width: 100%;

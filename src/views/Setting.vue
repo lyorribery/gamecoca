@@ -104,20 +104,20 @@
                   <nut-input
                     v-model="passwordForm.oldpassword"
                     placeholder="Old Password"
-                    :type="showpass.old_pass?'text':'password'"
+                    :type="showpass.old_pass ? 'text' : 'password'"
                   />
                   <img
-              @click="showpass.old_pass=false"
-                v-if="showpass.old_pass"
-                class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
-              />
-              <img
-                @click="showpass.old_pass=true"
-                v-else
-                class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
-              />
+                    @click="showpass.old_pass = false"
+                    v-if="showpass.old_pass"
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingguan.png"
+                  />
+                  <img
+                    @click="showpass.old_pass = true"
+                    v-else
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingkai.png"
+                  />
                 </div>
               </nut-form-item>
               <nut-form-item
@@ -131,20 +131,20 @@
                   <nut-input
                     v-model="passwordForm.newpassword"
                     placeholder="New Password"
-                    :type="showpass.new_pass?'text':'password'"
+                    :type="showpass.new_pass ? 'text' : 'password'"
                   />
                   <img
-              @click="showpass.new_pass=false"
-                v-if="showpass.new_pass"
-                class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
-              />
-              <img
-                @click="showpass.new_pass=true"
-                v-else
-                class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
-              />
+                    @click="showpass.new_pass = false"
+                    v-if="showpass.new_pass"
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingguan.png"
+                  />
+                  <img
+                    @click="showpass.new_pass = true"
+                    v-else
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingkai.png"
+                  />
                 </div>
               </nut-form-item>
 
@@ -159,20 +159,20 @@
                   <nut-input
                     v-model="passwordForm.repassword"
                     placeholder="Confirm New Password"
-                    :type="showpass.re_pass?'text':'password'"
+                    :type="showpass.re_pass ? 'text' : 'password'"
                   />
                   <img
-              @click="showpass.re_pass=false"
-                v-if="showpass.re_pass"
-                class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
-              />
-              <img
-                @click="showpass.re_pass=true"
-                v-else
-                class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
-              />
+                    @click="showpass.re_pass = false"
+                    v-if="showpass.re_pass"
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingguan.png"
+                  />
+                  <img
+                    @click="showpass.re_pass = true"
+                    v-else
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingkai.png"
+                  />
                 </div>
               </nut-form-item>
             </nut-form>
@@ -240,20 +240,20 @@
                   <nut-input
                     v-model="emailForm.password"
                     placeholder="Password"
-                    :type="showpass.email_pass?'text':'password'"
+                    :type="showpass.email_pass ? 'text' : 'password'"
                   />
                   <img
-              @click="showpass.email_pass=false"
-                v-if="showpass.email_pass"
-                class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
-              />
-              <img
-                @click="showpass.email_pass=true"
-                v-else
-                class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
-              />
+                    @click="showpass.email_pass = false"
+                    v-if="showpass.email_pass"
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingguan.png"
+                  />
+                  <img
+                    @click="showpass.email_pass = true"
+                    v-else
+                    class="pass-icon"
+                    src="../assets/images/login/yanjingkai.png"
+                  />
                 </div>
               </nut-form-item>
             </nut-form>
@@ -311,12 +311,12 @@ import { useRouter } from "vue-router";
 const { state, commit } = useStore();
 const router = useRouter();
 
-const showpass=ref({
-  email_pass:false,
-  re_pass:false,
-  old_pass:false,
-  new_pass:false
-})
+const showpass = ref({
+  email_pass: false,
+  re_pass: false,
+  old_pass: false,
+  new_pass: false,
+});
 const tranRef = ref(null);
 const tranForm = ref({
   oldpassword: "",
@@ -417,18 +417,24 @@ const confirmPass = () => {
     tranRef.value.validate().then(({ valid, errors }) => {
       if (valid) {
         is_loading.value = true;
-        
-        const pram={
-          oldpassword:tranForm.value.oldpassword.join(''),
-          newpassword:tranForm.value.newpassword.join('')
-        }
+
+        const pram = {
+          oldpassword: tranForm.value.oldpassword.join(""),
+          newpassword: tranForm.value.newpassword.join(""),
+        };
 
         SetTranscationPassword(pram)
           .then((res) => {
             if (res.code == 200) {
-              
+              commit("set_show_tip", {
+                type: 1,
+                msg: "success",
+              });
             } else {
-             
+              commit("set_show_tip", {
+                type: 0,
+                msg: res.msg,
+              });
             }
           })
           .finally(() => {
@@ -475,11 +481,11 @@ const goBack = () => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
-.pass-icon{
+.pass-icon {
   position: absolute;
-  right:0.416rem;
-  bottom:0.333rem;
-  width:0.444rem;
+  right: 0.416rem;
+  bottom: 0.333rem;
+  width: 0.444rem;
 }
 .overlay-body {
   display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-
+    <tip />
     <loading />
   </div>
 </template>
@@ -11,6 +11,7 @@ import { onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import loading from "@/components/loading.vue";
+import tip from '@/components/tip.vue'
 const uuid = require("uuid");
 
 const setFont = () => {
@@ -25,6 +26,7 @@ export default {
   name: "App",
   components: {
     loading,
+    tip
   },
   setup() {
     const router = useRouter();

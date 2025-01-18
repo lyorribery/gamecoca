@@ -650,7 +650,7 @@
     ></div>
   </transition>
 
-  <tip />
+
 </template>
 
 
@@ -661,12 +661,8 @@ import { useRouter, useRoute } from "vue-router";
 // import { preloadImage } from "@/utils/utils";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import tip from '@/components/tip.vue'
 
 export default {
-  components:{
-    tip
-  },
   setup() {
     const { locale } = useI18n();
     let { state, commit, dispatch } = useStore();
