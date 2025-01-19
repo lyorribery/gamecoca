@@ -535,15 +535,15 @@ const goDeposit = (type) => {
       padding: 0.555rem 0.277rem;
       .img-box {
         border-radius: 50%;
-        width: 1.66rem;
-        height: 1.66rem;
+        width: 1.583rem;
+        height: 1.583rem;
         box-sizing: border-box;
-        border: 0.054rem solid $primary-color;
+        // border: 0.054rem solid $primary-color;
         margin: 0 0.277rem 0.277rem 0;
         position: relative;
         i {
           position: absolute;
-          bottom: -0.277rem;
+          bottom: -0.138rem;
           right: 0;
           font-size: 0.555rem;
           font-weight: bold;
