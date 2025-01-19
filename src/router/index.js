@@ -72,7 +72,15 @@ const router = createRouter({
             transition: 'slide-right',
           }
         },
-
+        {
+          path: '/betbonus',
+          name: 'betbonus',
+          component: () => import('@/views/Betbonus.vue'),
+          meta: {
+            auth: false,
+            transition: 'slide-left',
+          }
+        },
         {
           path: '/promotion',
           name: 'promotion',

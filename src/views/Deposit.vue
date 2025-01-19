@@ -158,6 +158,7 @@
             }}
           </span>
           <svg
+            @click="showIns = true"
             t="1737227137216"
             class="icon"
             viewBox="0 0 1030 1024"
@@ -181,7 +182,7 @@
               <span>R$</span>
             </div>
             <nut-input
-              v-model="withdraw_form.basicValue"
+              v-model="withdraw_form.withdrawAmount"
               placeholder="Enter your amount"
               type="number"
             />
@@ -189,7 +190,7 @@
         </div>
         <div class="tax-row">
           <div class="item">
-            Withdraw Fee:<span>R${{ withdraw_form.basicValue }}</span>
+            Withdraw Fee:<span>R${{ withdraw_form.withdrawAmount }}</span>
           </div>
           <div class="item">Handing Fee:<span>R$1.00</span></div>
         </div>
@@ -199,95 +200,111 @@
             class="item"
             v-for="(item, index) in trans_info.withdrawalAccounts"
             :key="index"
+            @click="changeWithdrawAccountType(item)"
           >
-            <img :src="pay_method[0].fullMethodIcon" />
-            <div class="item-info">
-              <div class="type">
-                PIX<span style="color: #666666">({{ item.accountType }})</span>
+            <div class="left">
+              <img :src="pay_method[0].fullMethodIcon" />
+              <div class="item-info">
+                <div class="type">
+                  PIX<span>({{ item.accountType }})</span>
+                </div>
+                <div class="pix-account">{{ item.account }}</div>
               </div>
-              <div class="pix-account">{{ item.account }}</div>
             </div>
+            <i
+              class="iconfont"
+              :class="
+                item.account == withdraw_form.account
+                  ? 'icon-xuanzhong'
+                  : 'icon-weixuanzhong'
+              "
+            ></i>
           </div>
-        </div>
-        <div class="add-pix">
-          <div class="left">
+          <div class="add-pix" @click="show_check_pass = true">
+            <div class="left">
+              <svg
+                t="1737228926918"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="16142"
+                width="21"
+                height="21"
+              >
+                <path
+                  d="M1024 1024H0V234.666667h1024v789.333333zM85.333333 938.666667h853.333334V320H85.333333v618.666667z"
+                  p-id="16143"
+                  fill="#999999"
+                ></path>
+                <path
+                  d="M768 320H0V0h768v320zM85.333333 234.666667h597.333334V85.333333H85.333333v149.333334z"
+                  p-id="16144"
+                  fill="#999999"
+                ></path>
+                <path
+                  d="M778.666667 629.333333m-74.666667 0a74.666667 74.666667 0 1 0 149.333333 0 74.666667 74.666667 0 1 0-149.333333 0Z"
+                  p-id="16145"
+                  fill="#999999"
+                ></path>
+              </svg>
+              <span>Add PIX</span>
+            </div>
             <svg
-              t="1737228926918"
+              t="1737229102401"
               class="icon"
               viewBox="0 0 1024 1024"
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
-              p-id="16142"
-              width="21"
-              height="21"
+              p-id="3136"
+              width="15"
+              height="15"
             >
               <path
-                d="M1024 1024H0V234.666667h1024v789.333333zM85.333333 938.666667h853.333334V320H85.333333v618.666667z"
-                p-id="16143"
-                fill="#999999"
-              ></path>
-              <path
-                d="M768 320H0V0h768v320zM85.333333 234.666667h597.333334V85.333333H85.333333v149.333334z"
-                p-id="16144"
-                fill="#999999"
-              ></path>
-              <path
-                d="M778.666667 629.333333m-74.666667 0a74.666667 74.666667 0 1 0 149.333333 0 74.666667 74.666667 0 1 0-149.333333 0Z"
-                p-id="16145"
-                fill="#999999"
+                d="M372.679931 191.690834c8.782014 0 17.565051 3.235694 24.26873 9.708106l297.484322 287.175535c13.408381 12.932544 13.408381 33.9226 0 46.855144l-297.485345 287.172465c-13.408381 12.9438-35.130102 12.9438-48.53746 0-13.408381-12.932544-13.408381-33.9226 0-46.855144l273.215592-263.744893L348.411201 248.25306c-13.408381-12.932544-13.408381-33.9226 0-46.855144C355.11488 194.926528 363.897917 191.68981 372.679931 191.690834z"
+                p-id="3137"
+                fill="#E6E6E6"
               ></path>
             </svg>
-            <span>Add PIX</span>
           </div>
+        </div>
+
+        <div class="form-row">
+          <modalCode
+            :titleTrans="true"
+            title="Transfication Password"
+            @complete="onComplete"
+          />
+        </div>
+        <div class="confirm-btn" style="margin-top: 1.111rem" @click="withdrawSubmit()">
+          Pay
           <svg
-            t="1737229102401"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
+            v-if="is_loading"
             xmlns="http://www.w3.org/2000/svg"
-            p-id="3136"
-            width="15"
-            height="15"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="22px"
+            height="22px"
+            viewBox="0 0 50 50"
+            style="enable-background: new 0 0 50 50"
+            xml:space="preserve"
           >
             <path
-              d="M372.679931 191.690834c8.782014 0 17.565051 3.235694 24.26873 9.708106l297.484322 287.175535c13.408381 12.932544 13.408381 33.9226 0 46.855144l-297.485345 287.172465c-13.408381 12.9438-35.130102 12.9438-48.53746 0-13.408381-12.932544-13.408381-33.9226 0-46.855144l273.215592-263.744893L348.411201 248.25306c-13.408381-12.932544-13.408381-33.9226 0-46.855144C355.11488 194.926528 363.897917 191.68981 372.679931 191.690834z"
-              p-id="3137"
-              fill="#E6E6E6"
-            ></path>
+              fill="#181717"
+              d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+              transform="rotate(275.098 25 25)"
+            >
+              <animateTransform
+                attributeType="xml"
+                attributeName="transform"
+                type="rotate"
+                from="0 25 25"
+                to="360 25 25"
+                dur="0.6s"
+                repeatCount="indefinite"
+              ></animateTransform>
+            </path>
           </svg>
         </div>
-        <div class="form-row">
-            <modalCode :titleTrans="true" title="Transfication Password" @complete="onComplete" />
-        </div>
-        <div class="confirm-btn" style="margin-top:1.111rem" @click="withdrawSubmit()">
-        Pay
-        <svg
-          v-if="is_loading"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          width="22px"
-          height="22px"
-          viewBox="0 0 50 50"
-          style="enable-background: new 0 0 50 50"
-          xml:space="preserve"
-        >
-          <path
-            fill="#181717"
-            d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
-            transform="rotate(275.098 25 25)"
-          >
-            <animateTransform
-              attributeType="xml"
-              attributeName="transform"
-              type="rotate"
-              from="0 25 25"
-              to="360 25 25"
-              dur="0.6s"
-              repeatCount="indefinite"
-            ></animateTransform>
-          </path>
-        </svg>
-      </div>
       </div>
     </div>
 
@@ -349,6 +366,386 @@
         </div>
       </div>
     </transition>
+
+    <nut-overlay
+      v-model:visible="trans_visible"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div class="overlay-content">
+          <div class="close" @click="trans_visible = false">
+            <svg
+              t="1737048406504"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2325"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M822.00345 776.822434l0.022513-0.022513L246.50423 201.317075c-5.78782-5.791913-13.785981-9.374508-22.621207-9.374508-17.662265 0-31.980365 14.3181-31.980365 31.980365 0 8.834202 3.582595 16.832364 9.373485 22.620184L776.11226 821.339324c5.838985 6.277984 14.166651 10.209526 23.416316 10.209526 17.662265 0 31.980365-14.3181 31.980365-31.980365C831.508941 790.667767 827.871087 782.620487 822.00345 776.822434z"
+                p-id="2326"
+                fill="#E6E6E6"
+              ></path>
+              <path
+                d="M776.783549 201.448058l-0.022513-0.022513L201.278189 776.947278c-5.791913 5.78782-9.374508 13.785981-9.374508 22.621207 0 17.662265 14.3181 31.980365 31.980365 31.980365 8.834202 0 16.832364-3.582595 22.620184-9.373485l574.797231-574.836117c6.277984-5.838985 10.209526-14.166651 10.209526-23.416316 0-17.662265-14.3181-31.980365-31.980365-31.980365C790.628882 191.942567 782.580578 195.58042 776.783549 201.448058z"
+                p-id="2327"
+                fill="#E6E6E6"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="title">
+            Change Password
+            <div class="line"></div>
+          </div>
+
+          <div>
+            <nut-form ref="tranRef" :model-value="trans_Form">
+              <nut-form-item
+                prop="newPassword"
+                :rules="[{ validator: customValidatorTransPass }]"
+              >
+                <modalCode
+                  :titleTrans="true"
+                  title="New Withdrawal Password"
+                  @complete="onComplete2"
+                />
+              </nut-form-item>
+              <nut-form-item
+                prop="rePassword"
+                :rules="[{ validator: customValidatorTransPassAgain }]"
+              >
+                <modalCode
+                  :titleTrans="true"
+                  title="Confirm Password"
+                  @complete="onComplete3"
+                />
+              </nut-form-item>
+            </nut-form>
+
+            <div class="tips">
+              <div class="circle"></div>
+              <span
+                >This is your first withdrawal;you need to set the withdrawal password
+                first.</span
+              >
+            </div>
+            <div class="tips">
+              <div class="circle"></div>
+              <span>
+                Nota: The withdrawal password is very important to protect the security of
+                your funds.Only you should know it to avoid loss of funds.</span
+              >
+            </div>
+          </div>
+
+          <div class="confirm-btn" @click="confirmWithdrawPass()">
+            Confirmar<svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="22px"
+              height="22px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#181717"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </nut-overlay>
+
+    <nut-overlay
+      v-model:visible="show_check_pass"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div class="overlay-content">
+          <div class="close" @click="show_check_pass = false">
+            <svg
+              t="1737048406504"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2325"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M822.00345 776.822434l0.022513-0.022513L246.50423 201.317075c-5.78782-5.791913-13.785981-9.374508-22.621207-9.374508-17.662265 0-31.980365 14.3181-31.980365 31.980365 0 8.834202 3.582595 16.832364 9.373485 22.620184L776.11226 821.339324c5.838985 6.277984 14.166651 10.209526 23.416316 10.209526 17.662265 0 31.980365-14.3181 31.980365-31.980365C831.508941 790.667767 827.871087 782.620487 822.00345 776.822434z"
+                p-id="2326"
+                fill="#E6E6E6"
+              ></path>
+              <path
+                d="M776.783549 201.448058l-0.022513-0.022513L201.278189 776.947278c-5.791913 5.78782-9.374508 13.785981-9.374508 22.621207 0 17.662265 14.3181 31.980365 31.980365 31.980365 8.834202 0 16.832364-3.582595 22.620184-9.373485l574.797231-574.836117c6.277984-5.838985 10.209526-14.166651 10.209526-23.416316 0-17.662265-14.3181-31.980365-31.980365-31.980365C790.628882 191.942567 782.580578 195.58042 776.783549 201.448058z"
+                p-id="2327"
+                fill="#E6E6E6"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="title">
+            Enter Password
+            <div class="line"></div>
+          </div>
+
+          <div>
+            <nut-form ref="checkPassRef" :model-value="checkPass_Form">
+              <nut-form-item
+                prop="transactionPassword"
+                :rules="[{ validator: customValidatorTransPass }]"
+              >
+                <modalCode
+                  :titleTrans="true"
+                  title="Confirm Password"
+                  @complete="onComplete4"
+                />
+              </nut-form-item>
+            </nut-form>
+
+            <div class="tips">
+              <div class="circle"></div>
+              <span>For the security of your account,enter the withdrawal password.</span>
+            </div>
+          </div>
+
+          <div class="confirm-btn" @click="confirmTransactionPassword()">
+            Confirmar<svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="22px"
+              height="22px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#181717"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </nut-overlay>
+
+    <nut-overlay
+      v-model:visible="add_pix_visible"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div class="overlay-content">
+          <div class="close" @click="add_pix_visible = false">
+            <svg
+              t="1737048406504"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2325"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M822.00345 776.822434l0.022513-0.022513L246.50423 201.317075c-5.78782-5.791913-13.785981-9.374508-22.621207-9.374508-17.662265 0-31.980365 14.3181-31.980365 31.980365 0 8.834202 3.582595 16.832364 9.373485 22.620184L776.11226 821.339324c5.838985 6.277984 14.166651 10.209526 23.416316 10.209526 17.662265 0 31.980365-14.3181 31.980365-31.980365C831.508941 790.667767 827.871087 782.620487 822.00345 776.822434z"
+                p-id="2326"
+                fill="#E6E6E6"
+              ></path>
+              <path
+                d="M776.783549 201.448058l-0.022513-0.022513L201.278189 776.947278c-5.791913 5.78782-9.374508 13.785981-9.374508 22.621207 0 17.662265 14.3181 31.980365 31.980365 31.980365 8.834202 0 16.832364-3.582595 22.620184-9.373485l574.797231-574.836117c6.277984-5.838985 10.209526-14.166651 10.209526-23.416316 0-17.662265-14.3181-31.980365-31.980365-31.980365C790.628882 191.942567 782.580578 195.58042 776.783549 201.448058z"
+                p-id="2327"
+                fill="#E6E6E6"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="title">
+            Add PIX
+            <div class="line"></div>
+          </div>
+
+          <nut-form ref="pixRef" :model-value="pixForm">
+            <nut-form-item
+              prop="realName"
+              :rules="[{ validator: customValidatorRealName }]"
+            >
+              <div class="ipt-box">
+                <div class="icon-box">
+                  <i class="iconfont icon-youjian"></i>
+                </div>
+                <nut-input
+                  :clearable="true"
+                  v-model="pixForm.realName"
+                  placeholder="Enter your real name"
+                  type="text"
+                />
+              </div>
+            </nut-form-item>
+            <nut-form-item
+              prop="account"
+              :rules="[{ validator: customValidatorAccount }]"
+            >
+              <div class="ipt-box">
+                <div class="icon-box">
+                  <i class="iconfont icon-youjian"></i>
+                </div>
+                <nut-input
+                  :clearable="true"
+                  v-model="pixForm.account"
+                  placeholder="Enter your PIX account"
+                  type="text"
+                />
+              </div>
+            </nut-form-item>
+            <nut-form-item prop="cpf" :rules="[{ validator: customValidatorCPF }]">
+              <div class="ipt-box">
+                <div class="icon-box">
+                  <i class="iconfont icon-youjian"></i>
+                </div>
+                <nut-input
+                  :clearable="true"
+                  v-model="pixForm.cpf"
+                  placeholder="Enter the 11-digit CPF number"
+                  type="text"
+                />
+              </div>
+            </nut-form-item>
+          </nut-form>
+
+          <div class="confirm-btn" @click="confirmAddPix()">
+            Confirmar<svg
+              v-if="is_loading"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              width="22px"
+              height="22px"
+              viewBox="0 0 50 50"
+              style="enable-background: new 0 0 50 50"
+              xml:space="preserve"
+            >
+              <path
+                fill="#181717"
+                d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                transform="rotate(275.098 25 25)"
+              >
+                <animateTransform
+                  attributeType="xml"
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.6s"
+                  repeatCount="indefinite"
+                ></animateTransform>
+              </path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </nut-overlay>
+
+    <nut-overlay
+      v-model:visible="showIns"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div class="overlay-content">
+          <div class="close" @click="showIns = false">
+            <svg
+              t="1737048406504"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2325"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M822.00345 776.822434l0.022513-0.022513L246.50423 201.317075c-5.78782-5.791913-13.785981-9.374508-22.621207-9.374508-17.662265 0-31.980365 14.3181-31.980365 31.980365 0 8.834202 3.582595 16.832364 9.373485 22.620184L776.11226 821.339324c5.838985 6.277984 14.166651 10.209526 23.416316 10.209526 17.662265 0 31.980365-14.3181 31.980365-31.980365C831.508941 790.667767 827.871087 782.620487 822.00345 776.822434z"
+                p-id="2326"
+                fill="#E6E6E6"
+              ></path>
+              <path
+                d="M776.783549 201.448058l-0.022513-0.022513L201.278189 776.947278c-5.791913 5.78782-9.374508 13.785981-9.374508 22.621207 0 17.662265 14.3181 31.980365 31.980365 31.980365 8.834202 0 16.832364-3.582595 22.620184-9.373485l574.797231-574.836117c6.277984-5.838985 10.209526-14.166651 10.209526-23.416316 0-17.662265-14.3181-31.980365-31.980365-31.980365C790.628882 191.942567 782.580578 195.58042 776.783549 201.448058z"
+                p-id="2327"
+                fill="#E6E6E6"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="title">
+            Withdrawal instructions
+            <div class="line"></div>
+          </div>
+          <div class="ins-box">
+            <div class="title1">Montante Saqueavel(R$)</div>
+            <div class="able-amount">{{ withdraw_info.sumCompletedAmount }}</div>
+            <div class="total-amount">
+              Montante a se desbloqueado:<span>{{ withdraw_info.balance }}</span>
+            </div>
+            <div class="title1" style="margin: 0.222rem 0">
+              Jogue prar desbloquear mais mintante saqueavel
+            </div>
+            <nut-progress
+              :percentage="
+                (withdraw_info.sumCompletedAmount / withdraw_info.sumTargetTurnover) *
+                  100 || 0
+              "
+              stroke-color="linear-gradient(270deg,#FFC02E  0%,#F36655 100%)"
+            />
+            <div class="progress-text">
+              <span> {{ withdraw_info.sumCompletedAmount }}</span
+              >/{{ withdraw_info.sumTargetTurnover }}
+            </div>
+            <div class="tip">
+              1.Kapag tumaya ka, nag-reload at tumanggapng mga bonus, ma a-update ang
+              iyong progresosa withdrawal.
+            </div>
+            <div class="tip">
+              2.Kapag nakumpleto mo ang iyong pag-usad ng withdrawal, ang balanse ng iyong
+              account aymako-convert sa halaga ng withdrawal.
+            </div>
+          </div>
+        </div>
+      </div>
+    </nut-overlay>
   </div>
 </template>
 
@@ -376,20 +773,175 @@ import {
   WithdrawRule,
   RechargeActivityParticipation,
   PayOrderCreate,
+  SetTranscationPassword,
+  CheckTranscationPassword,
+  AddTranscationInfo,
+  GetAccountType,
 } from "@/apis/deposit";
 
 const { state, dispatch, commit } = useStore();
 const route = useRoute();
 const router = useRouter();
 
-const withdrawSubmit=()=>{}
+const showIns = ref(false);
+
+const pixRef = ref(null);
+const add_pix_visible = ref(false);
+const pixForm = ref({
+  transactionPassword: "", // 交易密码
+  realName: "", // 真实姓名
+  account: "", // 本次添加的账号
+  accountType: "", // 账户类型
+  cpf: "", //CPF号码
+});
+const confirmAddPix = () => {};
+const customValidatorRealName = (val) => {
+  if (val) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please enter your real name");
+  }
+};
+const customValidatorAccount = (val) => {
+  if (val) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please enter your PIX account");
+  }
+};
+const customValidatorCPF = (val) => {
+  if (val.length != 11) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please enter the 11-digit CPF number");
+  }
+};
+
+const checkPassRef = ref(null);
+const checkPass_Form = ref({
+  transactionPassword: "",
+});
+const show_check_pass = ref(false);
+const confirmTransactionPassword = () => {
+  if (is_loading.value) return;
+  checkPassRef.value.validate().then(({ valid, errors }) => {
+    if (valid) {
+      is_loading.value = true;
+      const pram = {
+        transactionPassword: checkPass_Form.value.transactionPassword.join(""),
+      };
+      CheckTranscationPassword(pram)
+        .then((res) => {
+          if (res.code == 200) {
+            show_check_pass.value = false;
+            add_pix_visible.value = true;
+          } else {
+            commit("set_show_tip", {
+              type: 0,
+              msg: res.msg,
+            });
+          }
+        })
+        .finally(() => {
+          is_loading.value = false;
+        });
+    } else {
+      console.warn("error:", errors);
+    }
+  });
+};
+
+const tranRef = ref(null);
+const trans_visible = ref(false);
+const trans_Form = ref({
+  newPassword: "",
+  rePassword: "",
+});
+const onComplete2 = (val) => {
+  trans_Form.value.newPassword = val;
+};
+
+const onComplete3 = (val) => {
+  trans_Form.value.rePassword = val;
+};
+
+const onComplete4 = (val) => {
+  checkPass_Form.value.transactionPassword = val;
+};
+
+const confirmWithdrawPass = () => {
+  if (is_loading.value) return;
+
+  tranRef.value.validate().then(({ valid, errors }) => {
+    if (valid) {
+      is_loading.value = true;
+      const pram = {
+        newPassword: trans_Form.value.newPassword.join(""),
+      };
+      SetTranscationPassword(pram)
+        .then((res) => {
+          if (res.code == 200) {
+            commit("set_show_tip", {
+              type: 1,
+              msg: "success",
+            });
+            getTransInfo();
+          } else {
+            commit("set_show_tip", {
+              type: 0,
+              msg: res.msg,
+            });
+          }
+        })
+        .finally(() => {
+          is_loading.value = false;
+          trans_visible.value = false;
+        });
+    } else {
+      console.warn("error:", errors);
+    }
+  });
+};
+
+const customValidatorTransPass = (val) => {
+  let code = val.filter((item) => item !== undefined && item !== null && item !== "");
+  if (code.length == 6) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please Enter Correct Password");
+  }
+};
+
+const customValidatorTransPassAgain = (val) => {
+  let code = val.filter((item) => item !== undefined && item !== null && item !== "");
+  if (
+    code.length == 6 &&
+    code !=
+      trans_Form.value.newPassword.filter(
+        (item) => item !== undefined && item !== null && item !== ""
+      )
+  ) {
+    return Promise.resolve();
+  } else {
+    return Promise.reject("please Enter Correct Password");
+  }
+};
+
+const withdrawSubmit = () => {};
 const onComplete = (val) => {
-  console.log("complete", val);
   withdraw_form.value.transficaiton_password = val;
 };
+const changeWithdrawAccountType = (data) => {
+  if (data.account == withdraw_form.value.account) return;
+  withdraw_form.value.account = data.account;
+  withdraw_form.value.accountType = data.accountType;
+};
 const withdraw_form = ref({
-  basicValue: "",
-  transficaiton_password:""
+  transactionPassword: "", // 交易密码
+  account: "", // 本次提现收款账号
+  accountType: "", //  账户类型
+  withdrawAmount: "1", // 提现金额
+  payCategory: "BANK", // WALLET 电子钱包,BANK 银行转账,CARD 信用卡
 });
 const copyPix = async () => {
   try {
@@ -504,7 +1056,16 @@ const getRule = () => {
 };
 const getTransInfo = () => {
   GetTranscationInfo().then((res) => {
-    if (res.code == 200) trans_info.value = res.data;
+    if (res.code == 200) {
+      trans_info.value = res.data;
+      if (trans_info.value.withdrawalAccounts.length > 0) {
+        withdraw_form.value.accountType =
+          trans_info.value.withdrawalAccounts[0].accountType;
+        withdraw_form.value.account = trans_info.value.withdrawalAccounts[0].account;
+      }
+      if (!trans_info.value.hasSetTransactionPassword && mode.value == "withdraw")
+        trans_visible.value = true;
+    }
   });
 };
 const getDepositActive = () => {
@@ -584,6 +1145,25 @@ watch(
       deposit_form.value.prize = (val * active_list.value[0].prizeValue) / 100;
   }
 );
+watch(
+  () => mode.value,
+  (val) => {
+    if (
+      val == "withdraw" &&
+      JSON.stringify(trans_info.value) != "{}" &&
+      !trans_info.value.hasSetTransactionPassword
+    ) {
+      trans_visible.value = true;
+    }
+  }
+);
+const getAccountType = () => {
+  GetAccountType().then((res) => {
+    if (res.code == 200) {
+      console.log(res.data);
+    }
+  });
+};
 onBeforeUnmount(() => {
   dispatch("GET_USER_BALANCE");
 });
@@ -592,6 +1172,7 @@ onMounted(() => {
   getDepositActive();
   getTransInfo();
   getWithdrawInfo();
+  //   getAccountType()
   pay_method.value = state.pay_method;
   type_id.value = pay_method.value[0].methodId;
   channel_list.value = pay_method.value[0].payChannels;
@@ -605,6 +1186,157 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+.overlay-body {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  .overlay-content {
+    width: calc(100% - 0.833rem);
+    background: #1f1e1e;
+    background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
+    border-radius: 0.555rem;
+    box-sizing: border-box;
+    padding: 0 0.416rem 0.555rem 0.416rem;
+    .ins-box {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.277rem 0;
+      .tip {
+        margin-top: 0.277rem;
+        font-weight: 400;
+        font-size: 0.305rem;
+        color: #cccccc;
+      }
+      .progress-text {
+        width: 100%;
+        text-align: center;
+        margin: 0.138rem 0 0.277rem 0;
+        font-weight: 400;
+        font-size: 0.305rem;
+        color: $color-white;
+        span {
+          font-weight: 400;
+          font-size: 0.305rem;
+          color: $primary-color;
+        }
+      }
+      .title1 {
+        font-weight: 400;
+        font-size: 0.305rem;
+        color: #999797;
+      }
+      .able-amount {
+        color: $primary-color;
+        font-weight: bold;
+        font-size: 0.638rem;
+        margin: 0.222rem 0;
+      }
+      .total-amount {
+        font-weight: 400;
+        font-size: 0.395rem;
+        color: #999797;
+        span {
+          padding-left: 0.416rem;
+          font-weight: bold;
+          font-size: 17px;
+          color: #ffc02e;
+        }
+      }
+    }
+    .ipt-box {
+      width: 100%;
+      height: 1.111rem;
+      background: #0f0f0f;
+      border-radius: 0.555rem;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0 0.416rem;
+      position: relative;
+      .icon-box {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding-right: 0.416rem;
+        span {
+          font-size: 0.305rem;
+          color: #808080;
+          padding-left: 0.138rem;
+        }
+        i {
+          font-size: 0.444rem;
+          font-weight: bold;
+          color: #808080;
+        }
+      }
+    }
+    .confirm-btn {
+      width: 100%;
+      height: 1.111rem;
+      background: #ffc02e;
+      border-radius: 0.555rem;
+      font-weight: bold;
+      font-size: 0.361rem;
+      color: #181717;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0.555rem;
+    }
+    .tips {
+      margin-top: 0.555rem;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      .circle {
+        width: 0.138rem;
+        height: 0.138rem;
+        background: #ff0707;
+        border-radius: 50%;
+        position: absolute;
+        top: 0.058rem;
+        left: 0;
+      }
+      span {
+        padding-left: 0.305rem;
+        color: $color-white;
+        font-size: 0.277rem;
+      }
+    }
+    .title {
+      width: 100%;
+      height: 1.188rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 0.027rem solid #383838;
+      position: relative;
+      font-weight: bold;
+      font-size: 0.461rem;
+      color: #e6e6e6;
+      .line {
+        position: absolute;
+        bottom: 0;
+        left: calc((100% - 1.861rem) / 2);
+        width: 1.861rem;
+        height: 0.055rem;
+        background: #ffcb78;
+        border-radius: 0.027rem;
+      }
+    }
+    .close {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: 0.416rem 0 0 0;
+    }
+  }
+}
+
 .deposit {
   width: 100%;
   display: flex;
@@ -706,66 +1438,69 @@ onMounted(() => {
     padding: 0 0.416rem;
     background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
     border-radius: 0.555rem;
-    .add-pix {
-      width: 100%;
-      height: 1.111rem;
-      background: rgba(15, 15, 15, 1);
-      border-radius: 0.555rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 0 0.416rem;
-      margin-top:0.277rem;
-      .left {
-        display: flex;
-        align-items: center;
-        span {
-            padding-left: 0.416rem;
-          font-weight: 400;
-          font-size: 0.361rem;
-          color: #e6e6e6;
-        }
-      }
-    }
+
     .withdraw-box {
       width: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      .active-item {
-        border: 0.027rem solid $primary-color;
-        color: #181717;
-        background: $primary-color;
+      flex-direction: column;
+      background: #0f0f0f;
+      border-radius: 0.555rem;
+      .add-pix {
+        width: 100%;
+        height: 1.111rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 0.416rem;
+        .left {
+          display: flex;
+          align-items: center;
+          span {
+            padding-left: 0.416rem;
+            font-weight: 400;
+            font-size: 0.361rem;
+            color: #e6e6e6;
+          }
+        }
       }
       .item {
-        width: 2.777rem;
-        height: 0.916rem;
-        border-radius: 0.472rem;
-        border: 0.027rem solid #808080;
-        font-weight: bold;
-        font-size: 0.361rem;
-        color: #808080;
+        width: 100%;
+        height: 1.111rem;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        margin-right: 0.277rem;
-        img {
-          width: 0.472rem;
-          margin-right: 0.222rem;
+        box-sizing: border-box;
+        padding: 0 0.416rem;
+        i {
+          font-size: 0.333rem;
+          font-weight: bold;
+          color: $primary-color;
         }
-        .item-info {
-          .pix-account {
-            font-size: #666666;
-            font-size: 0.277rem;
-            margin-top: 0.027rem;
+        .left {
+          display: flex;
+          align-items: center;
+          img {
+            width: 0.472rem;
+            margin-right: 0.222rem;
           }
-          .type {
-            font-size: 0.305rem;
-            color: $color-white;
-            span {
-              font-size: #666666;
-              font-size: 0.25rem;
+          .item-info {
+            display: flex;
+            align-items: center;
+            .pix-account {
+              color: $color-white;
+              font-size: 0.305rem;
+              padding-left: 0.277rem;
+            }
+            .type {
+              font-size: 0.305rem;
+              color: #e6e6e6;
+              span {
+                color: #e6e6e6;
+                font-size: 0.25rem;
+              }
             }
           }
         }

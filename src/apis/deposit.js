@@ -56,6 +56,7 @@ export const ChangeUserPassword = (data) => { // 修改用户密码
     })
 }
 
+
 export const GetTranscationInfo = () => { // 获取用户的交易信息
     return axios.request({
         url: 'user/user/get/transaction/info',

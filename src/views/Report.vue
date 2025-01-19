@@ -417,11 +417,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import {useStore} from 'vuex'
 import { orderPage, withdrawalPage } from "@/apis/user";
 import { BalanceChangeList, GameRecordList, BonusRecord } from "@/apis/report";
 import { UserTaskInfo } from "@/apis/deposit";
 import { getGameType } from "@/apis/game";
 
+const {commit} =useStore()
 const route = useRoute();
 const showType = ref(false);
 const confirm = ({ selectedValue, selectedOptions }) => {
@@ -527,6 +529,7 @@ const getData = () => {
 };
 const copyId = async (data) => {
   try {
+    commit('set_show_tip',{type:1,msg:'copied'})
     await navigator.clipboard.writeText(data);
     console.log("文本已复制到剪贴板");
   } catch (err) {

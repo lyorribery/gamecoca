@@ -3,7 +3,7 @@
     <div class="info-box">
       <div class="info">
         <div class="avatar">
-          <img src="../assets/images/avatar/3.png" />
+          <img src="../assets/images/avatar/3.png" @click="showAvatar = true" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
         <div class="info-user">
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="vip-box">
+      <div class="vip-box" @click="goPath('/vip')">
         <img src="../assets/images/mine/zuojiantou.png" class="arrow" />
         <div class="left">
           <div class="des">
@@ -267,14 +267,145 @@
         </svg>
       </div>
     </div>
+
+    <nut-overlay
+      v-model:visible="showAvatar"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div class="overlay-content">
+          <div class="close" @click="showAvatar = false">
+            <svg
+              t="1737048406504"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="2325"
+              width="22"
+              height="22"
+            >
+              <path
+                d="M822.00345 776.822434l0.022513-0.022513L246.50423 201.317075c-5.78782-5.791913-13.785981-9.374508-22.621207-9.374508-17.662265 0-31.980365 14.3181-31.980365 31.980365 0 8.834202 3.582595 16.832364 9.373485 22.620184L776.11226 821.339324c5.838985 6.277984 14.166651 10.209526 23.416316 10.209526 17.662265 0 31.980365-14.3181 31.980365-31.980365C831.508941 790.667767 827.871087 782.620487 822.00345 776.822434z"
+                p-id="2326"
+                fill="#E6E6E6"
+              ></path>
+              <path
+                d="M776.783549 201.448058l-0.022513-0.022513L201.278189 776.947278c-5.791913 5.78782-9.374508 13.785981-9.374508 22.621207 0 17.662265 14.3181 31.980365 31.980365 31.980365 8.834202 0 16.832364-3.582595 22.620184-9.373485l574.797231-574.836117c6.277984-5.838985 10.209526-14.166651 10.209526-23.416316 0-17.662265-14.3181-31.980365-31.980365-31.980365C790.628882 191.942567 782.580578 195.58042 776.783549 201.448058z"
+                p-id="2327"
+                fill="#E6E6E6"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="title">
+            Mudar avatar
+            <div class="line"></div>
+          </div>
+          <div class="avatar-box">
+            <div class="img-box" @click="changeAvatar(1)">
+              <img
+                :style="{ filter: avatar_index == 1 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/1.png"
+              />
+              <i v-if="avatar_index == 1" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(2)">
+              <img
+                :style="{ filter: avatar_index == 2 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/2.png"
+              />
+              <i v-if="avatar_index == 2" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(3)">
+              <img
+                :style="{ filter: avatar_index == 3 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/3.png"
+              />
+              <i v-if="avatar_index == 3" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(4)">
+              <img
+                :style="{ filter: avatar_index == 4 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/4.png"
+              />
+              <i v-if="avatar_index == 4" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(5)">
+              <img
+                :style="{ filter: avatar_index == 5 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/5.png"
+              />
+              <i v-if="avatar_index == 5" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(6)">
+              <img
+                :style="{ filter: avatar_index == 6 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/6.png"
+              />
+              <i v-if="avatar_index == 6" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(7)">
+              <img
+                :style="{ filter: avatar_index == 7 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/7.png"
+              />
+              <i v-if="avatar_index == 7" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(8)">
+              <img
+                :style="{ filter: avatar_index == 8 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/8.png"
+              />
+              <i v-if="avatar_index == 8" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(9)">
+              <img
+                :style="{ filter: avatar_index == 9 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/9.png"
+              />
+              <i v-if="avatar_index == 9" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(10)">
+              <img
+                :style="{ filter: avatar_index == 10 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/8.png"
+              />
+              <i v-if="avatar_index == 10" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(11)">
+              <img
+                :style="{ filter: avatar_index == 11 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/11.png"
+              />
+              <i v-if="avatar_index == 11" class="iconfont icon-xuanzhong"></i>
+            </div>
+            <div class="img-box" @click="changeAvatar(12)">
+              <img
+                :style="{ filter: avatar_index == 12 ? '' : 'grayscale(100%)' }"
+                src="../assets/images/avatar/12.png"
+              />
+              <i v-if="avatar_index == 12" class="iconfont icon-xuanzhong"></i>
+            </div>
+          </div>
+          <div class="confirm-btn" @click="showAvatar=false">Confirmar</div>
+        </div>
+      </div>
+    </nut-overlay>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
+const showAvatar = ref(false);
+const avatar_index = ref(1);
+const changeAvatar = (index) => {
+  avatar_index.value = index;
+};
 const router = useRouter();
 let { state, dispatch, commit } = useStore();
 const goPath = (path) => {
@@ -353,6 +484,7 @@ const exit = () => {
 };
 const copyId = async () => {
   try {
+    commit("set_show_tip", { type: 1, msg: "copied" });
     await navigator.clipboard.writeText(state.user_info.userId);
     console.log("文本已复制到剪贴板");
   } catch (err) {
@@ -380,6 +512,94 @@ const goDeposit = (type) => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+
+.overlay-body {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  .overlay-content {
+    width: calc(100% - 0.833rem);
+    background: #1f1e1e;
+    background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
+    border-radius: 0.555rem;
+    box-sizing: border-box;
+    padding: 0 0.416rem 0.555rem 0.416rem;
+    .avatar-box {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0.555rem 0.277rem;
+      .img-box {
+        border-radius: 50%;
+        width: 1.66rem;
+        height: 1.66rem;
+        box-sizing: border-box;
+        border: 0.054rem solid $primary-color;
+        margin: 0 0.277rem 0.277rem 0;
+        position: relative;
+        i {
+          position: absolute;
+          bottom: -0.277rem;
+          right: 0;
+          font-size: 0.555rem;
+          font-weight: bold;
+          color: $primary-color;
+        }
+        img {
+          width: 1.583rem;
+          height: 1.583rem;
+        }
+      }
+    }
+    .confirm-btn {
+      width: 100%;
+      height: 1.111rem;
+      background: #ffc02e;
+      border-radius: 0.555rem;
+      font-weight: bold;
+      font-size: 0.361rem;
+      color: #181717;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 0.555rem;
+    }
+
+    .title {
+      width: 100%;
+      height: 1.188rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 0.027rem solid #383838;
+      position: relative;
+      font-weight: bold;
+      font-size: 0.461rem;
+      color: #e6e6e6;
+      .line {
+        position: absolute;
+        bottom: 0;
+        left: calc((100% - 1.861rem) / 2);
+        width: 1.861rem;
+        height: 0.055rem;
+        background: #ffcb78;
+        border-radius: 0.027rem;
+      }
+    }
+    .close {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      box-sizing: border-box;
+      padding: 0.416rem 0 0 0;
+    }
+  }
+}
+
 .mine {
   width: 100%;
   box-sizing: border-box;

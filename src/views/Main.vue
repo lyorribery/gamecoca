@@ -361,7 +361,7 @@
       }"
     >
       <div class="avatar-pop">
-        <div class="avatar">
+        <div class="avatar" @click="goPath('/betbonus')">
           <img src="../assets/images/avatar/3.png" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
@@ -769,6 +769,7 @@ export default {
 
     const goPath = (path) => {
       isOpen.value = false;
+      isShow.value=false
       router.push({
         path,
       });
@@ -810,6 +811,7 @@ export default {
     const copyId = async () => {
       try {
         await navigator.clipboard.writeText(state.user_info.userId);
+        commit('set_show_tip',{type:1,msg:'copied'})
         console.log("文本已复制到剪贴板");
       } catch (err) {
         console.error("复制到剪贴板失败", err);

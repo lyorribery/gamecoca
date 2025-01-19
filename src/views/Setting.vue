@@ -303,7 +303,7 @@ export default {
 
 <script setup>
 import { SetEmail } from "@/apis/setting";
-import { SetTranscationPassword } from "@/apis/deposit";
+import { ChangeTranscationPassword } from "@/apis/deposit";
 import { _validpassword, _validemail } from "@/utils/utils";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
@@ -419,11 +419,11 @@ const confirmPass = () => {
         is_loading.value = true;
 
         const pram = {
-          oldpassword: tranForm.value.oldpassword.join(""),
-          newpassword: tranForm.value.newpassword.join(""),
+          oldPassword: tranForm.value.oldpassword.join(""),
+          newPassword: tranForm.value.newpassword.join(""),
         };
 
-        SetTranscationPassword(pram)
+        ChangeTranscationPassword(pram)
           .then((res) => {
             if (res.code == 200) {
               commit("set_show_tip", {
