@@ -151,11 +151,7 @@
         <div class="name">Withdrawable</div>
         <div class="able-amount">
           <span>
-            {{
-              withdraw_info.sumCompletedAmount
-                ? withdraw_info.sumCompletedAmount.toFixed(2)
-                : "0.00"
-            }}
+            {{ withdraw_info.balance ? withdraw_info.balance.toFixed(2) : "0.00" }}
           </span>
           <svg
             @click="showIns = true"
@@ -192,7 +188,9 @@
           <div class="item">
             Withdraw Fee:<span>R${{ withdraw_form.withdrawAmount }}</span>
           </div>
-          <div class="item">Handing Fee:<span>R$1.00</span></div>
+          <div class="item">
+            Handing Fee:<span>R${{ withdraw_form.bonus }}</span>
+          </div>
         </div>
         <div class="title-row">Carteira / Banco / Cartao</div>
         <div class="withdraw-box">
@@ -214,9 +212,7 @@
             <i
               class="iconfont"
               :class="
-                item.account == withdraw_form.account
-                  ? 'icon-xuanzhong'
-                  : 'icon-weixuanzhong'
+                item.id == withdraw_form.id ? 'icon-xuanzhong' : 'icon-weixuanzhong'
               "
             ></i>
           </div>
@@ -606,7 +602,7 @@
             >
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-youjian"></i>
+                  <i class="iconfont icon-shenfenzheng"></i>
                 </div>
                 <nut-input
                   :clearable="true"
@@ -616,13 +612,36 @@
                 />
               </div>
             </nut-form-item>
+            <nut-form-item prop="accountType">
+              <div class="ipt-box">
+                <div class="icon-box">
+                  <i class="iconfont icon-geren"></i>
+                </div>
+                <div class="options-box" @click="showPixType = !showPixType">
+                  <span>{{ pixType_name }}</span>
+                  <i class="iconfont icon-xiangxiajiantou"></i>
+                </div>
+                <div class="pix-type-box" v-if="showPixType">
+                  <div
+                    class="item"
+                    :style="{ color: item.name == pixType_name ? '#fff' : '#999' }"
+                    v-for="(item, index) in pixType"
+                    :key="index"
+                    @click="changePIXType(item)"
+                  >
+                    {{ item.name }}
+                  </div>
+                </div>
+              </div>
+            </nut-form-item>
             <nut-form-item
+              v-if="pixForm.accountType != 'cpf'"
               prop="account"
               :rules="[{ validator: customValidatorAccount }]"
             >
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-youjian"></i>
+                  <i class="iconfont icon-mima"></i>
                 </div>
                 <nut-input
                   :clearable="true"
@@ -635,7 +654,7 @@
             <nut-form-item prop="cpf" :rules="[{ validator: customValidatorCPF }]">
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-youjian"></i>
+                  <i class="iconfont icon-shenfenzheng"></i>
                 </div>
                 <nut-input
                   :clearable="true"
@@ -716,9 +735,11 @@
           </div>
           <div class="ins-box">
             <div class="title1">Montante Saqueavel(R$)</div>
-            <div class="able-amount">{{ withdraw_info.sumCompletedAmount }}</div>
+            <div class="able-amount">{{ withdraw_info.balance }}</div>
             <div class="total-amount">
-              Montante a se desbloqueado:<span>{{ withdraw_info.balance }}</span>
+              Montante a se desbloqueado:<span>{{
+                withdraw_info.sumCompletedAmount
+              }}</span>
             </div>
             <div class="title1" style="margin: 0.222rem 0">
               Jogue prar desbloquear mais mintante saqueavel
@@ -777,6 +798,8 @@ import {
   CheckTranscationPassword,
   AddTranscationInfo,
   GetAccountType,
+  WithdrawAdd,
+  PayMethod,
 } from "@/apis/deposit";
 
 const { state, dispatch, commit } = useStore();
@@ -784,7 +807,27 @@ const route = useRoute();
 const router = useRouter();
 
 const showIns = ref(false);
-
+const showPixType = ref(false);
+const pixType = ref([
+  {
+    name: "PIX-TELEFONE",
+    type: "phone",
+  },
+  {
+    name: "PIX-EMAIL",
+    type: "email",
+  },
+  {
+    name: "PIX-CPF",
+    type: "cpf",
+  },
+]);
+const pixType_name = ref("");
+const changePIXType = (data) => {
+  pixForm.value.accountType = data.type;
+  pixType_name.value = data.name;
+  showPixType.value = false;
+};
 const pixRef = ref(null);
 const add_pix_visible = ref(false);
 const pixForm = ref({
@@ -794,7 +837,32 @@ const pixForm = ref({
   accountType: "", // 账户类型
   cpf: "", //CPF号码
 });
-const confirmAddPix = () => {};
+const confirmAddPix = () => {
+  if (is_loading.value) return;
+
+  pixRef.value.validate().then(({ valid, errors }) => {
+    if (valid) {
+      is_loading.value = true;
+      AddTranscationInfo(pixForm.value)
+        .then((res) => {
+          if (res.code == 200) {
+            add_pix_visible.value = false;
+            getTransInfo();
+          } else {
+            commit("set_show_tip", {
+              type: 0,
+              msg: res.msg,
+            });
+          }
+        })
+        .finally(() => {
+          is_loading.value = false;
+        });
+    } else {
+      console.warn("error:", errors);
+    }
+  });
+};
 const customValidatorRealName = (val) => {
   if (val) {
     return Promise.resolve();
@@ -803,14 +871,15 @@ const customValidatorRealName = (val) => {
   }
 };
 const customValidatorAccount = (val) => {
-  if (val) {
+  if (pixForm.value.accountType == "cpf") return Promise.resolve();
+  if (val.length == 10) {
     return Promise.resolve();
   } else {
     return Promise.reject("please enter your PIX account");
   }
 };
 const customValidatorCPF = (val) => {
-  if (val.length != 11) {
+  if (val.length == 11) {
     return Promise.resolve();
   } else {
     return Promise.reject("please enter the 11-digit CPF number");
@@ -835,6 +904,9 @@ const confirmTransactionPassword = () => {
           if (res.code == 200) {
             show_check_pass.value = false;
             add_pix_visible.value = true;
+            pixForm.value.transactionPassword = pram.transactionPassword;
+            pixForm.value.accountType = "phone";
+            pixType_name.value = "PIX-TELEFONE";
           } else {
             commit("set_show_tip", {
               type: 0,
@@ -927,21 +999,49 @@ const customValidatorTransPassAgain = (val) => {
   }
 };
 
-const withdrawSubmit = () => {};
+const withdrawSubmit = () => {
+  if (is_loading.value) return;
+  if (!withdraw_info.value.isWithdrawal) return;
+  if (!withdraw_form.value.withdrawAmount) return;
+  if (!withdraw_form.value.id) return;
+  if (!withdraw_form.value.transactionPassword) return;
+  if (withdraw_info.value.balance < Number(withdraw_form.value.withdrawAmount)) return;
+  is_loading.value = true;
+
+  WithdrawAdd({
+    ...withdraw_form.value,
+    withdrawAmount: Number(withdraw_form.value.withdrawAmount),
+    transactionPassword: withdraw_form.value.transactionPassword.join(""),
+  })
+    .then((res) => {
+      if (res.code == 200) {
+        getWithdrawInfo();
+        getTransInfo();
+        commit("set_show_tip", { type: 1, msg: "Application is under review" });
+      } else {
+        commit("set_show_tip", { type: 0, msg: res.msg });
+      }
+    })
+    .finally(() => {
+      is_loading.value = false;
+    });
+};
 const onComplete = (val) => {
-  withdraw_form.value.transficaiton_password = val;
+  withdraw_form.value.transactionPassword = val;
 };
 const changeWithdrawAccountType = (data) => {
-  if (data.account == withdraw_form.value.account) return;
-  withdraw_form.value.account = data.account;
-  withdraw_form.value.accountType = data.accountType;
+  if (data.id == withdraw_form.value.id) return;
+  withdraw_form.value.id = data.id;
+  // withdraw_form.value.accountType = data.accountType;
 };
 const withdraw_form = ref({
+  id: "",
   transactionPassword: "", // 交易密码
-  account: "", // 本次提现收款账号
-  accountType: "", //  账户类型
-  withdrawAmount: "1", // 提现金额
-  payCategory: "BANK", // WALLET 电子钱包,BANK 银行转账,CARD 信用卡
+  // account: "", // 本次提现收款账号
+  // accountType: "", //  账户类型
+  withdrawAmount: "", // 提现金额
+  // payCategory: "BANK", // WALLET 电子钱包,BANK 银行转账,CARD 信用卡
+  bonus: 1,
 });
 const copyPix = async () => {
   try {
@@ -1059,9 +1159,7 @@ const getTransInfo = () => {
     if (res.code == 200) {
       trans_info.value = res.data;
       if (trans_info.value.withdrawalAccounts.length > 0) {
-        withdraw_form.value.accountType =
-          trans_info.value.withdrawalAccounts[0].accountType;
-        withdraw_form.value.account = trans_info.value.withdrawalAccounts[0].account;
+        withdraw_form.value.id = trans_info.value.withdrawalAccounts[0].id;
       }
       if (!trans_info.value.hasSetTransactionPassword && mode.value == "withdraw")
         trans_visible.value = true;
@@ -1146,6 +1244,29 @@ watch(
   }
 );
 watch(
+  () => withdraw_form.value.withdrawAmount,
+  (val) => {
+    if (Number(val) < withdraw_method.value.minAmount)
+      withdraw_form.value.withdrawAmount = withdraw_method.value.minAmount.toString();
+    if (Number(val) > withdraw_method.value.maxAmount)
+      withdraw_form.value.withdrawAmount = withdraw_method.value.maxAmount.toString();
+    if (withdraw_method.value.feeRole) {
+      withdraw_form.value.bonus = 0;
+    } else {
+      const fee =
+        withdraw_method.value.feeFix +
+        Number(withdraw_form.value.withdrawAmount) * withdraw_method.value.feePercent;
+      if (fee > withdraw_method.value.feeMax) {
+        withdraw_form.value.bonus = withdraw_method.value.feeMax;
+      } else if (fee < withdraw_method.value.feeMin) {
+        withdraw_form.value.bonus = withdraw_method.value.feeMin;
+      } else {
+        withdraw_form.value.bonus = fee;
+      }
+    }
+  }
+);
+watch(
   () => mode.value,
   (val) => {
     if (
@@ -1164,6 +1285,15 @@ const getAccountType = () => {
     }
   });
 };
+const withdraw_method = ref({});
+const GetWithdrawlMethod = () => {
+  PayMethod({ channelType: 1 }).then((res) => {
+    if (res.code == 200) {
+      withdraw_method.value = res.data[0].payChannels[0].payConfig;
+      withdraw_form.value.withdrawAmount = withdraw_method.value.minAmount.toString();
+    }
+  });
+};
 onBeforeUnmount(() => {
   dispatch("GET_USER_BALANCE");
 });
@@ -1172,6 +1302,7 @@ onMounted(() => {
   getDepositActive();
   getTransInfo();
   getWithdrawInfo();
+  GetWithdrawlMethod();
   //   getAccountType()
   pay_method.value = state.pay_method;
   type_id.value = pay_method.value[0].methodId;
@@ -1186,6 +1317,44 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+.pix-type-box {
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -3rem;
+  background: rgba(15, 15, 15, 1);
+  border-radius: 0.194rem;
+  .item {
+    width: 100%;
+    height: 0.972rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 0.305rem;
+    font-weight: bold;
+    box-sizing: border-box;
+    padding: 0 0.416rem;
+  }
+}
+.options-box {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 0.277rem;
+  span {
+    color: $color-white;
+    font-size: 0.305rem;
+    font-weight: bold;
+  }
+  i {
+    color: $color-white;
+    font-size: 0.333rem;
+    font-weight: bold;
+  }
+}
 .overlay-body {
   display: flex;
   height: 100%;
@@ -1597,6 +1766,8 @@ onMounted(() => {
         align-items: center;
         box-sizing: border-box;
         padding: 0.416rem;
+        position: relative;
+
         .promotion-des {
           font-weight: 400;
           font-size: 0.361rem;

@@ -37,11 +37,6 @@ const store = createStore({
     level: [],
     lucky: {},
     wheel_list: [],
-    activity_detail: {
-      fullNoticeImg: "",
-      noticeContent: "",
-      noticeTitle: ""
-    },
     unread_count: 0,
     msg_list: { records: [] },
     is_show_app:true,
@@ -50,9 +45,17 @@ const store = createStore({
       msg:'',
     },
     tip_visible:false,
-    is_refresh_banlance:false
+    is_refresh_banlance:false,
+    home_icon:[],
+    spin_show:false
   }),
   mutations: {
+    set_spin_show(state,val){
+      state.spin_show=val
+    },
+    set_home_icon(state,val){
+      state.home_icon=val
+    },
     set_is_refresh_banlance(state,val){
       state.is_refresh_banlance=val
     },
@@ -125,9 +128,7 @@ const store = createStore({
     set_wheel_list(state, val) {
       state.wheel_list = val
     },
-    set_activity_detail(state, val) {
-      state.activity_detail = val
-    },
+
     set_unread_count(state, val) {
       state.unread_count = val
     },
@@ -161,7 +162,29 @@ const store = createStore({
         if (res.code == 200) ctx.commit('set_activity_notice', res.data)
       })
       getStationImgList().then(res => {
-        if (res.code == 200) ctx.commit('set_station_img', res.data)
+        if (res.code == 200){
+          ctx.commit('set_station_img', res.data)
+          let home_icon=[]
+          res.data.map(item=>{
+            if(item.imgType==6||item.imgType==7||item.imgType==8){
+              home_icon.push(item)
+            }
+          })
+          const mergeByCategory = home_icon.reduce((accumulator, currentItem) => {
+            const existingCategoryIndex = accumulator.findIndex(item => item.imgType === currentItem.imgType);
+            if (existingCategoryIndex >= 0) {
+              accumulator[existingCategoryIndex].data.push(currentItem);
+            } else {
+              accumulator.push({
+                imgType: currentItem.imgType,
+                data: [currentItem],
+                isShow:true
+              });
+            }
+            return accumulator;
+          }, []);
+          ctx.commit('set_home_icon',mergeByCategory)
+        }
       })
       PayMethod().then(res => {
         if (res.code == 200) ctx.commit('set_pay_method', res.data)

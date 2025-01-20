@@ -236,7 +236,7 @@ export default {
 
 <style lang="scss" scoped>
 .input-box {
-  width:100%;
+  flex:1;
   .title {
     width: 100%;
     margin: 0.416rem 0;
@@ -263,8 +263,8 @@ export default {
       font-family: Arial;
       border: 0;
       outline: 0;
-      height: 1.1rem;
-      width: 1.1rem;
+      height: 0.88rem;
+      width: 0.88rem;
       font-weight: bold;
       font-size: 0.555rem;
       color: #e6e6e6;

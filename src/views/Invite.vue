@@ -31,7 +31,7 @@
       <div class="des">Seu link de referência</div>
       <div class="link-box">
         <div class="link">{{ link_val }}</div>
-        <div class="copy-btn">Copy</div>
+        <div class="copy-btn" @click="copyLink()">Copy</div>
       </div>
     </div>
     <div class="text">
@@ -49,13 +49,26 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { GetUserRule } from "@/apis/proxy";
-const link_val = ref("https://brbr.games/#/?agentid=9");
-const rule=ref('')
-onMounted(()=>{
-  GetUserRule().then(res=>{
-    if(res.code==200) rule.value=res.data.content
-  })
-})
+import { useStore } from "vuex";
+
+const { state,commit } = useStore();
+const link_val = ref("");
+const rule = ref("");
+const copyLink = async () => {
+  try {
+    commit("set_show_tip", { type: 1, msg: "copied" });
+    await navigator.clipboard.writeText(link_val.value);
+  } catch (err) {
+    console.error("复制到剪贴板失败", err);
+  }
+};
+onMounted(() => {
+  link_val.value =
+    "https://" + window.location.hostname + "/#/?agentid=" + state.user_info.userId;
+  GetUserRule().then((res) => {
+    if (res.code == 200) rule.value = res.data.content;
+  });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -96,7 +109,7 @@ onMounted(()=>{
     background: rgba(74, 74, 74, 0.4);
     border-radius: 0.361rem;
     box-sizing: border-box;
-    padding:0.277rem 0.461rem;
+    padding: 0.277rem 0.461rem;
     font-size: 0.305rem;
     color: $color-sub-text;
     text-align: center;

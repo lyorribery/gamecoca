@@ -203,7 +203,7 @@
       </div>
       <div class="table-row" v-for="(item, index) in withdraw_data" :key="index">
         <div class="table-col-copy">
-          <div class="copy-btn" @click="copyId(item.orderNum)">
+          <div class="copy-btn" @click="copyId(item.accountNo)">
             <svg
               t="1736770609856"
               class="icon"
@@ -222,24 +222,26 @@
             </svg>
           </div>
         </div>
-        <div class="table-col">{{ item.orderNum }}</div>
+        <div class="table-col">{{ item.accountNo }}</div>
         <div class="table-col">{{ item.createTime }}</div>
-        <div class="table-col">{{ item.rechargeAmount }}</div>
-        <div class="table-col">{{ item.cashBonus }}</div>
+        <div class="table-col">{{ item.withdrawAmount }}</div>
+        <div class="table-col">{{ item.bonus }}</div>
         <div
           class="table-col"
           :style="{
             color:
-              item.status == 1 ? '#06a950' : item.status == 2 ? '#999999' : '#eb3323',
+              item.status == 1 ? '#06a950' : item.status == 4 ? '#eb3323' : '#999999',
           }"
         >
           {{
-            item.status == 1
-              ? "success"
-              : item.status == 2
-              ? "expired"
-              : item.status == 0
-              ? "Not Paid"
+            item.status == 0
+              ? "Submitted"
+              : item.status == 4
+              ? "Rejected"
+              : item.status == 1
+              ? "Success"
+              : item.status == 3
+              ? "Failure"
               : ""
           }}
         </div>
@@ -417,13 +419,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import {useStore} from 'vuex'
+import { useStore } from "vuex";
 import { orderPage, withdrawalPage } from "@/apis/user";
 import { BalanceChangeList, GameRecordList, BonusRecord } from "@/apis/report";
 import { UserTaskInfo } from "@/apis/deposit";
 import { getGameType } from "@/apis/game";
 
-const {commit} =useStore()
+const { commit } = useStore();
 const route = useRoute();
 const showType = ref(false);
 const confirm = ({ selectedValue, selectedOptions }) => {
@@ -529,7 +531,7 @@ const getData = () => {
 };
 const copyId = async (data) => {
   try {
-    commit('set_show_tip',{type:1,msg:'copied'})
+    commit("set_show_tip", { type: 1, msg: "copied" });
     await navigator.clipboard.writeText(data);
     console.log("文本已复制到剪贴板");
   } catch (err) {

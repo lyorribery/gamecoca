@@ -27,15 +27,15 @@ export default {
 import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-let { state, commit } = useStore();
+let { state } = useStore();
 const router = useRouter();
 const list = computed(() => {
   return state.activity_notice.records;
 });
 const goPath = (data) => {
-  commit("set_activity_detail", data);
   router.push({
     path: "/activity",
+    query: { id: data.id },
   });
 };
 </script>

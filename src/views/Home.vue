@@ -103,7 +103,31 @@
         </div>
       </div>
     </div>
+    <div class="home-icon-box">
+      <div class="icon-item" v-for="(item, index) in home_icon" :key="index">
+        <div
+          v-for="(items, indexs) in item.data"
+          :key="indexs"
+          class="swiper"
+          :style="getStyle(item.data)"
+        >
+          <div class="img-box" v-if="item.isShow">
+            <img
+              @click="closeIcon(index)"
+              src="../assets/images/icon_close.png"
+              class="close"
+            />
+            <img
+              @click="goIcon(items)"
+              :src="items.fullImgUrl"
+              style="height: 100%; width: 100%"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
     <pageFooter />
+    <spin />
     <nut-popup v-model:visible="down_visible" position="bottom" round>
       <div class="down-box" v-if="divice == 'android'">
         <div class="close">
@@ -130,10 +154,12 @@
 <script>
 import imgCard from "@/components/imgCard.vue";
 import pageFooter from "@/components/pageFooter.vue";
+import spin from "@/components/spin.vue";
 export default {
   components: {
     imgCard,
     pageFooter,
+    spin,
   },
 };
 </script>
@@ -143,9 +169,50 @@ import { computed, ref, onMounted } from "vue";
 import { Close } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
+import { formatDate } from "@/utils/utils";
 import { Lucky } from "@/apis/cashwheel";
 
 let { state, commit, dispatch } = useStore();
+
+const getStyle = computed(() => {
+  return function (data) {
+    if (data.length > 1) {
+      const style = `slide 6s infinite alternate`;
+      return { animation: style };
+    } else {
+      return { animation: "" };
+    }
+  };
+});
+
+const closeIcon = (indexs) => {
+  const data = state.home_icon;
+  data.map((item, index) => {
+    if (index == indexs) item.isShow = false;
+  });
+  commit("set_home_icon", data);
+};
+const goIcon = (item) => {
+  if (item.routerUrl.indexOf("home") > -1) {
+    if (JSON.stringify(state.lucky) != "{}") {
+      commit("set_spin_show", true);
+    }
+  } else if (item.routerUrl.indexOf("activity") > -1) {
+    router.push({
+      path: item.routerUrl.split("?")[0],
+      query: {
+        id: item.routerUrl.split("=")[1],
+      },
+    });
+  } else {
+    router.push({
+      path: item.routerUrl.split("?")[0],
+    });
+  }
+};
+const home_icon = computed(() => {
+  return state.home_icon;
+});
 
 const is_show_app = computed(() => {
   return state.is_show_app;
@@ -183,14 +250,16 @@ const goPath = (path) => {
   if (!path) return;
 
   if (path.indexOf("activity") > -1) {
-    const promotion = state.activity_notice.records.filter((item) => {
-      return item.id == path.split("=")[1];
-    });
-    commit("set_activity_detail", promotion[0]);
     router.push({
       path,
+      query: {
+        id: path.split("=")[1],
+      },
     });
   } else if (path.indexOf("home") > -1) {
+    if (JSON.stringify(state.lucky) != "{}") {
+      commit("set_spin_show", true);
+    }
   } else {
     router.push({
       path,
@@ -225,9 +294,11 @@ const changeDown = (type) => {
 const divice = ref(false);
 
 const goActive = (data) => {
-  commit("set_activity_detail", data);
   router.push({
     path: "/activity",
+    query: {
+      id: data.id,
+    },
   });
 };
 onMounted(() => {
@@ -241,7 +312,11 @@ onMounted(() => {
     divice.value = "android";
   }
   Lucky().then((res) => {
-    if (res.code == 200) commit("set_lucky", res.data);
+    if (res.code == 200) {
+      res.data.displayStartTime = formatDate(Number(res.data.displayStartTime));
+      res.data.displayEndTime = formatDate(Number(res.data.displayEndTime));
+      commit("set_lucky", res.data);
+    }
   });
 });
 
@@ -261,8 +336,55 @@ window.addEventListener("pageshow", function (event) {
 });
 </script>
 
+<style>
+@keyframes slide {
+  0% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.611rem);
+  }
+
+  100% {
+    transform: translateY(-1.611rem);
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+.home-icon-box {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 0.555rem;
+  z-index: 9;
+
+  .icon-item {
+    width: 1.611rem;
+    height: 1.611rem;
+    margin-top: 0.555rem;
+    overflow-x: hidden;
+    .swiper {
+      .img-box {
+        display: inline-block;
+        position: relative;
+        width: 1.611rem;
+        height: 1.611rem;
+
+        .close {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 0.666rem;
+        }
+      }
+    }
+  }
+}
 .sticky-type-app {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 2.638rem);

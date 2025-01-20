@@ -73,11 +73,20 @@ const router = createRouter({
           }
         },
         {
+          path: '/service',
+          name: 'service',
+          component: () => import('@/views/Service.vue'),
+          meta: {
+            auth: true,
+            transition: 'slide-left',
+          }
+        },
+        {
           path: '/betbonus',
           name: 'betbonus',
           component: () => import('@/views/Betbonus.vue'),
           meta: {
-            auth: false,
+            auth: true,
             transition: 'slide-left',
           }
         },
@@ -162,17 +171,6 @@ const router = createRouter({
           meta: {
             auth: false,
             transition: 'slide-left',
-          }
-        },
-
-
-        {
-          path: '/spin',
-          name: 'spin',
-          component: () => import('@/views/Spin.vue'),
-          meta: {
-            transition: 'slide-left',
-            auth: false
           }
         },
 

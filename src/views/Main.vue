@@ -761,9 +761,11 @@ export default {
 
     const goActive = (data) => {
       isOpen.value = false;
-      commit("set_activity_detail", data);
       router.push({
         path: "/activity",
+        query:{
+          id:data.id
+        }
       });
     };
 
