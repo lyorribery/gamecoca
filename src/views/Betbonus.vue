@@ -6,22 +6,22 @@
         :class="mode == 'bonus' ? 'active' : 'unactive'"
         @click="changeTab('bonus')"
       >
-        Bet Bonus
+        {{ $t('betbonus.Betbonus') }}
       </div>
       <div
         class="item item-right"
         :class="mode == 'detail' ? 'active' : 'unactive'"
         @click="changeTab('detail')"
       >
-        Details
+        {{ $t('betbonus.Details') }}
       </div>
     </div>
     <div v-if="mode == 'bonus'" style="width: 100%">
       <div class="game-box">
         <div class="game-header">
-          <div class="header-item" style="color: #e6e6e6">Games</div>
-          <div class="header-item" style="color: #159b52">Atual V0</div>
-          <div class="header-item" style="color: #ffcb78">Proximo V1</div>
+          <div class="header-item" style="color: #e6e6e6">{{ $t('betbonus.Games') }}</div>
+          <div class="header-item" style="color: #159b52">{{ $t('betbonus.Atual') }}V0</div>
+          <div class="header-item" style="color: #ffcb78">{{ $t('betbonus.Proximo') }}V1</div>
         </div>
         <div class="game-row">
           <div class="game-col" style="color: #e6e6e6">Slot</div>
@@ -80,9 +80,9 @@
           <img src="../assets/images/coins.png" style="width: 0.833rem" />
           <span>0.00</span>
         </div>
-        <div class="btn">Receive</div>
+        <div class="btn">{{ $t('betbonus.Receive') }}</div>
       </div>
-      <div class="title-box">Ratio of Bet Bonus<div class="line"></div></div>
+      <div class="title-box">{{ $t('betbonus.RatioofBetBonus') }}<div class="line"></div></div>
       <div class="game-box" style="margin-top:0;">
         <div class="game-header2">
           <div class="header-item">Level</div>

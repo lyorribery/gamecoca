@@ -5,7 +5,7 @@
         <span>{{ date[0] }} - {{ date[1] }}</span>
       </div>
       <nut-animate type="ripple" action="click">
-        <div class="search-btn">Procurar</div>
+        <div class="search-btn">{{ $t('referc.Procurar') }}</div>
       </nut-animate>
     </div>
 
@@ -15,7 +15,7 @@
         @click="changeType('all')"
         :style="{ color: type == 'all' ? '#fdc24a' : '' }"
       >
-        All
+        {{$t('referc.All')}}
         <div class="active" v-if="type == 'all'"></div>
       </div>
       <div
@@ -23,7 +23,7 @@
         @click="changeType('today')"
         :style="{ color: type == 'today' ? '#fdc24a' : '' }"
       >
-        Today
+        {{ $t('referc.Today') }}
         <div class="active" v-if="type == 'today'"></div>
       </div>
       <div
@@ -31,7 +31,7 @@
         @click="changeType('yesterday')"
         :style="{ color: type == 'yesterday' ? '#fdc24a' : '' }"
       >
-        Yesterday
+        {{ $t('referc.Yesterday') }}
         <div class="active" v-if="type == 'yesterday'"></div>
       </div>
       <div
@@ -39,7 +39,7 @@
         @click="changeType('week')"
         :style="{ color: type == 'week' ? '#fdc24a' : '' }"
       >
-        This Week
+        {{ $t('referc.Week') }}
         <div class="active" v-if="type == 'week'"></div>
       </div>
       <div
@@ -47,42 +47,42 @@
         @click="changeType('month')"
         :style="{ color: type == 'month' ? '#fdc24a' : '' }"
       >
-        This Month
+        {{ $t('referc.Month') }}
         <div class="active" v-if="type == 'month'"></div>
       </div>
     </div>
 
     <div class="data-item">
-      <span>Sub Commission</span>
+      <span>{{ $t('referc.title1') }}</span>
       <span>{{ data.directSubordinatesCommission }}</span>
     </div>
 
     <div class="data-item">
-      <span>Team Commission</span>
+      <span>{{ $t('referc.title2') }}</span>
       <span>{{ data.indirectSubordinatesCommission }}</span>
     </div>
 
     <div class="data-item">
-      <span>Total Commission</span>
+      <span>{{ $t('referc.title3') }}</span>
       <span>{{ data.allCommission }}</span>
     </div>
 
     <div class="data-item">
-      <span>New Direct Sub</span>
+      <span>{{ $t('referc.title4') }}</span>
       <span>{{ data.directSubordinatesCount }}</span>
     </div>
 
     <div class="data-item">
-      <span>New Team Sub</span>
+      <span>{{ $t('referc.title5') }}</span>
       <span>{{ data.directSubordinatesCount }}</span>
     </div>
 
     <div class="data-item">
-      <span>Total Number of People</span>
+      <span>{{ $t('referc.title6') }}</span>
       <span>{{ data.allCount }}</span>
     </div>
 
-    <div class="des">Os dados são o valor que aumenta durante o intervalo de tempo</div>
+    <div class="des">{{ $t('referc.des1') }}</div>
 
     <nut-calendar
       v-model:visible="show"

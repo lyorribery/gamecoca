@@ -5,7 +5,7 @@
         <span>{{ date[0] }} - {{ date[1] }}</span>
       </div>
       <nut-animate type="ripple" action="click">
-        <div class="search-btn">Procurar</div>
+        <div class="search-btn">{{ $t('referc.Procurar') }}</div>
       </nut-animate>
     </div>
 
@@ -15,7 +15,7 @@
         @click="changeType('all')"
         :style="{ color: type == 'all' ? '#fdc24a' : '' }"
       >
-        All
+      {{$t('referc.All')}}
         <div class="active" v-if="type == 'all'"></div>
       </div>
       <div
@@ -23,7 +23,7 @@
         @click="changeType('today')"
         :style="{ color: type == 'today' ? '#fdc24a' : '' }"
       >
-        Today
+      {{ $t('referc.Today') }}
         <div class="active" v-if="type == 'today'"></div>
       </div>
       <div
@@ -31,7 +31,7 @@
         @click="changeType('yesterday')"
         :style="{ color: type == 'yesterday' ? '#fdc24a' : '' }"
       >
-        Yesterday
+      {{ $t('referc.Yesterday') }}
         <div class="active" v-if="type == 'yesterday'"></div>
       </div>
       <div
@@ -39,7 +39,7 @@
         @click="changeType('week')"
         :style="{ color: type == 'week' ? '#fdc24a' : '' }"
       >
-        This Week
+      {{ $t('referc.Week') }}
         <div class="active" v-if="type == 'week'"></div>
       </div>
       <div
@@ -47,7 +47,7 @@
         @click="changeType('month')"
         :style="{ color: type == 'month' ? '#fdc24a' : '' }"
       >
-        This Month
+      {{ $t('referc.Month') }}
         <div class="active" v-if="type == 'month'"></div>
       </div>
     </div>
@@ -89,6 +89,10 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useI18n} from 'vue-i18n'
+
+const { t } = useI18n();
+
 const show = ref(false);
 const date = ref(["0000-00-00", "0000-00-00"]);
 const choose = (param) => {
@@ -103,7 +107,7 @@ const changeType = (data) => {
 };
 const columns = ref([
   {
-    title: "Time",
+    title: t('member.time'),
     key: "time",
   },
   {

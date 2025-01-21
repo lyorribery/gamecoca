@@ -9,18 +9,18 @@
         :class="mode == 'deposit' ? 'active' : 'unactive'"
         @click="changeTab('deposit')"
       >
-        Deposit
+        {{ $t('deposit.Deposit') }}
       </div>
       <div
         class="item item-right"
         :class="mode == 'withdraw' ? 'active' : 'unactive'"
         @click="changeTab('withdraw')"
       >
-        Withdraw
+      {{ $t('deposit.Withdraw') }}
       </div>
     </div>
     <div class="form-box" v-if="mode == 'deposit'">
-      <div class="title-row">Select Type</div>
+      <div class="title-row">{{ $t('deposit.selecttype') }}</div>
       <div class="form-row">
         <div
           class="type-item"
@@ -32,7 +32,7 @@
           <span>{{ item.methodName }}</span>
         </div>
       </div>
-      <div class="title-row">Select a Channel</div>
+      <div class="title-row">{{ $t('deposit.selectchannel') }}</div>
       <div class="form-row">
         <div
           @click="changeChannel(item.channelId)"
@@ -44,7 +44,7 @@
           <span>{{ item.name }}</span>
         </div>
       </div>
-      <div class="title-row">Amount Options</div>
+      <div class="title-row">{{ $t('deposit.amountoption') }}</div>
       <div class="form-row">
         <div
           :class="
@@ -58,7 +58,7 @@
           <div class="prize" v-if="item.prize">+{{ item.prize }}</div>
         </div>
       </div>
-      <div class="title-row">Enter your amount</div>
+      <div class="title-row">{{ $t('deposit.enteryouramount') }}</div>
       <div class="form-row">
         <div class="ipt-box">
           <div class="unit">
@@ -66,7 +66,7 @@
           </div>
           <nut-input
             v-model="deposit_form.basicValue"
-            placeholder="Enter your amount"
+            :placeholder="$t('deposit.enteryouramount')"
             type="number"
           />
           <div class="promotion-des" v-if="deposit_form.prize">
@@ -148,7 +148,7 @@
 
     <div class="form-box" v-if="mode == 'withdraw'">
       <div class="withdraw-able">
-        <div class="name">Withdrawable</div>
+        <div class="name">{{ $t('deposit.Withdrawable') }}</div>
         <div class="able-amount">
           <span>
             {{ withdraw_info.balance ? withdraw_info.balance.toFixed(2) : "0.00" }}
@@ -171,7 +171,7 @@
             ></path>
           </svg>
         </div>
-        <div class="title-row">Enter your amount</div>
+        <div class="title-row">{{ $t('deposit.enteryouramount') }}</div>
         <div class="form-row">
           <div class="ipt-box">
             <div class="unit">
@@ -179,20 +179,20 @@
             </div>
             <nut-input
               v-model="withdraw_form.withdrawAmount"
-              placeholder="Enter your amount"
+              :placeholder="$t('deposit.enteryouramount')"
               type="number"
             />
           </div>
         </div>
         <div class="tax-row">
           <div class="item">
-            Withdraw Fee:<span>R${{ withdraw_form.withdrawAmount }}</span>
+            {{ $t('deposit.WithdrawFee') }}:<span>R${{ withdraw_form.withdrawAmount }}</span>
           </div>
           <div class="item">
-            Handing Fee:<span>R${{ withdraw_form.bonus }}</span>
+            {{ $t('deposit.HandingFee') }}:<span>R${{ withdraw_form.bonus }}</span>
           </div>
         </div>
-        <div class="title-row">Carteira / Banco / Cartao</div>
+        <div class="title-row">{{ $t('deposit.title1') }}</div>
         <div class="withdraw-box">
           <div
             class="item"
@@ -268,7 +268,7 @@
         <div class="form-row">
           <modalCode
             :titleTrans="true"
-            title="Transfication Password"
+            :title="$t('deposit.TransficationPassword')"
             @complete="onComplete"
           />
         </div>
@@ -349,15 +349,14 @@
             <img :src="pay_method[0].fullMethodIcon" />
             <span>R${{ deposit_form.basicValue }}</span>
           </div>
-          <div class="des">OPen your payment app and scan the QR code below to pay</div>
+          <div class="des">{{ $t('deposit.title2') }}</div>
           <img style="margin: 1.111rem 0 0.555rem 0" :src="qrCodeSrc" />
           <div class="count-down">
             <nut-countdown :start-time="nowtime" :end-time="countdown"></nut-countdown>
           </div>
           <div class="copy-qr-btn" @click="copyPix()">Copy PIX Code</div>
           <div class="des-copy">
-            Paste the Pix code into your preferred banking app or digtal wallet and
-            comfirm the payment
+            {{ $t('deposit.title3') }}
           </div>
         </div>
       </div>
@@ -395,7 +394,7 @@
           </div>
 
           <div class="title">
-            Change Password
+            {{ $t('deposit.ChangePassword') }}
             <div class="line"></div>
           </div>
 
@@ -407,7 +406,7 @@
               >
                 <modalCode
                   :titleTrans="true"
-                  title="New Withdrawal Password"
+                  :title="$t('deposit.NewWithdrawalPassword')"
                   @complete="onComplete2"
                 />
               </nut-form-item>
@@ -417,7 +416,7 @@
               >
                 <modalCode
                   :titleTrans="true"
-                  title="Confirm Password"
+                  :title="$t('deposit.ConfirmPassword')"
                   @complete="onComplete3"
                 />
               </nut-form-item>
@@ -426,21 +425,19 @@
             <div class="tips">
               <div class="circle"></div>
               <span
-                >This is your first withdrawal;you need to set the withdrawal password
-                first.</span
+                >{{ $t('deposit.tip1') }}</span
               >
             </div>
             <div class="tips">
               <div class="circle"></div>
               <span>
-                Nota: The withdrawal password is very important to protect the security of
-                your funds.Only you should know it to avoid loss of funds.</span
+                {{ $t('deposit.tip2') }}</span
               >
             </div>
           </div>
 
           <div class="confirm-btn" @click="confirmWithdrawPass()">
-            Confirmar<svg
+            {{ $t('btn.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -503,7 +500,7 @@
           </div>
 
           <div class="title">
-            Enter Password
+            {{ $t('deposit.EnterPassword') }}
             <div class="line"></div>
           </div>
 
@@ -515,7 +512,7 @@
               >
                 <modalCode
                   :titleTrans="true"
-                  title="Confirm Password"
+                  :title="$t('deposit.ConfirmPassword')"
                   @complete="onComplete4"
                 />
               </nut-form-item>
@@ -523,12 +520,12 @@
 
             <div class="tips">
               <div class="circle"></div>
-              <span>For the security of your account,enter the withdrawal password.</span>
+              <span>{{ $t('deposit.title4') }}</span>
             </div>
           </div>
 
           <div class="confirm-btn" @click="confirmTransactionPassword()">
-            Confirmar<svg
+            {{ $t('btn.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -607,7 +604,7 @@
                 <nut-input
                   :clearable="true"
                   v-model="pixForm.realName"
-                  placeholder="Enter your real name"
+                  :placeholder="$t('deposit.Enteryourrealname')"
                   type="text"
                 />
               </div>
@@ -646,7 +643,7 @@
                 <nut-input
                   :clearable="true"
                   v-model="pixForm.account"
-                  placeholder="Enter your PIX account"
+                  :placeholder="$t('deposit.EnteryourPIXaccount')"
                   type="text"
                 />
               </div>
@@ -659,7 +656,7 @@
                 <nut-input
                   :clearable="true"
                   v-model="pixForm.cpf"
-                  placeholder="Enter the 11-digit CPF number"
+                  :placeholder="$t('deposit.Enterthe11digitCPFnumber')"
                   type="text"
                 />
               </div>
@@ -667,7 +664,7 @@
           </nut-form>
 
           <div class="confirm-btn" @click="confirmAddPix()">
-            Confirmar<svg
+            {{ $t('btn.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -730,19 +727,19 @@
           </div>
 
           <div class="title">
-            Withdrawal instructions
+            {{ $t('deposit.Withdrawalnstructions') }}
             <div class="line"></div>
           </div>
           <div class="ins-box">
-            <div class="title1">Montante Saqueavel(R$)</div>
+            <div class="title1">{{$t('deposit.MontanteSaqueavel')}}(R$)</div>
             <div class="able-amount">{{ withdraw_info.balance }}</div>
             <div class="total-amount">
-              Montante a se desbloqueado:<span>{{
+              {{ $t('deposit.Montanteasedesbloqueado') }}:<span>{{
                 withdraw_info.sumCompletedAmount
               }}</span>
             </div>
             <div class="title1" style="margin: 0.222rem 0">
-              Jogue prar desbloquear mais mintante saqueavel
+              {{ $t('deposit.tip3') }}
             </div>
             <nut-progress
               :percentage="
@@ -756,12 +753,10 @@
               >/{{ withdraw_info.sumTargetTurnover }}
             </div>
             <div class="tip">
-              1.Kapag tumaya ka, nag-reload at tumanggapng mga bonus, ma a-update ang
-              iyong progresosa withdrawal.
+              {{ $t('deposit.tip4') }}
             </div>
             <div class="tip">
-              2.Kapag nakumpleto mo ang iyong pag-usad ng withdrawal, ang balanse ng iyong
-              account aymako-convert sa halaga ng withdrawal.
+              {{ $t('deposit.tip5') }}
             </div>
           </div>
         </div>

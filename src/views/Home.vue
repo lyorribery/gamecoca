@@ -127,46 +127,105 @@
       </div>
     </div>
     <pageFooter />
-    <spin />
-    <nut-popup v-model:visible="down_visible" position="bottom" round>
-      <div class="down-box" v-if="divice == 'android'">
-        <div class="close">
-          <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
+    <!-- <spin /> -->
+
+
+    <nut-overlay
+      v-model:visible="login_tip_visible"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div
+          class="overlay-content"
+          :style="{ width: login_visible_w + 'px', height: login_visible_w + 'px' }"
+        >
+          <img
+            src="../assets/images/modal_close.png"
+            @click="changeLoginTip()"
+            class="close"
+          />
+          <div class="title">Seja bem-vindo?</div>
+          <div class="text">
+            Bonus de <span>30%</span> para novos membros no primeiro deposito!
+          </div>
+          <div class="text">
+            Convide amigos e ganhe <span>R$20</span> de bdnus por cada convite.
+          </div>
+          <div class="text">Bdnus diario de <span>8%</span> em recargas.</div>
+          <div class="text">Depositos e saques em apenas <span>30 segundos!</span></div>
+          <div class="text">
+            Roda da Sorte, nfveis VIP e muitos premios esperando por voce!
+          </div>
         </div>
-        <div class="title">1. Click the "More" icon, then click Install application</div>
-
-        <div class="title">2. Click Add and select "Add"</div>
       </div>
-      <div class="down-box" v-if="divice == 'ios'">
-        <div class="close">
-          <Close color="#fff" width="16px" height="16px" @click="changeDown(2)" />
+    </nut-overlay>
+    <nut-overlay
+      v-model:visible="login_tip_swiper_visible"
+      :lock-scroll="true"
+      :close-on-click-overlay="false"
+    >
+      <div class="overlay-body">
+        <div
+          class="overlay-swiper"
+          :style="{ width: login_visible_w + 'px', height: 198 + 'px' }"
+        >
+          <img
+            src="../assets/images/modal_close.png"
+            @click="login_tip_swiper_visible = false"
+            class="close"
+          />
+          <nut-swiper
+            ref="swiperRef"
+            :is-prevent-default="false"
+            :is-stop-propagation="false"
+            :width="login_visible_w"
+            :loop="true"
+            :height="198"
+          >
+            <nut-swiper-item
+              v-for="(item, index) in promotion_list"
+              :key="index"
+              style="height: 198px"
+            >
+              <img
+                @click="goActive(item)"
+                :src="item.fullNoticeImg"
+                style="height: 100%; width: 100%"
+                draggable="false"
+              />
+            </nut-swiper-item>
+          </nut-swiper>
+          <div class="swiper-btns">
+            <div class="swiper-btn" @click="handlePrev">
+              <Left></Left>
+            </div>
+            <div class="swiper-btn" @click="handleNext">
+              <Right></Right>
+            </div>
+          </div>
         </div>
-        <div class="title">1.Click the share button at the bottom</div>
-
-        <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
-
-        <div class="title">3. Click Add and select "Add"</div>
       </div>
-    </nut-popup>
+    </nut-overlay>
   </div>
 </template>
 
 <script>
 import imgCard from "@/components/imgCard.vue";
 import pageFooter from "@/components/pageFooter.vue";
-import spin from "@/components/spin.vue";
+// import spin from "@/components/spin.vue";
 export default {
   components: {
     imgCard,
     pageFooter,
-    spin,
+    // spin,
   },
 };
 </script>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
-import { Close } from "@nutui/icons-vue";
+import { computed, ref, onMounted, watch } from "vue";
+import {  Left, Right } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { formatDate } from "@/utils/utils";
@@ -174,6 +233,22 @@ import { Lucky } from "@/apis/cashwheel";
 
 let { state, commit, dispatch } = useStore();
 
+const swiperRef = ref();
+const handlePrev = () => {
+  swiperRef.value.prev();
+};
+const handleNext = () => {
+  swiperRef.value.next();
+};
+const login_tip_visible = computed(() => {
+  return state.login_tip_visible;
+});
+const login_tip_swiper_visible = ref(false);
+const login_visible_w = ref(0);
+const changeLoginTip = () => {
+  commit("set_login_tip_visible", false);
+  login_tip_swiper_visible.value = true;
+};
 const getStyle = computed(() => {
   return function (data) {
     if (data.length > 1) {
@@ -195,6 +270,7 @@ const closeIcon = (indexs) => {
 const goIcon = (item) => {
   if (item.routerUrl.indexOf("home") > -1) {
     if (JSON.stringify(state.lucky) != "{}") {
+      return
       commit("set_spin_show", true);
     }
   } else if (item.routerUrl.indexOf("activity") > -1) {
@@ -258,6 +334,7 @@ const goPath = (path) => {
     });
   } else if (path.indexOf("home") > -1) {
     if (JSON.stringify(state.lucky) != "{}") {
+      return
       commit("set_spin_show", true);
     }
   } else {
@@ -291,9 +368,10 @@ const down_visible = ref(false);
 const changeDown = (type) => {
   type == 1 ? (down_visible.value = true) : (down_visible.value = false);
 };
-const divice = ref(false);
+
 
 const goActive = (data) => {
+  login_tip_swiper_visible.value = false;
   router.push({
     path: "/activity",
     query: {
@@ -301,16 +379,10 @@ const goActive = (data) => {
     },
   });
 };
+
 onMounted(() => {
-  if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
-  const userAgent = navigator.userAgent;
-  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-  const isAndroid = /Android/.test(userAgent) && !/Windows Phone/.test(userAgent);
-  if (isIOS) {
-    divice.value = "ios";
-  } else if (isAndroid) {
-    divice.value = "android";
-  }
+  // if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
+  login_visible_w.value = window.innerWidth - 30;
   Lucky().then((res) => {
     if (res.code == 200) {
       res.data.displayStartTime = formatDate(Number(res.data.displayStartTime));
@@ -357,9 +429,66 @@ window.addEventListener("pageshow", function (event) {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+
+.overlay-body {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  .overlay-swiper {
+    position: relative;
+    width: 100%;
+    .swiper-btns {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+    .close {
+      position: absolute;
+      bottom: -1rem;
+      left: calc((100% - 0.9rem) / 2);
+      width: 0.9rem;
+    }
+  }
+  .overlay-content {
+    background-image: url("https://testfile.1k9.net/master/1013/9986bb41e002410da4a9a05e1097f971.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0.277rem;
+    .title {
+      box-sizing: border-box;
+      padding-left: 0.277rem;
+      font-size: 0.777rem;
+      color: #ffffff;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .text {
+      margin-top: 0.777rem;
+      font-size: 0.361rem;
+      font-weight: 600;
+      color: #ffffff;
+      span {
+        color: #ed5b57;
+      }
+    }
+    .close {
+      position: absolute;
+      bottom: -1rem;
+      left: calc((100% - 0.9rem) / 2);
+      width: 0.9rem;
+    }
+  }
+}
 .home-icon-box {
   position: fixed;
-  bottom: 2.5rem;
+  bottom: 2.8rem;
   right: 0.555rem;
   z-index: 9;
 
@@ -538,31 +667,5 @@ window.addEventListener("pageshow", function (event) {
   }
 }
 
-.down-box {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 1.277rem 0.972rem 0.555rem 0.972rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background: #18171e;
-  .close {
-    position: absolute;
-    right: 0.555rem;
-    top: 0.416rem;
-  }
-  .title {
-    width: 100%;
-    text-align: left;
-    font-size: 0.361rem;
-    color: #ffffff;
-    font-weight: 600;
-  }
-  img {
-    margin: 0.416rem 0;
-    width: 100%;
-  }
-}
+
 </style>

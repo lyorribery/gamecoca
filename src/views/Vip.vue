@@ -7,7 +7,7 @@
       </div>
       <div class="progress-row">
         <div class="des">
-          Recharge<span>0 / {{ cur_info.payment }}</span>
+          {{ $t('vip.title1') }}<span>0 / {{ cur_info.payment }}</span>
         </div>
         <div class="progress-box" style="width: 55%">
           <nut-progress
@@ -20,7 +20,7 @@
       </div>
       <div class="progress-row" style="margin-top: 0.277rem">
         <div class="des">
-          Bet Amount<span>0 / {{ cur_info.gameStatement }}</span>
+         {{ $t('vip.betamount') }}<span>0 / {{ cur_info.gameStatement }}</span>
         </div>
         <div class="progress-box">
           <nut-progress
@@ -61,35 +61,35 @@
 
     <div class="bottom-box">
       <div class="title">
-        Privilégio de membro
+        {{ $t('vip.title2') }}
         <div class="line"></div>
       </div>
       <div class="bottom-info">
         <div class="item">
           <img src="../assets/images/vip_1.png" />
           <div class="des-box">
-            <span>Saques diários</span>
+            <span>{{ $t('vip.title3') }}</span>
             <span class="data">5</span>
           </div>
         </div>
         <div class="item">
           <img src="../assets/images/vip_2.png" />
           <div class="des-box">
-            <span>Limite saque único</span>
+            <span>{{ $t('vip.title4') }}</span>
             <span class="data">2000</span>
           </div>
         </div>
         <div class="item">
           <img src="../assets/images/vip_1.png" />
           <div class="des-box">
-            <span>Limite saque diário</span>
+            <span>{{ $t('vip.title5') }}</span>
             <span class="data">2000</span>
           </div>
         </div>
         <div class="item">
           <img src="../assets/images/vip_3.png" />
           <div class="des-box">
-            <span>Aposta Bonus</span>
+            <span>{{ $t('vip.title6') }}</span>
             <span class="data">1%</span>
           </div>
         </div>

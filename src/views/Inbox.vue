@@ -10,7 +10,7 @@
             @click="changeShow(item, index)"
           >
             <span :style="{ color: !item.messageRead ? '' : '#B3B3B3' }">{{
-              !item.isShow ? "Unfold" : "Fold"
+              !item.isShow ? $t('inbox.Unfold') : $t('inbox.Fold')
             }}</span>
             <div class="icon">
               <i

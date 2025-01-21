@@ -8,7 +8,7 @@
         </div>
         <div class="info-user">
           <div class="val" style="margin-bottom: 0.138rem">
-            Account:{{ user_info.userName }}
+            {{$t('main.Account')}}:{{ user_info.userName }}
           </div>
           <div class="val">ID:{{ user_info.userId }}</div>
         </div>
@@ -31,30 +31,30 @@
         <div class="item" @click="openModal('Change Password')">
           <div class="title">
             <i class="iconfont icon-mima"></i>
-            <span>Senha de saque</span>
+            <span>{{ $t('setting.pass2') }}</span>
           </div>
-          <div class="btn">Referencia</div>
+          <div class="btn">{{ $t('setting.btn1') }}</div>
         </div>
         <div class="item" @click="openModal('Change transaction password')">
           <div class="title">
             <i class="iconfont icon-mima"></i>
-            <span>Senha de saque</span>
+            <span>{{ $t('setting.pass1') }}</span>
           </div>
-          <div class="btn">Referencia</div>
+          <div class="btn">{{ $t('setting.btn1') }}</div>
         </div>
         <div class="item" @click="openModal('Inserir senha')">
           <div class="title">
             <i class="iconfont icon-youjian"></i>
             <span>Email</span>
           </div>
-          <div class="btn">Referencia</div>
+          <div class="btn">{{ $t('setting.btn1') }}</div>
         </div>
       </div>
       <div class="ipt-box">
         <i class="iconfont icon-shengri"></i>
         <span>{{ user_info.birthday }}</span>
       </div>
-      <div class="return" @click="goBack()">Retomar</div>
+      <div class="return" @click="goBack()">{{$t('setting.btn2')}}</div>
     </div>
     <nut-overlay
       v-model:visible="modal"
@@ -103,7 +103,7 @@
                   </div>
                   <nut-input
                     v-model="passwordForm.oldpassword"
-                    placeholder="Old Password"
+                    :placeholder="$t('setting.oldpassword')"
                     :type="showpass.old_pass ? 'text' : 'password'"
                   />
                   <img
@@ -130,7 +130,7 @@
                   </div>
                   <nut-input
                     v-model="passwordForm.newpassword"
-                    placeholder="New Password"
+                    :placeholder="$t('setting.newpassword')"
                     :type="showpass.new_pass ? 'text' : 'password'"
                   />
                   <img
@@ -158,7 +158,7 @@
                   </div>
                   <nut-input
                     v-model="passwordForm.repassword"
-                    placeholder="Confirm New Password"
+                       :placeholder="$t('setting.confirmnewpassword')"
                     :type="showpass.re_pass ? 'text' : 'password'"
                   />
                   <img
@@ -183,34 +183,33 @@
                 prop="oldpassword"
                 :rules="[{ validator: customValidatorTransPass }]"
               >
-                <modalCode title="Old Password" @complete="onComplete" />
+                <modalCode :title="$t('setting.oldpassword')" @complete="onComplete" />
               </nut-form-item>
               <nut-form-item
                 prop="newpassword"
                 :rules="[{ validator: customValidatorTransPass }]"
               >
-                <modalCode title="New Password" @complete="onComplete2" />
+                <modalCode :title="$t('setting.newpassword')" @complete="onComplete2" />
               </nut-form-item>
               <nut-form-item
                 prop="repassword"
                 :rules="[{ validator: customValidatorTransPassAgain }]"
               >
-                <modalCode title="Confirm Password" @complete="onComplete3" />
+                <modalCode :title="$t('setting.confirmnewpassword')" @complete="onComplete3" />
               </nut-form-item>
             </nut-form>
 
             <div class="tips">
               <div class="circle"></div>
               <span
-                >E a sua primeira retirada, você precisa definir a senha de retira da
-                primeiro.</span
+                >{{ $t('setting.tip1') }}</span
               >
             </div>
             <div class="tips">
               <div class="circle"></div>
               <span>
-                Nota: A senha de saque é muito importante para proteger a seg uran çade
-                seus fundos. Você só pode conhecê-la para evitar a per dade fundos.</span
+                {{ $t('setting.tip2') }}
+                </span
               >
             </div>
           </div>
@@ -259,7 +258,7 @@
             </nut-form>
           </div>
           <div class="confirm-btn" @click="confirmPass()">
-            Confirmar<svg
+            {{ $t('button.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -355,14 +354,14 @@ const customValidatorEmail = (val) => {
   if (_validemail(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject("Please enter correct emial.");
+    return Promise.reject("Please enter correct email.");
   }
 };
 const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject("Please enter a 6-16 digit password.");
+    return Promise.reject("Please enter a 6-20 digit password.");
   }
 };
 const customValidatorPassAgain = (val) => {

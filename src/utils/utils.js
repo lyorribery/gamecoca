@@ -1,3 +1,25 @@
+import {heartbeat} from '@/apis/user'
+import store from "@/store/index.js";
+
+let onlineTimer = null
+export const checkOnline=(type)=>{
+	if(type==1){
+		onlineTimer=setInterval(async() => {
+			const res = await heartbeat()
+			if(res.code!=200){
+				clearInterval(onlineTimer)
+				onlineTimer=null
+				store.dispatch('LogOut')
+			}
+		},180000);
+	}else{
+		if(onlineTimer!=null){
+			clearInterval(onlineTimer)
+			onlineTimer=null
+		}
+	}
+
+}
 
 export const _validname = (val) => {
 	if (!val) return false

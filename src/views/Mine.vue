@@ -8,7 +8,7 @@
         </div>
         <div class="info-user">
           <div class="val" style="margin-bottom: 0.138rem">
-            Account:{{ user_info.userName }}
+            {{$t('main.Account')}}:{{ user_info.userName }}
           </div>
           <div class="val">
             ID:{{ user_info.userId }}
@@ -66,7 +66,7 @@
         <img src="../assets/images/mine/zuojiantou.png" class="arrow" />
         <div class="left">
           <div class="des">
-            <span class="name">Deposit</span>
+            <span class="name">{{ $t('mine.Deposit') }}</span>
             <div class="data">
               <span class="cur">{{
                 user_info.totalRechargeAmount
@@ -88,7 +88,7 @@
             stroke-color="linear-gradient(270deg,#FFC02E  0%,#F36655 100%)"
           />
           <div class="des">
-            <span class="name">Total Bet</span>
+            <span class="name">{{ $t('mine.totalbet') }}</span>
             <div class="data">
               <span class="cur">{{
                 user_info.totalBetAmount ? user_info.totalBetAmount.toFixed(2) : "0.00"
@@ -159,7 +159,7 @@
       <div class="item" @click="goPath('/refer/invite')">
         <div class="left">
           <img src="../assets/images/mine/fenxiang_icon.png" />
-          <span>Agente</span>
+          <span>{{ $t('mine.Agente') }}</span>
         </div>
         <svg
           t="1736777328996"
@@ -181,7 +181,7 @@
       <div class="item" @click="goPath('/setting')">
         <div class="left">
           <img src="../assets/images/mine/xiugai_icon.png" />
-          <span>Personal Infomation</span>
+          <span>{{ $t('mine.info') }}</span>
         </div>
         <svg
           t="1736777328996"
@@ -203,7 +203,7 @@
       <div class="item" @click="goPath('/service')">
         <div class="left">
           <img src="../assets/images/mine/kefu_icon.png" />
-          <span>Surpport</span>
+          <span>{{ $t('mine.Surpport') }}</span>
         </div>
         <svg
           t="1736777328996"
@@ -225,7 +225,7 @@
       <div class="item">
         <div class="left">
           <img src="../assets/images/mine/xiazai_icon.png" />
-          <span>Download Applincation</span>
+          <span>{{ $t('mine.downapp') }}</span>
         </div>
         <svg
           t="1736777328996"
@@ -247,7 +247,7 @@
       <div class="item" @click="exit()">
         <div class="left">
           <img src="../assets/images/mine/tuichu_icon.png" />
-          <span>Logout</span>
+          <span>{{ $t('mine.logout') }}</span>
         </div>
         <svg
           t="1736777328996"
@@ -300,7 +300,7 @@
           </div>
 
           <div class="title">
-            Mudar avatar
+            {{ $t('mine.avatar') }}
             <div class="line"></div>
           </div>
           <div class="avatar-box">
@@ -486,7 +486,6 @@ const copyId = async () => {
   try {
     commit("set_show_tip", { type: 1, msg: "copied" });
     await navigator.clipboard.writeText(state.user_info.userId);
-    console.log("文本已复制到剪贴板");
   } catch (err) {
     console.error("复制到剪贴板失败", err);
   }

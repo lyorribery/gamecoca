@@ -6,7 +6,7 @@
       </div>
       <nut-animate type="ripple" action="click">
         <div class="search-btn" @click="getData()">
-          <span v-if="!is_loading">Procurar</span>
+          <span v-if="!is_loading">{{ $t('report.Procurar') }}</span>
           <svg
             v-if="is_loading"
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@
         @click="changeType('Account')"
         :style="{ color: type == 'Account' ? '#fdc24a' : '' }"
       >
-        Account
+        {{ $t('report.Account') }}
         <div class="active" v-if="type == 'Account'"></div>
       </div>
       <div
@@ -57,7 +57,7 @@
         @click="changeType('Deposit')"
         :style="{ color: type == 'Deposit' ? '#fdc24a' : '' }"
       >
-        Deposit
+        {{ $t('report.Deposit') }}
         <div class="active" v-if="type == 'Deposit'"></div>
       </div>
       <div
@@ -65,7 +65,7 @@
         @click="changeType('Withdraw')"
         :style="{ color: type == 'Withdraw' ? '#fdc24a' : '' }"
       >
-        Withdraw
+        {{ $t('report.Withdraw') }}
         <div class="active" v-if="type == 'Withdraw'"></div>
       </div>
       <div
@@ -73,7 +73,7 @@
         @click="changeType('Bets')"
         :style="{ color: type == 'Bets' ? '#fdc24a' : '' }"
       >
-        Bets
+        {{ $t('report.Bets') }}
         <div class="active" v-if="type == 'Bets'"></div>
       </div>
       <div
@@ -81,7 +81,7 @@
         @click="changeType('Bonus')"
         :style="{ color: type == 'Bonus' ? '#fdc24a' : '' }"
       >
-        Bonus
+        {{ $t('report.Bonus') }}
         <div class="active" v-if="type == 'Bonus'"></div>
       </div>
       <div
@@ -89,7 +89,7 @@
         @click="changeType('Promotion')"
         :style="{ color: type == 'Promotion' ? '#fdc24a' : '' }"
       >
-        Promotion
+        {{ $t('report.Promotion') }}
         <div class="active" v-if="type == 'Promotion'"></div>
       </div>
     </div>
@@ -98,9 +98,9 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">ID</div>
-        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">Date</div>
-        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">Type</div>
-        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">Amount</div>
+        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">{{ $t('report.Date') }}</div>
+        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">{{ $t('report.Type') }}</div>
+        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">{{ $t('report.Amount') }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in account_data" :key="index">
         <div class="table-col-copy">
@@ -142,10 +142,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">Date</div>
-        <div class="table-col">Deposit</div>
-        <div class="table-col">Bonus</div>
-        <div class="table-col">Status</div>
+        <div class="table-col">{{$t('report.Date')}}</div>
+        <div class="table-col">{{ $t('report.Deposit') }}</div>
+        <div class="table-col">{{ $t('report.Bonus') }}</div>
+        <div class="table-col">{{ $t('report.Status') }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in deposit_data" :key="index">
         <div class="table-col-copy">
@@ -196,10 +196,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">Date</div>
-        <div class="table-col">Amount</div>
-        <div class="table-col">Fee</div>
-        <div class="table-col">Status</div>
+        <div class="table-col">{{ $t('report.Date') }}</div>
+        <div class="table-col">{{ $t('rerpot.Amount') }}</div>
+        <div class="table-col">{{ $t('report.Fee') }}</div>
+        <div class="table-col">{{ $t('report.Status') }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in withdraw_data" :key="index">
         <div class="table-col-copy">
@@ -252,10 +252,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">Date</div>
-        <div class="table-col">Type</div>
-        <div class="table-col">Bets</div>
-        <div class="table-col">Bonus</div>
+        <div class="table-col">{{ $t('report.Date') }}</div>
+        <div class="table-col">{{ $t('report.Type') }}</div>
+        <div class="table-col">{{ $t('report.Bets') }}</div>
+        <div class="table-col">{{ $t('report.Bonus') }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in bet_data" :key="index">
         <div class="table-col-copy">
@@ -290,10 +290,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">Date</div>
-        <div class="table-col">Origin</div>
-        <div class="table-col">Bonus</div>
-        <div class="table-col">Status</div>
+        <div class="table-col">{{ $t('report.Date') }}</div>
+        <div class="table-col">{{ $t('report.Origin') }}</div>
+        <div class="table-col">{{ $t('report.Bonus') }}</div>
+        <div class="table-col">{{ $t('report.Status') }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in bonus_data" :key="index">
         <div class="table-col-copy">
@@ -335,10 +335,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">Date</div>
-        <div class="table-col">Type</div>
-        <div class="table-col">Bonus</div>
-        <div class="table-col">Details</div>
+        <div class="table-col">{{ $t('report.Date') }}</div>
+        <div class="table-col">{{ $t('report.Type') }}</div>
+        <div class="table-col">{{ $t('report.Bonus') }}</div>
+        <div class="table-col">{{ $t('report.Details') }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in promotion_data" :key="index">
         <div class="table-col-copy">

@@ -7,19 +7,19 @@
           <div class="val">0</div>
         </div>
         <div class="btn-box">
-          <div class="deposit-btn">Saque</div>
-          <div class="transfer-btn">Transferir</div>
+          <div class="deposit-btn">{{ $t("invite.Saque") }}</div>
+          <div class="transfer-btn">{{ $t("invite.Transferir") }}</div>
         </div>
       </div>
       <div class="bottom">
-        A liquidação da comissão vai demorar um pouco, por favor ab sejapaciente
+        {{ $t("invite.des1") }}
       </div>
     </div>
     <div class="share-box">
       <div class="des" style="margin-bottom: 0.416rem">
-        Convide seus amigos para participar e você receberá grandes recompensas
+        {{ $t("invite.des2") }}
       </div>
-      <div class="des">Compartilhar via:</div>
+      <div class="des">{{ $t("invite.title1") }}</div>
       <div class="channel">
         <img src="../assets/images/footer/tg.png" />
         <img src="../assets/images/footer/youtube.png" />
@@ -28,19 +28,19 @@
         <img src="../assets/images/footer/x.png" />
         <img src="../assets/images/footer/douyin.png" />
       </div>
-      <div class="des">Seu link de referência</div>
+      <div class="des">{{ $t("invite.title2") }}</div>
       <div class="link-box">
         <div class="link">{{ link_val }}</div>
-        <div class="copy-btn" @click="copyLink()">Copy</div>
+        <div class="copy-btn" @click="copyLink()">{{ $t("invite.Copy") }}</div>
       </div>
     </div>
     <div class="text">
-      Programa de afiliados exclusivo, tornando o dinheiro mais fácil
+      {{ $t("invite.des3") }}
     </div>
     <div class="text-box" v-html="rule"></div>
     <div class="invite-img">
-      <div class="title">Programa Afiliado</div>
-      <div class="sub-title">Modelo Lancôme</div>
+      <div class="title">{{ $t("invite.title3") }}</div>
+      <div class="sub-title">{{ $t("invite.title4") }}</div>
       <img src="../assets/images/refer/fenxiao.png" />
     </div>
   </div>
@@ -51,7 +51,7 @@ import { onMounted, ref } from "vue";
 import { GetUserRule } from "@/apis/proxy";
 import { useStore } from "vuex";
 
-const { state,commit } = useStore();
+const { state, commit } = useStore();
 const link_val = ref("");
 const rule = ref("");
 const copyLink = async () => {

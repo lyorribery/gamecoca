@@ -14,10 +14,10 @@
         />
         <div class="down-des">
           <img :src="fullStationLogo" />
-          <span>Baixe agora para receberum b’nus gratuito!</span>
+          <span>{{ $t("main.downloaddes") }}</span>
         </div>
       </div>
-      <div class="btn">Download</div>
+      <div class="btn" @click="changeDown(1)">{{ $t("main.Download") }}</div>
     </div>
   </transition>
 
@@ -367,7 +367,7 @@
         </div>
         <div class="info-user">
           <div class="val" style="margin-bottom: 0.138rem">
-            Account:{{ user_info.userName }}
+            {{ $t("main.Account") }}:{{ user_info.userName }}
           </div>
           <div class="val">
             ID:{{ user_info.userId }}
@@ -395,23 +395,23 @@
       <div class="pop-action-box">
         <div class="item" @click="popActionBtn('/mine')">
           <img src="../assets/images/main/gerenxinxi.png" />
-          <span>Conta</span>
+          <span>{{ $t("main.Account") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/inbox')">
           <img src="../assets/images/main/zoujian.png" />
-          <span>Message</span>
+          <span>{{ $t("main.Message") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/service')">
           <img src="../assets/images/main/kefu.png" />
-          <span>Surpport</span>
+          <span>{{ $t("main.Surpport") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/report')">
           <img src="../assets/images/main/baobiao.png" />
-          <span>Report</span>
+          <span>{{ $t("main.Report") }}</span>
         </div>
         <div class="item" @click="exit()">
           <img src="../assets/images/main/tuichu.png" />
-          <span>Exit</span>
+          <span>{{ $t("main.Exit") }}</span>
         </div>
       </div>
     </div>
@@ -449,7 +449,7 @@
                 p-id="4133"
               ></path>
             </svg>
-            <span>PROMOTION</span>
+            <span>{{ $t("main.PROMOTION") }}</span>
           </div>
           <i style="margin-right: 0" class="iconfont icon-xiangxiajiantou"></i>
         </div>
@@ -464,7 +464,9 @@
             <img :src="item.fullNoticeTitleIcon" />
           </div>
         </div>
-        <div class="promotion-btn" @click="goPath('/promotion')">All Promotion</div>
+        <div class="promotion-btn" @click="goPath('/promotion')">
+          {{ $t("main.AllPromotion") }}
+        </div>
       </div>
       <div class="language-box">
         <nut-collapse>
@@ -642,7 +644,7 @@
     <div
       class="pop-fade"
       v-if="isOpen"
-      @click="isOpen=false"
+      @click="isOpen = false"
       :style="{
         height: is_show_app ? 'calc(100% - 147px)' : 'calc(100% - 101px)',
         top: is_show_app ? '101px' : '55px',
@@ -650,9 +652,27 @@
     ></div>
   </transition>
 
+  <nut-popup v-model:visible="down_visible" position="bottom" round>
+    <div class="down-box" v-if="divice == 'android'">
+      <div class="close">
+        <img @click="changeDown(2)" src="../assets/images/close.png" />
+      </div>
+      <div class="title">1. Click the "More" icon, then click Install application</div>
 
+      <div class="title">2. Click Add and select "Add"</div>
+    </div>
+    <div class="down-box" v-if="divice == 'ios'">
+      <div class="close">
+        <img @click="changeDown(2)" src="../assets/images/close.png" />
+      </div>
+      <div class="title">1.Click the share button at the bottom</div>
+      <img style="width: 100%" src="../assets/images/ios_1.png" />
+      <div class="title">2.Tap the More icon, then tap Add to Home Screen</div>
+      <img style="width: 100%" src="../assets/images/ios_2.png" />
+      <div class="title">3. Click Add and select "Add"</div>
+    </div>
+  </nut-popup>
 </template>
-
 
 <script>
 import { computed, watch } from "vue";
@@ -763,15 +783,15 @@ export default {
       isOpen.value = false;
       router.push({
         path: "/activity",
-        query:{
-          id:data.id
-        }
+        query: {
+          id: data.id,
+        },
       });
     };
 
     const goPath = (path) => {
       isOpen.value = false;
-      isShow.value=false
+      isShow.value = false;
       router.push({
         path,
       });
@@ -783,37 +803,22 @@ export default {
 
     const languageChange = (value) => {
       locale.value = value;
+      if (locale.value == "en") {
+        commit("set_show_tip", { type: 1, msg: "Already switched to English" });
+      } else if (locale.value == "por") {
+        commit("set_show_tip", { type: 1, msg: "Já mudei para português" });
+      }
       showHeadLanguage.value = false;
     };
 
-    const is_refresh_banlance = computed(()=>{
-      return state.is_refresh_banlance
-    });
-
-    onMounted(() => {
-      switch (route.name) {
-        case "home":
-          active_tab.value = 0;
-          break;
-        case "invite":
-          active_tab.value = 1;
-          break;
-        case "promotion":
-          active_tab.value = 2;
-          break;
-        case "inbox":
-          active_tab.value = 3;
-          break;
-        case "mine":
-          active_tab.value = 4;
-          break;
-      }
+    const is_refresh_banlance = computed(() => {
+      return state.is_refresh_banlance;
     });
 
     const copyId = async () => {
       try {
         await navigator.clipboard.writeText(state.user_info.userId);
-        commit('set_show_tip',{type:1,msg:'copied'})
+        commit("set_show_tip", { type: 1, msg: "copied" });
         console.log("文本已复制到剪贴板");
       } catch (err) {
         console.error("复制到剪贴板失败", err);
@@ -835,7 +840,42 @@ export default {
     const unread_count = computed(() => {
       return state.unread_count;
     });
+    const down_visible = ref(false);
+    const changeDown = (type) => {
+      type == 1 ? (down_visible.value = true) : (down_visible.value = false);
+    };
+    const divice = ref(false);
+    onMounted(() => {
+      const userAgent = navigator.userAgent;
+      const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+      const isAndroid = /Android/.test(userAgent) && !/Windows Phone/.test(userAgent);
+      if (isIOS) {
+        divice.value = "ios";
+      } else if (isAndroid) {
+        divice.value = "android";
+      }
+      switch (route.name) {
+        case "home":
+          active_tab.value = 0;
+          break;
+        case "invite":
+          active_tab.value = 1;
+          break;
+        case "promotion":
+          active_tab.value = 2;
+          break;
+        case "inbox":
+          active_tab.value = 3;
+          break;
+        case "mine":
+          active_tab.value = 4;
+          break;
+      }
+    });
     return {
+      divice,
+      down_visible,
+      changeDown,
       change_show_app,
       is_show_app,
       popActionBtn,
@@ -873,15 +913,17 @@ export default {
 @import "../assets/styles/variables.scss";
 
 .animate__animated.animate__slideInDown,
-.animate__animated.animate__slideOutUp,.animate__animated.animate__slideOutLeft,.animate__animated.animate__slideInLeft {
+.animate__animated.animate__slideOutUp,
+.animate__animated.animate__slideOutLeft,
+.animate__animated.animate__slideInLeft {
   --animate-duration: 0.5s;
 }
 .pop-fade {
   position: fixed;
-  right:0;
+  right: 0;
   width: 100%;
   background: rgba(0, 0, 0, 0.6);
-  z-index:3;
+  z-index: 3;
 }
 .download {
   position: fixed;
@@ -1119,7 +1161,7 @@ export default {
 }
 
 .pop-up-box {
-  z-index:4;
+  z-index: 4;
   position: fixed;
   width: 5.695rem;
   height: 100%;
@@ -1485,5 +1527,35 @@ export default {
 .slide-left-leave-active {
   opacity: 0.3;
   transform: translateX(-100%);
+}
+.down-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1.277rem 0.972rem 0.555rem 0.972rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: #151515;
+  .close {
+    position: absolute;
+    right: 0.555rem;
+    top: 0.416rem;
+    img {
+      width: 0.555rem;
+    }
+  }
+  .title {
+    width: 100%;
+    text-align: left;
+    font-size: 0.361rem;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  img {
+    margin: 0.416rem 0;
+    width: 100%;
+  }
 }
 </style>

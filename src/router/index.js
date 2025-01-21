@@ -119,15 +119,7 @@ const router = createRouter({
           }
         },
 
-        {
-          path: '/forgetPass',
-          name: 'forgetPass',
-          component: () => import('@/views/ForgetPass.vue'),
-          meta: {
-            transition: 'slide-left',
-            auth: false
-          },
-        },
+
         {
           path: '/activity',
           name: 'activity',
@@ -173,16 +165,6 @@ const router = createRouter({
             transition: 'slide-left',
           }
         },
-
-        {
-          path: '/pay',
-          name: 'pay',
-          component: () => import('@/views/Pay.vue'),
-          meta: {
-            transition: 'slide-left',
-            auth: false
-          }
-        }
       ]
     },
     {

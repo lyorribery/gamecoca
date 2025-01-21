@@ -6,7 +6,7 @@
     <div class="img-box">
       <img :src="logo" />
     </div>
-    <div class="title">Hello,Welcome to {{ station_name }}</div>
+    <div class="title">{{ $t('login.title1') }} {{ station_name }}</div>
     <div class="form-container">
       <div class="form-type">
         <div
@@ -14,14 +14,14 @@
           :class="mode == 'login' ? 'active' : 'unactive'"
           @click="changeTab('login')"
         >
-          Entrar
+          {{ $t('login.Entrar') }}
         </div>
         <div
           class="item item-right"
           :class="mode == 'register' ? 'active' : 'unactive'"
           @click="changeTab('register')"
         >
-          Cadastro
+          {{ $t('login.Cadastro') }}
         </div>
       </div>
       <div class="form-box" v-if="mode == 'login'">
@@ -32,7 +32,7 @@
               class="iconfont icon-shouji"
               :class="login_type == 1 ? 'active' : 'unactive'"
             ></i>
-            <span :class="login_type == 1 ? 'active' : 'unactive'">Telefone</span>
+            <span :class="login_type == 1 ? 'active' : 'unactive'">{{ $t('login.Telefone') }}</span>
           </div>
           <div @click="changeLoginType(2)" class="type-item">
             <div class="active-type" v-if="login_type == 2"></div>
@@ -48,7 +48,7 @@
               class="iconfont icon-geren"
               :class="login_type == 0 ? 'active' : 'unactive'"
             ></i>
-            <span :class="login_type == 0 ? 'active' : 'unactive'">Usuário</span>
+            <span :class="login_type == 0 ? 'active' : 'unactive'">{{ $t('login.username') }}</span>
           </div>
         </div>
         <nut-form ref="loginRef" :model-value="loginForm">
@@ -72,10 +72,10 @@
                 :clearable="true"
                 :placeholder="
                   login_type == 1
-                    ? 'Phone Number'
+                    ? $t('login.PhoneNumber')
                     : login_type === 2
-                    ? 'Email Address'
-                    : 'User Name'
+                    ? $t('login.EmailAddress')
+                    : $t('login.UserName')
                 "
                 type="text"
               />
@@ -112,14 +112,14 @@
                   :style="{ color: is_check ? '#06a950' : '#808080' }"
                   class="iconfont icon-duoxuanyixuan"
                 ></i>
-                <span>Lembrar</span>
+                <span>{{ $t('login.Lembrar') }}</span>
               </div>
-              <div class="forget" @click="modal_visible = true">Esqueceu?</div>
+              <div class="forget" @click="modal_visible = true">{{$t('login.Esqueceu')}}?</div>
             </div>
           </nut-form-item>
           <nut-form-item prop="submit">
             <div class="login-btn" @click="submitLogin()">
-              Entrar
+              {{ $t('login.Entrar') }}
               <svg
                 v-if="is_loading"
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@
                 </path>
               </svg>
             </div>
-            <div class="register-btn">Cadastro</div>
+            <div class="register-btn">{{ $t('login.Cadastro') }}</div>
             <div class="des">
               By accessing the site.l confirm that l am 18 years old and l have read
               the<span>Terms of Service</span>
@@ -174,7 +174,7 @@
             :rules="[{ validator: customValidatorRealName }]"
           >
             <div class="ipt-title">
-              <span>Real Name</span>
+              <span>{{ $t('login.RealName') }}</span>
               <div class="circle"></div>
             </div>
             <div class="ipt-box">
@@ -183,14 +183,14 @@
               </div>
               <nut-input
                 v-model="registerForm1.realName"
-                placeholder="Real Name"
+                :placeholder="$t('login.RealName')"
                 type="text"
               />
             </div>
           </nut-form-item>
           <nut-form-item prop="sex">
             <div class="ipt-title">
-              <span>Gender</span>
+              <span>{{ $t('login.Gender') }}</span>
               <div class="circle"></div>
             </div>
             <div class="gender">
@@ -204,7 +204,7 @@
                   :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
                 ></i>
                 <span :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
-                  >Guy</span
+                  >{{ $t('login.Guy') }}</span
                 >
               </div>
               <div
@@ -217,7 +217,7 @@
                   :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
                 ></i>
                 <span :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
-                  >Girl</span
+                  >{{ $t('login.Girl') }}</span
                 >
               </div>
             </div>
@@ -227,7 +227,7 @@
             :rules="[{ validator: customValidatorBirthday }]"
           >
             <div class="ipt-title">
-              <span>Data de Nascimento</span>
+              <span>{{ $t('login.DatadeNascimento') }}</span>
               <div class="circle"></div>
             </div>
             <div class="ipt-box" @click="showBirthday = true">
@@ -240,7 +240,7 @@
             </div>
           </nut-form-item>
           <nut-form-item prop="submit">
-            <div class="login-btn" @click="submitRegisterStep1()">Continuar</div>
+            <div class="login-btn" @click="submitRegisterStep1()">{{$t('btn.confirm')}}</div>
           </nut-form-item>
         </nut-form>
       </div>
@@ -292,10 +292,10 @@
                 :clearable="true"
                 :placeholder="
                   login_type == 1
-                    ? 'Phone Number'
+                    ? $t('login.PhoneNumber')
                     : login_type === 2
-                    ? 'Email Address'
-                    : 'User Name'
+                    ? $t('login.EmailAddress')
+                    : $t('login.UserName')
                 "
                 type="text"
               />
@@ -356,7 +356,7 @@
 
           <nut-form-item prop="submit">
             <div class="login-btn" @click="submitRegister2()">
-              Entrar
+              {{$t('login.Entrar')}}
               <svg
                 v-if="is_loading"
                 xmlns="http://www.w3.org/2000/svg"
@@ -385,8 +385,7 @@
               </svg>
             </div>
             <div class="des" style="margin-top: 0.416rem">
-              By accessing the site.l confirm that l am 18 years old and l have read
-              the<span>Terms of Service</span>
+              {{ $t('login.tip1') }}<span>Terms of Service</span>
             </div>
           </nut-form-item>
         </nut-form>
@@ -425,7 +424,7 @@
           </div>
 
           <div class="title">
-            Forget Password
+            {{ $t('login.ForgetPassword') }}
             <div class="line"></div>
           </div>
           <nut-form ref="forgetRef" :model-value="forgetForm">
@@ -438,7 +437,7 @@
                 <nut-input
                   :clearable="true"
                   v-model="forgetForm.mobile"
-                  placeholder="Phone Number"
+                  :placeholder="$t('login.PhoneNumber')"
                   type="number"
                 />
               </div>
@@ -477,7 +476,7 @@
             </nut-form-item>
             <nut-form-item prop="submit">
               <div class="login-btn" @click="confirmForget()">
-                Continuar<svg
+                {{ $t('login.Continuar') }}<svg
                   v-if="is_loading"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -541,6 +540,7 @@ import {
   _validemail,
   _validphone,
   _validbirth,
+  checkOnline
 } from "@/utils/utils";
 import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
@@ -682,10 +682,12 @@ const submitLogin = () => {
             dispatch("GET_USER_BALANCE");
             dispatch("GET_MSG_LIST");
             dispatch("GET_UNREAD_COUNT");
+            checkOnline(1)
             router.push({
               path: "/home",
             });
             commit("set_show_tip", { type: 1, msg: "login success" });
+            commit("set_login_tip_visible",true)
           } else {
             commit("set_show_tip", { type: 1, msg: res.msg });
           }
@@ -748,7 +750,7 @@ const customValidatorPass = (val) => {
   if (_validpassword(val)) {
     return Promise.resolve();
   } else {
-    return Promise.reject("Please enter a 6-16 digit password.");
+    return Promise.reject("Please enter a 6-20 digit password.");
   }
 };
 const customValidatorPassAgain = (val) => {

@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="activity">
+      <div class="loading" v-if="is_loading"></div>
+      <div class="loading" style="height: 7rem;" v-if="is_loading"></div>
       <img :src="activity_detail.fullNoticeImg" style="width: 100%" />
       <div class="activity-content" v-html="activity_detail.noticeContent"></div>
     </div>
@@ -29,10 +31,13 @@ const activity_detail = ref({
   noticeContent: "",
   noticeTitle: "",
 });
+const is_loading = ref(true);
 onMounted(() => {
-  console.log(route.query);
   getNoticeById(route.query.id).then((res) => {
-    if (res.code == 200) activity_detail.value = res.data;
+    if (res.code == 200) {
+      is_loading.value = false;
+      activity_detail.value = res.data;
+    }
   });
 });
 </script>
@@ -42,6 +47,33 @@ onMounted(() => {
   width: 100%;
   box-sizing: border-box;
   padding: 0.416rem 0.416rem calc(env(safe-area-inset-bottom) + 0.416rem) 0.416rem;
+  .loading {
+    width: 100%;
+    height: 5rem;
+    border-radius: 0.416rem;
+    background-size: 200% 200%;
+    background-image: linear-gradient(
+      135deg,
+      rgba(188, 54, 204, 0.8),
+      rgba(188, 54, 204, 0.6),
+      rgba(56, 28, 164, 0.8),
+      rgba(56, 28, 164, 0.6)
+    );
+    animation: flowbg 2s ease infinite;
+    @keyframes flowbg {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    margin-bottom: 0.416rem;
+  }
+
   .activity-content {
     width: 100%;
     font-size: 0.416rem;

@@ -55,6 +55,13 @@ export const logout = () => {
     })
 }
 
+export const heartbeat=()=>{
+    return axios.request({
+        url:'/user/user/online',
+        method:'post'
+    })
+}
+
 export const getUserBalance = () => {
     return axios.request({
         url: '/user/getUserBalance',

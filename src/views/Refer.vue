@@ -67,6 +67,9 @@ export default {
 import { computed, ref } from "vue";
 import {useStore} from 'vuex'
 import { useRoute, useRouter } from "vue-router";
+import { useI18n} from 'vue-i18n'
+
+const { t } = useI18n();
 const {state}=useStore()
 const route = useRoute();
 const router = useRouter();
@@ -77,10 +80,10 @@ const is_show_app=computed(()=>{
   return state.is_show_app
 })
 const tabs = [
-  { name: "invite", title: "Convidar" },
-  { name: "referc", title: "Referencia" },
-  { name: "member", title: "Menbro" },
-  { name: "bonus", title: "Bonus" },
+  { name: "invite", title: t('refer.Toinvite') },
+  { name: "referc", title: t('refer.Referencia') },
+  { name: "member", title: t('Menbro') },
+  { name: "bonus", title: t('Bonus') },
 ];
 const changePath = (item) => {
   router.push({

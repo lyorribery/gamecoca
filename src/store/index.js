@@ -4,9 +4,9 @@ import { getConfig, GetAjuda, GetUserMessageUnReadCountApi } from '@/apis/base.j
 import { PayMethod } from '@/apis/deposit.js'
 import { GetLevel } from '@/apis/vip.js'
 import { LuckyDetails } from '@/apis/cashwheel.js'
-import { getUserBalance, getUserInfo, getUserMessageApi, logout } from '@/apis/user.js'
+import { getUserBalance, getUserInfo, getUserMessageApi, logout} from '@/apis/user.js'
 import router from '@/router';
-import { formatDate } from "@/utils/utils";
+import { formatDate, checkOnline } from "@/utils/utils";
 
 const store = createStore({
   state: () => ({
@@ -47,9 +47,13 @@ const store = createStore({
     tip_visible:false,
     is_refresh_banlance:false,
     home_icon:[],
-    spin_show:false
+    spin_show:false,
+    login_tip_visible:false
   }),
   mutations: {
+    set_login_tip_visible(state,val){
+      state.login_tip_visible=val
+    },
     set_spin_show(state,val){
       state.spin_show=val
     },
@@ -237,6 +241,7 @@ const store = createStore({
       })
     },
     LogOut(ctx) {
+      checkOnline(2)
       logout().then(() => {
         localStorage.removeItem('accessToken')
         ctx.commit('set_user_info', {})
@@ -246,7 +251,8 @@ const store = createStore({
         })
         ctx.commit('set_show_tip',{type:1,msg:'logout success'})
       })
-    }
+    },
+
   }
 })
 
