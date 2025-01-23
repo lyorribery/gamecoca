@@ -437,7 +437,7 @@
           </div>
 
           <div class="confirm-btn" @click="confirmWithdrawPass()">
-            {{ $t('btn.confirm') }}<svg
+            {{ $t('button.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -525,7 +525,7 @@
           </div>
 
           <div class="confirm-btn" @click="confirmTransactionPassword()">
-            {{ $t('btn.confirm') }}<svg
+            {{ $t('button.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -664,7 +664,7 @@
           </nut-form>
 
           <div class="confirm-btn" @click="confirmAddPix()">
-            {{ $t('btn.confirm') }}<svg
+            {{ $t('button.confirm') }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"

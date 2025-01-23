@@ -11,6 +11,7 @@ import { onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import loading from "@/components/loading.vue";
+import {loadStaticImg} from '@/utils/utils'
 import tip from "@/components/tip.vue";
 const uuid = require("uuid");
 
@@ -43,7 +44,6 @@ export default {
     onMounted(() => {
       const id = getQueryParam("agentid");
       if (id) window.localStorage.setItem("agentId", id);
-      
       let userAgentInfo = window.navigator.userAgent;
       let Agents = new Array(
         "Android",
@@ -60,6 +60,7 @@ export default {
         ) &&
         !(self.frameElement && self.frameElement.tagName == "IFRAME")
       ) {
+        document.body.style.background='#222222'
         let ifrTag = document.getElementsByTagName("iframe")[0];
         if (ifrTag) {
           ifrTag.remove();
@@ -69,11 +70,12 @@ export default {
           ifrTag.setAttribute("src", window.location.href);
           ifrTag.setAttribute("frameborder", 0);
           let styleObj = {
-            width: "414px",
+            width: "440px",
             height: "100vh",
             position: "absolute",
             left: "50%",
             transform: "translateX(-50%)",
+            boxShadow:"0 0 20px #151515" 
           };
           Object.entries(styleObj).forEach(([key, value]) => {
             ifrTag.style[key] = value;
@@ -81,6 +83,7 @@ export default {
           document.body.append(ifrTag);
         }
       }
+      loadStaticImg()
       dispatch("GET_CONFIG");
       if (localStorage.getItem("accessToken")) {
         dispatch("GET_USER_INFO");

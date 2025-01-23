@@ -493,7 +493,6 @@ const goBack = () => {
   justify-content: center;
   .overlay-content {
     width: calc(100% - 0.833rem);
-    background: #1f1e1e;
     background: linear-gradient(135deg, #1f1e1e 0%, #1f1e1e 75%, #413825 100%);
     border-radius: 0.555rem;
     box-sizing: border-box;

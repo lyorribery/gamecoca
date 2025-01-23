@@ -48,9 +48,80 @@ const store = createStore({
     is_refresh_banlance:false,
     home_icon:[],
     spin_show:false,
-    login_tip_visible:false
+    login_tip_visible:false,
+    static_img:{
+      footer:{
+        img_url_1:"",
+        img_url_2:"",
+        img_url_3:"",
+        img_url_4:'',
+        img_url_5:'',
+        img_url_6:''
+      },
+      avatar:{
+        avatar1:'',
+        avatar2:'',
+        avatar3:'',
+        avatar4:'',
+        avatar5:'',
+        avatar6:'',
+        avatar7:'',
+        avatar8:'',
+        avatar9:'',
+        avatar10:'',
+        avatar11:'',
+        avatar12:''
+      },
+      mine:{
+        img_1:'',
+        img_2:'',
+        img_3:'',
+        img_4:'',
+        img_5:'',
+        img_6:'',
+        img_7:'',
+        img_8:'',
+        img_9:'',
+        img_10:'',
+        img_11:'',
+        img_12:'',
+        img_13:'',
+        img_14:'',
+        img_15:'',
+      },
+      inbox:{
+        img_url_1:'',
+        img_url_2:''
+      },
+      invite:{
+        img_1:'',
+        img_7:'',
+        img_8:''
+      },
+      refer:{
+        img_1:'',
+        img_2:'',
+        img_3:'',
+        img_4:'',
+        img_5:'',
+      },
+      main:{
+        img_1:'',
+        img_2:'',
+        img_3:'',
+        img_4:'',
+        img_5:''
+      },
+      login:{
+        img_1:'',
+        img_2:'',
+      }
+    }
   }),
   mutations: {
+    set_static_img(state,val){
+      state.static_img=val
+    },
     set_login_tip_visible(state,val){
       state.login_tip_visible=val
     },
@@ -148,7 +219,7 @@ const store = createStore({
   },
   actions: {
     GET_CONFIG(ctx) {
-      // ctx.commit('set_loading_modal', true)
+      ctx.commit('set_loading_modal', true)
       getConfig().then(res => {
         if (res.code == 200) {
           ctx.commit('set_station_base', res.data)
@@ -163,7 +234,7 @@ const store = createStore({
         ctx.commit('set_loading_modal', false)
       })
       getPromotionList().then(res => {
-        if (res.code == 200) ctx.commit('set_activity_notice', res.data)
+        if (res.code == 200)   ctx.commit('set_activity_notice', res.data)
       })
       getStationImgList().then(res => {
         if (res.code == 200){

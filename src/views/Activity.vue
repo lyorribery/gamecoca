@@ -2,7 +2,7 @@
   <div>
     <div class="activity">
       <div class="loading" v-if="is_loading"></div>
-      <div class="loading" style="height: 7rem;" v-if="is_loading"></div>
+      <div class="loading" style="height: 7rem" v-if="is_loading"></div>
       <img :src="activity_detail.fullNoticeImg" style="width: 100%" />
       <div class="activity-content" v-html="activity_detail.noticeContent"></div>
     </div>
@@ -52,12 +52,19 @@ onMounted(() => {
     height: 5rem;
     border-radius: 0.416rem;
     background-size: 200% 200%;
+    // background-image: linear-gradient(
+    //   135deg,
+    //   rgba(188, 54, 204, 0.8),
+    //   rgba(188, 54, 204, 0.6),
+    //   rgba(56, 28, 164, 0.8),
+    //   rgba(56, 28, 164, 0.6)
+    // );
     background-image: linear-gradient(
       135deg,
-      rgba(188, 54, 204, 0.8),
-      rgba(188, 54, 204, 0.6),
-      rgba(56, 28, 164, 0.8),
-      rgba(56, 28, 164, 0.6)
+      rgba(6, 169, 80, 1),
+      rgba(6, 169, 80, 0.8),
+      rgba(255, 197, 54, 1),
+      rgba(255, 197, 54, 0.8)
     );
     animation: flowbg 2s ease infinite;
     @keyframes flowbg {

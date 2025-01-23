@@ -6,12 +6,11 @@
   >
     <div class="download" v-if="is_show_app">
       <div class="left">
-        <img
-          src="../assets/images/close.png"
-          width="17"
+        <i
           @click="change_show_app"
+          class="iconfont icon-cuo"
           style="margin-right: 0.416rem"
-        />
+        ></i>
         <div class="down-des">
           <img :src="fullStationLogo" />
           <span>{{ $t("main.downloaddes") }}</span>
@@ -30,7 +29,7 @@
       :class="!isOpen ? 'icon-caidanxiangyou' : 'icon-caidanxiangzuo'"
       @click="changeMenu"
     ></i>
-    <img :src="fullStationLogo" style="height: 1.1rem" />
+    <img :src="fullStationLogo" @click="goHome()" style="height: 1.1rem" />
     <div class="info-box" v-if="JSON.stringify(user_info) != '{}'">
       <div class="balance-box">
         <div class="unit">R$</div>
@@ -65,7 +64,7 @@
         <div class="img-box">
           <div class="red"></div>
           <div class="level">{{ user_info.levelName }}</div>
-          <img src="../assets/images/avatar/3.png" />
+          <img :src="avatar_url" />
         </div>
         <i
           class="iconfont"
@@ -167,25 +166,22 @@
   >
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <transition :name="transitionName" mode="out-in">
-          <component
-            :is="Component"
-            v-if="route.meta.keepAlive"
-            :key="route.name"
-          ></component>
-        </transition>
-      </keep-alive>
-      <transition :name="transitionName" mode="out-in">
         <component
           :is="Component"
-          v-if="!route.meta.keepAlive"
+          v-if="route.meta.keepAlive"
           :key="route.name"
         ></component>
-      </transition>
+      </keep-alive>
+
+      <component
+        :is="Component"
+        v-if="!route.meta.keepAlive"
+        :key="route.name"
+      ></component>
     </router-view>
   </div>
 
-  <div class="tab-box">
+  <div class="tab-box" v-if="JSON.stringify(user_info) != '{}'">
     <div
       class="tab-item"
       v-for="(item, index) in tabs"
@@ -304,7 +300,11 @@
           </svg>
           <span>Por</span>
         </div>
-        <img src="../assets/images/dui.png" v-if="locale == 'por'" width="11" />
+        <i
+          class="iconfont icon-duihao"
+          v-if="locale == 'por'"
+          style="font-size: 0.333rem; color: #ffc536"
+        ></i>
       </div>
       <div class="item" @click="languageChange('en')">
         <div class="left">
@@ -341,7 +341,11 @@
           </svg>
           <span>Eng</span>
         </div>
-        <img src="../assets/images/dui.png" v-if="locale == 'en'" width="11" />
+        <i
+          class="iconfont icon-duihao"
+          v-if="locale == 'en'"
+          style="font-size: 0.333rem; color: #ffc536"
+        ></i>
       </div>
     </div>
   </transition>
@@ -362,7 +366,7 @@
     >
       <div class="avatar-pop">
         <div class="avatar" @click="goPath('/betbonus')">
-          <img src="../assets/images/avatar/3.png" />
+          <img :src="avatar_url" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
         <div class="info-user">
@@ -394,23 +398,23 @@
       </div>
       <div class="pop-action-box">
         <div class="item" @click="popActionBtn('/mine')">
-          <img src="../assets/images/main/gerenxinxi.png" />
+          <img :src="static_img.img_1" />
           <span>{{ $t("main.Account") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/inbox')">
-          <img src="../assets/images/main/zoujian.png" />
+          <img :src="static_img.img_2" />
           <span>{{ $t("main.Message") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/service')">
-          <img src="../assets/images/main/kefu.png" />
+          <img :src="static_img.img_3" />
           <span>{{ $t("main.Surpport") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/report')">
-          <img src="../assets/images/main/baobiao.png" />
+          <img :src="static_img.img_4" />
           <span>{{ $t("main.Report") }}</span>
         </div>
         <div class="item" @click="exit()">
-          <img src="../assets/images/main/tuichu.png" />
+          <img :src="static_img.img_5" />
           <span>{{ $t("main.Exit") }}</span>
         </div>
       </div>
@@ -591,7 +595,12 @@
                   </svg>
                   <span :class="locale == 'por' ? 'active-color' : ''">Português</span>
                 </div>
-                <img src="../assets/images/dui.png" v-if="locale == 'por'" width="12" />
+
+                <i
+                  class="iconfont icon-duihao"
+                  style="font-size: 0.333rem; color: #ffc536"
+                  v-if="locale == 'por'"
+                ></i>
               </div>
               <div class="item" @click="languageChange('en')">
                 <div class="left">
@@ -628,7 +637,11 @@
                   </svg>
                   <span :class="locale == 'en' ? 'active-color' : ''">English</span>
                 </div>
-                <img src="../assets/images/dui.png" v-if="locale == 'en'" width="12" />
+                <i
+                  class="iconfont icon-duihao"
+                  style="font-size: 0.333rem; color: #ffc536"
+                  v-if="locale == 'en'"
+                ></i>
               </div>
             </div>
           </nut-collapse-item>
@@ -655,7 +668,7 @@
   <nut-popup v-model:visible="down_visible" position="bottom" round>
     <div class="down-box" v-if="divice == 'android'">
       <div class="close">
-        <img @click="changeDown(2)" src="../assets/images/close.png" />
+        <i class="iconfont icon-cuo" @click="changeDown(2)"></i>
       </div>
       <div class="title">1. Click the "More" icon, then click Install application</div>
 
@@ -663,7 +676,7 @@
     </div>
     <div class="down-box" v-if="divice == 'ios'">
       <div class="close">
-        <img @click="changeDown(2)" src="../assets/images/close.png" />
+        <i class="iconfont icon-cuo" @click="changeDown(2)"></i>
       </div>
       <div class="title">1.Click the share button at the bottom</div>
       <img style="width: 100%" src="../assets/images/ios_1.png" />
@@ -678,7 +691,6 @@
 import { computed, watch } from "vue";
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-// import { preloadImage } from "@/utils/utils";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
 
@@ -686,6 +698,9 @@ export default {
   setup() {
     const { locale } = useI18n();
     let { state, commit, dispatch } = useStore();
+    const static_img = computed(() => {
+      return state.static_img.main;
+    });
     const is_show_app = computed(() => {
       return state.is_show_app;
     });
@@ -844,7 +859,16 @@ export default {
     const changeDown = (type) => {
       type == 1 ? (down_visible.value = true) : (down_visible.value = false);
     };
+    const goHome = () => {
+      if (route.path != "/home")
+        router.push({
+          path: "/home",
+        });
+    };
     const divice = ref(false);
+    const avatar_url = computed(() => {
+      return state.static_img.avatar.avatar3;
+    });
     onMounted(() => {
       const userAgent = navigator.userAgent;
       const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
@@ -872,7 +896,10 @@ export default {
           break;
       }
     });
+
     return {
+      static_img,
+      avatar_url,
       divice,
       down_visible,
       changeDown,
@@ -904,6 +931,7 @@ export default {
       copyId,
       unread_count,
       showHeadLanguage,
+      goHome,
     };
   },
 };
@@ -941,6 +969,10 @@ export default {
   .left {
     display: flex;
     align-items: center;
+    i {
+      font-size: 0.666rem;
+      color: $primary-color;
+    }
     .down-des {
       display: flex;
       flex-direction: column;
@@ -948,6 +980,7 @@ export default {
       img {
         width: 1.2rem;
       }
+
       span {
         padding-top: 0.055rem;
         color: #e6e6e6;
@@ -1003,7 +1036,7 @@ export default {
 .bottom-permission {
   position: fixed;
   left: 0;
-  bottom: calc(env(safe-area-inset-bottom) + 1.361rem);
+  bottom: env(safe-area-inset-bottom);
   display: flex;
   width: 100%;
   height: 4.638rem;
@@ -1225,6 +1258,7 @@ export default {
       align-items: center;
       flex-wrap: wrap;
       .promotion-option {
+        background: linear-gradient(135deg, #413825 0%, #1f1e1e 35%, #1f1e1e 100%);
         width: calc((100% - 0.277rem) / 2);
         height: 1.416rem;
         border-radius: 0.222rem;
@@ -1542,8 +1576,9 @@ export default {
     position: absolute;
     right: 0.555rem;
     top: 0.416rem;
-    img {
-      width: 0.555rem;
+    i {
+      font-size: 0.555rem;
+      color: $color-white;
     }
   }
   .title {

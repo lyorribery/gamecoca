@@ -142,7 +142,7 @@ const columns = ref([
     key: "subid",
   },
   {
-    title: t('subno'),
+    title: t('member.subno'),
     key: "subno",
   },
 ]);

@@ -10,7 +10,7 @@
             @click="changeShow(item, index)"
           >
             <span :style="{ color: !item.messageRead ? '' : '#B3B3B3' }">{{
-              !item.isShow ? $t('inbox.Unfold') : $t('inbox.Fold')
+              !item.isShow ? $t("inbox.Unfold") : $t("inbox.Fold")
             }}</span>
             <div class="icon">
               <i
@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="middle">
-          <img v-if="!item.messageRead" src="../assets//images/inbox/xinfeng.png" />
-          <img v-else src="../assets//images/inbox/xinfeng_yidu.png" />
+          <img v-if="!item.messageRead" :src="static_img.img_url_1" />
+          <img v-else :src="static_img.img_url_2" />
           <span :class="!item.messageRead ? 'unread' : ''">{{ item.title }}</span>
         </div>
 
@@ -48,12 +48,16 @@ export default {
 </script>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { readUserMessageApi } from "../apis/user";
+import { preloadImage } from "@/utils/utils";
 const { state, commit } = useStore();
 const msg = computed(() => {
   return state.msg_list.records;
+});
+const static_img = computed(() => {
+  return state.static_img.inbox;
 });
 const changeShow = (item, index) => {
   const data = state.msg_list;
@@ -145,7 +149,7 @@ const changeShow = (item, index) => {
         justify-content: space-between;
         align-items: center;
         box-sizing: border-box;
-        padding:0 0.666rem;
+        padding: 0 0.666rem;
         span {
           color: $color-black;
           font-size: 0.305rem;

@@ -15,18 +15,18 @@
         {{ $t("invite.des1") }}
       </div>
     </div>
-    <div class="share-box">
+    <div class="share-box" :style="{backgroundImage:'url('+invite_img.img_8+')'}">
       <div class="des" style="margin-bottom: 0.416rem">
         {{ $t("invite.des2") }}
       </div>
       <div class="des">{{ $t("invite.title1") }}</div>
       <div class="channel">
-        <img src="../assets/images/footer/tg.png" />
-        <img src="../assets/images/footer/youtube.png" />
-        <img src="../assets/images/footer/ins.png" />
-        <img src="../assets/images/footer/whatsapp.png" />
-        <img src="../assets/images/footer/x.png" />
-        <img src="../assets/images/footer/douyin.png" />
+        <img :src="invite_img.img_1" />
+        <img :src="static_img.img_url_2" />
+        <img :src="static_img.img_url_3" />
+        <img :src="static_img.img_url_4" />
+        <img :src="static_img.img_url_5" />
+        <img :src="static_img.img_url_6" />
       </div>
       <div class="des">{{ $t("invite.title2") }}</div>
       <div class="link-box">
@@ -41,15 +41,16 @@
     <div class="invite-img">
       <div class="title">{{ $t("invite.title3") }}</div>
       <div class="sub-title">{{ $t("invite.title4") }}</div>
-      <img src="../assets/images/refer/fenxiao.png" />
+      <img :src="invite_img.img_7" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { GetUserRule } from "@/apis/proxy";
 import { useStore } from "vuex";
+import { preloadImage } from "@/utils/utils";
 
 const { state, commit } = useStore();
 const link_val = ref("");
@@ -62,7 +63,13 @@ const copyLink = async () => {
     console.error("复制到剪贴板失败", err);
   }
 };
-onMounted(() => {
+const static_img = computed(() => {
+  return state.static_img.footer;
+});
+const invite_img = computed(() => {
+  return state.static_img.invite;
+});
+onBeforeMount(() => {
   link_val.value =
     "https://" + window.location.hostname + "/#/?agentid=" + state.user_info.userId;
   GetUserRule().then((res) => {
@@ -127,7 +134,7 @@ onMounted(() => {
   .share-box {
     width: 9.444rem;
     height: 5.277rem;
-    background-image: url("../assets/images/refer/fenxiang_di.png");
+    // background-image: url("../assets/images/refer/fenxiang_di.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     margin: 0.416rem 0;

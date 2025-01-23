@@ -6,7 +6,7 @@
     <div class="img-box">
       <img :src="logo" />
     </div>
-    <div class="title">{{ $t('login.title1') }} {{ station_name }}</div>
+    <div class="title">{{ $t("login.title1") }} {{ station_name }}</div>
     <div class="form-container">
       <div class="form-type">
         <div
@@ -14,14 +14,14 @@
           :class="mode == 'login' ? 'active' : 'unactive'"
           @click="changeTab('login')"
         >
-          {{ $t('login.Entrar') }}
+          {{ $t("login.Entrar") }}
         </div>
         <div
           class="item item-right"
           :class="mode == 'register' ? 'active' : 'unactive'"
           @click="changeTab('register')"
         >
-          {{ $t('login.Cadastro') }}
+          {{ $t("login.Cadastro") }}
         </div>
       </div>
       <div class="form-box" v-if="mode == 'login'">
@@ -32,7 +32,9 @@
               class="iconfont icon-shouji"
               :class="login_type == 1 ? 'active' : 'unactive'"
             ></i>
-            <span :class="login_type == 1 ? 'active' : 'unactive'">{{ $t('login.Telefone') }}</span>
+            <span :class="login_type == 1 ? 'active' : 'unactive'">{{
+              $t("login.Telefone")
+            }}</span>
           </div>
           <div @click="changeLoginType(2)" class="type-item">
             <div class="active-type" v-if="login_type == 2"></div>
@@ -48,7 +50,9 @@
               class="iconfont icon-geren"
               :class="login_type == 0 ? 'active' : 'unactive'"
             ></i>
-            <span :class="login_type == 0 ? 'active' : 'unactive'">{{ $t('login.username') }}</span>
+            <span :class="login_type == 0 ? 'active' : 'unactive'">{{
+              $t("login.username")
+            }}</span>
           </div>
         </div>
         <nut-form ref="loginRef" :model-value="loginForm">
@@ -95,13 +99,13 @@
                 @click="showpass.login_pass = false"
                 v-if="showpass.login_pass"
                 class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
+                :src="static_img.img_2"
               />
               <img
                 @click="showpass.login_pass = true"
                 v-else
                 class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
+                :src="static_img.img_1"
               />
             </div>
           </nut-form-item>
@@ -112,14 +116,16 @@
                   :style="{ color: is_check ? '#06a950' : '#808080' }"
                   class="iconfont icon-duoxuanyixuan"
                 ></i>
-                <span>{{ $t('login.Lembrar') }}</span>
+                <span>{{ $t("login.Lembrar") }}</span>
               </div>
-              <div class="forget" @click="modal_visible = true">{{$t('login.Esqueceu')}}?</div>
+              <div class="forget" @click="modal_visible = true">
+                {{ $t("login.Esqueceu") }}?
+              </div>
             </div>
           </nut-form-item>
           <nut-form-item prop="submit">
             <div class="login-btn" @click="submitLogin()">
-              {{ $t('login.Entrar') }}
+              {{ $t("login.Entrar") }}
               <svg
                 v-if="is_loading"
                 xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +153,7 @@
                 </path>
               </svg>
             </div>
-            <div class="register-btn">{{ $t('login.Cadastro') }}</div>
+            <div class="register-btn">{{ $t("login.Cadastro") }}</div>
             <div class="des">
               By accessing the site.l confirm that l am 18 years old and l have read
               the<span>Terms of Service</span>
@@ -174,7 +180,7 @@
             :rules="[{ validator: customValidatorRealName }]"
           >
             <div class="ipt-title">
-              <span>{{ $t('login.RealName') }}</span>
+              <span>{{ $t("login.RealName") }}</span>
               <div class="circle"></div>
             </div>
             <div class="ipt-box">
@@ -190,7 +196,7 @@
           </nut-form-item>
           <nut-form-item prop="sex">
             <div class="ipt-title">
-              <span>{{ $t('login.Gender') }}</span>
+              <span>{{ $t("login.Gender") }}</span>
               <div class="circle"></div>
             </div>
             <div class="gender">
@@ -203,8 +209,9 @@
                   class="iconfont icon-nanxing"
                   :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
                 ></i>
-                <span :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
-                  >{{ $t('login.Guy') }}</span
+                <span
+                  :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
+                  >{{ $t("login.Guy") }}</span
                 >
               </div>
               <div
@@ -216,8 +223,9 @@
                   class="iconfont icon-nvxing"
                   :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
                 ></i>
-                <span :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
-                  >{{ $t('login.Girl') }}</span
+                <span
+                  :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
+                  >{{ $t("login.Girl") }}</span
                 >
               </div>
             </div>
@@ -227,7 +235,7 @@
             :rules="[{ validator: customValidatorBirthday }]"
           >
             <div class="ipt-title">
-              <span>{{ $t('login.DatadeNascimento') }}</span>
+              <span>{{ $t("login.DatadeNascimento") }}</span>
               <div class="circle"></div>
             </div>
             <div class="ipt-box" @click="showBirthday = true">
@@ -240,7 +248,9 @@
             </div>
           </nut-form-item>
           <nut-form-item prop="submit">
-            <div class="login-btn" @click="submitRegisterStep1()">{{$t('btn.confirm')}}</div>
+            <div class="login-btn" @click="submitRegisterStep1()">
+              {{ $t("btn.confirm") }}
+            </div>
           </nut-form-item>
         </nut-form>
       </div>
@@ -315,13 +325,13 @@
                 @click="showpass.register_pass = false"
                 v-if="showpass.register_pass"
                 class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
+                :src="static_img.img_2"
               />
               <img
                 @click="showpass.register_pass = true"
                 v-else
                 class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
+                :src="static_img.img_1"
               />
             </div>
           </nut-form-item>
@@ -343,20 +353,20 @@
                 @click="showpass.register_pass_again = false"
                 v-if="showpass.register_pass_again"
                 class="pass-icon"
-                src="../assets/images/login/yanjingguan.png"
+                :src="static_img.img_2"
               />
               <img
                 @click="showpass.register_pass_again = true"
                 v-else
                 class="pass-icon"
-                src="../assets/images/login/yanjingkai.png"
+                :src="static_img.img_1"
               />
             </div>
           </nut-form-item>
 
           <nut-form-item prop="submit">
             <div class="login-btn" @click="submitRegister2()">
-              {{$t('login.Entrar')}}
+              {{ $t("login.Entrar") }}
               <svg
                 v-if="is_loading"
                 xmlns="http://www.w3.org/2000/svg"
@@ -385,7 +395,7 @@
               </svg>
             </div>
             <div class="des" style="margin-top: 0.416rem">
-              {{ $t('login.tip1') }}<span>Terms of Service</span>
+              {{ $t("login.tip1") }}<span>Terms of Service</span>
             </div>
           </nut-form-item>
         </nut-form>
@@ -424,7 +434,7 @@
           </div>
 
           <div class="title">
-            {{ $t('login.ForgetPassword') }}
+            {{ $t("login.ForgetPassword") }}
             <div class="line"></div>
           </div>
           <nut-form ref="forgetRef" :model-value="forgetForm">
@@ -456,13 +466,13 @@
                   @click="showpass.forget_pass = false"
                   v-if="showpass.forget_pass"
                   class="pass-icon"
-                  src="../assets/images/login/yanjingguan.png"
+                  :src="static_img.img_2"
                 />
                 <img
                   @click="showpass.forget_pass = true"
                   v-else
                   class="pass-icon"
-                  src="../assets/images/login/yanjingkai.png"
+                  :src="static_img.img_1"
                 />
               </div>
             </nut-form-item>
@@ -476,7 +486,8 @@
             </nut-form-item>
             <nut-form-item prop="submit">
               <div class="login-btn" @click="confirmForget()">
-                {{ $t('login.Continuar') }}<svg
+                {{ $t("login.Continuar")
+                }}<svg
                   v-if="is_loading"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -540,12 +551,15 @@ import {
   _validemail,
   _validphone,
   _validbirth,
-  checkOnline
+  checkOnline,
 } from "@/utils/utils";
 import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
 let { dispatch, state, commit } = useStore();
 
+const static_img = computed(() => {
+  return state.static_img.login;
+});
 const modal_visible = ref(false);
 const showpass = ref({
   login_pass: false,
@@ -682,12 +696,12 @@ const submitLogin = () => {
             dispatch("GET_USER_BALANCE");
             dispatch("GET_MSG_LIST");
             dispatch("GET_UNREAD_COUNT");
-            checkOnline(1)
+            checkOnline(1);
             router.push({
               path: "/home",
             });
             commit("set_show_tip", { type: 1, msg: "login success" });
-            commit("set_login_tip_visible",true)
+            commit("set_login_tip_visible", true);
           } else {
             commit("set_show_tip", { type: 1, msg: res.msg });
           }

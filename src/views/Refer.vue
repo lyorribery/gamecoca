@@ -1,50 +1,32 @@
 <template>
   <div class="refer">
-    <div class="refer-tab"
-    :class="
-            page_num >= 50 && is_show_app
-              ? 'sticky-type-app'
-              : page_num >= 50 && !is_show_app
-              ? 'sticky-type'
-              : ''
-          ">
+    <div
+      class="refer-tab"
+      :class="
+        page_num >= 50 && is_show_app
+          ? 'sticky-type-app'
+          : page_num >= 50 && !is_show_app
+          ? 'sticky-type'
+          : ''
+      "
+    >
       <div
         class="item"
         v-for="(item, index) in tabs"
         :key="index"
         @click="changePath(item)"
       >
-        <img
-          v-if="tab_name == item.name"
-          src="../assets/images/refer/xz_di_jiaguang.png"
-          class="active-back"
-        />
+        <img v-if="tab_name == item.name" :src="static_img.img_1" class="active-back" />
         <div
           class="name"
           :style="{ color: tab_name == item.name ? '#ffffff' : '#cccccc' }"
         >
           {{ item.title }}
         </div>
-        <img
-          v-if="item.name == 'invite'"
-          class="icon"
-          src="../assets/images/refer/convidar.png"
-        />
-        <img
-          v-if="item.name == 'referc'"
-          class="icon"
-          src="../assets/images/refer/Referencia.png"
-        />
-        <img
-          v-if="item.name == 'member'"
-          class="icon"
-          src="../assets/images/refer/Menbro.png"
-        />
-        <img
-          v-if="item.name == 'bonus'"
-          class="icon"
-          src="../assets/images/refer/Bonus.png"
-        />
+        <img v-if="item.name == 'invite'" class="icon" :src="static_img.img_2" />
+        <img v-if="item.name == 'referc'" class="icon" :src="static_img.img_3" />
+        <img v-if="item.name == 'member'" class="icon" :src="static_img.img_4" />
+        <img v-if="item.name == 'bonus'" class="icon" :src="static_img.img_5" />
       </div>
     </div>
     <router-view v-slot="{ Component }">
@@ -65,32 +47,36 @@ export default {
 
 <script setup>
 import { computed, ref } from "vue";
-import {useStore} from 'vuex'
+import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-import { useI18n} from 'vue-i18n'
+import { useI18n } from "vue-i18n";
+import { preloadImage } from "@/utils/utils";
 
 const { t } = useI18n();
-const {state}=useStore()
+const { state } = useStore();
 const route = useRoute();
 const router = useRouter();
-const tab_name = computed(()=>{
-  return route.name
+const static_img = computed(() => {
+  return state.static_img.refer;
 });
-const is_show_app=computed(()=>{
-  return state.is_show_app
-})
+const tab_name = computed(() => {
+  return route.name;
+});
+const is_show_app = computed(() => {
+  return state.is_show_app;
+});
+
 const tabs = [
-  { name: "invite", title: t('refer.Toinvite') },
-  { name: "referc", title: t('refer.Referencia') },
-  { name: "member", title: t('Menbro') },
-  { name: "bonus", title: t('Bonus') },
+  { name: "invite", title: t("refer.Toinvite") },
+  { name: "referc", title: t("refer.Referencia") },
+  { name: "member", title: t("refer.Menbro") },
+  { name: "bonus", title: t("refer.Bonus") },
 ];
 const changePath = (item) => {
   router.push({
-    path: '/refer/'+item.name
+    path: "/refer/" + item.name,
   });
 };
-
 
 const page_num = ref(0);
 

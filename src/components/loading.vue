@@ -6,15 +6,11 @@
     :duration="0.8"
   >
     <div class="loading-modal">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60px" height="60px"
-        viewBox="0 0 50 50" style="enable-background: new 0 0 50 50;" xml:space="preserve">
-        <path fill="#FFFFFF"
-          d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
-          transform="rotate(275.098 25 25)">
-          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25"
-            dur="0.6s" repeatCount="indefinite"></animateTransform>
-        </path>
-      </svg>
+      <div class="pulse">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </div>
   </nut-overlay>
 </template>
@@ -48,6 +44,43 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: $bg-color;;
+  background: $bg-color;
+  .pulse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dot {
+      width: 22px;
+      height: 22px;
+      background-color: #06a950;
+      border-radius: 50%;
+      margin: 0 5px;
+      animation: pulse 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: -0.4s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: -0.2s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.5);
+      }
+
+      50% {
+        opacity: 0.1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(0.5);
+      }
+    }
+  }
 }
 </style>

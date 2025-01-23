@@ -10,30 +10,17 @@
     </div>
     <div class="help-des" v-if="show"></div>
     <div class="contact-box">
-      <img src="../assets/images/footer/18.png" />
-      <img src="../assets/images/footer/youtube.png" />
-      <img src="../assets/images/footer/ins.png" />
-      <img src="../assets/images/footer/whatsapp.png" />
-      <img src="../assets/images/footer/x.png" />
-      <img src="../assets/images/footer/douyin.png" />
+      <img :src="static_img.img_url_1" />
+      <img :src="static_img.img_url_2" />
+      <img :src="static_img.img_url_3" />
+      <img :src="static_img.img_url_4" />
+      <img :src="static_img.img_url_5" />
+      <img :src="static_img.img_url_6" />
     </div>
     <div class="game-box">
-      <!-- <img src="../assets/images/footer/cp.png" />
-      <img src="../assets/images/footer/evol.png" />
-      <img src="../assets/images/footer/pg.png" />
-      <img src="../assets/images/footer/pp.png" /> -->
       <img v-for="(item, index) in img_list" :key="index" :src="item.fullImgUrl" />
     </div>
-    <!-- <div class="game-box">
-      <img src="../assets/images/footer/evop.png" />
-      <img src="../assets/images/footer/tada.png" />
-      <img src="../assets/images/footer/cqg.png" />
-      <img src="../assets/images/footer/jbd.png" />
-    </div>
-    <div class="game-box">
-      <img src="../assets/images/footer/goo.png" />
-      <img src="../assets/images/footer/face.png" />
-    </div> -->
+
     <div class="des" style="margin-top: 0.555rem">Copyright @ 2025</div>
     <div class="des">@todos os direitos reservados</div>
     <div class="des">2002-2025</div>
@@ -44,8 +31,13 @@
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { preloadImage } from "@/utils/utils";
 
 const { state } = useStore();
+const static_img=computed(()=>{
+  return state.static_img.footer
+})
+
 const show = ref(false);
 const changeShow = () => {
   show.value = !show.value;
@@ -56,6 +48,7 @@ const img_list = computed(() => {
   });
   return data;
 });
+
 // const goThrid = (type) => {
 //   if (type == 1) {
 //     location.href = "https://wa.me/447960076392";
@@ -89,14 +82,14 @@ const img_list = computed(() => {
   .game-box {
     width: 100%;
     box-sizing: border-box;
-    padding:0 calc((100% - 7.5rem) / 2);
+    padding: 0 calc((100% - 7.5rem) / 2);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     img {
       width: 1.8rem;
-      &:last-child{
+      &:last-child {
         margin-left: 0.138rem;
       }
     }

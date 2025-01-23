@@ -1,9 +1,9 @@
 <template>
-  <div class="card-item" :style="{ width: img_width }" @click="goDetail(cardInfo)">
+  <div class="card-item" :style="{ width: img_width }" @click="goDetail(img_info)">
     <nut-animate type="ripple" action="click">
       <div class="card-image-box">
         <nut-image
-          :src="cardInfo.fullGameImg"
+          :src="img_info.fullGameImg"
           :width="img_width"
           :height="img_height"
           show-loading
@@ -25,7 +25,13 @@
             ></div>
           </template>
         </nut-image>
-        <div class="img-mask"></div>
+        <div class="colect-box" @click="changeColection(img_info)">
+          <i
+            class="iconfont icon-shoucangxuanzhong"
+            :style="{ color: img_info.isColect ? '#FFC536' : '#d2cccb' }"
+          ></i>
+        </div>
+        <!-- <div class="img-mask"></div> -->
       </div>
     </nut-animate>
   </div>
@@ -49,11 +55,15 @@ export default {
     },
   },
   setup(props, ctx) {
+
+    const img_info=ref({})
+    img_info.value=props.cardInfo
+    // calc(100% - 1.305rem - 0.277rem -0.277rem - 0.277rem -0.277rem -0.277rem)
     const img_width = ref("2.964rem");
     const img_height = ref("4.0755rem");
 
     if (props.imgType == "small") {
-      img_width.value = "2.437rem";
+      img_width.value = "2.435rem";
       img_height.value = "3.3231rem";
     } else {
       img_width.value = "2.964rem";
@@ -87,10 +97,16 @@ export default {
         return;
       }
     };
+
+    const changeColection = (data) => {
+      img_info.value.isColect=!img_info.value.isColect
+    };
     return {
+      img_info,
       goDetail,
       img_width,
       img_height,
+      changeColection,
     };
   },
 };
@@ -111,24 +127,43 @@ export default {
     border-radius: 0.194rem;
     position: relative;
     overflow: hidden;
-    .img-mask {
+    .colect-box {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+      right: 0.099rem;
+      top: 0.099rem;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      padding: 0.054rem;
+      i {
+        font-size: 0.361rem;
+      }
     }
+    // .img-mask {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 70%);
+    // }
 
     .img-loading {
-      background-size: 200% 200%; 
+      background-size: 200% 200%;
       background-image: linear-gradient(
         135deg,
-        rgba(188, 54, 204, 0.8),
-        rgba(188, 54, 204, 0.6),
-        rgba(56, 28, 164, 0.8),
-        rgba(56, 28, 164, 0.6)
+        rgba(6, 169, 80, 1),
+        rgba(6, 169, 80, 0.8),
+        rgba(255, 197, 54, 1),
+        rgba(255, 197, 54, 0.8)
       );
+      // background-image: linear-gradient(
+      //   135deg,
+      //   rgba(188, 54, 204, 0.8),
+      //   rgba(188, 54, 204, 0.6),
+      //   rgba(56, 28, 164, 0.8),
+      //   rgba(56, 28, 164, 0.6)
+      // );
       animation: flow 2s ease infinite;
     }
     @keyframes flow {

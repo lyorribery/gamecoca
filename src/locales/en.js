@@ -163,8 +163,8 @@ export default {
     Esqueceu:'Forgot',
     tip1:'By accessing the site.l confirm that l am 18 years old and l have read the',
     Gender:'Gender',
-    Guy:'Guy',
-    Girl:'Girl',
+    Guy:'Male',
+    Girl:'Female',
     DatadeNascimento:'Date of birth',
     ForgetPassword:'Forget Password',
     Continuar:'Continue'

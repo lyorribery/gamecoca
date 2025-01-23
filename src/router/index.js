@@ -24,6 +24,7 @@ const router = createRouter({
           name: 'refer',
           component: () => import('@/views/Home.vue'),
           meta: {
+            keepAlive:true,
             auth: true,
             transition: 'slide-right',
           },
@@ -35,6 +36,7 @@ const router = createRouter({
               component: () => import('@/views/Invite.vue'),
               meta: {
                 auth: true,
+                keepAlive:false,
               }
             },
             {
@@ -43,6 +45,7 @@ const router = createRouter({
               component: () => import('@/views/Referc.vue'),
               meta: {
                 auth: true,
+                keepAlive:false,
               }
             },
             {
@@ -51,6 +54,7 @@ const router = createRouter({
               component: () => import('@/views/Member.vue'),
               meta: {
                 auth: true,
+                keepAlive:false,
               }
             },
             {
@@ -59,6 +63,7 @@ const router = createRouter({
               component: () => import('@/views/Bonus.vue'),
               meta: {
                 auth: true,
+                keepAlive:false,
               }
             },
           ]
@@ -77,7 +82,7 @@ const router = createRouter({
           name: 'service',
           component: () => import('@/views/Service.vue'),
           meta: {
-            auth: true,
+            auth: false,
             transition: 'slide-left',
           }
         },
@@ -96,6 +101,7 @@ const router = createRouter({
           component: () => import('@/views/Promotion.vue'),
           meta: {
             auth: false,
+            keepAlive:true,
             transition: 'slide-right',
           }
         },
@@ -105,6 +111,7 @@ const router = createRouter({
           component: () => import('@/views/Inbox.vue'),
           meta: {
             auth: true,
+            keepAlive:true,
             transition: 'slide-right',
           }
         },
@@ -113,7 +120,7 @@ const router = createRouter({
           name: 'mine',
           component: () => import('@/views/Mine.vue'),
           meta: {
-
+            keepAlive:true,
             auth: true,
             transition: 'slide-right',
           }
@@ -129,15 +136,7 @@ const router = createRouter({
             transition: 'slide-right',
           }
         },
-        {
-          path: '/vip',
-          name: 'vip',
-          component: () => import('@/views/Vip.vue'),
-          meta: {
-            auth: false,
-            transition: 'slide-right',
-          }
-        },
+
         {
           path: '/report',
           name: 'report',
@@ -184,7 +183,16 @@ const router = createRouter({
         transition: 'slide-right',
         auth: false
       },
-    }
+    },
+    {
+      path: '/vip',
+      name: 'vip',
+      component: () => import('@/views/Vip.vue'),
+      meta: {
+        auth: false,
+        transition: 'slide-right',
+      }
+    },
   ]
 })
 
