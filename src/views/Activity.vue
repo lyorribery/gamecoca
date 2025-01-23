@@ -38,13 +38,15 @@ const activity_detail = ref({
 watch(
   () => route,
   (newValue, oldValue) => {
-    is_loading.value = true;
-    getNoticeById(route.query.id).then((res) => {
-      if (res.code == 200) {
-        is_loading.value = false;
-        activity_detail.value = res.data;
-      }
-    });
+    if (route.name == "activity") {
+      is_loading.value = true;
+      getNoticeById(route.query.id).then((res) => {
+        if (res.code == 200) {
+          is_loading.value = false;
+          activity_detail.value = res.data;
+        }
+      });
+    }
   },
   { deep: true }
 );

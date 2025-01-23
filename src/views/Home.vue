@@ -639,12 +639,12 @@ window.addEventListener("pageshow", function (event) {
           display: flex;
           align-items: center;
           img {
-            width: 0.5rem;
-            margin-right: 0.168rem;
+            height: 0.6rem;
+            margin-right: 0.222rem;
           }
           span {
             color: $color-white;
-            font-size: 0.361rem;
+            font-size: 0.333rem;
             font-weight: 900;
           }
         }
