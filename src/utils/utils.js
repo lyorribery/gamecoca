@@ -163,6 +163,11 @@ export const loadStaticImg=async()=>{
 		login:{
 			img_1:'',
 			img_2:'',
+		},
+		vip:{
+			img_1:'',
+			img_2:"",
+			img_3:''
 		}
 	  }
 	  static_img.login.img_2=await preloadImage(require("../assets/images/login/yanjingguan.png"))
@@ -218,6 +223,10 @@ export const loadStaticImg=async()=>{
 
 	  static_img.inbox.img_url_1=await preloadImage(require("../assets/images/inbox/xinfeng.png"))
 	  static_img.inbox.img_url_2= await preloadImage(require("../assets/images/inbox/xinfeng_yidu.png"))
+
+	  static_img.vip.img_1=await preloadImage(require("../assets/images/vip/vip_1.png"))
+	  static_img.vip.img_2=await preloadImage(require("../assets/images/vip/vip_2.png"))
+	  static_img.vip.img_3=await preloadImage(require("../assets/images/vip/vip_3.png"))
 
 	store.commit('set_static_img',static_img)
 }

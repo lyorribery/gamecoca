@@ -49,6 +49,7 @@ const store = createStore({
     home_icon:[],
     spin_show:false,
     login_tip_visible:false,
+    activity_list:[],
     static_img:{
       footer:{
         img_url_1:"",
@@ -115,6 +116,11 @@ const store = createStore({
       login:{
         img_1:'',
         img_2:'',
+      },
+      vip:{
+        img_1:'',
+        img_2:"",
+        img_3:''
       }
     }
   }),
@@ -185,6 +191,9 @@ const store = createStore({
     set_station_img(state, val) {
       state.station_img = val
     },
+    set_activity_list(state,val){
+      state.activity_list=val
+    },
     set_pay_method(state, val) {
       state.pay_method = val
     },
@@ -239,6 +248,10 @@ const store = createStore({
       getStationImgList().then(res => {
         if (res.code == 200){
           ctx.commit('set_station_img', res.data)
+          const active_data=res.data.filter(item=>{
+            return item.imgType == 2
+          })
+          ctx.commit('set_activity_list',active_data)
           let home_icon=[]
           res.data.map(item=>{
             if(item.imgType==6||item.imgType==7||item.imgType==8){

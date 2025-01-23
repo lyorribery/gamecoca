@@ -59,7 +59,7 @@
             :style="{backgroundImage:'url('+item.fullImgUrl+')'}"
           >
 
-            <div class="name">{{ item.imgTitle }}</div>
+            <div class="name" >{{ item.imgTitle }}</div>
           </div>
         </div>
       </div>
@@ -92,7 +92,9 @@
             <nut-image
               :src="item.fullCategoryImg"
               style="margin-bottom: 0.083rem"
-              :style="{ filter: active_type != index&&item.isload ? 'grayscale(100%)' : '' }"
+              :style="{
+                filter: active_type != index && item.isload ? 'grayscale(100%)' : '',
+              }"
               :width="category_width"
               :height="category_width"
               @load="loadCategory(index)"
@@ -340,10 +342,7 @@ const maquee_text = computed(() => {
 });
 
 const activity_list = computed(() => {
-  const list = state.station_img.filter((item) => {
-    return item.imgType == 2;
-  });
-  return list;
+  return state.activity_list;
 });
 
 const promotion_list = computed(() => {
@@ -353,9 +352,9 @@ const category_list = computed(() => {
   return state.game_list.category;
 });
 
-const loadCategory=(index)=>{
-  state.game_list.category[index].isload=true
-}
+const loadCategory = (index) => {
+  state.game_list.category[index].isload = true;
+};
 
 const game_list = computed(() => {
   return state.current_game_list;
@@ -435,7 +434,6 @@ const scrollActive = (type) => {
   }
 };
 const swiper_w = ref(330);
-
 onMounted(() => {
   swiper_w.value = window.innerWidth * (300 / 360);
   // if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
@@ -498,16 +496,16 @@ window.addEventListener("pageshow", function (event) {
   );
   animation: flow 2s ease infinite;
   @keyframes flow {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+    0% {
+      background-position: 0% 50%;
     }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 .overlay-body {
   display: flex;

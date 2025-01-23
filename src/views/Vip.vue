@@ -15,67 +15,17 @@
         >
         <div
           class="circle"
-
           :style="{ background: index + 1 > cur_info.level - 2 ? '#999999' : '#FFCB78' }"
         ></div>
       </div>
     </div>
 
-    <!-- <div class="vip-swiper">
-      <nut-swiper
-        ref="vipSwiperRef"
-        :is-prevent-default="false"
-        :is-stop-propagation="false"
-        :width="330"
-        :loop="true"
-        :height="189"
-      >
-        <nut-swiper-item v-for="(item, index) in list" :key="index" style="height: 189px;margin:0 0.333rem">
-          <div class="vip-bg" :style="{ backgroundImage: 'url(' + item.levelBg + ')' }">
-            <div class="row">
-              <div class="name">{{ item.levelName }}</div>
-              <img :src="item.levelIcon" />
-            </div>
-            <div class="progress-row">
-              <div class="des">
-                {{ $t("vip.title1") }}<span>0 / {{ item.payment }}</span>
-              </div>
-              <div class="progress-box" style="width: 55%">
-                <nut-progress
-                  :percentage="(0 / item.payment) * 100 || 0"
-                  :show-text="false"
-                  size="small"
-                  stroke-color="linear-gradient(270deg,#FFC02E  0%,#F36655 100%)"
-                />
-              </div>
-            </div>
-            <div class="progress-row" style="margin-top: 0.277rem">
-              <div class="des">
-                {{ $t("vip.betamount") }}<span>0 / {{ item.gameStatement }}</span>
-              </div>
-              <div class="progress-box">
-                <nut-progress
-                  :percentage="(0 / item.gameStatement) * 100 || 0"
-                  :show-text="false"
-                  size="small"
-                  stroke-color="linear-gradient(270deg,#FFC02E  0%,#F36655 100%)"
-                />
-              </div>
-            </div>
-          </div>
-        </nut-swiper-item>
-      </nut-swiper>
-      <div class="swiper-btns">
-        <div class="swiper-btn" @click="handlePrev">
-          <Left></Left>
-        </div>
-        <div class="swiper-btn" @click="handleNext">
-          <Right></Right>
-        </div>
-      </div>
-    </div> -->
+
     <div style="width: 100%; box-sizing: border-box; padding: 0 0.416rem">
-      <div class="vip-bg" :style="{ backgroundImage: 'url(' + change_info.levelBg + ')' }">
+      <div
+        class="vip-bg"
+        :style="{ backgroundImage: 'url(' + change_info.levelBg + ')' }"
+      >
         <div class="row">
           <div class="name">{{ change_info.levelName }}</div>
           <img :src="change_info.levelIcon" />
@@ -147,28 +97,28 @@
       </div>
       <div class="bottom-info">
         <div class="item">
-          <img src="../assets/images/vip_1.png" />
+          <img :src="static_img.img_1" />
           <div class="des-box">
             <span>{{ $t("vip.title3") }}</span>
             <span class="data">5</span>
           </div>
         </div>
         <div class="item">
-          <img src="../assets/images/vip_2.png" />
+          <img :src="static_img.img_2" />
           <div class="des-box">
             <span>{{ $t("vip.title4") }}</span>
             <span class="data">2000</span>
           </div>
         </div>
         <div class="item">
-          <img src="../assets/images/vip_1.png" />
+          <img :src="static_img.img_1" />
           <div class="des-box">
             <span>{{ $t("vip.title5") }}</span>
             <span class="data">2000</span>
           </div>
         </div>
         <div class="item">
-          <img src="../assets/images/vip_3.png" />
+          <img :src="static_img.img_3" />
           <div class="des-box">
             <span>{{ $t("vip.title6") }}</span>
             <span class="data">1%</span>
@@ -180,13 +130,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import { Left, Right } from "@nutui/icons-vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-const router = useRouter();
 const { state } = useStore();
+const static_img = computed(() => {
+  return state.static_img.vip;
+});
+const router = useRouter();
+
 const list = ref([]);
 const user_info = ref({});
 const cur_info = ref({});
@@ -197,9 +151,9 @@ const cur_info = ref({});
 // const handleNext = () => {
 //   vipSwiperRef.value.next();
 // };
-const change_info=ref({})
+const change_info = ref({});
 const changeInfo = (data) => {
-  change_info.value=data
+  change_info.value = data;
 };
 const goBack = () => {
   router.go(-1);
@@ -224,11 +178,11 @@ const top_box_data = ref([]);
 onMounted(() => {
   user_info.value = state.user_info;
   list.value = state.level;
- 
+
   list.value.map((item, index) => {
     if (item.level == user_info.value.level) {
       cur_info.value = item;
-      change_info.value=item
+      change_info.value = item;
       if (index <= 2) {
         top_box_data.value = [
           list.value[0],
@@ -293,6 +247,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+
 .vip {
   width: 100%;
   display: flex;
@@ -300,21 +255,20 @@ onMounted(() => {
   align-items: center;
   box-sizing: border-box;
   padding: 0.416rem 0;
-  // .vip-swiper {
-  //   margin-bottom: 0.416rem;
-  //   position: relative;
-  //   width: 100%;
-  //   height: 189px;
-  //   .swiper-btns {
-  //     width: 100%;
-  //     position: absolute;
-  //     top: 50%;
-  //     transform: translateY(-50%);
-  //     z-index: 1;
-  //     display: flex;
-  //     justify-content: space-between;
-  //   }
-  // }
+  .vip-swiper {
+    margin-bottom: 0.416rem;
+    width: 100%;
+    height: 189px;
+    // .swiper-btns {
+    //   width: 100%;
+    //   position: absolute;
+    //   top: 50%;
+    //   transform: translateY(-50%);
+    //   z-index: 1;
+    //   display: flex;
+    //   justify-content: space-between;
+    // }
+  }
   .top-box {
     width: 100%;
     height: 3.944rem;
@@ -385,6 +339,7 @@ onMounted(() => {
     }
   }
   .bottom-box {
+    margin-top: 0.416rem;
     width: 100%;
     box-sizing: border-box;
     padding-bottom: 0.277rem;
@@ -540,7 +495,7 @@ onMounted(() => {
     }
   }
   .vip-bg {
-     margin-bottom: 0.416rem;
+    margin-bottom: 0.416rem;
     width: 100%;
     height: 5.132rem;
     position: relative;
