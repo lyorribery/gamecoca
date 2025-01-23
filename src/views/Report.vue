@@ -197,7 +197,7 @@
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
         <div class="table-col">{{ $t('report.Date') }}</div>
-        <div class="table-col">{{ $t('rerpot.Amount') }}</div>
+        <div class="table-col">{{ $t('report.Amount') }}</div>
         <div class="table-col">{{ $t('report.Fee') }}</div>
         <div class="table-col">{{ $t('report.Status') }}</div>
       </div>
@@ -663,6 +663,7 @@ onMounted(() => {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin-top:0.138rem;
     .game-type-option {
       margin-left: 0.138rem;
       border-radius: 0.194rem;

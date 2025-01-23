@@ -995,6 +995,7 @@ const customValidatorTransPassAgain = (val) => {
 };
 
 const withdrawSubmit = () => {
+
   if (is_loading.value) return;
   if (!withdraw_info.value.isWithdrawal) return;
   if (!withdraw_form.value.withdrawAmount) return;

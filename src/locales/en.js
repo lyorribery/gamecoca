@@ -39,7 +39,7 @@ export default {
     title4:'Lancome model'
   },
   referc:{
-    Procurar:'To search for',
+    Procurar:'Search',
     All:'All',
     Today:'Today',
     Yesterday:'Yesterday',
@@ -125,7 +125,7 @@ export default {
     tip5:'2. After completing the withdrawal progress, your account balance will be converted to the withdrawal amount.'
   },
   report:{
-    Procurar:'search',
+    Procurar:'Search',
     Account:'Account',
     Deposit:'Deposit',
     Withdraw:'Withdraw',

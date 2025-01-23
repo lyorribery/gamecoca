@@ -101,7 +101,7 @@ const img_list = computed(() => {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0.416rem 0.416rem 0.555rem 0.416rem;
+    padding: 0.416rem;
     img {
       width: 0.888rem;
     }

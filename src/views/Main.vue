@@ -376,7 +376,7 @@
           </div>
           <div class="val">
             ID:{{ user_info.userId }}
-            <div class="copy-btn" @click="copyId">
+            <div class="copy-btn" @click="copyId()">
               <svg
                 t="1736770609856"
                 class="icon"
@@ -861,7 +861,6 @@ const copyId = async () => {
   try {
     await navigator.clipboard.writeText(state.user_info.userId);
     commit("set_show_tip", { type: 1, msg: "copied" });
-    console.log("文本已复制到剪贴板");
   } catch (err) {
     console.error("复制到剪贴板失败", err);
   }
