@@ -64,7 +64,7 @@
         <div class="img-box">
           <div class="red"></div>
           <div class="level">{{ user_info.levelName }}</div>
-          <img :src="avatar_url" />
+          <img src="../assets/images/avatar/3.png" />
         </div>
         <i
           class="iconfont"
@@ -398,23 +398,23 @@
       </div>
       <div class="pop-action-box">
         <div class="item" @click="popActionBtn('/mine')">
-          <img :src="static_img.img_1" />
+          <img src="../assets/images/main/gerenxinxi.png" />
           <span>{{ $t("main.Account") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/inbox')">
-          <img :src="static_img.img_2" />
+          <img src="../assets/images/main/zoujian.png" />
           <span>{{ $t("main.Message") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/service')">
-          <img :src="static_img.img_3" />
+          <img src="../assets/images/main/kefu.png" />
           <span>{{ $t("main.Surpport") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/report')">
-          <img :src="static_img.img_4" />
+          <img src="../assets/images/main/baobiao.png" />
           <span>{{ $t("main.Report") }}</span>
         </div>
         <div class="item" @click="exit()">
-          <img :src="static_img.img_5" />
+          <img src="../assets/images/main/tuichu.png" />
           <span>{{ $t("main.Exit") }}</span>
         </div>
       </div>
@@ -698,9 +698,7 @@ export default {
   setup() {
     const { locale } = useI18n();
     let { state, commit, dispatch } = useStore();
-    const static_img = computed(() => {
-      return state.static_img.main;
-    });
+
     const is_show_app = computed(() => {
       return state.is_show_app;
     });
@@ -866,17 +864,15 @@ export default {
         });
     };
     const divice = ref(false);
-    const avatar_url = computed(() => {
-      return state.static_img.avatar.avatar3;
-    });
+
     onMounted(() => {
       const userAgent = navigator.userAgent;
       const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
       const isAndroid = /Android/.test(userAgent) && !/Windows Phone/.test(userAgent);
-      if (isIOS) {
-        divice.value = "ios";
-      } else if (isAndroid) {
+      if (isAndroid) {
         divice.value = "android";
+      } else {
+        divice.value = "ios";
       }
       switch (route.name) {
         case "home":
@@ -898,8 +894,6 @@ export default {
     });
 
     return {
-      static_img,
-      avatar_url,
       divice,
       down_visible,
       changeDown,

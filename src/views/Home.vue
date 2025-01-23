@@ -267,7 +267,9 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { formatDate } from "@/utils/utils";
 import { Lucky } from "@/apis/cashwheel";
+import {loadStaticImg} from '@/utils/utils'
 
+loadStaticImg()
 let { state, commit, dispatch } = useStore();
 
 const swiperRef = ref();

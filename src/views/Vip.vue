@@ -20,7 +20,6 @@
       </div>
     </div>
 
-
     <div style="width: 100%; box-sizing: border-box; padding: 0 0.416rem">
       <div
         class="vip-bg"
@@ -97,28 +96,28 @@
       </div>
       <div class="bottom-info">
         <div class="item">
-          <img :src="static_img.img_1" />
+          <img src="../assets/images/vip/vip_1.png" />
           <div class="des-box">
             <span>{{ $t("vip.title3") }}</span>
             <span class="data">5</span>
           </div>
         </div>
         <div class="item">
-          <img :src="static_img.img_2" />
+          <img src="../assets/images/vip/vip_2.png" />
           <div class="des-box">
             <span>{{ $t("vip.title4") }}</span>
             <span class="data">2000</span>
           </div>
         </div>
         <div class="item">
-          <img :src="static_img.img_1" />
+          <img src="../assets/images/vip/vip_1.png" />
           <div class="des-box">
             <span>{{ $t("vip.title5") }}</span>
             <span class="data">2000</span>
           </div>
         </div>
         <div class="item">
-          <img :src="static_img.img_3" />
+          <img src="../assets/images/vip/vip_3.png" />
           <div class="des-box">
             <span>{{ $t("vip.title6") }}</span>
             <span class="data">1%</span>
@@ -136,9 +135,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 const { state } = useStore();
-const static_img = computed(() => {
-  return state.static_img.vip;
-});
+
 const router = useRouter();
 
 const list = ref([]);

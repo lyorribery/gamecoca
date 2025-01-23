@@ -3,7 +3,7 @@
     <div class="info-box">
       <div class="info">
         <div class="avatar">
-          <img :src="static_img.img_1" @click="showAvatar = true" />
+          <img src="../assets/images/avatar/3.png" @click="showAvatar = true" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
         <div class="info-user">
@@ -44,18 +44,18 @@
     <div class="action-box">
       <div class="wallet-box">
         <div class="action">
-          <img :src="static_img.img_2" />
+          <img src="../assets/images/mine/qianbao.png" />
           <div>
             Central <br />
             Wallet
           </div>
         </div>
         <div class="action" @click="goDeposit('withdraw')">
-          <img :src="static_img.img_3" />
+          <img src="../assets/images/mine/tixian.png" />
           <div>Withdraw <br />Details</div>
         </div>
         <div class="action" @click="goDeposit('deposit')">
-          <img :src="static_img.img_4" />
+          <img src="../assets/images/mine/chongzhi.png" />
           <div>
             Desposit<br />
             Details
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="vip-box" @click="goPath('/vip')">
-        <img :src="static_img.img_5" class="arrow" />
+        <img src="../assets/images/mine/zuojiantou.png" class="arrow" />
         <div class="left">
           <div class="des">
             <span class="name">{{ $t("mine.Deposit") }}</span>
@@ -135,30 +135,30 @@
     </div>
     <div class="details-box">
       <div class="item" @click="goReport('Account')">
-        <img :src="static_img.img_6" />
+        <img src="../assets/images/mine/bnt_account.png" />
         <div>Account<br />Details</div>
       </div>
       <div class="item" @click="goReport('Deposit')">
-        <img :src="static_img.img_7" />
+        <img src="../assets/images/mine/bnt_deposit.png" />
         <div>Deposit<br />Details</div>
       </div>
       <div class="item" @click="goReport('Withdraw')">
-        <img :src="static_img.img_8" />
+        <img src="../assets/images/mine/bnt_tixian.png" />
         <div>Withdraw<br />Details</div>
       </div>
       <div class="item" @click="goReport('Bets')">
-        <img :src="static_img.img_9" />
+        <img src="../assets/images/mine/bnt_youxiji.png" />
         <div>Bet<br />Details</div>
       </div>
       <div class="item" @click="goReport('Bonus')">
-        <img :src="static_img.img_10" />
+        <img src="../assets/images/mine/bnt_liwu.png" />
         <div>Bonus<br />Details</div>
       </div>
     </div>
     <div class="service-box">
       <div class="item" @click="goPath('/refer/invite')">
         <div class="left">
-          <img :src="static_img.img_11" />
+          <img src="../assets/images/mine/fenxiang_icon.png" />
           <span>{{ $t("mine.Agente") }}</span>
         </div>
         <svg
@@ -180,7 +180,7 @@
       </div>
       <div class="item" @click="goPath('/setting')">
         <div class="left">
-          <img :src="static_img.img_12" />
+          <img src="../assets/images/mine/xiugai_icon.png" />
           <span>{{ $t("mine.info") }}</span>
         </div>
         <svg
@@ -202,7 +202,7 @@
       </div>
       <div class="item" @click="goPath('/service')">
         <div class="left">
-          <img :src="static_img.img_13" />
+          <img src="../assets/images/mine/kefu_icon.png" />
           <span>{{ $t("mine.Surpport") }}</span>
         </div>
         <svg
@@ -224,7 +224,7 @@
       </div>
       <div class="item">
         <div class="left">
-          <img :src="static_img.img_14" />
+          <img src="../assets/images/mine/xiazai_icon.png" />
           <span>{{ $t("mine.downapp") }}</span>
         </div>
         <svg
@@ -246,7 +246,7 @@
       </div>
       <div class="item" @click="exit()">
         <div class="left">
-          <img :src="static_img.img_15" />
+          <img src="../assets/images/mine/tuichu_icon.png" />
           <span>{{ $t("mine.logout") }}</span>
         </div>
         <svg
@@ -307,84 +307,84 @@
             <div class="img-box" @click="changeAvatar(1)">
               <img
                 :style="{ filter: avatar_index == 1 ? '' : 'grayscale(100%)' }"
-                :src="avatar_img.avatar1"
+                src="../assets/images/avatar/1.png"
               />
               <i v-if="avatar_index == 1" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(2)">
               <img
                 :style="{ filter: avatar_index == 2 ? '' : 'grayscale(100%)' }"
-               :src="avatar_img.avatar2"
+               src="../assets/images/avatar/2.png"
               />
               <i v-if="avatar_index == 2" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(3)">
               <img
                 :style="{ filter: avatar_index == 3 ? '' : 'grayscale(100%)' }"
-              :src="avatar_img.avatar3"
+               src="../assets/images/avatar/3.png"
               />
               <i v-if="avatar_index == 3" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(4)">
               <img
                 :style="{ filter: avatar_index == 4 ? '' : 'grayscale(100%)' }"
-               :src="avatar_img.avatar4"
+                src="../assets/images/avatar/4.png"
               />
               <i v-if="avatar_index == 4" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(5)">
               <img
                 :style="{ filter: avatar_index == 5 ? '' : 'grayscale(100%)' }"
-               :src="avatar_img.avatar5"
+               src="../assets/images/avatar/5.png"
               />
               <i v-if="avatar_index == 5" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(6)">
               <img
                 :style="{ filter: avatar_index == 6 ? '' : 'grayscale(100%)' }"
-              :src="avatar_img.avatar6"
+              src="../assets/images/avatar/6.png"
               />
               <i v-if="avatar_index == 6" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(7)">
               <img
                 :style="{ filter: avatar_index == 7 ? '' : 'grayscale(100%)' }"
-                :src="avatar_img.avatar7"
+                src="../assets/images/avatar/7.png"
               />
               <i v-if="avatar_index == 7" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(8)">
               <img
                 :style="{ filter: avatar_index == 8 ? '' : 'grayscale(100%)' }"
-              :src="avatar_img.avatar8"
+                src="../assets/images/avatar/8.png"
               />
               <i v-if="avatar_index == 8" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(9)">
               <img
                 :style="{ filter: avatar_index == 9 ? '' : 'grayscale(100%)' }"
-               :src="avatar_img.avatar9"
+                src="../assets/images/avatar/9.png"
               />
               <i v-if="avatar_index == 9" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(10)">
               <img
                 :style="{ filter: avatar_index == 10 ? '' : 'grayscale(100%)' }"
-                :src="avatar_img.avatar10"
+               src="../assets/images/avatar/10.png"
               />
               <i v-if="avatar_index == 10" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(11)">
               <img
                 :style="{ filter: avatar_index == 11 ? '' : 'grayscale(100%)' }"
-               :src="avatar_img.avatar11"
+              src="../assets/images/avatar/11.png"
               />
               <i v-if="avatar_index == 11" class="iconfont icon-xuanzhong"></i>
             </div>
             <div class="img-box" @click="changeAvatar(12)">
               <img
                 :style="{ filter: avatar_index == 12 ? '' : 'grayscale(100%)' }"
-              :src="avatar_img.avatar12"
+               src="../assets/images/avatar/12.png"
               />
               <i v-if="avatar_index == 12" class="iconfont icon-xuanzhong"></i>
             </div>
@@ -402,12 +402,6 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { preloadImage } from "@/utils/utils";
 
-const static_img=computed(()=>{
-  return state.static_img.mine
-})
-const avatar_img=computed(()=>{
-  return state.static_img.avatar
-})
 const showAvatar = ref(false);
 const avatar_index = ref(1);
 const changeAvatar = (index) => {

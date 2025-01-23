@@ -59,41 +59,7 @@ const store = createStore({
         img_url_5:'',
         img_url_6:''
       },
-      avatar:{
-        avatar1:'',
-        avatar2:'',
-        avatar3:'',
-        avatar4:'',
-        avatar5:'',
-        avatar6:'',
-        avatar7:'',
-        avatar8:'',
-        avatar9:'',
-        avatar10:'',
-        avatar11:'',
-        avatar12:''
-      },
-      mine:{
-        img_1:'',
-        img_2:'',
-        img_3:'',
-        img_4:'',
-        img_5:'',
-        img_6:'',
-        img_7:'',
-        img_8:'',
-        img_9:'',
-        img_10:'',
-        img_11:'',
-        img_12:'',
-        img_13:'',
-        img_14:'',
-        img_15:'',
-      },
-      inbox:{
-        img_url_1:'',
-        img_url_2:''
-      },
+
       invite:{
         img_1:'',
         img_7:'',
@@ -106,22 +72,7 @@ const store = createStore({
         img_4:'',
         img_5:'',
       },
-      main:{
-        img_1:'',
-        img_2:'',
-        img_3:'',
-        img_4:'',
-        img_5:''
-      },
-      login:{
-        img_1:'',
-        img_2:'',
-      },
-      vip:{
-        img_1:'',
-        img_2:"",
-        img_3:''
-      }
+
     }
   }),
   mutations: {

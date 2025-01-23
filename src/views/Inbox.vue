@@ -21,8 +21,8 @@
           </div>
         </div>
         <div class="middle">
-          <img v-if="!item.messageRead" :src="static_img.img_url_1" />
-          <img v-else :src="static_img.img_url_2" />
+          <img v-if="!item.messageRead" src="../assets/images/inbox/xinfeng.png" />
+          <img v-else src="../assets/images/inbox/xinfeng_yidu.png" />
           <span :class="!item.messageRead ? 'unread' : ''">{{ item.title }}</span>
         </div>
 
@@ -56,9 +56,7 @@ const { state, commit } = useStore();
 const msg = computed(() => {
   return state.msg_list.records;
 });
-const static_img = computed(() => {
-  return state.static_img.inbox;
-});
+
 const changeShow = (item, index) => {
   const data = state.msg_list;
   data.records.map((items, indexs) => {

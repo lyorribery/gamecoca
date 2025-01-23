@@ -106,41 +106,6 @@ export const loadStaticImg=async()=>{
 		  img_url_5:'',
 		  img_url_6:''
 		},
-		avatar:{
-			avatar1:'',
-			avatar2:'',
-			avatar3:'',
-			avatar4:'',
-			avatar5:'',
-			avatar6:'',
-			avatar7:'',
-			avatar8:'',
-			avatar9:'',
-			avatar10:'',
-			avatar11:'',
-			avatar12:''
-		},
-		mine:{
-			img_1:'',
-			img_2:'',
-			img_3:'',
-			img_4:'',
-			img_5:'',
-			img_6:'',
-			img_7:'',
-			img_8:'',
-			img_9:'',
-			img_10:'',
-			img_11:'',
-			img_12:'',
-			img_13:'',
-			img_14:'',
-			img_15:'',
-		},
-		inbox:{
-			img_url_1:'',
-			img_url_2:''
-		},
 		invite:{
 			img_1:'',
 			img_7:'',
@@ -153,28 +118,7 @@ export const loadStaticImg=async()=>{
 			img_4:'',
 			img_5:'',
 		},
-		main:{
-			img_1:'',
-			img_2:'',
-			img_3:'',
-			img_4:'',
-			img_5:''
-		},
-		login:{
-			img_1:'',
-			img_2:'',
-		},
-		vip:{
-			img_1:'',
-			img_2:"",
-			img_3:''
-		}
 	  }
-	  static_img.main.img_1=await preloadImage(require("../assets/images/main/gerenxinxi.png"))
-	  static_img.main.img_2=await preloadImage(require("../assets/images/main/zoujian.png"))
-	  static_img.main.img_3=await preloadImage(require("../assets/images/main/kefu.png"))
-	  static_img.main.img_4=await preloadImage(require("../assets/images/main/baobiao.png"))
-	  static_img.main.img_5=await preloadImage(require("../assets/images/main/tuichu.png"))
 
 	  static_img.footer.img_url_1= await preloadImage(require("../assets/images/footer/18.png"))
 	  static_img.footer.img_url_2= await preloadImage(require("../assets/images/footer/youtube.png"))
@@ -182,12 +126,6 @@ export const loadStaticImg=async()=>{
 	  static_img.footer.img_url_4= await preloadImage(require("../assets/images/footer/whatsapp.png"))
 	  static_img.footer.img_url_5= await preloadImage(require("../assets/images/footer/x.png"))
 	  static_img.footer.img_url_6= await preloadImage(require("../assets/images/footer/douyin.png"))
-
-	  static_img.inbox.img_url_1=await preloadImage(require("../assets/images/inbox/xinfeng.png"))
-	  static_img.inbox.img_url_2= await preloadImage(require("../assets/images/inbox/xinfeng_yidu.png"))
-
-	  static_img.login.img_2=await preloadImage(require("../assets/images/login/yanjingguan.png"))
-	  static_img.login.img_1=await preloadImage(require("../assets/images/login/yanjingkai.png"))
 	 
 	  static_img.refer.img_1=await preloadImage(require("../assets/images/refer/xz_di_jiaguang.png"))
 	  static_img.refer.img_2=await preloadImage(require("../assets/images/refer/convidar.png"))
@@ -197,39 +135,6 @@ export const loadStaticImg=async()=>{
 	  static_img.invite.img_1=await preloadImage(require("../assets/images/footer/tg.png"))
 	  static_img.invite.img_7=await preloadImage(require("../assets/images/refer/fenxiao.png"))
 	  static_img.invite.img_8=await preloadImage(require("../assets/images/refer/fenxiang_di.png"))
-	  static_img.mine.img_1=await preloadImage(require("../assets/images/avatar/3.png"))
-	  static_img.mine.img_2=await preloadImage(require("../assets/images/mine/qianbao.png"))
-	  static_img.mine.img_3=await preloadImage(require("../assets/images/mine/tixian.png"))
-	  static_img.mine.img_4=await preloadImage(require("../assets/images/mine/chongzhi.png"))
-	  static_img.mine.img_5=await preloadImage(require("../assets/images/mine/zuojiantou.png"))
-	  static_img.mine.img_6=await preloadImage(require("../assets/images/mine/bnt_account.png"))
-	  static_img.mine.img_7=await preloadImage(require("../assets/images/mine/bnt_deposit.png"))
-	  static_img.mine.img_8=await preloadImage(require("../assets/images/mine/bnt_tixian.png"))
-	  static_img.mine.img_9=await preloadImage(require("../assets/images/mine/bnt_youxiji.png"))
-	  static_img.mine.img_10=await preloadImage(require("../assets/images/mine/bnt_liwu.png"))
-	  static_img.mine.img_11=await preloadImage(require("../assets/images/mine/fenxiang_icon.png"))
-	  static_img.mine.img_12=await preloadImage(require("../assets/images/mine/xiugai_icon.png"))
-	  static_img.mine.img_13=await preloadImage(require("../assets/images/mine/kefu_icon.png"))
-	  static_img.mine.img_14=await preloadImage(require("../assets/images/mine/xiazai_icon.png"))
-	  static_img.mine.img_15=await preloadImage(require("../assets/images/mine/tuichu_icon.png"))
-
-	  static_img.avatar.avatar1=await preloadImage(require("../assets/images/avatar/1.png"))
-	  static_img.avatar.avatar2=await preloadImage(require("../assets/images/avatar/2.png"))
-	  static_img.avatar.avatar3=await preloadImage(require("../assets/images/avatar/3.png"))
-	  static_img.avatar.avatar4=await preloadImage(require("../assets/images/avatar/4.png"))
-	  static_img.avatar.avatar5=await preloadImage(require("../assets/images/avatar/5.png"))
-	  static_img.avatar.avatar6=await preloadImage(require("../assets/images/avatar/6.png"))
-	  static_img.avatar.avatar7=await preloadImage(require("../assets/images/avatar/7.png"))
-	  static_img.avatar.avatar8=await preloadImage(require("../assets/images/avatar/8.png"))
-	  static_img.avatar.avatar9=await preloadImage(require("../assets/images/avatar/9.png"))
-	  static_img.avatar.avatar10=await preloadImage(require("../assets/images/avatar/10.png"))
-	  static_img.avatar.avatar11=await preloadImage(require("../assets/images/avatar/11.png"))
-	  static_img.avatar.avatar12=await  preloadImage(require("../assets/images/avatar/12.png"))
-	
-	
-	  static_img.vip.img_1=await preloadImage(require("../assets/images/vip/vip_1.png"))
-	  static_img.vip.img_2=await preloadImage(require("../assets/images/vip/vip_2.png"))
-	  static_img.vip.img_3=await preloadImage(require("../assets/images/vip/vip_3.png"))
 
 	store.commit('set_static_img',static_img)
 }

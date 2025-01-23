@@ -11,7 +11,7 @@ import { onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import loading from "@/components/loading.vue";
-import {loadStaticImg} from '@/utils/utils'
+
 import tip from "@/components/tip.vue";
 const uuid = require("uuid");
 
@@ -83,7 +83,6 @@ export default {
           document.body.append(ifrTag);
         }
       }
-      loadStaticImg()
       dispatch("GET_CONFIG");
       if (localStorage.getItem("accessToken")) {
         dispatch("GET_USER_INFO");

@@ -99,13 +99,13 @@
                 @click="showpass.login_pass = false"
                 v-if="showpass.login_pass"
                 class="pass-icon"
-                :src="static_img.img_2"
+                src="../assets/images/login/yanjingguan.png"
               />
               <img
                 @click="showpass.login_pass = true"
                 v-else
                 class="pass-icon"
-                :src="static_img.img_1"
+                src="../assets/images/login/yanjingkai.png"
               />
             </div>
           </nut-form-item>
@@ -325,13 +325,13 @@
                 @click="showpass.register_pass = false"
                 v-if="showpass.register_pass"
                 class="pass-icon"
-                :src="static_img.img_2"
+                src="../assets/images/login/yanjingguan.png"
               />
               <img
                 @click="showpass.register_pass = true"
                 v-else
                 class="pass-icon"
-                :src="static_img.img_1"
+                src="../assets/images/login/yanjingkai.png"
               />
             </div>
           </nut-form-item>
@@ -353,13 +353,13 @@
                 @click="showpass.register_pass_again = false"
                 v-if="showpass.register_pass_again"
                 class="pass-icon"
-                :src="static_img.img_2"
+                src="../assets/images/login/yanjingguan.png"
               />
               <img
                 @click="showpass.register_pass_again = true"
                 v-else
                 class="pass-icon"
-                :src="static_img.img_1"
+                src="../assets/images/login/yanjingkai.png"
               />
             </div>
           </nut-form-item>
@@ -466,13 +466,13 @@
                   @click="showpass.forget_pass = false"
                   v-if="showpass.forget_pass"
                   class="pass-icon"
-                  :src="static_img.img_2"
+                  src="../assets/images/login/yanjingguan.png"
                 />
                 <img
                   @click="showpass.forget_pass = true"
                   v-else
                   class="pass-icon"
-                  :src="static_img.img_1"
+                  src="../assets/images/login/yanjingkai.png"
                 />
               </div>
             </nut-form-item>
@@ -557,9 +557,7 @@ import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
 let { dispatch, state, commit } = useStore();
 
-const static_img = computed(() => {
-  return state.static_img.login;
-});
+
 const modal_visible = ref(false);
 const showpass = ref({
   login_pass: false,
