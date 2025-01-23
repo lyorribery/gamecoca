@@ -96,6 +96,54 @@ const getBase64Image = (img, width, height) => {
 	return dataURL
 }
 
+export const loadMainImg=async()=>{
+	const main_img={
+		avatar:{
+			img_1:""
+		},
+		main:{
+			img_1:"",
+			img_2:"",
+			img_3:"",
+			img_4:"",
+			img_5:"",
+		},
+		mine:{
+			img_1:"",
+			img_2:"",
+			img_3:"",
+			img_4:"",
+			img_5:"",
+			img_6:"",
+			img_7:"",
+			img_8:"",
+		}
+	}
+	main_img.avatar.img_1=await preloadImage(require('../assets/images/avatar/3.png'))
+
+	main_img.main.img_1=await preloadImage(require('../assets/images/main/gerenxinxi.png'))
+	main_img.main.img_2=await preloadImage(require('../assets/images/main/zoujian.png'))
+	main_img.main.img_3=await preloadImage(require('../assets/images/main/kefu.png'))
+	main_img.main.img_4=await preloadImage(require('../assets/images/main/baobiao.png'))
+	main_img.main.img_5=await preloadImage(require('../assets/images/main/tuichu.png'))
+
+	main_img.mine.img_1=await preloadImage(require('../assets/images/mine/qianbao.png'))
+	main_img.mine.img_2=await preloadImage(require('../assets/images/mine/tixian.png'))
+	main_img.mine.img_3=await preloadImage(require('../assets/images/mine/chongzhi.png'))
+	main_img.mine.img_4=await preloadImage(require('../assets/images/mine/bnt_account.png'))
+	main_img.mine.img_5=await preloadImage(require('../assets/images/mine/bnt_deposit.png'))
+	main_img.mine.img_6=await preloadImage(require('../assets/images/mine/bnt_tixian.png'))
+	main_img.mine.img_7=await preloadImage(require('../assets/images/mine/bnt_youxiji.png'))
+	main_img.mine.img_8=await preloadImage(require('../assets/images/mine/bnt_liwu.png'))
+	main_img.mine.img_9=await preloadImage(require('../assets/images/mine/fenxiang_icon.png'))
+	main_img.mine.img_10=await preloadImage(require('../assets/images/mine/xiugai_icon.png'))
+	main_img.mine.img_11=await preloadImage(require('../assets/images/mine/kefu_icon.png'))
+	main_img.mine.img_12=await preloadImage(require('../assets/images/mine/xiazai_icon.png'))
+	main_img.mine.img_13=await preloadImage(require('../assets/images/mine/tuichu_icon.png'))
+
+	store.commit("set_main_img",main_img)
+}
+
 export const loadStaticImg=async ()=>{
 	const static_img={
 		footer:{

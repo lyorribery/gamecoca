@@ -65,7 +65,7 @@
         <div class="img-box">
           <div class="red"></div>
           <div class="level">{{ user_info.levelName }}</div>
-          <img src="../assets/images/avatar/3.png" />
+          <img :src="avatar_img.img_1" />
         </div>
         <i
           class="iconfont"
@@ -367,7 +367,7 @@
     >
       <div class="avatar-pop">
         <div class="avatar" @click="goPath('/betbonus')">
-          <img src="../assets/images/avatar/3.png" />
+          <img :src="avatar_img.img_1" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
         <div class="info-user">
@@ -399,23 +399,23 @@
       </div>
       <div class="pop-action-box">
         <div class="item" @click="popActionBtn('/mine')">
-          <img src="../assets/images/main/gerenxinxi.png" />
+          <img :src="main_img.img_1" />
           <span>{{ $t("main.Account") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/inbox')">
-          <img src="../assets/images/main/zoujian.png" />
+          <img :src="main_img.img_2" />
           <span>{{ $t("main.Message") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/service')">
-          <img src="../assets/images/main/kefu.png" />
+          <img :src="main_img.img_3" />
           <span>{{ $t("main.Surpport") }}</span>
         </div>
         <div class="item" @click="popActionBtn('/report')">
-          <img src="../assets/images/main/baobiao.png" />
+          <img :src="main_img.img_4" />
           <span>{{ $t("main.Report") }}</span>
         </div>
         <div class="item" @click="exit()">
-          <img src="../assets/images/main/tuichu.png" />
+          <img :src="main_img.img_5" />
           <span>{{ $t("main.Exit") }}</span>
         </div>
       </div>
@@ -482,15 +482,13 @@
                 <div
                   class="static-img-loading"
                   :style="{ width: category_width, height: category_width }"
-                >
-                </div>
+                ></div>
               </template>
               <template #error>
                 <div
                   class="static-img-loading"
                   :style="{ width: category_width, height: category_width }"
-                >
-                </div>
+                ></div>
               </template>
             </nut-image>
           </div>
@@ -716,7 +714,6 @@
 
 <script setup>
 import { CloseLittle } from "@nutui/icons-vue";
-
 import { computed, watch } from "vue";
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -725,6 +722,12 @@ import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
 let { state, commit, dispatch } = useStore();
 
+const avatar_img = computed(() => {
+  return state.main_img.avatar;
+});
+const main_img = computed(() => {
+  return state.main_img.main;
+});
 const is_show_app = computed(() => {
   return state.is_show_app;
 });

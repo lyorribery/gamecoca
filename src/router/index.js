@@ -172,16 +172,8 @@ const router = createRouter({
             transition: 'slide-left',
           }
         },
+       
       ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/Login.vue'),
-      meta: {
-        transition: 'slide-left',
-        auth: false
-      },
     },
     {
       path:'/deposit',
@@ -189,6 +181,15 @@ const router = createRouter({
       component: () => import('@/views/Deposit.vue'),
       meta: {
         transition: 'slide-right',
+        auth: false
+      },
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/Login.vue'),
+      meta: {
+        transition: 'slide-left',
         auth: false
       },
     },

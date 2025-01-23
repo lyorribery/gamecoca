@@ -551,7 +551,7 @@ import {
   _validemail,
   _validphone,
   _validbirth,
-  checkOnline,
+  checkOnline
 } from "@/utils/utils";
 import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
