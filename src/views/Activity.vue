@@ -3,8 +3,12 @@
     <div class="activity">
       <div class="loading" v-if="is_loading"></div>
       <div class="loading" style="height: 7rem" v-if="is_loading"></div>
-      <img :src="activity_detail.fullNoticeImg" style="width: 100%" />
-      <div class="activity-content" v-html="activity_detail.noticeContent"></div>
+      <img v-if="!is_loading" :src="activity_detail.fullNoticeImg" style="width: 100%" />
+      <div
+        v-if="!is_loading"
+        class="activity-content"
+        v-html="activity_detail.noticeContent"
+      ></div>
     </div>
     <pageFooter />
   </div>
@@ -21,7 +25,7 @@ export default {
 </script>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onActivated, watch } from "vue";
 import { useRoute } from "vue-router";
 import { getNoticeById } from "@/apis/home";
 
@@ -31,8 +35,22 @@ const activity_detail = ref({
   noticeContent: "",
   noticeTitle: "",
 });
+watch(
+  () => route,
+  (newValue, oldValue) => {
+    is_loading.value = true;
+    getNoticeById(route.query.id).then((res) => {
+      if (res.code == 200) {
+        is_loading.value = false;
+        activity_detail.value = res.data;
+      }
+    });
+  },
+  { deep: true }
+);
 const is_loading = ref(true);
-onMounted(() => {
+onActivated(() => {
+  is_loading.value = true;
   getNoticeById(route.query.id).then((res) => {
     if (res.code == 200) {
       is_loading.value = false;

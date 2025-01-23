@@ -117,7 +117,7 @@ export const loadStaticImg=async ()=>{
 			img_1:"",
 			img_2:"",
 			img_3:""
-		}
+		},
 	}
 	static_img.footer.img_1=await preloadImage(require('../assets/images/footer/18.png'))
 	static_img.footer.img_2=await preloadImage(require('../assets/images/footer/youtube.png'))

@@ -472,7 +472,6 @@
               :src="item.fullNoticeTitleIcon"
               :width="category_width"
               :height="category_width"
-              @load="loadCategory(index)"
               round
               :radius="7"
               show-loading

@@ -1,7 +1,7 @@
 <template>
   <div class="vip">
     <div class="top-box">
-      <i class="iconfont icon-arrow-left back" @click="goBack()"></i>
+      <!-- <i class="iconfont icon-arrow-left back" @click="goBack()"></i> -->
       <img src="../assets/images/vip/jingyantiao.png" />
       <div
         class="point"
@@ -152,9 +152,9 @@ const change_info = ref({});
 const changeInfo = (data) => {
   change_info.value = data;
 };
-const goBack = () => {
-  router.go(-1);
-};
+// const goBack = () => {
+//   router.go(-1);
+// };
 const scrollContainer = ref(null);
 const scrollVip = (type) => {
   if (type == 2) {

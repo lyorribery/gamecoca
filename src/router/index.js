@@ -125,13 +125,21 @@ const router = createRouter({
             transition: 'slide-right',
           }
         },
-
-
+        {
+          path: '/vip',
+          name: 'vip',
+          component: () => import('@/views/Vip.vue'),
+          meta: {
+            auth: false,
+            transition: 'slide-right',
+          }
+        },
         {
           path: '/activity',
           name: 'activity',
           component: () => import('@/views/Activity.vue'),
           meta: {
+            keepAlive:true,
             auth: false,
             transition: 'slide-right',
           }
@@ -183,15 +191,6 @@ const router = createRouter({
         transition: 'slide-right',
         auth: false
       },
-    },
-    {
-      path: '/vip',
-      name: 'vip',
-      component: () => import('@/views/Vip.vue'),
-      meta: {
-        auth: false,
-        transition: 'slide-right',
-      }
     },
   ]
 })

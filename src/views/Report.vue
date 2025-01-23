@@ -4,7 +4,7 @@
       <div class="date-container" @click="show = true">
         <span>{{ date[0] }} - {{ date[1] }}</span>
       </div>
-      <nut-animate type="ripple" action="click">
+    
         <div class="search-btn" @click="getData()">
           <span v-if="!is_loading">{{ $t('report.Procurar') }}</span>
           <svg
@@ -34,7 +34,7 @@
             </path>
           </svg>
         </div>
-      </nut-animate>
+
       <div class="game-type-option" v-if="type == 'Bets'" @click="showType = true">
         <div class="game-name">{{ game_type_name }}</div>
         <i
