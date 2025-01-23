@@ -15,18 +15,18 @@
         {{ $t("invite.des1") }}
       </div>
     </div>
-    <div class="share-box" :style="{backgroundImage:'url('+invite_img.img_8+')'}">
+    <div class="share-box" :style="{backgroundImage:'url(../assets/images/refer/fenxiang_di.png)'}">
       <div class="des" style="margin-bottom: 0.416rem">
         {{ $t("invite.des2") }}
       </div>
       <div class="des">{{ $t("invite.title1") }}</div>
       <div class="channel">
-        <img :src="invite_img.img_1" />
-        <img :src="static_img.img_url_2" />
-        <img :src="static_img.img_url_3" />
-        <img :src="static_img.img_url_4" />
-        <img :src="static_img.img_url_5" />
-        <img :src="static_img.img_url_6" />
+        <img src="../assets/images/footer/tg.png" />
+        <img src="../assets/images/footer/youtube.png" />
+      <img src="../assets/images/footer/ins.png" />
+      <img src="../assets/images/footer/whatsapp.png" />
+      <img src="../assets/images/footer/x.png" />
+      <img src="../assets/images/footer/douyin.png" />
       </div>
       <div class="des">{{ $t("invite.title2") }}</div>
       <div class="link-box">
@@ -41,7 +41,7 @@
     <div class="invite-img">
       <div class="title">{{ $t("invite.title3") }}</div>
       <div class="sub-title">{{ $t("invite.title4") }}</div>
-      <img :src="invite_img.img_7" />
+      <img src="../assets/images/refer/fenxiao.png" />
     </div>
   </div>
 </template>
@@ -63,9 +63,7 @@ const copyLink = async () => {
     console.error("复制到剪贴板失败", err);
   }
 };
-const static_img = computed(() => {
-  return state.static_img.footer;
-});
+
 const invite_img = computed(() => {
   return state.static_img.invite;
 });

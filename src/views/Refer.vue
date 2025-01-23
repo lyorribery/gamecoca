@@ -16,17 +16,17 @@
         :key="index"
         @click="changePath(item)"
       >
-        <img v-if="tab_name == item.name" :src="static_img.img_1" class="active-back" />
+        <img v-if="tab_name == item.name" src="../assets/images/refer/xz_di_jiaguang.png" class="active-back" />
         <div
           class="name"
           :style="{ color: tab_name == item.name ? '#ffffff' : '#cccccc' }"
         >
           {{ item.title }}
         </div>
-        <img v-if="item.name == 'invite'" class="icon" :src="static_img.img_2" />
-        <img v-if="item.name == 'referc'" class="icon" :src="static_img.img_3" />
-        <img v-if="item.name == 'member'" class="icon" :src="static_img.img_4" />
-        <img v-if="item.name == 'bonus'" class="icon" :src="static_img.img_5" />
+        <img v-if="item.name == 'invite'" class="icon" src="../assets/images/refer/convidar.png" />
+        <img v-if="item.name == 'referc'" class="icon" src="../assets/images/refer/Referencia.png" />
+        <img v-if="item.name == 'member'" class="icon" src="../assets/images/refer/Menbro.png" />
+        <img v-if="item.name == 'bonus'" class="icon" src="../assets/images/refer/Bonus.png" />
       </div>
     </div>
     <router-view v-slot="{ Component }">

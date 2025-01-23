@@ -50,35 +50,8 @@ const store = createStore({
     spin_show:false,
     login_tip_visible:false,
     activity_list:[],
-    static_img:{
-      footer:{
-        img_url_1:"",
-        img_url_2:"",
-        img_url_3:"",
-        img_url_4:'',
-        img_url_5:'',
-        img_url_6:''
-      },
-
-      invite:{
-        img_1:'',
-        img_7:'',
-        img_8:''
-      },
-      refer:{
-        img_1:'',
-        img_2:'',
-        img_3:'',
-        img_4:'',
-        img_5:'',
-      },
-
-    }
   }),
   mutations: {
-    set_static_img(state,val){
-      state.static_img=val
-    },
     set_login_tip_visible(state,val){
       state.login_tip_visible=val
     },
