@@ -11,7 +11,7 @@ import "@nutui/nutui/dist/style.css"
 
 import './assets/styles/common.scss'
 import './assets/iconfont/iconfont.css'
-import './assets/iconfont/iconfont.js'
+// import './assets/iconfont/iconfont.js'
 import animated from 'animate.css'
 
 import enUS from '@nutui/nutui/dist/packages/locale/lang/en-US'

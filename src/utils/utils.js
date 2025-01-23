@@ -170,13 +170,25 @@ export const loadStaticImg=async()=>{
 			img_3:''
 		}
 	  }
-	  static_img.login.img_2=await preloadImage(require("../assets/images/login/yanjingguan.png"))
-	  static_img.login.img_1=await preloadImage(require("../assets/images/login/yanjingkai.png"))
 	  static_img.main.img_1=await preloadImage(require("../assets/images/main/gerenxinxi.png"))
 	  static_img.main.img_2=await preloadImage(require("../assets/images/main/zoujian.png"))
 	  static_img.main.img_3=await preloadImage(require("../assets/images/main/kefu.png"))
 	  static_img.main.img_4=await preloadImage(require("../assets/images/main/baobiao.png"))
 	  static_img.main.img_5=await preloadImage(require("../assets/images/main/tuichu.png"))
+
+	  static_img.footer.img_url_1= await preloadImage(require("../assets/images/footer/18.png"))
+	  static_img.footer.img_url_2= await preloadImage(require("../assets/images/footer/youtube.png"))
+	  static_img.footer.img_url_3= await preloadImage(require("../assets/images/footer/ins.png"))
+	  static_img.footer.img_url_4= await preloadImage(require("../assets/images/footer/whatsapp.png"))
+	  static_img.footer.img_url_5= await preloadImage(require("../assets/images/footer/x.png"))
+	  static_img.footer.img_url_6= await preloadImage(require("../assets/images/footer/douyin.png"))
+
+	  static_img.inbox.img_url_1=await preloadImage(require("../assets/images/inbox/xinfeng.png"))
+	  static_img.inbox.img_url_2= await preloadImage(require("../assets/images/inbox/xinfeng_yidu.png"))
+
+	  static_img.login.img_2=await preloadImage(require("../assets/images/login/yanjingguan.png"))
+	  static_img.login.img_1=await preloadImage(require("../assets/images/login/yanjingkai.png"))
+	 
 	  static_img.refer.img_1=await preloadImage(require("../assets/images/refer/xz_di_jiaguang.png"))
 	  static_img.refer.img_2=await preloadImage(require("../assets/images/refer/convidar.png"))
 	  static_img.refer.img_3=await preloadImage(require("../assets/images/refer/Referencia.png"))
@@ -214,16 +226,7 @@ export const loadStaticImg=async()=>{
 	  static_img.avatar.avatar11=await preloadImage(require("../assets/images/avatar/11.png"))
 	  static_img.avatar.avatar12=await  preloadImage(require("../assets/images/avatar/12.png"))
 	
-	  static_img.footer.img_url_1= await preloadImage(require("../assets/images/footer/18.png"))
-	  static_img.footer.img_url_2= await preloadImage(require("../assets/images/footer/youtube.png"))
-	  static_img.footer.img_url_3= await preloadImage(require("../assets/images/footer/ins.png"))
-	  static_img.footer.img_url_4= await preloadImage(require("../assets/images/footer/whatsapp.png"))
-	  static_img.footer.img_url_5= await preloadImage(require("../assets/images/footer/x.png"))
-	  static_img.footer.img_url_6= await preloadImage(require("../assets/images/footer/douyin.png"))
-
-	  static_img.inbox.img_url_1=await preloadImage(require("../assets/images/inbox/xinfeng.png"))
-	  static_img.inbox.img_url_2= await preloadImage(require("../assets/images/inbox/xinfeng_yidu.png"))
-
+	
 	  static_img.vip.img_1=await preloadImage(require("../assets/images/vip/vip_1.png"))
 	  static_img.vip.img_2=await preloadImage(require("../assets/images/vip/vip_2.png"))
 	  static_img.vip.img_3=await preloadImage(require("../assets/images/vip/vip_3.png"))
