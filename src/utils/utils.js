@@ -96,6 +96,48 @@ const getBase64Image = (img, width, height) => {
 	return dataURL
 }
 
+export const loadStaticImg=async ()=>{
+	const static_img={
+		footer:{
+			img_1:'',
+			img_2:'',
+			img_3:'',
+			img_4:'',
+			img_5:'',
+			img_6:'',
+		},
+		refer:{
+			img_1:"",
+			img_2:"",
+			img_3:"",
+			img_4:"",
+			img_5:""
+		},
+		invite:{
+			img_1:"",
+			img_2:"",
+			img_3:""
+		}
+	}
+	static_img.footer.img_1=await preloadImage(require('../assets/images/footer/18.png'))
+	static_img.footer.img_2=await preloadImage(require('../assets/images/footer/youtube.png'))
+	static_img.footer.img_3=await preloadImage(require('../assets/images/footer/ins.png'))
+	static_img.footer.img_4=await preloadImage(require('../assets/images/footer/whatsapp.png'))
+	static_img.footer.img_5=await preloadImage(require('../assets/images/footer/x.png'))
+	static_img.footer.img_6=await preloadImage(require('../assets/images/footer/douyin.png'))
+
+	static_img.refer.img_1=await preloadImage(require('../assets/images/refer/xz_di_jiaguang.png'))
+	static_img.refer.img_2=await preloadImage(require('../assets/images/refer/convidar.png'))
+	static_img.refer.img_3=await preloadImage(require('../assets/images/refer/Referencia.png'))
+	static_img.refer.img_4=await preloadImage(require('../assets/images/refer/Menbro.png'))
+	static_img.refer.img_5=await preloadImage(require('../assets/images/refer/Bonus.png'))
+
+	static_img.invite.img_1=await preloadImage(require('../assets/images/refer/fenxiang_di.png'))
+	static_img.invite.img_2=await preloadImage(require('../assets/images/footer/tg.png'))
+	static_img.invite.img_3=await preloadImage(require('../assets/images/refer/fenxiao.png'))
+
+	store.commit("set_static_img",static_img)
+}
 
 
 

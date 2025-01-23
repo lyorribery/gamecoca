@@ -6,11 +6,12 @@
   >
     <div class="download" v-if="is_show_app">
       <div class="left">
-        <i
+        <CloseLittle
           @click="change_show_app"
-          class="iconfont icon-cuo"
           style="margin-right: 0.416rem"
-        ></i>
+          width="0.666rem"
+          color="#FFC536"
+        />
         <div class="down-des">
           <img :src="fullStationLogo" />
           <span>{{ $t("main.downloaddes") }}</span>
@@ -356,7 +357,7 @@
     leave-active-class="animate__animated animate__slideOutUp"
   >
     <div
-      v-if="isShow"
+      v-show="isShow"
       class="info-pop-box"
       :style="{
         top: is_show_app
@@ -366,7 +367,7 @@
     >
       <div class="avatar-pop">
         <div class="avatar" @click="goPath('/betbonus')">
-          <img  src="../assets/images/avatar/3.png" />
+          <img src="../assets/images/avatar/3.png" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
         <div class="info-user">
@@ -465,7 +466,34 @@
             @click="goActive(item)"
           >
             <div class="promotion-title">{{ item.noticeTitle }}</div>
-            <img :src="item.fullNoticeTitleIcon" />
+            <!-- <img :src="item.fullNoticeTitleIcon" /> -->
+            <nut-image
+              style="position: absolute; bottom: 0.138rem; right: 0.138rem"
+              :src="item.fullNoticeTitleIcon"
+              :width="category_width"
+              :height="category_width"
+              @load="loadCategory(index)"
+              round
+              :radius="7"
+              show-loading
+              show-error
+              lazy-load
+            >
+              <template #loading>
+                <div
+                  class="static-img-loading"
+                  :style="{ width: category_width, height: category_width }"
+                >
+                </div>
+              </template>
+              <template #error>
+                <div
+                  class="static-img-loading"
+                  :style="{ width: category_width, height: category_width }"
+                >
+                </div>
+              </template>
+            </nut-image>
           </div>
         </div>
         <div class="promotion-btn" @click="goPath('/promotion')">
@@ -687,252 +715,238 @@
   </nut-popup>
 </template>
 
-<script>
+<script setup>
+import { CloseLittle } from "@nutui/icons-vue";
+
 import { computed, watch } from "vue";
 import { onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+let { state, commit, dispatch } = useStore();
 
-export default {
-  setup() {
-    const { locale } = useI18n();
-    let { state, commit, dispatch } = useStore();
-
-    const is_show_app = computed(() => {
-      return state.is_show_app;
-    });
-    const promotion_list = computed(() => {
-      return state.activity_notice.records;
-    });
-    const user_balance = computed(() => {
-      return state.user_balance;
-    });
-    const fullStationLogo = computed(() => {
-      return state.station_base.fullStationLogo;
-    });
-    const user_info = computed(() => {
-      return state.user_info;
-    });
-    const tabs = computed(() => {
-      return state.station_base.bottomTabBar;
-      // const bottom = state.station_base.bottomTabBar;
-      // bottom.map((item) => {
-      //   item.icon = item.icon.replace('width="200"', 'width="0.666rem"');
-      //   item.icon = item.icon.replace('height="200"', 'height="0.666rem"');
-      //   item.icon = item.icon.replace('fill="#ffffff"', 'fill="#e556ff"');
-      //   item.icon = item.icon.replace('fill="#3D3B4F"', 'fill="#e556ff"');
-      //   item.icon = item.icon.replace('fill="#333333"', 'fill="#e556ff"');
-      //   item.icon = item.icon.replace('fill="#333333"', 'fill="#e556ff"');
-      //   item.icon = item.icon.replace(
-      //     'xmlns="http://www.w3.org/2000/svg"',
-      //     'xmlns="http://www.w3.org/2000/svg" fill="#e556ff"'
-      //   );
-      // });
-      // return bottom;
-    });
-    const transitionName = ref("slide-right");
-    const route = useRoute();
-    const router = useRouter();
-    const active_tab = ref(0);
-    const isOpen = ref(false);
-    const isShow = ref(false);
-    const showHeadLanguage = ref(false);
-    watch(
-      () => route,
-      (newRoute, oldRoute) => {
-        switch (newRoute.name) {
-          case "home":
-            active_tab.value = 0;
-            break;
-          case "invite":
-            active_tab.value = 1;
-            break;
-          case "promotion":
-            active_tab.value = 2;
-            break;
-          case "inbox":
-            active_tab.value = 3;
-            break;
-          case "mine":
-            active_tab.value = 4;
-            break;
-        }
-      },
-      { deep: true, immediate: true }
-    );
-
-    watch(
-      () => route.meta,
-      (newVal, oldVal) => {
-        transitionName.value = newVal.transition;
-      }
-    );
-
-    const tabSwitch = (path) => {
-      router.push({
-        path: path,
-      });
-    };
-
-    const goPermission = (type) => {
-      router.push({
-        path: "/login",
-        query: {
-          mode: type,
-        },
-      });
-    };
-
-    const changeMenu = () => {
-      isOpen.value = !isOpen.value;
-    };
-
-    const changeShow = () => {
-      isShow.value = !isShow.value;
-    };
-
-    const goActive = (data) => {
-      isOpen.value = false;
-      router.push({
-        path: "/activity",
-        query: {
-          id: data.id,
-        },
-      });
-    };
-
-    const goPath = (path) => {
-      isOpen.value = false;
-      isShow.value = false;
-      router.push({
-        path,
-      });
-    };
-
-    const refreshBalance = () => {
-      dispatch("GET_USER_BALANCE");
-    };
-
-    const languageChange = (value) => {
-      locale.value = value;
-      if (locale.value == "en") {
-        commit("set_show_tip", { type: 1, msg: "Already switched to English" });
-      } else if (locale.value == "por") {
-        commit("set_show_tip", { type: 1, msg: "Já mudei para português" });
-      }
-      showHeadLanguage.value = false;
-    };
-
-    const is_refresh_banlance = computed(() => {
-      return state.is_refresh_banlance;
-    });
-
-    const copyId = async () => {
-      try {
-        await navigator.clipboard.writeText(state.user_info.userId);
-        commit("set_show_tip", { type: 1, msg: "copied" });
-        console.log("文本已复制到剪贴板");
-      } catch (err) {
-        console.error("复制到剪贴板失败", err);
-      }
-    };
-    const popActionBtn = (path) => {
-      isShow.value = false;
-      router.push({
-        path,
-      });
-    };
-    const exit = () => {
-      isShow.value = false;
-      dispatch("LogOut");
-    };
-    const change_show_app = () => {
-      commit("set_is_show_app", false);
-    };
-    const unread_count = computed(() => {
-      return state.unread_count;
-    });
-    const down_visible = ref(false);
-    const changeDown = (type) => {
-      type == 1 ? (down_visible.value = true) : (down_visible.value = false);
-    };
-    const goHome = () => {
-      if (route.path != "/home")
-        router.push({
-          path: "/home",
-        });
-    };
-    const divice = ref(false);
-
-    onMounted(() => {
-      const userAgent = navigator.userAgent;
-      const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-      const isAndroid = /Android/.test(userAgent) && !/Windows Phone/.test(userAgent);
-      if (isAndroid) {
-        divice.value = "android";
-      } else {
-        divice.value = "ios";
-      }
-      switch (route.name) {
-        case "home":
-          active_tab.value = 0;
-          break;
-        case "invite":
-          active_tab.value = 1;
-          break;
-        case "promotion":
-          active_tab.value = 2;
-          break;
-        case "inbox":
-          active_tab.value = 3;
-          break;
-        case "mine":
-          active_tab.value = 4;
-          break;
-      }
-    });
-
-    return {
-      divice,
-      down_visible,
-      changeDown,
-      change_show_app,
-      is_show_app,
-      popActionBtn,
-      exit,
-      tabs,
-      route,
-      promotion_list,
-      active_tab,
-      tabSwitch,
-      transitionName,
-      fullStationLogo,
-      state,
-      goPermission,
-      user_info,
-      isOpen,
-      changeMenu,
-      isShow,
-      changeShow,
-      goActive,
-      goPath,
-      languageChange,
-      locale,
-      user_balance,
-      refreshBalance,
-      is_refresh_banlance,
-      copyId,
-      unread_count,
-      showHeadLanguage,
-      goHome,
-    };
+const is_show_app = computed(() => {
+  return state.is_show_app;
+});
+const promotion_list = computed(() => {
+  return state.activity_notice.records;
+});
+const user_balance = computed(() => {
+  return state.user_balance;
+});
+const fullStationLogo = computed(() => {
+  return state.station_base.fullStationLogo;
+});
+const user_info = computed(() => {
+  return state.user_info;
+});
+const tabs = computed(() => {
+  return state.station_base.bottomTabBar;
+  // const bottom = state.station_base.bottomTabBar;
+  // bottom.map((item) => {
+  //   item.icon = item.icon.replace('width="200"', 'width="0.666rem"');
+  //   item.icon = item.icon.replace('height="200"', 'height="0.666rem"');
+  //   item.icon = item.icon.replace('fill="#ffffff"', 'fill="#e556ff"');
+  //   item.icon = item.icon.replace('fill="#3D3B4F"', 'fill="#e556ff"');
+  //   item.icon = item.icon.replace('fill="#333333"', 'fill="#e556ff"');
+  //   item.icon = item.icon.replace('fill="#333333"', 'fill="#e556ff"');
+  //   item.icon = item.icon.replace(
+  //     'xmlns="http://www.w3.org/2000/svg"',
+  //     'xmlns="http://www.w3.org/2000/svg" fill="#e556ff"'
+  //   );
+  // });
+  // return bottom;
+});
+const transitionName = ref("slide-right");
+const route = useRoute();
+const router = useRouter();
+const active_tab = ref(0);
+const isOpen = ref(false);
+const isShow = ref(false);
+const showHeadLanguage = ref(false);
+watch(
+  () => route,
+  (newRoute, oldRoute) => {
+    switch (newRoute.name) {
+      case "home":
+        active_tab.value = 0;
+        break;
+      case "invite":
+        active_tab.value = 1;
+        break;
+      case "promotion":
+        active_tab.value = 2;
+        break;
+      case "inbox":
+        active_tab.value = 3;
+        break;
+      case "mine":
+        active_tab.value = 4;
+        break;
+    }
   },
+  { deep: true, immediate: true }
+);
+
+watch(
+  () => route.meta,
+  (newVal, oldVal) => {
+    transitionName.value = newVal.transition;
+  }
+);
+
+const tabSwitch = (path) => {
+  router.push({
+    path: path,
+  });
 };
+
+const goPermission = (type) => {
+  router.push({
+    path: "/login",
+    query: {
+      mode: type,
+    },
+  });
+};
+
+const changeMenu = () => {
+  isOpen.value = !isOpen.value;
+};
+
+const changeShow = () => {
+  isShow.value = !isShow.value;
+};
+
+const goActive = (data) => {
+  isOpen.value = false;
+  router.push({
+    path: "/activity",
+    query: {
+      id: data.id,
+    },
+  });
+};
+
+const goPath = (path) => {
+  isOpen.value = false;
+  isShow.value = false;
+  router.push({
+    path,
+  });
+};
+
+const refreshBalance = () => {
+  dispatch("GET_USER_BALANCE");
+};
+
+const languageChange = (value) => {
+  locale.value = value;
+  if (locale.value == "en") {
+    commit("set_show_tip", { type: 1, msg: "Already switched to English" });
+  } else if (locale.value == "por") {
+    commit("set_show_tip", { type: 1, msg: "Já mudei para português" });
+  }
+  showHeadLanguage.value = false;
+};
+
+const is_refresh_banlance = computed(() => {
+  return state.is_refresh_banlance;
+});
+
+const copyId = async () => {
+  try {
+    await navigator.clipboard.writeText(state.user_info.userId);
+    commit("set_show_tip", { type: 1, msg: "copied" });
+    console.log("文本已复制到剪贴板");
+  } catch (err) {
+    console.error("复制到剪贴板失败", err);
+  }
+};
+const popActionBtn = (path) => {
+  isShow.value = false;
+  router.push({
+    path,
+  });
+};
+const exit = () => {
+  isShow.value = false;
+  dispatch("LogOut");
+};
+const change_show_app = () => {
+  commit("set_is_show_app", false);
+};
+const unread_count = computed(() => {
+  return state.unread_count;
+});
+const down_visible = ref(false);
+const changeDown = (type) => {
+  type == 1 ? (down_visible.value = true) : (down_visible.value = false);
+};
+const goHome = () => {
+  if (route.path != "/home")
+    router.push({
+      path: "/home",
+    });
+};
+const divice = ref(false);
+const category_width = ref("0.5rem");
+onMounted(() => {
+  const userAgent = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+  const isAndroid = /Android/.test(userAgent) && !/Windows Phone/.test(userAgent);
+  if (isAndroid) {
+    divice.value = "android";
+  } else {
+    divice.value = "ios";
+  }
+  switch (route.name) {
+    case "home":
+      active_tab.value = 0;
+      break;
+    case "invite":
+      active_tab.value = 1;
+      break;
+    case "promotion":
+      active_tab.value = 2;
+      break;
+    case "inbox":
+      active_tab.value = 3;
+      break;
+    case "mine":
+      active_tab.value = 4;
+      break;
+  }
+});
 </script>
 
 <style lang="scss" scoped>
 @import "../assets/styles/variables.scss";
+
+.static-img-loading {
+  border-radius: 7px;
+  background-size: 200% 200%;
+  background-image: linear-gradient(
+    135deg,
+    rgba(6, 169, 80, 0.9),
+    rgba(6, 169, 80, 0.8),
+    rgba(255, 197, 54, 0.9),
+    rgba(255, 197, 54, 0.8)
+  );
+  animation: flow 2s ease infinite;
+  @keyframes flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
 
 .animate__animated.animate__slideInDown,
 .animate__animated.animate__slideOutUp,
@@ -963,10 +977,6 @@ export default {
   .left {
     display: flex;
     align-items: center;
-    i {
-      font-size: 0.666rem;
-      color: $primary-color;
-    }
     .down-des {
       display: flex;
       flex-direction: column;

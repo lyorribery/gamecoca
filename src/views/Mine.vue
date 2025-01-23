@@ -45,6 +45,7 @@
       <div class="wallet-box">
         <div class="action">
           <img src="../assets/images/mine/qianbao.png" />
+          <!-- <i class="iconfont icon-xinyongqianbaofill"></i> -->
           <div>
             Central <br />
             Wallet
@@ -52,10 +53,12 @@
         </div>
         <div class="action" @click="goDeposit('withdraw')">
           <img src="../assets/images/mine/tixian.png" />
+          <!-- <i class="iconfont icon-tixianjilu"></i> -->
           <div>Withdraw <br />Details</div>
         </div>
         <div class="action" @click="goDeposit('deposit')">
           <img src="../assets/images/mine/chongzhi.png" />
+          <!-- <i class="iconfont icon-cunqianguan"></i> -->
           <div>
             Desposit<br />
             Details
@@ -756,6 +759,11 @@ const goDeposit = (type) => {
         img {
           width: 0.916rem;
           margin-right: 0.138rem;
+        }
+        i{ 
+           margin-right: 0.138rem;
+          font-size: 0.916rem;
+          color:#2b2b2b;
         }
         div {
           text-align: center;

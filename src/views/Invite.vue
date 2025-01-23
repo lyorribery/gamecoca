@@ -15,18 +15,18 @@
         {{ $t("invite.des1") }}
       </div>
     </div>
-    <div class="share-box" :style="{backgroundImage:'url(../assets/images/refer/fenxiang_di.png)'}">
+    <div class="share-box" :style="{ backgroundImage: 'url(' + invite_img.img_1 + ')' }">
       <div class="des" style="margin-bottom: 0.416rem">
         {{ $t("invite.des2") }}
       </div>
       <div class="des">{{ $t("invite.title1") }}</div>
       <div class="channel">
-        <img src="../assets/images/footer/tg.png" />
-        <img src="../assets/images/footer/youtube.png" />
-      <img src="../assets/images/footer/ins.png" />
-      <img src="../assets/images/footer/whatsapp.png" />
-      <img src="../assets/images/footer/x.png" />
-      <img src="../assets/images/footer/douyin.png" />
+        <img :src="invite_img.img_2" />
+        <img :src="static_img.img_2" />
+        <img :src="static_img.img_3" />
+        <img :src="static_img.img_4" />
+        <img :src="static_img.img_5" />
+        <img :src="static_img.img_6" />
       </div>
       <div class="des">{{ $t("invite.title2") }}</div>
       <div class="link-box">
@@ -41,7 +41,7 @@
     <div class="invite-img">
       <div class="title">{{ $t("invite.title3") }}</div>
       <div class="sub-title">{{ $t("invite.title4") }}</div>
-      <img src="../assets/images/refer/fenxiao.png" />
+      <img :src="invite_img.img_3" />
     </div>
   </div>
 </template>
@@ -50,7 +50,6 @@
 import { computed, onBeforeMount, ref } from "vue";
 import { GetUserRule } from "@/apis/proxy";
 import { useStore } from "vuex";
-import { preloadImage } from "@/utils/utils";
 
 const { state, commit } = useStore();
 const link_val = ref("");
@@ -66,6 +65,9 @@ const copyLink = async () => {
 
 const invite_img = computed(() => {
   return state.static_img.invite;
+});
+const static_img = computed(() => {
+  return state.static_img.footer;
 });
 onBeforeMount(() => {
   link_val.value =

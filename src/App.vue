@@ -11,6 +11,7 @@ import { onMounted, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import loading from "@/components/loading.vue";
+import {loadStaticImg} from '@/utils/utils'
 
 import tip from "@/components/tip.vue";
 const uuid = require("uuid");
@@ -42,6 +43,7 @@ export default {
     };
 
     onMounted(() => {
+      loadStaticImg()
       const id = getQueryParam("agentid");
       if (id) window.localStorage.setItem("agentId", id);
       let userAgentInfo = window.navigator.userAgent;

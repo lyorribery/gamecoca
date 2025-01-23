@@ -10,12 +10,12 @@
     </div>
     <div class="help-des" v-if="show"></div>
     <div class="contact-box">
-      <img src="../assets/images/footer/18.png" />
-      <img src="../assets/images/footer/youtube.png" />
-      <img src="../assets/images/footer/ins.png" />
-      <img src="../assets/images/footer/whatsapp.png" />
-      <img src="../assets/images/footer/x.png" />
-      <img src="../assets/images/footer/douyin.png" />
+      <img :src="static_img.img_1" />
+      <img :src="static_img.img_2" />
+      <img :src="static_img.img_3" />
+      <img :src="static_img.img_4" />
+      <img :src="static_img.img_5" />
+      <img :src="static_img.img_6" />
     </div>
     <div class="game-box">
       <img v-for="(item, index) in img_list" :key="index" :src="item.fullImgUrl" />
