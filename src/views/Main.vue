@@ -366,7 +366,7 @@
     >
       <div class="avatar-pop">
         <div class="avatar" @click="goPath('/betbonus')">
-          <img :src="avatar_url" />
+          <img  src="../assets/images/avatar/3.png" />
           <div class="level">{{ user_info.levelName }}</div>
         </div>
         <div class="info-user">
