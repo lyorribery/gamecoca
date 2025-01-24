@@ -25,7 +25,7 @@
             ></div>
           </template>
         </nut-image>
-        <div class="colect-box" @click="changeColection(img_info)">
+        <div class="colect-box" @click.stop="changeColection(img_info)">
           <i
             class="iconfont icon-shoucangxuanzhong"
             :style="{ color: img_info.isColect ? '#FFC536' : '#d2cccb' }"
@@ -40,7 +40,7 @@
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
-// import apiconfig from "@/utils/apiConfig";
+import { useRouter } from "vue-router";
 
 export default {
   name: "imgCard",
@@ -55,10 +55,9 @@ export default {
     },
   },
   setup(props, ctx) {
-
-    const img_info=ref({})
-    img_info.value=props.cardInfo
-    // calc(100% - 1.305rem - 0.277rem -0.277rem - 0.277rem -0.277rem -0.277rem)
+    const router = useRouter();
+    const img_info = ref({});
+    img_info.value = props.cardInfo;
     const img_width = ref("2.964rem");
     const img_height = ref("4.0755rem");
 
@@ -71,35 +70,34 @@ export default {
     }
 
     const { state, commit } = useStore();
-    const is_req = ref(false);
 
-    const goDetail = async (data) => {
-      return;
-      if (!data.id) return;
-      if (!localStorage.getItem("token")) {
-        commit("set_tip_info", "You have not logged in yet,please login.");
-        commit("set_tip_type", 1);
-        commit("set_tip_modal", true);
+    const goDetail = (data) => {
+      if (!localStorage.getItem("accessToken")) {
+        router.push({
+          path: "/login",
+          query: {
+            mode: "login",
+          },
+        });
         return;
       }
-      if (!state.user_info.bindGold) {
-        commit("set_tip_info", "The current balance is insufficient, please deposit.");
-        commit("set_tip_type", 3);
-        commit("set_tip_modal", true);
+      if (state.user_balance.balance == 0) {
+        commit("set_show_tip", { type: 1, msg: "Saldo de conta insuficiente" });
         return;
       }
-      if (is_req.value) return;
-      is_req.value = true;
       commit("set_loading_modal", true);
-      if (data.clientUrl) {
-        is_req.value = false;
-        location.href = `${data.clientUrl}?t_code=${localStorage.getItem("token")}`;
-        return;
-      }
+      router.push({
+        path: "/other",
+        query: {
+          channel: data.channelBean,
+          gameCode: data.gameCode,
+          gameId: data.gameId,
+        },
+      });
     };
 
     const changeColection = (data) => {
-      img_info.value.isColect=!img_info.value.isColect
+      img_info.value.isColect = !img_info.value.isColect;
     };
     return {
       img_info,

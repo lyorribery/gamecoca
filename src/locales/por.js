@@ -2,12 +2,14 @@ export default {
   tel: 'Telefone',
   email: 'E-mail',
   user: 'Usuário',
+  gameTip:"Tem certeza de que deseja salvar o jogo e retornar ao lobby?",
   button: {
     login: 'Entrar',
     register: 'Cadastro',
     more:'Ver tudo',
     change:'Mudar',
-    confirm:'Confirmar'
+    confirm:'Confirmar',
+    cancel:'Cancelar'
   },
   main:{
     Download:'Download',

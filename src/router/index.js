@@ -185,6 +185,15 @@ const router = createRouter({
       },
     },
     {
+      path: '/other',
+      name: 'other',
+      component: () => import('@/views/Other.vue'),
+      meta: {
+        transition: 'slide-left',
+        auth: true
+      },
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/views/Login.vue'),

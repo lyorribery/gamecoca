@@ -7,3 +7,4 @@ export const getGameType = () => {
         method: 'get'
     })
 }
+

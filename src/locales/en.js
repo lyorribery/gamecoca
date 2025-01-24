@@ -4,11 +4,13 @@ export default {
     register: 'Register',
     more: 'More',
     change: 'Change',
-    confirm:'Confirm'
+    confirm:'Confirm',
+    cancel:'Cancel'
   },
   tel: 'Mobile',
   email: 'E-mail',
   user: 'User',
+  gameTip:"Are you sure you want to save the game and return to the lobby?",
   main:{
     Download:'Download',
     downloaddes:'Download now to receive a free bonus!',
