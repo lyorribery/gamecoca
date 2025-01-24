@@ -435,6 +435,7 @@ const scrollActive = (type) => {
 };
 const swiper_w = ref(330);
 onMounted(() => {
+
   swiper_w.value = window.innerWidth * (300 / 360);
   // if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   login_visible_w.value = window.innerWidth - 30;
@@ -448,6 +449,7 @@ onMounted(() => {
 });
 const category_width = ref("0.694rem");
 const page_num = ref(0);
+const contentContainer=ref(null)
 const scroll_num = computed(() => {
   return state.is_show_app ? 339.5 : 293.5;
 });
@@ -455,12 +457,12 @@ window.addEventListener("scroll", () => {
   page_num.value = document.documentElement.scrollTop || document.body.scrollTop || 0;
 });
 
-window.addEventListener("pageshow", function (event) {
-  if (event.persisted) {
-    commit("set_loading_modal", false);
-    if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
-  }
-});
+// window.addEventListener("pageshow", function (event) {
+//   if (event.persisted) {
+//     commit("set_loading_modal", false);
+//     if (localStorage.getItem("token")) dispatch("GET_USER_INFO");
+//   }
+// });
 </script>
 
 <style>
@@ -567,7 +569,7 @@ window.addEventListener("pageshow", function (event) {
 }
 .home-icon-box {
   position: fixed;
-  bottom: 2.2rem;
+  bottom: 2.5rem;
   right: 0.555rem;
   z-index: 9;
 

@@ -1041,17 +1041,30 @@ onMounted(() => {
 .bottom-permission {
   position: fixed;
   left: 0;
-  bottom: env(safe-area-inset-bottom);
+  bottom: 0;
+  height: calc(env(safe-area-inset-bottom) + 4.628rem);
   display: flex;
   width: 100%;
-  height: 4.638rem;
   background-image: url("../assets/images/denglu_mask.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  // background: linear-gradient(
+  //   0deg,
+  //   rgba(0, 0, 0, 1) 0%,
+  //   rgba(0, 0, 0, 0.9) 10%,
+  //   rgba(0, 0, 0, 0.8) 20%,
+  //   rgba(0,0,0,0.7) 30%,
+  //   rgba(0, 0, 0, 0.6) 40%,
+  //   rgba(0, 0, 0, 0.5) 50%,
+  //   rgba(0, 0, 0, 0.4) 60%,
+  //   rgba(0, 0, 0, 0.3) 70%,
+  //   rgba(0,0,0,0.2) 80%,
+  //   rgba(0, 0, 0, 0.1) 90%,
+  // );
   justify-content: space-around;
   align-items: flex-end;
   box-sizing: border-box;
-  padding: 0 0.416rem 0.416rem 0.416rem;
+  padding: 0 0.416rem calc(0.416rem + env(safe-area-inset-bottom)) 0.416rem;
   .login-btn {
     width: 4.222rem;
     height: 0.888rem;
