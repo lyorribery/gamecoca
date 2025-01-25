@@ -1,7 +1,6 @@
 <template>
   <div class="vip">
     <div class="top-box">
-      <!-- <i class="iconfont icon-arrow-left back" @click="goBack()"></i> -->
       <img src="../assets/images/vip/jingyantiao.png" />
       <div
         class="point"
@@ -61,12 +60,12 @@
     <div class="vip-info-box">
       <div class="left-arrow" @click="scrollVip(1)">
         <div class="icon-box">
-          <i class="iconfont icon-xiangzuo"></i>
+          <img src="../assets/images/svg/left.svg" />
         </div>
       </div>
       <div class="right-arrow" @click="scrollVip(2)">
         <div class="icon-box">
-          <i class="iconfont icon-xiangyou"></i>
+          <img src="../assets/images/svg/right.svg" />
         </div>
       </div>
 
@@ -424,9 +423,8 @@ onMounted(() => {
         padding: 0.054rem;
         border-radius: 50%;
         background: rgba(0, 0, 0, 0.3);
-        i {
-          font-size: 0.277rem;
-          color: rgba(255, 255, 255, 0.7);
+        img {
+          width: 0.277rem;
         }
       }
     }
@@ -452,9 +450,8 @@ onMounted(() => {
         padding: 0.054rem;
         border-radius: 50%;
         background: rgba(0, 0, 0, 0.3);
-        i {
-          font-size: 0.277rem;
-          color: rgba(255, 255, 255, 0.7);
+        img {
+          width: 0.277rem;
         }
       }
     }

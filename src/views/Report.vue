@@ -4,43 +4,47 @@
       <div class="date-container" @click="show = true">
         <span>{{ date[0] }} - {{ date[1] }}</span>
       </div>
-    
-        <div class="search-btn" @click="getData()">
-          <span v-if="!is_loading">{{ $t('report.Procurar') }}</span>
-          <svg
-            v-if="is_loading"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            width="20px"
-            height="20px"
-            viewBox="0 0 50 50"
-            style="enable-background: new 0 0 50 50"
-            xml:space="preserve"
+
+      <div class="search-btn" @click="getData()">
+        <span v-if="!is_loading">{{ $t("report.Procurar") }}</span>
+        <svg
+          v-if="is_loading"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="20px"
+          height="20px"
+          viewBox="0 0 50 50"
+          style="enable-background: new 0 0 50 50"
+          xml:space="preserve"
+        >
+          <path
+            fill="#ffffff"
+            d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+            transform="rotate(275.098 25 25)"
           >
-            <path
-              fill="#ffffff"
-              d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
-              transform="rotate(275.098 25 25)"
-            >
-              <animateTransform
-                attributeType="xml"
-                attributeName="transform"
-                type="rotate"
-                from="0 25 25"
-                to="360 25 25"
-                dur="0.6s"
-                repeatCount="indefinite"
-              ></animateTransform>
-            </path>
-          </svg>
-        </div>
+            <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+              type="rotate"
+              from="0 25 25"
+              to="360 25 25"
+              dur="0.6s"
+              repeatCount="indefinite"
+            ></animateTransform>
+          </path>
+        </svg>
+      </div>
 
       <div class="game-type-option" v-if="type == 'Bets'" @click="showType = true">
         <div class="game-name">{{ game_type_name }}</div>
-        <i
-          class="iconfont"
-          :class="showType ? 'icon-xiangshangjiantou' : 'icon-xiangxiajiantou'"
-        ></i>
+        <img
+          @click="changeShow"
+          :src="
+            !showType
+              ? require('../assets/images/svg/bottom.svg')
+              : require('../assets/images/svg/top.svg')
+          "
+        />
       </div>
     </div>
     <div class="tab-box">
@@ -49,7 +53,7 @@
         @click="changeType('Account')"
         :style="{ color: type == 'Account' ? '#fdc24a' : '' }"
       >
-        {{ $t('report.Account') }}
+        {{ $t("report.Account") }}
         <div class="active" v-if="type == 'Account'"></div>
       </div>
       <div
@@ -57,7 +61,7 @@
         @click="changeType('Deposit')"
         :style="{ color: type == 'Deposit' ? '#fdc24a' : '' }"
       >
-        {{ $t('report.Deposit') }}
+        {{ $t("report.Deposit") }}
         <div class="active" v-if="type == 'Deposit'"></div>
       </div>
       <div
@@ -65,7 +69,7 @@
         @click="changeType('Withdraw')"
         :style="{ color: type == 'Withdraw' ? '#fdc24a' : '' }"
       >
-        {{ $t('report.Withdraw') }}
+        {{ $t("report.Withdraw") }}
         <div class="active" v-if="type == 'Withdraw'"></div>
       </div>
       <div
@@ -73,7 +77,7 @@
         @click="changeType('Bets')"
         :style="{ color: type == 'Bets' ? '#fdc24a' : '' }"
       >
-        {{ $t('report.Bets') }}
+        {{ $t("report.Bets") }}
         <div class="active" v-if="type == 'Bets'"></div>
       </div>
       <div
@@ -81,7 +85,7 @@
         @click="changeType('Bonus')"
         :style="{ color: type == 'Bonus' ? '#fdc24a' : '' }"
       >
-        {{ $t('report.Bonus') }}
+        {{ $t("report.Bonus") }}
         <div class="active" v-if="type == 'Bonus'"></div>
       </div>
       <div
@@ -89,7 +93,7 @@
         @click="changeType('Promotion')"
         :style="{ color: type == 'Promotion' ? '#fdc24a' : '' }"
       >
-        {{ $t('report.Promotion') }}
+        {{ $t("report.Promotion") }}
         <div class="active" v-if="type == 'Promotion'"></div>
       </div>
     </div>
@@ -98,9 +102,15 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">ID</div>
-        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">{{ $t('report.Date') }}</div>
-        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">{{ $t('report.Type') }}</div>
-        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">{{ $t('report.Amount') }}</div>
+        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">
+          {{ $t("report.Date") }}
+        </div>
+        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">
+          {{ $t("report.Type") }}
+        </div>
+        <div class="table-col" style="width: calc((100% - 0.555rem) / 4)">
+          {{ $t("report.Amount") }}
+        </div>
       </div>
       <div class="table-row" v-for="(item, index) in account_data" :key="index">
         <div class="table-col-copy">
@@ -142,10 +152,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">{{$t('report.Date')}}</div>
-        <div class="table-col">{{ $t('report.Deposit') }}</div>
-        <div class="table-col">{{ $t('report.Bonus') }}</div>
-        <div class="table-col">{{ $t('report.Status') }}</div>
+        <div class="table-col">{{ $t("report.Date") }}</div>
+        <div class="table-col">{{ $t("report.Deposit") }}</div>
+        <div class="table-col">{{ $t("report.Bonus") }}</div>
+        <div class="table-col">{{ $t("report.Status") }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in deposit_data" :key="index">
         <div class="table-col-copy">
@@ -196,10 +206,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">{{ $t('report.Date') }}</div>
-        <div class="table-col">{{ $t('report.Amount') }}</div>
-        <div class="table-col">{{ $t('report.Fee') }}</div>
-        <div class="table-col">{{ $t('report.Status') }}</div>
+        <div class="table-col">{{ $t("report.Date") }}</div>
+        <div class="table-col">{{ $t("report.Amount") }}</div>
+        <div class="table-col">{{ $t("report.Fee") }}</div>
+        <div class="table-col">{{ $t("report.Status") }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in withdraw_data" :key="index">
         <div class="table-col-copy">
@@ -252,10 +262,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">{{ $t('report.Date') }}</div>
-        <div class="table-col">{{ $t('report.Type') }}</div>
-        <div class="table-col">{{ $t('report.Bets') }}</div>
-        <div class="table-col">{{ $t('report.Bonus') }}</div>
+        <div class="table-col">{{ $t("report.Date") }}</div>
+        <div class="table-col">{{ $t("report.Type") }}</div>
+        <div class="table-col">{{ $t("report.Bets") }}</div>
+        <div class="table-col">{{ $t("report.Bonus") }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in bet_data" :key="index">
         <div class="table-col-copy">
@@ -290,10 +300,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">{{ $t('report.Date') }}</div>
-        <div class="table-col">{{ $t('report.Origin') }}</div>
-        <div class="table-col">{{ $t('report.Bonus') }}</div>
-        <div class="table-col">{{ $t('report.Status') }}</div>
+        <div class="table-col">{{ $t("report.Date") }}</div>
+        <div class="table-col">{{ $t("report.Origin") }}</div>
+        <div class="table-col">{{ $t("report.Bonus") }}</div>
+        <div class="table-col">{{ $t("report.Status") }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in bonus_data" :key="index">
         <div class="table-col-copy">
@@ -335,10 +345,10 @@
       <div class="table-header">
         <div class="table-col-copy"></div>
         <div class="table-col">ID</div>
-        <div class="table-col">{{ $t('report.Date') }}</div>
-        <div class="table-col">{{ $t('report.Type') }}</div>
-        <div class="table-col">{{ $t('report.Bonus') }}</div>
-        <div class="table-col">{{ $t('report.Details') }}</div>
+        <div class="table-col">{{ $t("report.Date") }}</div>
+        <div class="table-col">{{ $t("report.Type") }}</div>
+        <div class="table-col">{{ $t("report.Bonus") }}</div>
+        <div class="table-col">{{ $t("report.Details") }}</div>
       </div>
       <div class="table-row" v-for="(item, index) in promotion_data" :key="index">
         <div class="table-col-copy">
@@ -663,7 +673,7 @@ onMounted(() => {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top:0.138rem;
+    margin-top: 0.138rem;
     .game-type-option {
       margin-left: 0.138rem;
       border-radius: 0.194rem;
@@ -686,9 +696,8 @@ onMounted(() => {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      i {
-        font-size: 0.277rem;
-        color: #666666;
+      img{
+        width:0.277rem;
       }
     }
     .date-container {

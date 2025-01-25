@@ -26,10 +26,7 @@
           </template>
         </nut-image>
         <div class="colect-box" @click.stop="changeColection(img_info)">
-          <i
-            class="iconfont icon-shoucangxuanzhong"
-            :style="{ color: img_info.isColect ? '#FFC536' : '#d2cccb' }"
-          ></i>
+          <img :src="img_info.isColect?require('../assets/images/svg/colect.svg'):require('../assets/images/svg/uncolect.svg')" />
         </div>
         <!-- <div class="img-mask"></div> -->
       </div>
@@ -133,8 +130,8 @@ export default {
       background: rgba(0, 0, 0, 0.3);
       box-sizing: border-box;
       padding: 0.054rem;
-      i {
-        font-size: 0.361rem;
+      img{
+        width:0.361rem;
       }
     }
     // .img-mask {

@@ -9,18 +9,18 @@
         :class="mode == 'deposit' ? 'active' : 'unactive'"
         @click="changeTab('deposit')"
       >
-        {{ $t('deposit.Deposit') }}
+        {{ $t("deposit.Deposit") }}
       </div>
       <div
         class="item item-right"
         :class="mode == 'withdraw' ? 'active' : 'unactive'"
         @click="changeTab('withdraw')"
       >
-      {{ $t('deposit.Withdraw') }}
+        {{ $t("deposit.Withdraw") }}
       </div>
     </div>
     <div class="form-box" v-if="mode == 'deposit'">
-      <div class="title-row">{{ $t('deposit.selecttype') }}</div>
+      <div class="title-row">{{ $t("deposit.selecttype") }}</div>
       <div class="form-row">
         <div
           class="type-item"
@@ -32,7 +32,7 @@
           <span>{{ item.methodName }}</span>
         </div>
       </div>
-      <div class="title-row">{{ $t('deposit.selectchannel') }}</div>
+      <div class="title-row">{{ $t("deposit.selectchannel") }}</div>
       <div class="form-row">
         <div
           @click="changeChannel(item.channelId)"
@@ -44,7 +44,7 @@
           <span>{{ item.name }}</span>
         </div>
       </div>
-      <div class="title-row">{{ $t('deposit.amountoption') }}</div>
+      <div class="title-row">{{ $t("deposit.amountoption") }}</div>
       <div class="form-row">
         <div
           :class="
@@ -58,7 +58,7 @@
           <div class="prize" v-if="item.prize">+{{ item.prize }}</div>
         </div>
       </div>
-      <div class="title-row">{{ $t('deposit.enteryouramount') }}</div>
+      <div class="title-row">{{ $t("deposit.enteryouramount") }}</div>
       <div class="form-row">
         <div class="ipt-box">
           <div class="unit">
@@ -148,7 +148,7 @@
 
     <div class="form-box" v-if="mode == 'withdraw'">
       <div class="withdraw-able">
-        <div class="name">{{ $t('deposit.Withdrawable') }}</div>
+        <div class="name">{{ $t("deposit.Withdrawable") }}</div>
         <div class="able-amount">
           <span>
             {{ withdraw_info.balance ? withdraw_info.balance.toFixed(2) : "0.00" }}
@@ -171,7 +171,7 @@
             ></path>
           </svg>
         </div>
-        <div class="title-row">{{ $t('deposit.enteryouramount') }}</div>
+        <div class="title-row">{{ $t("deposit.enteryouramount") }}</div>
         <div class="form-row">
           <div class="ipt-box">
             <div class="unit">
@@ -186,13 +186,15 @@
         </div>
         <div class="tax-row">
           <div class="item">
-            {{ $t('deposit.WithdrawFee') }}:<span>R${{ withdraw_form.withdrawAmount }}</span>
+            {{ $t("deposit.WithdrawFee") }}:<span
+              >R${{ withdraw_form.withdrawAmount }}</span
+            >
           </div>
           <div class="item">
-            {{ $t('deposit.HandingFee') }}:<span>R${{ withdraw_form.bonus }}</span>
+            {{ $t("deposit.HandingFee") }}:<span>R${{ withdraw_form.bonus }}</span>
           </div>
         </div>
-        <div class="title-row">{{ $t('deposit.title1') }}</div>
+        <div class="title-row">{{ $t("deposit.title1") }}</div>
         <div class="withdraw-box">
           <div
             class="item"
@@ -209,12 +211,14 @@
                 <div class="pix-account">{{ item.account }}</div>
               </div>
             </div>
-            <i
-              class="iconfont"
-              :class="
-                item.id == withdraw_form.id ? 'icon-xuanzhong' : 'icon-weixuanzhong'
+            <img
+              :src="
+                item.id == withdraw_form.id
+                  ? require('../assets/images/svg/deposit_check.svg')
+                  : require('../assets/images/svg/deposit_nocheck.svg')
               "
-            ></i>
+              style="width: 0.333rem"
+            />
           </div>
           <div class="add-pix" @click="show_check_pass = true">
             <div class="left">
@@ -349,14 +353,14 @@
             <img :src="pay_method[0].fullMethodIcon" />
             <span>R${{ deposit_form.basicValue }}</span>
           </div>
-          <div class="des">{{ $t('deposit.title2') }}</div>
+          <div class="des">{{ $t("deposit.title2") }}</div>
           <img style="margin: 1.111rem 0 0.555rem 0" :src="qrCodeSrc" />
           <div class="count-down">
             <nut-countdown :start-time="nowtime" :end-time="countdown"></nut-countdown>
           </div>
           <div class="copy-qr-btn" @click="copyPix()">Copy PIX Code</div>
           <div class="des-copy">
-            {{ $t('deposit.title3') }}
+            {{ $t("deposit.title3") }}
           </div>
         </div>
       </div>
@@ -394,7 +398,7 @@
           </div>
 
           <div class="title">
-            {{ $t('deposit.ChangePassword') }}
+            {{ $t("deposit.ChangePassword") }}
             <div class="line"></div>
           </div>
 
@@ -424,20 +428,17 @@
 
             <div class="tips">
               <div class="circle"></div>
-              <span
-                >{{ $t('deposit.tip1') }}</span
-              >
+              <span>{{ $t("deposit.tip1") }}</span>
             </div>
             <div class="tips">
               <div class="circle"></div>
-              <span>
-                {{ $t('deposit.tip2') }}</span
-              >
+              <span> {{ $t("deposit.tip2") }}</span>
             </div>
           </div>
 
           <div class="confirm-btn" @click="confirmWithdrawPass()">
-            {{ $t('button.confirm') }}<svg
+            {{ $t("button.confirm")
+            }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -500,7 +501,7 @@
           </div>
 
           <div class="title">
-            {{ $t('deposit.EnterPassword') }}
+            {{ $t("deposit.EnterPassword") }}
             <div class="line"></div>
           </div>
 
@@ -520,12 +521,13 @@
 
             <div class="tips">
               <div class="circle"></div>
-              <span>{{ $t('deposit.title4') }}</span>
+              <span>{{ $t("deposit.title4") }}</span>
             </div>
           </div>
 
           <div class="confirm-btn" @click="confirmTransactionPassword()">
-            {{ $t('button.confirm') }}<svg
+            {{ $t("button.confirm")
+            }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -599,7 +601,7 @@
             >
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-shenfenzheng"></i>
+                  <img src="../assets/images/svg/idcard.svg" />
                 </div>
                 <nut-input
                   :clearable="true"
@@ -612,11 +614,11 @@
             <nut-form-item prop="accountType">
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-geren"></i>
+                  <img src="../assets/images/svg/user.svg" />
                 </div>
                 <div class="options-box" @click="showPixType = !showPixType">
                   <span>{{ pixType_name }}</span>
-                  <i class="iconfont icon-xiangxiajiantou"></i>
+                  <img src="../assets/images/svg/bottom.svg" />
                 </div>
                 <div class="pix-type-box" v-if="showPixType">
                   <div
@@ -638,7 +640,7 @@
             >
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-mima"></i>
+                  <img src="../assets/images/svg/password.svg" />
                 </div>
                 <nut-input
                   :clearable="true"
@@ -651,7 +653,7 @@
             <nut-form-item prop="cpf" :rules="[{ validator: customValidatorCPF }]">
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-shenfenzheng"></i>
+                  <img src="../assets/images/svg/idcard.svg" />
                 </div>
                 <nut-input
                   :clearable="true"
@@ -664,7 +666,8 @@
           </nut-form>
 
           <div class="confirm-btn" @click="confirmAddPix()">
-            {{ $t('button.confirm') }}<svg
+            {{ $t("button.confirm")
+            }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -727,19 +730,19 @@
           </div>
 
           <div class="title">
-            {{ $t('deposit.Withdrawalnstructions') }}
+            {{ $t("deposit.Withdrawalnstructions") }}
             <div class="line"></div>
           </div>
           <div class="ins-box">
-            <div class="title1">{{$t('deposit.MontanteSaqueavel')}}(R$)</div>
+            <div class="title1">{{ $t("deposit.MontanteSaqueavel") }}(R$)</div>
             <div class="able-amount">{{ withdraw_info.balance }}</div>
             <div class="total-amount">
-              {{ $t('deposit.Montanteasedesbloqueado') }}:<span>{{
+              {{ $t("deposit.Montanteasedesbloqueado") }}:<span>{{
                 withdraw_info.sumCompletedAmount
               }}</span>
             </div>
             <div class="title1" style="margin: 0.222rem 0">
-              {{ $t('deposit.tip3') }}
+              {{ $t("deposit.tip3") }}
             </div>
             <nut-progress
               :percentage="
@@ -753,10 +756,10 @@
               >/{{ withdraw_info.sumTargetTurnover }}
             </div>
             <div class="tip">
-              {{ $t('deposit.tip4') }}
+              {{ $t("deposit.tip4") }}
             </div>
             <div class="tip">
-              {{ $t('deposit.tip5') }}
+              {{ $t("deposit.tip5") }}
             </div>
           </div>
         </div>
@@ -1344,10 +1347,8 @@ onMounted(() => {
     font-size: 0.305rem;
     font-weight: bold;
   }
-  i {
-    color: $color-white;
-    font-size: 0.333rem;
-    font-weight: bold;
+  img {
+    width: 0.333rem;
   }
 }
 .overlay-body {
@@ -1428,10 +1429,8 @@ onMounted(() => {
           color: #808080;
           padding-left: 0.138rem;
         }
-        i {
-          font-size: 0.444rem;
-          font-weight: bold;
-          color: #808080;
+        img {
+          width: 0.444rem;
         }
       }
     }
@@ -1638,11 +1637,7 @@ onMounted(() => {
         align-items: center;
         box-sizing: border-box;
         padding: 0 0.416rem;
-        i {
-          font-size: 0.333rem;
-          font-weight: bold;
-          color: $primary-color;
-        }
+
         .left {
           display: flex;
           align-items: center;

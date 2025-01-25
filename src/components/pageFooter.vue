@@ -2,11 +2,14 @@
   <div class="page-footer">
     <div class="help">
       <span>Ajuda</span>
-      <i
+      <img
         @click="changeShow"
-        class="iconfont"
-        :class="!show ? 'icon-xiangxiajiantou' : 'icon-xiangshangjiantou'"
-      ></i>
+        :src="
+          !show
+            ? require('../assets/images/svg/bottom.svg')
+            : require('../assets/images/svg/top.svg')
+        "
+      />
     </div>
     <div class="help-des" v-if="show"></div>
     <div class="contact-box">
@@ -34,9 +37,9 @@ import { useStore } from "vuex";
 import { preloadImage } from "@/utils/utils";
 
 const { state } = useStore();
-const static_img=computed(()=>{
-  return state.static_img.footer
-})
+const static_img = computed(() => {
+  return state.static_img.footer;
+});
 
 const show = ref(false);
 const changeShow = () => {
@@ -119,10 +122,8 @@ const img_list = computed(() => {
       font-size: 0.416rem;
       color: $color-sub-text;
     }
-    i {
-      font-size: 0.361rem;
-      color: $color-sub-text;
-      font-weight: bold;
+    img {
+      width: 0.361rem;
     }
   }
 }

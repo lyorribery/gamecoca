@@ -25,11 +25,16 @@
     class="main-header"
     :style="{ top: is_show_app ? 'calc(env(safe-area-inset-top) + 1.277rem)' : '' }"
   >
-    <i
-      class="iconfont"
-      :class="!isOpen ? 'icon-caidanxiangyou' : 'icon-caidanxiangzuo'"
+
+    <img
       @click="changeMenu"
-    ></i>
+      style="width: 0.555rem;margin-right:0.277rem"
+      :src="
+        !isOpen
+          ? require('../assets/images/svg/menu_right.svg')
+          : require('../assets/images/svg/menu_left.svg')
+      "
+    />
     <img :src="fullStationLogo" @click="goHome()" style="height: 1.1rem" />
     <div class="info-box" v-if="JSON.stringify(user_info) != '{}'">
       <div class="balance-box">
@@ -37,11 +42,11 @@
         <div class="amount">
           {{ user_balance.balance ? user_balance.balance : "0.00" }}
         </div>
-        <i
-          class="iconfont icon-shuaxin"
-          @click="refreshBalance"
+        <img
           :class="{ 'refresh-loading': is_refresh_banlance }"
-        ></i>
+          src="../assets/images/svg/refresh.svg"
+          @click="refreshBalance"
+        />
         <div class="deposit-btn" @click="goPath('/deposit')">
           <svg
             t="1736711047466"
@@ -67,10 +72,14 @@
           <div class="level">{{ user_info.levelName }}</div>
           <img :src="avatar_img.img_1" />
         </div>
-        <i
-          class="iconfont"
-          :class="!isShow ? 'icon-xiangxiajiantou' : 'icon-xiangshangjiantou'"
-        ></i>
+        <img
+          style="width:0.277rem;"
+          :src="
+            !isShow
+              ? require('../assets/images/svg/bottom.svg')
+              : require('../assets/images/svg/top.svg')
+          "
+        />
       </div>
     </div>
     <div v-else class="info-box">
@@ -148,11 +157,14 @@
           </svg>
           <span>Eng</span>
         </div>
-        <i
-          style="margin-right: 0"
-          class="iconfont"
-          :class="!showHeadLanguage ? 'icon-xiangxiajiantou' : 'icon-xiangshangjiantou'"
-        ></i>
+        <img
+        style="width:0.305rem;"
+          :src="
+            !showHeadLanguage
+              ? require('../assets/images/svg/bottom.svg')
+              : require('../assets/images/svg/top.svg')
+          "
+        />
       </div>
     </div>
   </div>
@@ -191,31 +203,46 @@
     >
       <nut-animate type="ripple" action="click">
         <div v-if="index != 2" class="common-tab">
-          <i
-            class="iconfont icon-rocket"
-            :class="active_tab == 0 ? 'active' : ''"
+          <img
             v-if="item.path == '/home'"
-          ></i>
-          <i
-            class="iconfont icon-share"
-            :class="active_tab == 1 ? 'active' : ''"
+            :src="
+              active_tab == 0
+                ? require('../assets/images/svg/home_active.svg')
+                : require('../assets/images/svg/home.svg')
+            "
+          />
+          <img
             v-if="item.path == '/refer/invite'"
-          ></i>
-          <i
-            class="iconfont icon-lihe"
-            :class="active_tab == 2 ? 'active' : ''"
+            :src="
+              active_tab == 1
+                ? require('../assets/images/svg/refer_active.svg')
+                : require('../assets/images/svg/refer.svg')
+            "
+          />
+          <img
             v-if="item.path == '/promotion'"
-          ></i>
-          <i
-            class="iconfont icon-youjian"
-            :class="active_tab == 3 ? 'active' : ''"
+            :src="
+              active_tab == 2
+                ? require('../assets/images/svg/promotion.svg')
+                : require('../assets/images/svg/promotion.svg')
+            "
+          />
+          <img
             v-if="item.path == '/inbox'"
-          ></i>
-          <i
-            class="iconfont icon-gerenzhongxin"
-            :class="active_tab == 4 ? 'active' : ''"
+            :src="
+              active_tab == 3
+                ? require('../assets/images/svg/inbox_active.svg')
+                : require('../assets/images/svg/inbox.svg')
+            "
+          />
+          <img
             v-if="item.path == '/mine'"
-          ></i>
+            :src="
+              active_tab == 4
+                ? require('../assets/images/svg/mine_active.svg')
+                : require('../assets/images/svg/mine.svg')
+            "
+          />
           <span>{{ item.name }}</span>
           <div class="msg-circle" v-if="item.path == '/inbox' && unread_count != 0">
             {{ unread_count }}
@@ -226,11 +253,17 @@
       <div class="middle-tab" v-if="index == 2">
         <nut-animate type="breath" duration="800" loop>
           <div class="circle-box">
-            <i class="iconfont icon-rocket" v-if="item.path == '/home'"></i>
-            <i class="iconfont icon-share" v-if="item.path == '/refer/invite'"></i>
-            <i class="iconfont icon-lihe" v-if="item.path == '/promotion'"></i>
-            <i class="iconfont icon-youjian" v-if="item.path == '/inbox'"></i>
-            <i class="iconfont icon-gerenzhongxin" v-if="item.path == '/mine'"></i>
+            <img src="../assets/images/svg/home.svg" v-if="item.path == '/home'" />
+            <img
+              src="../assets/images/svg/refer.svg"
+              v-if="item.path == '/refer/invite'"
+            />
+            <img
+              src="../assets/images/svg/promotion.svg"
+              v-if="item.path == '/promotion'"
+            />
+            <img src="../assets/images/svg/inbox.svg" v-if="item.path == '/inbox'" />
+            <img src="../assets/images/svg/mine.svg" v-if="item.path == '/mine'" />
           </div>
         </nut-animate>
         <span>{{ item.name }}</span>
@@ -301,11 +334,11 @@
           </svg>
           <span>Por</span>
         </div>
-        <i
-          class="iconfont icon-duihao"
+        <img
           v-if="locale == 'por'"
-          style="font-size: 0.333rem; color: #ffc536"
-        ></i>
+          style="width: 0.333rem"
+          src="../assets/images/svg/language_check.svg"
+        />
       </div>
       <div class="item" @click="languageChange('en')">
         <div class="left">
@@ -342,11 +375,11 @@
           </svg>
           <span>Eng</span>
         </div>
-        <i
-          class="iconfont icon-duihao"
+        <img
           v-if="locale == 'en'"
-          style="font-size: 0.333rem; color: #ffc536"
-        ></i>
+          style="width: 0.333rem"
+          src="../assets/images/svg/language_check.svg"
+        />
       </div>
     </div>
   </transition>
@@ -456,7 +489,7 @@
             </svg>
             <span>{{ $t("main.PROMOTION") }}</span>
           </div>
-          <i style="margin-right: 0" class="iconfont icon-xiangxiajiantou"></i>
+          <img src="../assets/images/svg/bottom.svg" />
         </div>
         <div class="promotion-item">
           <div
@@ -620,12 +653,11 @@
                   </svg>
                   <span :class="locale == 'por' ? 'active-color' : ''">Português</span>
                 </div>
-
-                <i
-                  class="iconfont icon-duihao"
-                  style="font-size: 0.333rem; color: #ffc536"
+                <img
                   v-if="locale == 'por'"
-                ></i>
+                  style="width: 0.333rem"
+                  src="../assets/images/svg/language_check.svg"
+                />
               </div>
               <div class="item" @click="languageChange('en')">
                 <div class="left">
@@ -662,11 +694,11 @@
                   </svg>
                   <span :class="locale == 'en' ? 'active-color' : ''">English</span>
                 </div>
-                <i
-                  class="iconfont icon-duihao"
-                  style="font-size: 0.333rem; color: #ffc536"
+                <img
                   v-if="locale == 'en'"
-                ></i>
+                  style="width: 0.333rem"
+                  src="../assets/images/svg/language_check.svg"
+                />
               </div>
             </div>
           </nut-collapse-item>
@@ -693,7 +725,7 @@
   <nut-popup v-model:visible="down_visible" position="bottom" round>
     <div class="down-box" v-if="divice == 'android'">
       <div class="close">
-        <i class="iconfont icon-cuo" @click="changeDown(2)"></i>
+        <img src="../assets/images/svg/close.svg" @click="changeDown(2)" />
       </div>
       <div class="title">1. Click the "More" icon, then click Install application</div>
 
@@ -701,7 +733,7 @@
     </div>
     <div class="down-box" v-if="divice == 'ios'">
       <div class="close">
-        <i class="iconfont icon-cuo" @click="changeDown(2)"></i>
+        <img src="../assets/images/svg/close.svg" @click="changeDown(2)" />
       </div>
       <div class="title">1.Click the share button at the bottom</div>
       <img style="width: 100%" src="../assets/images/ios_1.png" />
@@ -1045,22 +1077,22 @@ onMounted(() => {
   height: calc(env(safe-area-inset-bottom) + 4.628rem);
   display: flex;
   width: 100%;
-  background-image: url("../assets/images/denglu_mask.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  // background: linear-gradient(
-  //   0deg,
-  //   rgba(0, 0, 0, 1) 0%,
-  //   rgba(0, 0, 0, 0.9) 10%,
-  //   rgba(0, 0, 0, 0.8) 20%,
-  //   rgba(0,0,0,0.7) 30%,
-  //   rgba(0, 0, 0, 0.6) 40%,
-  //   rgba(0, 0, 0, 0.5) 50%,
-  //   rgba(0, 0, 0, 0.4) 60%,
-  //   rgba(0, 0, 0, 0.3) 70%,
-  //   rgba(0,0,0,0.2) 80%,
-  //   rgba(0, 0, 0, 0.1) 90%,
-  // );
+  // background-image: url("../assets/images/denglu_mask.png");
+  // background-size: 100% 100%;
+  // background-repeat: no-repeat;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0.9) 30%,
+    rgba(0, 0, 0, 0.7) 40%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.4) 60%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.2) 80%,
+    rgba(0, 0, 0, 0) 90%
+  );
   justify-content: space-around;
   align-items: flex-end;
   box-sizing: border-box;
@@ -1321,11 +1353,8 @@ onMounted(() => {
           padding-left: 0.277rem;
         }
       }
-
-      i {
-        color: $primary-color;
-        font-size: 0.361rem;
-        font-weight: bold;
+      img {
+        width: 0.361rem;
       }
     }
   }
@@ -1344,11 +1373,7 @@ onMounted(() => {
   box-sizing: border-box;
   padding: 0 0.277rem;
   background: $bg-color;
-  i {
-    font-size: 0.555rem;
-    color: $icon-color;
-    margin-right: 0.416rem;
-  }
+
   .info-box {
     flex: 1;
     display: flex;
@@ -1374,11 +1399,6 @@ onMounted(() => {
           padding-left: 0.138rem;
         }
       }
-    }
-    i {
-      font-size: 0.222rem;
-      font-weight: bold;
-      color: $icon-color;
     }
     .avatar-box {
       display: flex;
@@ -1447,11 +1467,10 @@ onMounted(() => {
         font-weight: bold;
         padding: 0 0.138rem;
       }
-      i {
-        font-weight: bold;
-        font-size: 0.444rem;
-        color: $icon-color;
+      img {
+        width: 0.444rem;
       }
+
       .deposit-btn {
         // width: 0.638rem;
         // height: 0.638rem;
@@ -1506,10 +1525,8 @@ onMounted(() => {
         display: flex;
         justify-content: center;
         align-items: center;
-
-        i {
-          color: $bg-color;
-          font-size: 0.788rem;
+        img {
+          width: 0.788rem;
         }
       }
     }
@@ -1535,9 +1552,8 @@ onMounted(() => {
         font-size: 0.25rem;
         font-weight: bold;
       }
-      i {
-        font-size: 0.688rem;
-        color: $color-tab-text;
+      img {
+        width: 0.688rem;
       }
       .active {
         color: $primary-color;
@@ -1594,9 +1610,8 @@ onMounted(() => {
     position: absolute;
     right: 0.555rem;
     top: 0.416rem;
-    i {
-      font-size: 0.555rem;
-      color: $color-white;
+    img {
+      width: 0.555rem;
     }
   }
   .title {

@@ -5,11 +5,29 @@ input {
     background-color: #0f0f0f !important;
 }
 
-.nut-input .input-text{
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #0f0f0f inset;
+    -webkit-text-fill-color: #fff;
     font-size: 0.361rem;
     font-weight: 600;
 }
 
+input:-internal-autofill-previewed,
+input:-internal-autofill-selected {
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-out 0.5s;
+    font-size: 0.361rem;
+    font-weight: 600;
+}
+
+
+.nut-input .input-text{
+    font-size: 0.361rem;
+    font-weight: 600;
+}
+.nut-input .input-text, .nut-input__text--readonly{
+    background-color: #0f0f0f;
+}
 input::input-placeholder {
     color: #808080;
 }

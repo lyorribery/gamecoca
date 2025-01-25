@@ -34,8 +34,8 @@
         </div>
       </div>
       <div class="action">
-        <i class="iconfont icon-youjian1"></i>
-        <i class="iconfont icon-shouji1"></i>
+        <img src="../assets/images/svg/youjian.svg" />
+        <img src="../assets/images/svg/shouji.svg" />
         <div class="action-btn" @click="goPath('/setting')">
           {{ $t("button.change") }}
         </div>
@@ -309,84 +309,132 @@
                 :style="{ filter: avatar_index == 1 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/1.png"
               />
-              <i v-if="avatar_index == 1" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 1"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(2)">
               <img
                 :style="{ filter: avatar_index == 2 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/2.png"
               />
-              <i v-if="avatar_index == 2" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 2"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(3)">
               <img
                 :style="{ filter: avatar_index == 3 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/3.png"
               />
-              <i v-if="avatar_index == 3" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 3"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(4)">
               <img
                 :style="{ filter: avatar_index == 4 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/4.png"
               />
-              <i v-if="avatar_index == 4" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 4"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(5)">
               <img
                 :style="{ filter: avatar_index == 5 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/5.png"
               />
-              <i v-if="avatar_index == 5" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 5"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(6)">
               <img
                 :style="{ filter: avatar_index == 6 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/6.png"
               />
-              <i v-if="avatar_index == 6" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 6"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(7)">
               <img
                 :style="{ filter: avatar_index == 7 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/7.png"
               />
-              <i v-if="avatar_index == 7" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 7"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(8)">
               <img
                 :style="{ filter: avatar_index == 8 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/8.png"
               />
-              <i v-if="avatar_index == 8" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 8"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(9)">
               <img
                 :style="{ filter: avatar_index == 9 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/9.png"
               />
-              <i v-if="avatar_index == 9" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 9"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(10)">
               <img
                 :style="{ filter: avatar_index == 10 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/10.png"
               />
-              <i v-if="avatar_index == 10" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 10"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(11)">
               <img
                 :style="{ filter: avatar_index == 11 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/11.png"
               />
-              <i v-if="avatar_index == 11" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 11"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
             <div class="img-box" @click="changeAvatar(12)">
               <img
                 :style="{ filter: avatar_index == 12 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/12.png"
               />
-              <i v-if="avatar_index == 12" class="iconfont icon-xuanzhong"></i>
+              <img
+                v-if="avatar_index == 12"
+                class="check"
+                src="../assets/images/svg/deposit_check.svg"
+              />
             </div>
           </div>
           <div class="confirm-btn" @click="showAvatar = false">Confirmar</div>
@@ -409,12 +457,12 @@ const changeAvatar = (index) => {
 };
 const router = useRouter();
 let { state, dispatch, commit } = useStore();
-const avatar_img=computed(()=>{
-  return state.main_img.avatar
-})
-const main_img=computed(()=>{
-  return state.main_img.mine
-})
+const avatar_img = computed(() => {
+  return state.main_img.avatar;
+});
+const main_img = computed(() => {
+  return state.main_img.mine;
+});
 const goPath = (path) => {
   router.push({
     path,
@@ -547,13 +595,12 @@ const goDeposit = (type) => {
         // border: 0.054rem solid $primary-color;
         margin: 0 0.277rem 0.277rem 0;
         position: relative;
-        i {
+
+        .check {
           position: absolute;
-          bottom: -0.138rem;
+          bottom: -0.416rem;
           right: 0;
-          font-size: 0.555rem;
-          font-weight: bold;
-          color: $primary-color;
+          width: 0.555rem;
         }
         img {
           width: 1.583rem;
@@ -789,10 +836,10 @@ const goDeposit = (type) => {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      i {
-        font-size: 0.638rem;
+
+      img {
+        width: 0.638rem;
         margin-right: 0.277rem;
-        color: #ffffff;
       }
 
       .action-btn {

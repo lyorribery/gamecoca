@@ -13,10 +13,14 @@
               !item.isShow ? $t("inbox.Unfold") : $t("inbox.Fold")
             }}</span>
             <div class="icon">
-              <i
-                class="iconfont"
-                :class="!item.isShow ? 'icon-xiangxiajiantou' : 'icon-xiangshangjiantou'"
-              ></i>
+              <img
+                @click="changeShow"
+                :src="
+                  !item.isShow
+                    ? require('../assets/images/svg/bottom.svg')
+                    : require('../assets/images/svg/top.svg')
+                "
+              />
             </div>
           </div>
         </div>
@@ -162,10 +166,8 @@ const changeShow = (item, index) => {
           display: flex;
           justify-content: center;
           align-items: center;
-          i {
-            font-size: 0.277rem;
-            font-weight: bold;
-            color: $color-white;
+          img {
+            width: 0.277rem;
           }
         }
       }

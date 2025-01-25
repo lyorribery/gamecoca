@@ -8,7 +8,7 @@
         </div>
         <div class="info-user">
           <div class="val" style="margin-bottom: 0.138rem">
-            {{$t('main.Account')}}:{{ user_info.userName }}
+            {{ $t("main.Account") }}:{{ user_info.userName }}
           </div>
           <div class="val">ID:{{ user_info.userId }}</div>
         </div>
@@ -16,45 +16,45 @@
     </div>
     <div class="info-form-box">
       <div class="ipt-box">
-        <i class="iconfont icon-geren"></i>
+        <img src="../assets/images/svg/user.svg" />
         <span>{{ user_info.userName }}</span>
       </div>
       <div class="ipt-box">
-        <i class="iconfont icon-shenfenzheng"></i>
+        <img src="../assets/images/svg/idcard.svg" />
         <span>{{ user_info.idcard }}</span>
       </div>
       <div class="ipt-box">
-        <i class="iconfont icon-shouji"></i>
+        <img src="../assets/images/svg/mobile.svg" />
         <span>{{ user_info.phone }}</span>
       </div>
       <div class="update-box">
         <div class="item" @click="openModal('Change Password')">
           <div class="title">
-            <i class="iconfont icon-mima"></i>
-            <span>{{ $t('setting.pass2') }}</span>
+            <img src="../assets/images/svg/password2.svg" />
+            <span>{{ $t("setting.pass2") }}</span>
           </div>
-          <div class="btn">{{ $t('setting.btn1') }}</div>
+          <div class="btn">{{ $t("setting.btn1") }}</div>
         </div>
         <div class="item" @click="openModal('Change transaction password')">
           <div class="title">
-            <i class="iconfont icon-mima"></i>
-            <span>{{ $t('setting.pass1') }}</span>
+            <img src="../assets/images/svg/password2.svg" />
+            <span>{{ $t("setting.pass1") }}</span>
           </div>
-          <div class="btn">{{ $t('setting.btn1') }}</div>
+          <div class="btn">{{ $t("setting.btn1") }}</div>
         </div>
         <div class="item" @click="openModal('Inserir senha')">
           <div class="title">
-            <i class="iconfont icon-youjian"></i>
+            <img src="../assets/images/svg/inbox_active.svg" />
             <span>Email</span>
           </div>
-          <div class="btn">{{ $t('setting.btn1') }}</div>
+          <div class="btn">{{ $t("setting.btn1") }}</div>
         </div>
       </div>
       <div class="ipt-box">
-        <i class="iconfont icon-shengri"></i>
+        <img src="../assets/images/svg/birth.svg" />
         <span>{{ user_info.birthday }}</span>
       </div>
-      <div class="return" @click="goBack()">{{$t('setting.btn2')}}</div>
+      <div class="return" @click="goBack()">{{ $t("setting.btn2") }}</div>
     </div>
     <nut-overlay
       v-model:visible="modal"
@@ -99,7 +99,7 @@
               >
                 <div class="ipt-box">
                   <div class="icon-box">
-                    <i class="iconfont icon-mima"></i>
+                    <img src="../assets/images/svg/password.svg" />
                   </div>
                   <nut-input
                     v-model="passwordForm.oldpassword"
@@ -126,7 +126,7 @@
               >
                 <div class="ipt-box">
                   <div class="icon-box">
-                    <i class="iconfont icon-mima"></i>
+                    <img src="../assets/images/svg/password.svg" />
                   </div>
                   <nut-input
                     v-model="passwordForm.newpassword"
@@ -154,11 +154,11 @@
               >
                 <div class="ipt-box">
                   <div class="icon-box">
-                    <i class="iconfont icon-mima"></i>
+                    <img src="../assets/images/svg/password.svg" />
                   </div>
                   <nut-input
                     v-model="passwordForm.repassword"
-                       :placeholder="$t('setting.confirmnewpassword')"
+                    :placeholder="$t('setting.confirmnewpassword')"
                     :type="showpass.re_pass ? 'text' : 'password'"
                   />
                   <img
@@ -195,22 +195,22 @@
                 prop="repassword"
                 :rules="[{ validator: customValidatorTransPassAgain }]"
               >
-                <modalCode :title="$t('setting.confirmnewpassword')" @complete="onComplete3" />
+                <modalCode
+                  :title="$t('setting.confirmnewpassword')"
+                  @complete="onComplete3"
+                />
               </nut-form-item>
             </nut-form>
 
             <div class="tips">
               <div class="circle"></div>
-              <span
-                >{{ $t('setting.tip1') }}</span
-              >
+              <span>{{ $t("setting.tip1") }}</span>
             </div>
             <div class="tips">
               <div class="circle"></div>
               <span>
-                {{ $t('setting.tip2') }}
-                </span
-              >
+                {{ $t("setting.tip2") }}
+              </span>
             </div>
           </div>
           <div v-if="modal_type == 'Inserir senha'">
@@ -218,7 +218,7 @@
               <nut-form-item prop="email" :rules="[{ validator: customValidatorEmail }]">
                 <div class="ipt-box">
                   <div class="icon-box">
-                    <i class="iconfont icon-youjian"></i>
+                    <img src="../assets/images/svg/email.svg" />
                   </div>
                   <nut-input
                     :clearable="true"
@@ -234,7 +234,7 @@
               >
                 <div class="ipt-box">
                   <div class="icon-box">
-                    <i class="iconfont icon-mima"></i>
+                    <img src="../assets/images/svg/password.svg" />
                   </div>
                   <nut-input
                     v-model="emailForm.password"
@@ -258,7 +258,8 @@
             </nut-form>
           </div>
           <div class="confirm-btn" @click="confirmPass()">
-            {{ $t('button.confirm') }}<svg
+            {{ $t("button.confirm")
+            }}<svg
               v-if="is_loading"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -517,10 +518,8 @@ const goBack = () => {
           color: #808080;
           padding-left: 0.138rem;
         }
-        i {
-          font-size: 0.444rem;
-          font-weight: bold;
-          color: #808080;
+        img {
+          width: 0.444rem;
         }
       }
     }
@@ -646,10 +645,8 @@ const goBack = () => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          i {
-            color: #ffcb78;
-            font-size: 0.555rem;
-            font-weight: bold;
+          img {
+            width: 0.555rem;
           }
           span {
             padding-top: 0.277rem;
@@ -670,10 +667,9 @@ const goBack = () => {
       align-items: center;
       box-sizing: border-box;
       padding: 0 0.416rem;
-      i {
-        font-size: 0.555rem;
-        color: #939393;
-        font-weight: bold;
+
+      img {
+        width: 0.555rem;
       }
       span {
         font-weight: bold;

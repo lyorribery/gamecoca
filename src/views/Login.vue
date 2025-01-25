@@ -28,28 +28,37 @@
         <div class="login-type-box">
           <div @click="changeLoginType(1)" class="type-item">
             <div class="active-type" v-if="login_type == 1"></div>
-            <i
-              class="iconfont icon-shouji"
-              :class="login_type == 1 ? 'active' : 'unactive'"
-            ></i>
+            <img
+              :src="
+                login_type == 1
+                  ? require('../assets/images/svg/mobile_active.svg')
+                  : require('../assets/images/svg/mobile.svg')
+              "
+            />
             <span :class="login_type == 1 ? 'active' : 'unactive'">{{
               $t("login.Telefone")
             }}</span>
           </div>
           <div @click="changeLoginType(2)" class="type-item">
             <div class="active-type" v-if="login_type == 2"></div>
-            <i
-              :class="login_type == 2 ? 'active' : 'unactive'"
-              class="iconfont icon-youjian"
-            ></i>
+            <img
+              :src="
+                login_type == 2
+                  ? require('../assets/images/svg/email_active.svg')
+                  : require('../assets/images/svg/email.svg')
+              "
+            />
             <span :class="login_type == 2 ? 'active' : 'unactive'">E-mail</span>
           </div>
           <div @click="changeLoginType(0)" class="type-item">
             <div class="active-type" v-if="login_type == 0"></div>
-            <i
-              class="iconfont icon-geren"
-              :class="login_type == 0 ? 'active' : 'unactive'"
-            ></i>
+            <img
+              :src="
+                login_type == 0
+                  ? require('../assets/images/svg/user_active.svg')
+                  : require('../assets/images/svg/user.svg')
+              "
+            />
             <span :class="login_type == 0 ? 'active' : 'unactive'">{{
               $t("login.username")
             }}</span>
@@ -59,16 +68,15 @@
           <nut-form-item prop="account" :rules="[{ validator: customValidatorAccount }]">
             <div class="ipt-box">
               <div class="icon-box">
-                <i
-                  class="iconfont"
-                  :class="
+                <img
+                  :src="
                     login_type == 1
-                      ? 'icon-shouji'
+                      ? require('../assets/images/svg/mobile.svg')
                       : login_type == 2
-                      ? 'icon-youjian'
-                      : 'icon-geren'
+                      ? require('../assets/images/svg/email.svg')
+                      : require('../assets/images/svg/user.svg')
                   "
-                ></i>
+                />
                 <span v-if="login_type == 1">+55</span>
               </div>
               <nut-input
@@ -88,7 +96,7 @@
           <nut-form-item prop="password" :rules="[{ validator: customValidatorPass }]">
             <div class="ipt-box">
               <div class="icon-box">
-                <i class="iconfont icon-mima"></i>
+                <img src="../assets/images/svg/password.svg" />
               </div>
               <nut-input
                 v-model="loginForm.password"
@@ -112,10 +120,13 @@
           <nut-form-item prop="action">
             <div class="forget-row">
               <div class="check" @click="is_check = !is_check">
-                <i
-                  :style="{ color: is_check ? '#06a950' : '#808080' }"
-                  class="iconfont icon-duoxuanyixuan"
-                ></i>
+                <img
+                  :src="
+                    is_check
+                      ? require('../assets/images/svg/check.svg')
+                      : require('../assets/images/svg/nocheck.svg')
+                  "
+                />
                 <span>{{ $t("login.Lembrar") }}</span>
               </div>
               <div class="forget" @click="modal_visible = true">
@@ -170,7 +181,7 @@
             </div>
             <div class="ipt-box">
               <div class="icon-box">
-                <i class="iconfont icon-shenfenzheng"></i>
+                <img src="../assets/images/svg/idcard.svg" />
               </div>
               <nut-input v-model="registerForm1.idcard" placeholder="CPF" type="text" />
             </div>
@@ -185,7 +196,7 @@
             </div>
             <div class="ipt-box">
               <div class="icon-box">
-                <i class="iconfont icon-geren"></i>
+                <img src="../assets/images/svg/user.svg" />
               </div>
               <nut-input
                 v-model="registerForm1.realName"
@@ -205,10 +216,13 @@
                 @click="changeSex(1)"
                 :class="registerForm1.sex == 1 ? 'active' : 'unactive'"
               >
-                <i
-                  class="iconfont icon-nanxing"
-                  :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
-                ></i>
+                <img
+                  :src="
+                    !registerForm1.sex == 1
+                      ? require('../assets/images/svg/man.svg')
+                      : require('../assets/images/svg/man_active.svg')
+                  "
+                />
                 <span
                   :style="{ color: !registerForm1.sex == 1 ? '#E6E6E6' : '#181717' }"
                   >{{ $t("login.Guy") }}</span
@@ -219,10 +233,13 @@
                 @click="changeSex(0)"
                 :class="registerForm1.sex == 0 ? 'active' : 'unactive'"
               >
-                <i
-                  class="iconfont icon-nvxing"
-                  :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
-                ></i>
+                <img
+                  :src="
+                    !registerForm1.sex == 1
+                      ? require('../assets/images/svg/woman.svg')
+                      : require('../assets/images/svg/woman_active.svg')
+                  "
+                />
                 <span
                   :style="{ color: !registerForm1.sex == 0 ? '#E6E6E6' : '#181717' }"
                   >{{ $t("login.Girl") }}</span
@@ -240,7 +257,7 @@
             </div>
             <div class="ipt-box" @click="showBirthday = true">
               <div class="icon-box">
-                <i class="iconfont icon-shengri"></i>
+                <img src="../assets/images/svg/birth.svg" />
               </div>
               <span>{{
                 registerForm1.birthday ? registerForm1.birthday : "Insira o aniversário"
@@ -258,43 +275,56 @@
         <div class="login-type-box">
           <div @click="changeLoginType(1)" class="type-item">
             <div class="active-type" v-if="login_type == 1"></div>
-            <i
-              class="iconfont icon-shouji"
-              :class="login_type == 1 ? 'active' : 'unactive'"
-            ></i>
-            <span :class="login_type == 1 ? 'active' : 'unactive'">Telefone</span>
+            <img
+              :src="
+                login_type == 1
+                  ? require('../assets/images/svg/mobile_active.svg')
+                  : require('../assets/images/svg/mobile.svg')
+              "
+            />
+            <span :class="login_type == 1 ? 'active' : 'unactive'">{{
+              $t("login.Telefone")
+            }}</span>
           </div>
           <div @click="changeLoginType(2)" class="type-item">
             <div class="active-type" v-if="login_type == 2"></div>
-            <i
-              :class="login_type == 2 ? 'active' : 'unactive'"
-              class="iconfont icon-youjian"
-            ></i>
+            <img
+              :src="
+                login_type == 2
+                  ? require('../assets/images/svg/email_active.svg')
+                  : require('../assets/images/svg/email.svg')
+              "
+            />
             <span :class="login_type == 2 ? 'active' : 'unactive'">E-mail</span>
           </div>
           <div @click="changeLoginType(0)" class="type-item">
             <div class="active-type" v-if="login_type == 0"></div>
-            <i
-              class="iconfont icon-geren"
-              :class="login_type == 0 ? 'active' : 'unactive'"
-            ></i>
-            <span :class="login_type == 0 ? 'active' : 'unactive'">Usuário</span>
+            <img
+              :src="
+                login_type == 0
+                  ? require('../assets/images/svg/user_active.svg')
+                  : require('../assets/images/svg/user.svg')
+              "
+            />
+            <span :class="login_type == 0 ? 'active' : 'unactive'">{{
+              $t("login.username")
+            }}</span>
           </div>
         </div>
+
         <nut-form ref="registerRef2" :model-value="registerForm2">
           <nut-form-item prop="account" :rules="[{ validator: customValidatorAccount }]">
             <div class="ipt-box">
               <div class="icon-box">
-                <i
-                  class="iconfont"
-                  :class="
+                <img
+                  :src="
                     login_type == 1
-                      ? 'icon-shouji'
+                      ? require('../assets/images/svg/mobile.svg')
                       : login_type == 2
-                      ? 'icon-youjian'
-                      : 'icon-geren'
+                      ? require('../assets/images/svg/email.svg')
+                      : require('../assets/images/svg/user.svg')
                   "
-                ></i>
+                />
                 <span v-if="login_type == 1">+55</span>
               </div>
               <nut-input
@@ -314,7 +344,7 @@
           <nut-form-item prop="password" :rules="[{ validator: customValidatorPass }]">
             <div class="ipt-box">
               <div class="icon-box">
-                <i class="iconfont icon-mima"></i>
+                <img src="../assets/images/svg/password.svg" />
               </div>
               <nut-input
                 v-model="registerForm2.password"
@@ -342,7 +372,7 @@
           >
             <div class="ipt-box">
               <div class="icon-box">
-                <i class="iconfont icon-mima"></i>
+                <img src="../assets/images/svg/password.svg" />
               </div>
               <nut-input
                 v-model="registerForm2.repassword"
@@ -441,7 +471,7 @@
             <nut-form-item prop="mobile" :rules="[{ validator: customValidatorMobile }]">
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-shouji"></i>
+                  <img src="../assets/images/svg/mobile.svg" />
                   <span>+55</span>
                 </div>
                 <nut-input
@@ -455,7 +485,7 @@
             <nut-form-item prop="password" :rules="[{ validator: customValidatorPass }]">
               <div class="ipt-box">
                 <div class="icon-box">
-                  <i class="iconfont icon-mima"></i>
+                  <img src="../assets/images/svg/password.svg" />
                 </div>
                 <nut-input
                   v-model="forgetForm.password"
@@ -551,12 +581,11 @@ import {
   _validemail,
   _validphone,
   _validbirth,
-  checkOnline
+  checkOnline,
 } from "@/utils/utils";
 import { useStore } from "vuex";
 import { login, register } from "@/apis/user.js";
 let { dispatch, state, commit } = useStore();
-
 
 const modal_visible = ref(false);
 const showpass = ref({
@@ -886,11 +915,6 @@ onMounted(() => {
           color: #808080;
           padding-left: 0.138rem;
         }
-        i {
-          font-size: 0.444rem;
-          font-weight: bold;
-          color: #808080;
-        }
       }
     }
     .title {
@@ -964,9 +988,8 @@ onMounted(() => {
             color: #e6e6e6;
             padding-left: 0.138rem;
           }
-          i {
-            font-size: 0.416rem;
-            font-weight: bold;
+          img {
+            width: 0.416rem;
           }
         }
         .active {
@@ -1045,9 +1068,8 @@ onMounted(() => {
         .check {
           display: flex;
           align-items: center;
-          i {
-            font-size: 0.305rem;
-            color: #06a950;
+          img {
+            width: 0.361rem;
           }
           span {
             padding-left: 0.138rem;
@@ -1077,10 +1099,8 @@ onMounted(() => {
             color: #808080;
             padding-left: 0.138rem;
           }
-          i {
-            font-size: 0.444rem;
-            font-weight: bold;
-            color: #808080;
+          img {
+            width: 0.444rem;
           }
         }
       }
@@ -1097,9 +1117,8 @@ onMounted(() => {
           display: flex;
           justify-content: center;
           align-items: center;
-          i {
-            font-size: 0.555rem;
-            font-weight: bold;
+          img {
+            width: 0.555rem;
           }
           span {
             font-size: 0.305rem;

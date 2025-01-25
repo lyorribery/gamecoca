@@ -17,12 +17,17 @@
             style="height: 198px; margin-right: 0.138rem"
           >
             <div @click="goActive(item)" class="banner-img">
-              <img
+              <!-- <img
                 class="mask"
                 height="198"
                 v-if="swiper_index != index"
                 src="../assets/images/banne_mask.png"
-              />
+              /> -->
+              <div
+                class="mask"
+                :style="{ width: swiper_w + 'px' }"
+                v-if="swiper_index != index"
+              ></div>
               <img
                 :src="item.fullNoticeImg"
                 style="height: 100%; width: 100%"
@@ -35,19 +40,19 @@
       <div class="maquee">
         <nut-noticebar :text="maquee_text" background="transparent" color="#E6E6E6">
           <template #left-icon>
-            <i class="iconfont icon-laba" style="font-size: 20px"></i>
+            <img src="../assets/images/svg/laba.svg" style="width: 0.555rem" />
           </template>
         </nut-noticebar>
       </div>
       <div class="activity-box">
         <div class="left-arrow" @click="scrollActive(1)">
           <div class="icon-box">
-            <i class="iconfont icon-xiangzuo"></i>
+            <img src="../assets/images/svg/left.svg" />
           </div>
         </div>
         <div class="right-arrow" @click="scrollActive(2)">
           <div class="icon-box">
-            <i class="iconfont icon-xiangyou"></i>
+            <img src="../assets/images/svg/right.svg" />
           </div>
         </div>
         <div class="activity-scroll" ref="activeContainer">
@@ -56,10 +61,9 @@
             class="activity-item"
             v-for="(item, index) in activity_list"
             :key="index"
-            :style="{backgroundImage:'url('+item.fullImgUrl+')'}"
+            :style="{ backgroundImage: 'url(' + item.fullImgUrl + ')' }"
           >
-
-            <div class="name" >{{ item.imgTitle }}</div>
+            <div class="name">{{ item.imgTitle }}</div>
           </div>
         </div>
       </div>
@@ -159,7 +163,11 @@
           :style="getStyle(item.data)"
         >
           <div class="img-box" v-if="item.isShow">
-            <i @click="closeIcon(index)" class="iconfont icon-guanbi close"></i>
+            <img
+              @click="closeIcon(index)"
+              class="close"
+              src="../assets/images/svg/close.svg"
+            />
             <img
               @click="goIcon(items)"
               :src="items.fullImgUrl"
@@ -182,7 +190,11 @@
           class="overlay-content"
           :style="{ width: login_visible_w + 'px', height: login_visible_w + 'px' }"
         >
-          <i class="iconfont icon-guanbi close" @click="changeLoginTip()"></i>
+          <img
+            src="../assets/images/svg/close.svg"
+            class="close"
+            @click="changeLoginTip()"
+          />
           <div class="title">Seja bem-vindo?</div>
           <div class="text">
             Bonus de <span>30%</span> para novos membros no primeiro deposito!
@@ -208,10 +220,11 @@
           class="overlay-swiper"
           :style="{ width: login_visible_w + 'px', height: 230 + 'px' }"
         >
-          <i
-            class="iconfont icon-guanbi close"
+          <img
+            class="close"
             @click="login_tip_swiper_visible = false"
-          ></i>
+            src="../assets/images/svg/close.svg"
+          />
           <nut-swiper
             ref="swiperRef"
             :is-prevent-default="false"
@@ -435,7 +448,6 @@ const scrollActive = (type) => {
 };
 const swiper_w = ref(330);
 onMounted(() => {
-
   swiper_w.value = window.innerWidth * (300 / 360);
   // if (route.query.i_code) localStorage.setItem("i_code", route.query.i_code);
   login_visible_w.value = window.innerWidth - 30;
@@ -449,7 +461,7 @@ onMounted(() => {
 });
 const category_width = ref("0.694rem");
 const page_num = ref(0);
-const contentContainer=ref(null)
+const contentContainer = ref(null);
 const scroll_num = computed(() => {
   return state.is_show_app ? 339.5 : 293.5;
 });
@@ -562,7 +574,7 @@ window.addEventListener("scroll", () => {
       position: absolute;
       bottom: -1rem;
       left: calc((100% - 0.666rem) / 2);
-      font-size: 0.666rem;
+      width: 0.666rem;
       color: $color-white;
     }
   }
@@ -589,10 +601,7 @@ window.addEventListener("scroll", () => {
           position: absolute;
           top: 0;
           right: 0;
-          font-size: 0.461rem;
-          color: rgba(255, 255, 255, 0.8);
-          font-weight: bold;
-          // opacity: 0.9;
+          width: 0.461rem;
         }
       }
     }
@@ -641,7 +650,7 @@ window.addEventListener("scroll", () => {
           display: flex;
           align-items: center;
           img {
-            height: 0.6rem;
+            height: 0.555rem;
             margin-right: 0.222rem;
           }
           span {
@@ -731,9 +740,8 @@ window.addEventListener("scroll", () => {
       padding: 0.054rem;
       border-radius: 50%;
       background: rgba(0, 0, 0, 0.3);
-      i {
-        font-size: 0.277rem;
-        color: rgba(255, 255, 255, 0.7);
+      img {
+        width: 0.277rem;
       }
     }
   }
@@ -759,9 +767,8 @@ window.addEventListener("scroll", () => {
       padding: 0.054rem;
       border-radius: 50%;
       background: rgba(0, 0, 0, 0.3);
-      i {
-        font-size: 0.277rem;
-        color: rgba(255, 255, 255, 0.7);
+      img {
+        width: 0.277rem;
       }
     }
   }
@@ -810,6 +817,8 @@ window.addEventListener("scroll", () => {
       position: absolute;
       top: 0;
       left: 0;
+      height: 198px;
+      background: rgba(0, 0, 0, 0.4);
     }
   }
 }
