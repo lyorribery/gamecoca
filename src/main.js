@@ -8,9 +8,7 @@ import i18n from './locales/i18n';
 
 import { Locale, Tabs, TabPane, Swiper, SwiperItem, Input, Image, Form, FormItem, Overlay, Popup, Textarea, Noticebar, Animate, Collapse, CollapseItem, Progress, Calendar, Table,DatePicker,Picker,Countdown } from "@nutui/nutui"
 import "@nutui/nutui/dist/style.css"
-
 import './assets/styles/common.scss'
-// import './assets/iconfont/iconfont.css'
 
 import animated from 'animate.css'
 
