@@ -13,14 +13,13 @@
               !item.isShow ? $t("inbox.Unfold") : $t("inbox.Fold")
             }}</span>
             <div class="icon">
-              <img
+              <ArrowDown
+                v-if="!item.isShow"
                 @click="changeShow"
-                :src="
-                  !item.isShow
-                    ? require('../assets/images/svg/bottom.svg')
-                    : require('../assets/images/svg/top.svg')
-                "
+                width="0.277rem"
+                color="#b3b3b3"
               />
+              <ArrowUp v-else @click="changeShow" width="0.277rem" color="#b3b3b3" />
             </div>
           </div>
         </div>
@@ -52,6 +51,7 @@ export default {
 </script>
 
 <script setup>
+import { ArrowDown, ArrowUp } from "@nutui/icons-vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { readUserMessageApi } from "../apis/user";
@@ -166,9 +166,6 @@ const changeShow = (item, index) => {
           display: flex;
           justify-content: center;
           align-items: center;
-          img {
-            width: 0.277rem;
-          }
         }
       }
       .unread {

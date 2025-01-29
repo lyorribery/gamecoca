@@ -2,10 +2,40 @@
   <div class="other">
     <div class="tool">
       <div class="item" @click="back()">
-        <img src="../assets/images/back.svg" />
+        <svg
+          t="1737884237966"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="16911"
+          width="0.5rem"
+          height="0.5rem"
+        >
+          <path
+            d="M426.666667 384V213.333333l-298.666667 298.666667 298.666667 298.666667v-174.933334c213.333333 0 362.666667 68.266667 469.333333 217.6-42.666667-213.333333-170.666667-426.666667-469.333333-469.333333z"
+            p-id="16912"
+            fill="#ffffff"
+          ></path>
+        </svg>
       </div>
       <div class="item" @click="back()">
-        <img src="../assets/images/box.svg" />
+        <svg
+          t="1737884316631"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="17999"
+          width="0.5rem"
+          height="0.5rem"
+        >
+          <path
+            d="M165.4 117L64 320h416V64H251.4c-36.4 0-69.6 20.6-86 53zM544 320h416L858.6 117c-16.4-32.4-49.6-53-86-53H544v256z m416 64H64v448c0 70.6 57.4 128 128 128h640c70.6 0 128-57.4 128-128V384z"
+            p-id="18000"
+            fill="#ffffff"
+          ></path>
+        </svg>
       </div>
     </div>
     <iframe
@@ -129,9 +159,6 @@ onBeforeMount(() => {
     box-sizing: border-box;
     padding: 0.138rem;
     margin-bottom: 0.222rem;
-    img {
-      width: 0.5rem;
-    }
   }
 }
 </style>

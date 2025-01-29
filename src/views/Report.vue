@@ -37,14 +37,9 @@
 
       <div class="game-type-option" v-if="type == 'Bets'" @click="showType = true">
         <div class="game-name">{{ game_type_name }}</div>
-        <img
-          @click="changeShow"
-          :src="
-            !showType
-              ? require('../assets/images/svg/bottom.svg')
-              : require('../assets/images/svg/top.svg')
-          "
-        />
+        <RectUp @click="changeShow" v-if="showType" width="0.277rem" color="#ffffff"/>
+        <RectDown @click="changeShow" v-else width="0.277rem" color="#ffffff"/>
+
       </div>
     </div>
     <div class="tab-box">
@@ -434,6 +429,7 @@ import { orderPage, withdrawalPage } from "@/apis/user";
 import { BalanceChangeList, GameRecordList, BonusRecord } from "@/apis/report";
 import { UserTaskInfo } from "@/apis/deposit";
 import { getGameType } from "@/apis/game";
+import { RectUp, RectDown } from "@nutui/icons-vue";
 
 const { commit } = useStore();
 const route = useRoute();
@@ -696,9 +692,7 @@ onMounted(() => {
         overflow: hidden;
         text-overflow: ellipsis;
       }
-      img{
-        width:0.277rem;
-      }
+
     }
     .date-container {
       width: 4.805rem;

@@ -34,8 +34,43 @@
         </div>
       </div>
       <div class="action">
-        <img src="../assets/images/svg/youjian.svg" />
-        <img src="../assets/images/svg/shouji.svg" />
+        <svg
+          t="1737876735424"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="10526"
+           width="0.638rem"
+          height="0.638rem"
+        >
+          <path
+            d="M893.842 217.557H130.159c-16.261 0-29.443 13.182-29.443 29.443v530c0 16.261 13.182 29.443 29.443 29.443h763.683c16.261 0 29.443-13.183 29.443-29.443V247c0-16.261-13.182-29.443-29.443-29.443z m-85.584 58.886L512 507.651 215.742 276.443h592.516zM159.602 747.557v-440.23l334.283 260.885A29.4 29.4 0 0 0 512 574.443a29.4 29.4 0 0 0 18.115-6.231l334.283-260.884v440.229H159.602z"
+            fill="#ffffff"
+            p-id="10527"
+          ></path>
+        </svg>
+        <svg
+          t="1737876665900"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="10318"
+          width="0.638rem"
+          height="0.638rem"
+        >
+          <path
+            d="M798.723234 174.782745c0-60.576657-49.106418-109.683075-109.683075-109.683075l-354.708628 0c-60.576657 0-109.683075 49.106418-109.683075 109.683075l0 673.980161c0 60.576657 49.106418 109.683075 109.683075 109.683075l354.708628 0c60.576657 0 109.683075-49.106418 109.683075-109.683075L798.723234 174.782745zM264.557398 237.015112l494.256894 0 0 529.049305-494.256894 0L264.557398 237.015112zM334.356091 105.008612 689.016623 105.008612c38.548968 0 69.798692 31.249725 69.798692 69.798692l0 22.298865-494.256894 0 0-22.298865C264.557398 136.25936 295.807123 105.008612 334.356091 105.008612zM689.016623 918.53704 334.356091 918.53704c-38.548968 0-69.798692-31.249725-69.798692-69.798692l0-43.788296 494.256894 0 0 43.788296C758.814292 887.287315 727.564567 918.53704 689.016623 918.53704z"
+            fill="#ffffff"
+            p-id="10319"
+          ></path>
+          <path
+            d="M513.173732 829.943282c-16.70752 0-30.30112 13.5936-30.30112 30.30112 0 16.70752 13.5936 30.30112 30.30112 30.30112s30.299073-13.5936 30.299073-30.30112C543.472805 843.536882 529.881253 829.943282 513.173732 829.943282z"
+            fill="#ffffff"
+            p-id="10320"
+          ></path>
+        </svg>
         <div class="action-btn" @click="goPath('/setting')">
           {{ $t("button.change") }}
         </div>
@@ -161,110 +196,35 @@
           <img :src="main_img.img_9" />
           <span>{{ $t("mine.Agente") }}</span>
         </div>
-        <svg
-          t="1736777328996"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="6511"
-          width="15"
-          height="15"
-        >
-          <path
-            d="M360.79 960.22c-19.27 0-38.54-7.52-53-22.48-28.29-29.27-27.5-75.93 1.78-104.23l270.11-261.1c12.29-11.88 13.44-30.88 2.66-44.17l-278.8-343.87c-25.65-31.61-20.8-78.03 10.82-103.67 31.6-25.66 78.03-20.82 103.68 10.83l278.79 343.86c59.29 73.1 52.96 177.58-14.68 243.02L412.02 939.52c-14.31 13.82-32.78 20.7-51.23 20.7z"
-            p-id="6512"
-            fill="#898C8D"
-          ></path>
-        </svg>
+        <Right width="15" color="#898C8D" />
       </div>
       <div class="item" @click="goPath('/setting')">
         <div class="left">
           <img :src="main_img.img_10" />
           <span>{{ $t("mine.info") }}</span>
         </div>
-        <svg
-          t="1736777328996"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="6511"
-          width="15"
-          height="15"
-        >
-          <path
-            d="M360.79 960.22c-19.27 0-38.54-7.52-53-22.48-28.29-29.27-27.5-75.93 1.78-104.23l270.11-261.1c12.29-11.88 13.44-30.88 2.66-44.17l-278.8-343.87c-25.65-31.61-20.8-78.03 10.82-103.67 31.6-25.66 78.03-20.82 103.68 10.83l278.79 343.86c59.29 73.1 52.96 177.58-14.68 243.02L412.02 939.52c-14.31 13.82-32.78 20.7-51.23 20.7z"
-            p-id="6512"
-            fill="#898C8D"
-          ></path>
-        </svg>
+        <Right width="15" color="#898C8D" />
       </div>
       <div class="item" @click="goPath('/service')">
         <div class="left">
           <img :src="main_img.img_11" />
           <span>{{ $t("mine.Surpport") }}</span>
         </div>
-        <svg
-          t="1736777328996"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="6511"
-          width="15"
-          height="15"
-        >
-          <path
-            d="M360.79 960.22c-19.27 0-38.54-7.52-53-22.48-28.29-29.27-27.5-75.93 1.78-104.23l270.11-261.1c12.29-11.88 13.44-30.88 2.66-44.17l-278.8-343.87c-25.65-31.61-20.8-78.03 10.82-103.67 31.6-25.66 78.03-20.82 103.68 10.83l278.79 343.86c59.29 73.1 52.96 177.58-14.68 243.02L412.02 939.52c-14.31 13.82-32.78 20.7-51.23 20.7z"
-            p-id="6512"
-            fill="#898C8D"
-          ></path>
-        </svg>
+        <Right width="15" color="#898C8D" />
       </div>
       <div class="item">
         <div class="left">
           <img :src="main_img.img_12" />
           <span>{{ $t("mine.downapp") }}</span>
         </div>
-        <svg
-          t="1736777328996"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="6511"
-          width="15"
-          height="15"
-        >
-          <path
-            d="M360.79 960.22c-19.27 0-38.54-7.52-53-22.48-28.29-29.27-27.5-75.93 1.78-104.23l270.11-261.1c12.29-11.88 13.44-30.88 2.66-44.17l-278.8-343.87c-25.65-31.61-20.8-78.03 10.82-103.67 31.6-25.66 78.03-20.82 103.68 10.83l278.79 343.86c59.29 73.1 52.96 177.58-14.68 243.02L412.02 939.52c-14.31 13.82-32.78 20.7-51.23 20.7z"
-            p-id="6512"
-            fill="#898C8D"
-          ></path>
-        </svg>
+        <Right width="15" color="#898C8D" />
       </div>
       <div class="item" @click="exit()">
         <div class="left">
           <img :src="main_img.img_13" />
           <span>{{ $t("mine.logout") }}</span>
         </div>
-        <svg
-          t="1736777328996"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="6511"
-          width="15"
-          height="15"
-        >
-          <path
-            d="M360.79 960.22c-19.27 0-38.54-7.52-53-22.48-28.29-29.27-27.5-75.93 1.78-104.23l270.11-261.1c12.29-11.88 13.44-30.88 2.66-44.17l-278.8-343.87c-25.65-31.61-20.8-78.03 10.82-103.67 31.6-25.66 78.03-20.82 103.68 10.83l278.79 343.86c59.29 73.1 52.96 177.58-14.68 243.02L412.02 939.52c-14.31 13.82-32.78 20.7-51.23 20.7z"
-            p-id="6512"
-            fill="#898C8D"
-          ></path>
-        </svg>
+        <Right width="15" color="#898C8D" />
       </div>
     </div>
 
@@ -309,132 +269,85 @@
                 :style="{ filter: avatar_index == 1 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/1.png"
               />
-              <img
-                v-if="avatar_index == 1"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 1" />
             </div>
             <div class="img-box" @click="changeAvatar(2)">
               <img
                 :style="{ filter: avatar_index == 2 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/2.png"
               />
-              <img
-                v-if="avatar_index == 2"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 2" />
             </div>
             <div class="img-box" @click="changeAvatar(3)">
               <img
                 :style="{ filter: avatar_index == 3 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/3.png"
               />
-              <img
-                v-if="avatar_index == 3"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 3" />
             </div>
             <div class="img-box" @click="changeAvatar(4)">
               <img
                 :style="{ filter: avatar_index == 4 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/4.png"
               />
-              <img
-                v-if="avatar_index == 4"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 4" />
             </div>
             <div class="img-box" @click="changeAvatar(5)">
               <img
                 :style="{ filter: avatar_index == 5 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/5.png"
               />
-              <img
-                v-if="avatar_index == 5"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 5" />
             </div>
             <div class="img-box" @click="changeAvatar(6)">
               <img
                 :style="{ filter: avatar_index == 6 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/6.png"
               />
-              <img
-                v-if="avatar_index == 6"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 6" />
             </div>
             <div class="img-box" @click="changeAvatar(7)">
               <img
                 :style="{ filter: avatar_index == 7 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/7.png"
               />
-              <img
-                v-if="avatar_index == 7"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 7" />
             </div>
             <div class="img-box" @click="changeAvatar(8)">
               <img
                 :style="{ filter: avatar_index == 8 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/8.png"
               />
-              <img
-                v-if="avatar_index == 8"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 8" />
             </div>
             <div class="img-box" @click="changeAvatar(9)">
               <img
                 :style="{ filter: avatar_index == 9 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/9.png"
               />
-              <img
-                v-if="avatar_index == 9"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 9" />
             </div>
             <div class="img-box" @click="changeAvatar(10)">
               <img
                 :style="{ filter: avatar_index == 10 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/10.png"
               />
-              <img
-                v-if="avatar_index == 10"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 10" />
             </div>
             <div class="img-box" @click="changeAvatar(11)">
               <img
                 :style="{ filter: avatar_index == 11 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/11.png"
               />
-              <img
-                v-if="avatar_index == 11"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 11" />
             </div>
             <div class="img-box" @click="changeAvatar(12)">
               <img
                 :style="{ filter: avatar_index == 12 ? '' : 'grayscale(100%)' }"
                 src="../assets/images/avatar/12.png"
               />
-              <img
-                v-if="avatar_index == 12"
-                class="check"
-                src="../assets/images/svg/deposit_check.svg"
-              />
+              <Checked width="0.555rem" color="#FFC536"  class="check" v-if="avatar_index == 12" />
             </div>
           </div>
           <div class="confirm-btn" @click="showAvatar = false">Confirmar</div>
@@ -445,6 +358,7 @@
 </template>
 
 <script setup>
+import { Right,Checked } from "@nutui/icons-vue";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -598,9 +512,8 @@ const goDeposit = (type) => {
 
         .check {
           position: absolute;
-          bottom: -0.416rem;
+          bottom: -0.054rem;
           right: 0;
-          width: 0.555rem;
         }
         img {
           width: 1.583rem;
@@ -836,12 +749,9 @@ const goDeposit = (type) => {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-
-      img {
-        width: 0.638rem;
-        margin-right: 0.277rem;
+      svg{
+        margin-right: 0.146rem;
       }
-
       .action-btn {
         width: 1.361rem;
         height: 0.583rem;

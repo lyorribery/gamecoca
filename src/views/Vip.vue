@@ -60,12 +60,42 @@
     <div class="vip-info-box">
       <div class="left-arrow" @click="scrollVip(1)">
         <div class="icon-box">
-          <img src="../assets/images/svg/left.svg" />
+          <svg
+              t="1737879673773"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="11553"
+              width="0.277rem"
+              height="0.277rem"
+            >
+              <path
+                d="M689.664 917.504L290.816 552.96c-12.288-10.752-19.456-26.624-19.456-43.008s7.168-32.256 19.456-43.008L689.664 102.4c18.944-17.92 46.08-23.552 70.656-14.336 24.064 9.216 40.96 31.232 43.52 57.344v729.088c-2.048 26.112-18.944 48.128-43.52 57.344-24.576 9.216-51.712 3.584-70.656-14.336z"
+                fill="#ffffff"
+                p-id="11554"
+              ></path>
+            </svg>
         </div>
       </div>
       <div class="right-arrow" @click="scrollVip(2)">
         <div class="icon-box">
-          <img src="../assets/images/svg/right.svg" />
+          <svg
+              t="1737879771275"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="12013"
+              width="0.277rem"
+              height="0.277rem"
+            >
+              <path
+                d="M385.536 102.4l398.848 364.544c12.288 10.752 19.456 26.624 19.456 43.008s-7.168 32.256-19.456 43.008l-398.848 364.544c-18.944 17.92-46.08 23.552-70.656 14.336s-40.96-31.232-43.52-57.344V145.408c2.048-26.112 18.944-48.128 43.52-57.344 24.064-9.216 51.712-3.584 70.656 14.336z"
+                fill="#ffffff"
+                p-id="12014"
+              ></path>
+            </svg>
         </div>
       </div>
 
@@ -423,9 +453,6 @@ onMounted(() => {
         padding: 0.054rem;
         border-radius: 50%;
         background: rgba(0, 0, 0, 0.3);
-        img {
-          width: 0.277rem;
-        }
       }
     }
     .right-arrow {
@@ -450,9 +477,6 @@ onMounted(() => {
         padding: 0.054rem;
         border-radius: 50%;
         background: rgba(0, 0, 0, 0.3);
-        img {
-          width: 0.277rem;
-        }
       }
     }
 

@@ -2,14 +2,8 @@
   <div class="page-footer">
     <div class="help">
       <span>Ajuda</span>
-      <img
-        @click="changeShow"
-        :src="
-          !show
-            ? require('../assets/images/svg/bottom.svg')
-            : require('../assets/images/svg/top.svg')
-        "
-      />
+      <RectUp @click="changeShow" v-if="show" width="0.361rem" color="#ffffff"/>
+      <RectDown @click="changeShow" v-else width="0.361rem" color="#ffffff"/>
     </div>
     <div class="help-des" v-if="show"></div>
     <div class="contact-box">
@@ -34,7 +28,7 @@
 import { ref } from "vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
-import { preloadImage } from "@/utils/utils";
+import { RectUp, RectDown } from "@nutui/icons-vue";
 
 const { state } = useStore();
 const static_img = computed(() => {
@@ -121,9 +115,6 @@ const img_list = computed(() => {
     span {
       font-size: 0.416rem;
       color: $color-sub-text;
-    }
-    img {
-      width: 0.361rem;
     }
   }
 }

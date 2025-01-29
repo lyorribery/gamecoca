@@ -40,19 +40,64 @@
       <div class="maquee">
         <nut-noticebar :text="maquee_text" background="transparent" color="#E6E6E6">
           <template #left-icon>
-            <img src="../assets/images/svg/laba.svg" style="width: 0.555rem" />
+            <svg
+              t="1737879580445"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="11346"
+              width="0.555rem"
+              height="0.555rem"
+            >
+              <path
+                d="M854.7 410c-19.6-298.5-130.1-262.5-130.1-262.5s-148.5 183.9-494.4 200v258s147 7.5 242.6 34.5 159.8 42.2 247 117c0 0 156.8-12.7 134.9-347zM97.8 351.9h94.5v251.7H97.8zM429.5 767.8c-37-44.7-48.3-102.3-48.3-102.3h-88.7c0 91.5 82.6 207 100.1 230.2 17.5 23.2 39.4 12.8 89.7 0 50.2-12.8 9.4-63.9 9.4-63.9s-25.2-19.3-62.2-64z"
+                p-id="11347"
+                fill="#c4c3c8"
+              ></path>
+            </svg>
           </template>
         </nut-noticebar>
       </div>
       <div class="activity-box">
         <div class="left-arrow" @click="scrollActive(1)">
           <div class="icon-box">
-            <img src="../assets/images/svg/left.svg" />
+            <svg
+              t="1737879673773"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="11553"
+              width="0.277rem"
+              height="0.277rem"
+            >
+              <path
+                d="M689.664 917.504L290.816 552.96c-12.288-10.752-19.456-26.624-19.456-43.008s7.168-32.256 19.456-43.008L689.664 102.4c18.944-17.92 46.08-23.552 70.656-14.336 24.064 9.216 40.96 31.232 43.52 57.344v729.088c-2.048 26.112-18.944 48.128-43.52 57.344-24.576 9.216-51.712 3.584-70.656-14.336z"
+                fill="#ffffff"
+                p-id="11554"
+              ></path>
+            </svg>
           </div>
         </div>
         <div class="right-arrow" @click="scrollActive(2)">
           <div class="icon-box">
-            <img src="../assets/images/svg/right.svg" />
+            <svg
+              t="1737879771275"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="12013"
+              width="0.277rem"
+              height="0.277rem"
+            >
+              <path
+                d="M385.536 102.4l398.848 364.544c12.288 10.752 19.456 26.624 19.456 43.008s-7.168 32.256-19.456 43.008l-398.848 364.544c-18.944 17.92-46.08 23.552-70.656 14.336s-40.96-31.232-43.52-57.344V145.408c2.048-26.112 18.944-48.128 43.52-57.344 24.064-9.216 51.712-3.584 70.656 14.336z"
+                fill="#ffffff"
+                p-id="12014"
+              ></path>
+            </svg>
           </div>
         </div>
         <div class="activity-scroll" ref="activeContainer">
@@ -163,10 +208,11 @@
           :style="getStyle(item.data)"
         >
           <div class="img-box" v-if="item.isShow">
-            <img
+            <CircleClose
               @click="closeIcon(index)"
               class="close"
-              src="../assets/images/svg/close.svg"
+              width="0.461rem"
+              color="#ffffff"
             />
             <img
               @click="goIcon(items)"
@@ -190,10 +236,11 @@
           class="overlay-content"
           :style="{ width: login_visible_w + 'px', height: login_visible_w + 'px' }"
         >
-          <img
-            src="../assets/images/svg/close.svg"
+          <CloseLittle
             class="close"
             @click="changeLoginTip()"
+            width="0.666rem"
+            color="#ffffff"
           />
           <div class="title">Seja bem-vindo?</div>
           <div class="text">
@@ -220,10 +267,11 @@
           class="overlay-swiper"
           :style="{ width: login_visible_w + 'px', height: 230 + 'px' }"
         >
-          <img
+          <CloseLittle
             class="close"
             @click="login_tip_swiper_visible = false"
-            src="../assets/images/svg/close.svg"
+            width="0.666rem"
+            color="#ffffff"
           />
           <nut-swiper
             ref="swiperRef"
@@ -275,7 +323,7 @@ export default {
 
 <script setup>
 import { computed, ref, onMounted, watch } from "vue";
-import { Left, Right } from "@nutui/icons-vue";
+import { Left, Right, CircleClose, CloseLittle } from "@nutui/icons-vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { formatDate } from "@/utils/utils";
@@ -574,8 +622,6 @@ window.addEventListener("scroll", () => {
       position: absolute;
       bottom: -1rem;
       left: calc((100% - 0.666rem) / 2);
-      width: 0.666rem;
-      color: $color-white;
     }
   }
 }
@@ -601,7 +647,6 @@ window.addEventListener("scroll", () => {
           position: absolute;
           top: 0;
           right: 0;
-          width: 0.461rem;
         }
       }
     }
@@ -740,9 +785,6 @@ window.addEventListener("scroll", () => {
       padding: 0.054rem;
       border-radius: 50%;
       background: rgba(0, 0, 0, 0.3);
-      img {
-        width: 0.277rem;
-      }
     }
   }
   .right-arrow {
@@ -767,9 +809,6 @@ window.addEventListener("scroll", () => {
       padding: 0.054rem;
       border-radius: 50%;
       background: rgba(0, 0, 0, 0.3);
-      img {
-        width: 0.277rem;
-      }
     }
   }
   .activity-scroll {
